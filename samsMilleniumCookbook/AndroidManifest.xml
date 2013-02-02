@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gmail.samos6"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="8"  
+        		android:maxSdkVersion="17"
+        		android:targetSdkVersion="10"/>
+
+    <application
+        android:configChanges="keyboardHidden|orientation"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
+
+        <activity
+            android:name=".MainScreenActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- All Product Activity -->
+        <activity
+            android:name=".AllProductsActivity"
+            android:label="All Ingredients" >
+        </activity>
+        
+        <activity
+            android:name="com.gmail.samos6.PantryActivity"
+            android:label="Your Pantry" >
+        </activity>
+
+        <!-- Add Product Activity -->
+        <activity
+            android:name=".NewProductActivity"
+            android:label="Add New Product" >
+        </activity>
+
+        <!-- Edit Product Activity -->
+        <activity
+            android:name="com.gmail.samos6.EditProductActivity"
+            android:label="Edit Product" >
+        </activity>
+    </application>
+
+    <!--  Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>

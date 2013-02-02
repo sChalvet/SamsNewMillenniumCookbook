@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="430dp"
+        android:layout_weight="4.69" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+
+	<TableRow >
+	    
+	    
+	    <Button
+		        android:id="@+id/btnAddIngredient"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0"
+		        android:text="@string/addOne" />
+	    <Button
+		        android:id="@+id/btnSaveIngredients"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:text="@string/save" />
+
+		   
+		   
+		  
+		   
+		   <Button
+		        android:id="@+id/btnEditIngredients"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0"
+		        android:text="@string/editOne" />
+		   
+		   
+		   
+		   </TableRow>
+		   
+		</TableLayout>
+
+</LinearLayout>

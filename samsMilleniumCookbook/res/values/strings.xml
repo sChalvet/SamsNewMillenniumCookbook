@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, AndroidConnectingToPhpMySQLActivity!</string>
+    <string name="app_name">MainScreen</string>
+    <string name="save">Save</string>
+    <string name="searchRecipes">Search Recipes</string>
+    <string name="editPantry">Edit Pantry</string>
+    <string name="delete">Delete</string>
+    <string name="addOne">Add One</string>
+    <string name="editOne">Edit One</string>
+
+</resources>
