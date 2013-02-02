@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- Ingredient Name -->
+
+    <TextView
+        android:id="@+id/ingredientName"
+        android:layout_width="fill_parent"
+        android:layout_height="46dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/ingredientName"
+        android:textSize="17sp" />
+    
+	<TableLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="0" >
+
+		<TableRow android:layout_gravity="center_horizontal" >
+
+	<!-- Calorie Label -->
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:text="@string/calories"
+        android:textSize="17sp" />
+    
+    <!-- Protein Label -->
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/protein"
+        android:textSize="17sp" />
+	
+	<!-- Fat Label -->
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/fat"
+        android:textSize="17sp" />
+    
+    <!-- Carbs Label -->
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/carbs"
+        android:textSize="17sp" />
+    
+    	</TableRow>
+    	<TableRow >
+	   	<!-- Input Calorie -->
+		<EditText android:id="@+id/inputCalorie" 
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+		android:singleLine="true"
+		android:inputType="numberDecimal"/> 
+		    
+		    <!-- Input Protein -->
+
+		<EditText
+		    android:id="@+id/inputProtein"
+		    android:layout_width="0dip"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:inputType="numberDecimal"
+		    android:singleLine="true" />
+	
+		<!-- Input Fat -->
+		<EditText android:id="@+id/inputFat" 
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+	    android:singleLine="true"
+	    android:inputType="numberDecimal"/>
+	
+	    <!-- Input Carbs -->
+		<EditText android:id="@+id/inputCarbs" 
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+	    android:singleLine="true"
+	    android:inputType="numberDecimal"/>
+	    	    
+    	</TableRow>
+   	</TableLayout>
+	
+	<TableLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="0" >
+
+		<TableRow >
+		<!-- Type Label -->
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight=".4"
+        android:text="@string/type"
+        android:textSize="17sp" />
+    
+    <!-- Input Type -->
+
+		<Spinner
+		    android:id="@+id/inputType"
+		    android:layout_width="0dip"
+		    android:layout_height="wrap_content" 
+		    android:layout_weight="2"/>
+
+    	</TableRow>
+    	</TableLayout>
+    	
+	<TableLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="0" >
+
+		<TableRow >
+		<!-- notes Label -->
+
+   		 <TextView
+   		     android:layout_width="0dip"
+   		     android:layout_height="wrap_content"
+   		     android:layout_gravity="center_vertical"
+   		     android:layout_weight=".4"
+   		     android:text="@string/notes"
+   		     android:textSize="17sp" />
+    
+    	<!-- Input Notes -->
+
+		<EditText
+		    android:id="@+id/inputNotes"
+		    android:layout_width="0dip"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="2"
+		    android:gravity="top"
+		    android:inputType="textCapSentences|textAutoCorrect|textAutoComplete"
+		    android:lines="5" />
+		
+		</TableRow>
+		
+	</TableLayout>
+	
+			<!-- addedBy Label -->
+
+		    <TextView
+		        android:layout_width="fill_parent"
+		        android:layout_height="102dp"
+		        android:layout_gravity="bottom"
+		        android:paddingLeft="10dip"
+		        android:paddingRight="10dip"
+		        android:paddingTop="10dip"
+		        android:text="@string/addedBy"
+		        android:textSize="17sp" />
+	
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="match_parent"
+	    android:layout_gravity="bottom"
+	    android:orientation="horizontal" >
+	    
+	<!-- Button Create Product -->
+
+	<Button
+	    android:id="@+id/btnSaveEditIngredient"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="bottom"
+	    android:layout_weight="1"
+	    android:text="@string/save" />
+	
+	<!-- Button Create Product -->
+
+	<Button
+	    android:id="@+id/btnDeleteEditIngredient"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="bottom"
+	    android:layout_weight="1"
+	    android:text="@string/delete" />
+	    
+	</LinearLayout>
+	
+</LinearLayout>

@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class PantryActivity extends ListActivity {
@@ -94,6 +95,29 @@ public class PantryActivity extends ListActivity {
 
 			}
 		});
+		
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+				//view.setBackgroundColor(Color.CYAN);
+				//view.findViewById(R.id.tableRowIngredient).setBackgroundColor(Color.CYAN);
+						
+				// getting values from selected ListItem
+				String ingredientname = ((TextView) view.findViewById(R.id.ingredientName)).getText().toString();
+				
+				Log.d("Pantry_ItemClick: ", ingredientname);
+				// Starting new intent
+				Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
+				// sending ingredientName to next activity
+				intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
+				
+				// starting new activity and expecting some response back
+				startActivityForResult(intent, 100);
+			}
+		});
 
 	}
 
@@ -140,8 +164,8 @@ public class PantryActivity extends ListActivity {
 
 			ingredientList = db.getAllIngredients();
 			
-			if(ingredientList.isEmpty())
-				Toast.makeText(getApplicationContext(), "Your Pantry is empty", Toast.LENGTH_SHORT).show();
+			//if(ingredientList.size()==0)
+			//	Toast.makeText(getApplicationContext(), "Your Pantry is empty", Toast.LENGTH_SHORT).show();
 			
 			// Check your log cat for DB response
 			Log.d("Pantry: ", ingredientList.toString());

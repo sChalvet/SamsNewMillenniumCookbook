@@ -59,7 +59,7 @@ public class JSONParser {
 				url += "?" + paramString;
 				HttpGet httpGet = new HttpGet(url);
 
-				HttpResponse httpResponse = httpClient.execute(httpGet);
+				HttpResponse httpResponse =  httpClient.execute(httpGet);
 				HttpEntity httpEntity = httpResponse.getEntity();
 				inputStream = httpEntity.getContent();
 			}			

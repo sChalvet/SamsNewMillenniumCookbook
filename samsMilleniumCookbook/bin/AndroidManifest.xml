@@ -30,7 +30,7 @@
         </activity>
         
         <activity
-            android:name="com.gmail.samos6.PantryActivity"
+            android:name=".PantryActivity"
             android:label="Your Pantry" >
         </activity>
 
@@ -42,8 +42,14 @@
 
         <!-- Edit Product Activity -->
         <activity
-            android:name="com.gmail.samos6.EditProductActivity"
+            android:name=".EditProductActivity"
             android:label="Edit Product" >
+        </activity>
+        
+        <!-- Edit ingredient Activity -->
+        <activity
+            android:name=".EditIngredientActivity"
+            android:label="Editing Ingredient Data" >
         </activity>
     </application>
 

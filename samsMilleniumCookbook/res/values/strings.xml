@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, AndroidConnectingToPhpMySQLActivity!</string>
-    <string name="app_name">MainScreen</string>
-    <string name="save">Save</string>
+    <string name="hello">Hello World, Check this recipe app out!</string>
+    <string name="app_name">Sam\'s New Millennium Cookbook</string>
+    <string name="save">Save Changes</string>
     <string name="searchRecipes">Search Recipes</string>
     <string name="editPantry">Edit Pantry</string>
     <string name="delete">Delete</string>
-    <string name="addOne">Add One</string>
-    <string name="editOne">Edit One</string>
+    <string name="addOne">Add Ingredient</string>
+    <string name="editOne">Edit</string>
+    
+    <!-- part of editIngredientActivity -->
+	<string name="ingredientName">Ingredient Name</string>
+	<string name="calories">Calories</string>
+	<string name="carbs">Carbs</string>
+	<string name="protein">Protein</string>
+	<string name="fat">Fat</string>
+	<string name="notes">Notes</string>
+	<string name="addedBy">Added By</string>
+	<string name="type">Type</string>
+	<string name="dateCreated">Date Created</string>
 
 </resources>

@@ -92,7 +92,7 @@ public class AllProductsActivity extends ListActivity {
 		btnAdd = (Button) findViewById(R.id.btnAddIngredient);
 		btnEdit = (Button) findViewById(R.id.btnEditIngredients);
 				
-				// view products click event
+		// save selected ingredients click event
 		btnSave.setOnClickListener(new View.OnClickListener() {
 					
 					@Override
@@ -120,39 +120,30 @@ public class AllProductsActivity extends ListActivity {
 						
 						
 					}
-				});
+				});	
+		
 		// on seleting single product
-		// launching Edit Product Screen
+		// launching EditIngredient Screen
 		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
-				
-				view.setBackgroundColor(Color.CYAN);
-				view.findViewById(R.id.tableRowIngredient).setBackgroundColor(Color.CYAN);
-				
-				
-				// getting values from selected ListItem
-				
-				Boolean ingredientName = ((CheckBox) view.findViewById(R.id.ingredientCheckBox)).isChecked();
-				
-				
-				//String ingredientname = ((TextView) view.findViewById(R.id.ingredientCheckBox)).getText().toString();
+
+				//view.setBackgroundColor(Color.CYAN);
+				//view.findViewById(R.id.tableRowIngredient).setBackgroundColor(Color.CYAN);
 						
-				//Color color=new Color(200,0,0);
-				if(ingredientName)Toast.makeText(getBaseContext(), "True", Toast.LENGTH_SHORT).show();
+				// getting values from selected ListItem
+				String ingredientname = ((TextView) view.findViewById(R.id.ingredientName)).getText().toString();
+						
 				// Starting new intent
-				/*Intent in = new Intent(getApplicationContext(),
-						EditProductActivity.class);
-				// sending pid to next activity
-				//in.putExtra(TAG_PID, pid);
-				in.putExtra(TAG_INGREDIENTNAME, ingredientname);
+				Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
+				// sending ingredientName to next activity
+				intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
 				
 				// starting new activity and expecting some response back
-				startActivityForResult(in, 100);*/
+				startActivityForResult(intent, 100);
 			}
 		});
 

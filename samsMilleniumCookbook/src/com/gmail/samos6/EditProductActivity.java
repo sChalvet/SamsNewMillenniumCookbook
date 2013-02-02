@@ -23,6 +23,7 @@ import android.widget.EditText;
 public class EditProductActivity extends Activity {
 
 	EditText txtName;
+	
 	EditText txtPrice;
 	EditText txtDesc;
 	EditText txtCreatedAt;
@@ -57,11 +58,11 @@ public class EditProductActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.edit_product);
+		setContentView(R.layout.edit_ingredient);
 
 		// save button
-		btnSave = (Button) findViewById(R.id.btnSave);
-		btnDelete = (Button) findViewById(R.id.btnDelete);
+		btnSave = (Button) findViewById(R.id.btnSaveEditIngredient);
+		btnDelete = (Button) findViewById(R.id.btnDeleteEditIngredient);
 
 		// getting product details from intent
 		Intent i = getIntent();
