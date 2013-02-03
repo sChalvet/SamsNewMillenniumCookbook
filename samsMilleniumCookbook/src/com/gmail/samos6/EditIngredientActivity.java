@@ -15,7 +15,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -44,8 +43,7 @@ public class EditIngredientActivity extends Activity {
 
 	// single ingredient url
 	private static final String url_ingredient_details = "http://10.0.2.2/recipeApp/get_product_datails.php";
-	
-	private static String url_all_products = "http://10.0.2.2/recipeApp/get_all_products.php";
+	            private static String url_all_products = "http://10.0.2.2/recipeApp/get_all_products.php";
 
 	// url to update product
 	private static final String url_update_product = "http://10.0.2.2/android_connect/update_product.php";
@@ -123,52 +121,50 @@ public class EditIngredientActivity extends Activity {
 			pDialog = new ProgressDialog(EditIngredientActivity.this);
 			pDialog.setMessage("Loading Ingredient details. Please wait...");
 			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(true);
-			pDialog.show();
+			pDialog.setCancelable(false);
+			//pDialog.show();
 		}
 
 		/**
 		 * Getting product details in background thread
 		 * */
-		protected String doInBackground(String... params) {
+		protected String doInBackground(String... args) {
 
-			// updating UI from Background Thread
-			runOnUiThread(new Runnable() {
-				public void run() {
-					// Check for success tag
-					int success;
-					try {
+
 						// Building Parameters
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
 						params.add(new BasicNameValuePair("ingredientName", ingredientName));
 
 						// getting product details by making HTTP request
 						// Note that product details url will use GET request
-						JSONObject json = jsonParser.makeHttpRequest(url_all_products, "GET", params);
+						JSONObject json = jsonParser.makeHttpRequest(url_ingredient_details, "GET", params);
 
 						// check your log for json response
 						Log.d("Single ingredient Details", json.toString());
-						
+					try{
 						// json success tag
-						success = json.getInt(TAG_SUCCESS);
+						int success = json.getInt(TAG_SUCCESS);
+						
 						if (success == 1) {
 							// successfully received product details
-							JSONArray productObj = json.getJSONArray(TAG_PRODUCT); // JSON Array
+							JSONArray products = json.getJSONArray(TAG_PRODUCT); // JSON Array
 							
 							// get first ingredient object from JSON Array
-							JSONObject product = productObj.getJSONObject(0);
+							JSONObject product = products.getJSONObject(0);
 
 							// ingredient with this name found Edit Text 
-							txtCalories = (EditText) findViewById(R.id.inputCalorie);
-							txtProtein = (EditText) findViewById(R.id.inputProtein);
-							txtFat = (EditText) findViewById(R.id.inputFat);
-							txtCarbs = (EditText) findViewById(R.id.inputCarbs);
+							txtCalories = (EditText) findViewById(R.id.inputNotes);
+							//txtCalories = (EditText) findViewById(R.id.inputCalorie);
+							//txtProtein = (EditText) findViewById(R.id.inputProtein);
+							//txtFat = (EditText) findViewById(R.id.inputFat);
+							//txtCarbs = (EditText) findViewById(R.id.inputCarbs);
 
 							// display ingredient data in EditText
-							txtCalories.setText(product.getString(TAG_CALORIES));
-							txtProtein.setText(product.getString(TAG_PROTEIN));
-							txtFat.setText(product.getString(TAG_FAT));
-							txtCarbs.setText(product.getString(TAG_CARBS));
+							txtCalories.setText(product.getString(TAG_TYPE));
+							//txtCalories.setText(product.getString(TAG_CALORIES));
+							//txtProtein.setText(product.getString(TAG_PROTEIN));
+							//txtFat.setText(product.getString(TAG_FAT));
+							//txtCarbs.setText(product.getString(TAG_CARBS));
 
 						}else{	
 							// ingredient with that name not found
@@ -177,8 +173,6 @@ public class EditIngredientActivity extends Activity {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
-				}
-			});
 
 			return null;
 		}
@@ -189,7 +183,7 @@ public class EditIngredientActivity extends Activity {
 		 * **/
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog once got all details
-			pDialog.dismiss();
+			//pDialog.dismiss();
 		}
 	}
 

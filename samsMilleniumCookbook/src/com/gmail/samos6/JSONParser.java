@@ -56,6 +56,7 @@ public class JSONParser {
 				// request method is GET
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				String paramString = URLEncodedUtils.format(params, "utf-8");
+				Log.d("JSOMParser params=", paramString);
 				url += "?" + paramString;
 				HttpGet httpGet = new HttpGet(url);
 
@@ -88,6 +89,8 @@ public class JSONParser {
 			inputStream.close();
 			
 			jsonString = stringBuilder.toString();
+			
+			Log.d("JSOMParser jsonString=", jsonString);
 			
 		} catch (Exception e) {
 			Log.e("OMG Buffer Error", "Error converting result " + e.toString());

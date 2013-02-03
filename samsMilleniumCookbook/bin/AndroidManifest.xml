@@ -51,6 +51,12 @@
             android:name=".EditIngredientActivity"
             android:label="Editing Ingredient Data" >
         </activity>
+        
+        <!-- Edit ingredient Activity -->
+        <activity
+            android:name=".trialActivity"
+            android:label="trialActivity" >
+        </activity>
     </application>
 
     <!--  Internet Permissions -->
