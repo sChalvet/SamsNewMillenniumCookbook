@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+	    <TableRow android:layout_weight="1" >
+        
+    <!-- type Label -->
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/byFoodType"
+        android:textSize="17sp" />
+
+    <Spinner
+        android:id="@+id/spnrFoodType"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_gravity="center_vertical" />
+    
+    </TableRow>
+
+	    <TableRow android:layout_weight="1" >
+        
+    <!-- type Label -->
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/byRecipeType"
+        android:textSize="17sp" />
+
+    <Spinner
+        android:id="@+id/spnrRecipeType"
+        android:layout_height="44dp"
+        android:layout_gravity="center_vertical" />
+    
+    </TableRow>
+
+	    <TableRow android:layout_weight="1" >
+        
+    <!-- type Label -->
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/byCooktime"
+        android:textSize="17sp" />
+
+    <Spinner
+        android:id="@+id/spnrCooktime"
+        android:layout_height="44dp"
+        android:layout_gravity="center_vertical" />
+    
+    </TableRow>
+
+	    <TableRow android:layout_weight="1" >
+        
+    <!-- type Label -->
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/byAuthor"
+        android:textSize="17sp" />
+
+    <EditText
+        android:id="@+id/txtAuthorName"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
+    
+    </TableRow>
+
+	    <TableRow android:layout_weight="1" >
+        
+	<Button
+	    android:id="@+id/btnSearch"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="bottom"
+	    android:layout_marginTop="25dip"
+	    android:text="@string/search" />
+    
+    </TableRow></TableLayout>
+ 
+
+    
+
+   
+
+</LinearLayout>
