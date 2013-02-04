@@ -140,8 +140,7 @@ public class EditProductActivity extends Activity {
 						success = json.getInt(TAG_SUCCESS);
 						if (success == 1) {
 							// successfully received product details
-							JSONArray productObj = json
-									.getJSONArray(TAG_PRODUCT); // JSON Array
+							JSONArray productObj = json.getJSONArray(TAG_PRODUCT); // JSON Array
 							
 							// get first product object from JSON Array
 							JSONObject product = productObj.getJSONObject(0);

@@ -20,5 +20,13 @@
 	<string name="addedBy">Added By</string>
 	<string name="type">Type</string>
 	<string name="dateCreated">Date Created</string>
+	
+	
+	<!-- part of Search For Recipe  -->
+	<string name="search">Search</string>
+	<string name="byFoodType">By Food Type</string>
+	<string name="byRecipeType">By Recipe Type</string>
+	<string name="byCooktime">By Cooktime</string>
+	<string name="byAuthor">By Author</string>
 
 </resources>

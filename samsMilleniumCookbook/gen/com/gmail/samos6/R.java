@@ -23,6 +23,7 @@ public final class R {
         public static final int btnPantry=0x7f050013;
         public static final int btnSaveEditIngredient=0x7f05000e;
         public static final int btnSaveIngredients=0x7f050005;
+        public static final int btnSearch=0x7f05001b;
         public static final int btnSearchRecipes=0x7f050015;
         public static final int btnViewProducts=0x7f050012;
         public static final int ingredientCheckBox=0x7f050011;
@@ -36,7 +37,11 @@ public final class R {
         public static final int inputPrice=0x7f050001;
         public static final int inputProtein=0x7f050009;
         public static final int inputType=0x7f05000c;
+        public static final int spnrCooktime=0x7f050019;
+        public static final int spnrFoodType=0x7f050017;
+        public static final int spnrRecipeType=0x7f050018;
         public static final int tableRowIngredient=0x7f050010;
+        public static final int txtAuthorName=0x7f05001a;
     }
     public static final class layout {
         public static final int add_product=0x7f030000;
@@ -45,11 +50,16 @@ public final class R {
         public static final int list_item=0x7f030003;
         public static final int main_screen=0x7f030004;
         public static final int pantry_view=0x7f030005;
+        public static final int search_for_recipe=0x7f030006;
     }
     public static final class string {
         public static final int addOne=0x7f040006;
         public static final int addedBy=0x7f04000e;
         public static final int app_name=0x7f040001;
+        public static final int byAuthor=0x7f040015;
+        public static final int byCooktime=0x7f040014;
+        public static final int byFoodType=0x7f040012;
+        public static final int byRecipeType=0x7f040013;
         public static final int calories=0x7f040009;
         public static final int carbs=0x7f04000a;
         public static final int dateCreated=0x7f040010;
@@ -64,6 +74,9 @@ public final class R {
         public static final int notes=0x7f04000d;
         public static final int protein=0x7f04000b;
         public static final int save=0x7f040002;
+        /**  part of Search For Recipe  
+         */
+        public static final int search=0x7f040011;
         public static final int searchRecipes=0x7f040003;
         public static final int type=0x7f04000f;
     }

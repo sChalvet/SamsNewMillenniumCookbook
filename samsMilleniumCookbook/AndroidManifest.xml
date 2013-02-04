@@ -52,6 +52,14 @@
             android:label="Editing Ingredient Data" >
         </activity>
         
+                <!-- Edit ingredient Activity -->
+        <activity
+            android:name=".SearchForRecipeActivity"
+            android:label="SearchForRecipeActivity" >
+        </activity>
+        
+        
+        
         <!-- Edit ingredient Activity -->
         <activity
             android:name=".trialActivity"

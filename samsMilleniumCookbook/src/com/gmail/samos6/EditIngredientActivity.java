@@ -42,7 +42,7 @@ public class EditIngredientActivity extends Activity {
 	JSONParser jsonParser = new JSONParser();
 
 	// single ingredient url
-	private static final String url_ingredient_details = "http://10.0.2.2/recipeApp/get_product_datails.php";
+	private static final String urlGetIngredientDetails = "http://10.0.2.2/recipeApp/getIngredientDetails.php";
 	            private static String url_all_products = "http://10.0.2.2/recipeApp/get_all_products.php";
 
 	// url to update product
@@ -64,6 +64,8 @@ public class EditIngredientActivity extends Activity {
 	private static final String TAG_TYPE = "type";
 	private static final String TAG_DATECREATED = "dateCreated";
 	private static final String TAG_DATEUPDATED = "dateUpdated";
+	
+	String type = "";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,8 @@ public class EditIngredientActivity extends Activity {
 		btnSave = (Button) findViewById(R.id.btnSaveEditIngredient);
 		btnDelete = (Button) findViewById(R.id.btnDeleteEditIngredient);
 
+		//txtCalories = (EditText) findViewById(R.id.inputNotes);
+		
 		// getting ingredient details from intent
 		Intent intent = getIntent();
 		
@@ -85,6 +89,9 @@ public class EditIngredientActivity extends Activity {
 		// Getting complete ingredient details in background thread
 		new GetIngredientDetails().execute();
 
+		//txtCalories.setText(type);
+		
+		Log.d("EditIngr_Back from GetIngre...", type);
 		// save button click event
 		btnSave.setOnClickListener(new View.OnClickListener() {
 
@@ -131,20 +138,25 @@ public class EditIngredientActivity extends Activity {
 		protected String doInBackground(String... args) {
 
 
+			// updating UI from Background Thread
+			runOnUiThread(new Runnable() {
+				public void run() {
+					// Check for success tag
+					int success;
+					try {
 						// Building Parameters
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
 						params.add(new BasicNameValuePair("ingredientName", ingredientName));
 
 						// getting product details by making HTTP request
 						// Note that product details url will use GET request
-						JSONObject json = jsonParser.makeHttpRequest(url_ingredient_details, "GET", params);
+						JSONObject json = jsonParser.makeHttpRequest( urlGetIngredientDetails, "GET", params);
 
 						// check your log for json response
-						Log.d("Single ingredient Details", json.toString());
-					try{
-						// json success tag
-						int success = json.getInt(TAG_SUCCESS);
+						Log.d("Single Product Details", json.toString());
 						
+						// json success tag
+						success = json.getInt(TAG_SUCCESS);
 						if (success == 1) {
 							// successfully received product details
 							JSONArray products = json.getJSONArray(TAG_PRODUCT); // JSON Array
@@ -158,7 +170,8 @@ public class EditIngredientActivity extends Activity {
 							//txtProtein = (EditText) findViewById(R.id.inputProtein);
 							//txtFat = (EditText) findViewById(R.id.inputFat);
 							//txtCarbs = (EditText) findViewById(R.id.inputCarbs);
-
+							Log.d("product.getString(TAG_TYPE)", product.getString(TAG_TYPE));
+							type=product.getString(TAG_TYPE);
 							// display ingredient data in EditText
 							txtCalories.setText(product.getString(TAG_TYPE));
 							//txtCalories.setText(product.getString(TAG_CALORIES));
@@ -173,6 +186,8 @@ public class EditIngredientActivity extends Activity {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
+				}
+			});
 
 			return null;
 		}
@@ -281,6 +296,7 @@ public class EditIngredientActivity extends Activity {
 		 * Deleting product
 		 * */
 		protected String doInBackground(String... args) {
+			
 
 			// Check for success tag
 			int success;
@@ -310,8 +326,10 @@ public class EditIngredientActivity extends Activity {
 				e.printStackTrace();
 			}
 
+
 			return null;
 		}
+			
 
 		/**
 		 * After completing background task Dismiss the progress dialog
