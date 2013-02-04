@@ -45,7 +45,6 @@ public class trialActivity extends ListActivity {
 	SamsListAdapter adapter;
 	Button btnSave;
 	Button btnAdd;
-	Button btnEdit;
 
 	ArrayList<HashMap<String, String>> productsList;
 	final DatabaseHandler db = new DatabaseHandler(this);
@@ -72,7 +71,7 @@ public class trialActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.all_products);
+		 setContentView(R.layout.list_ingredients);
 		
 		//Instantiating the SQLite database
 		//final DatabaseHandler db = new DatabaseHandler(this);
@@ -90,7 +89,6 @@ public class trialActivity extends ListActivity {
 		
 		btnSave = (Button) findViewById(R.id.btnSaveIngredients);
 		btnAdd = (Button) findViewById(R.id.btnAddIngredient);
-		btnEdit = (Button) findViewById(R.id.btnEditIngredients);
 				
 		// save selected ingredients click event
 		btnSave.setOnClickListener(new View.OnClickListener() {

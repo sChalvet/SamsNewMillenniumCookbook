@@ -29,7 +29,7 @@ public class PantryActivity extends ListActivity {
 	SamsListAdapter adapter;
 	
 	Button btnEdit;
-	Button btnSearchRecipes;
+	Button btnSearch;
 	Button btnDeleteIngredient;
 
 	ArrayList<HashMap<String, String>> productsList;
@@ -56,7 +56,7 @@ public class PantryActivity extends ListActivity {
 		final ListView lv = getListView();  //added final
 		
 		
-		btnSearchRecipes = (Button) findViewById(R.id.btnSearchRecipes);
+		btnSearch = (Button) findViewById(R.id.btnSearch);
 		btnEdit = (Button) findViewById(R.id.btnEditPantry);
 		btnDeleteIngredient = (Button) findViewById(R.id.btnDeleteIngredients);
 				
@@ -68,7 +68,7 @@ public class PantryActivity extends ListActivity {
 				Log.d("Pantry_btnEdit: ", "inside OnClick");
 				
 				// Starting new intent
-				Intent i = new Intent(getApplicationContext(), AllProductsActivity.class);
+				Intent i = new Intent(getApplicationContext(), ListIngredientActivity.class);
 				
 			
 				// starting new activity and expecting some response back

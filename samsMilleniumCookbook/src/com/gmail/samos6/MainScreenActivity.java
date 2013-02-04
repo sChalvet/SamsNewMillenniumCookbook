@@ -17,6 +17,7 @@ public class MainScreenActivity extends Activity{
 	Button btnViewProducts;
 	Button btnNewProduct;
 	Button btnPantry;
+	Button btnToRecipeSearch;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,14 +30,26 @@ public class MainScreenActivity extends Activity{
 		btnViewProducts = (Button) findViewById(R.id.btnViewProducts);
 		btnNewProduct = (Button) findViewById(R.id.btnCreateProduct);
 		btnPantry = (Button) findViewById(R.id.btnPantry);
+		btnToRecipeSearch = (Button) findViewById(R.id.btnToRecipeSearch);
 		
-		// view products click event
+
 		btnViewProducts.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View view) {
+						// Launching All products Activity
+						Intent i = new Intent(getApplicationContext(), ListIngredientActivity.class);
+						startActivity(i);
+						
+					}
+				});
+
+		btnToRecipeSearch.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				// Launching All products Activity
-				Intent i = new Intent(getApplicationContext(), AllProductsActivity.class);
+				Intent i = new Intent(getApplicationContext(), SearchForRecipeActivity.class);
 				startActivity(i);
 				
 			}

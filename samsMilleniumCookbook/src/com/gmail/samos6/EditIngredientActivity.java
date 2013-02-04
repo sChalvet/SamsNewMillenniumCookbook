@@ -138,9 +138,9 @@ public class EditIngredientActivity extends Activity {
 		protected String doInBackground(String... args) {
 
 
-			// updating UI from Background Thread
+			/*// updating UI from Background Thread
 			runOnUiThread(new Runnable() {
-				public void run() {
+				public void run() {*/
 					// Check for success tag
 					int success;
 					try {
@@ -173,7 +173,7 @@ public class EditIngredientActivity extends Activity {
 							Log.d("product.getString(TAG_TYPE)", product.getString(TAG_TYPE));
 							type=product.getString(TAG_TYPE);
 							// display ingredient data in EditText
-							txtCalories.setText(product.getString(TAG_TYPE));
+							//txtCalories.setText(product.getString(TAG_TYPE));
 							//txtCalories.setText(product.getString(TAG_CALORIES));
 							//txtProtein.setText(product.getString(TAG_PROTEIN));
 							//txtFat.setText(product.getString(TAG_FAT));
@@ -186,8 +186,8 @@ public class EditIngredientActivity extends Activity {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
-				}
-			});
+			/*	}
+			});*/
 
 			return null;
 		}

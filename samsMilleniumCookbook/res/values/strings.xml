@@ -28,5 +28,7 @@
 	<string name="byRecipeType">By Recipe Type</string>
 	<string name="byCooktime">By Cooktime</string>
 	<string name="byAuthor">By Author</string>
+	<string name="pickYourPoison">Pick Your Poison</string>
+	<string name="hintSearch">Search Key Words</string>
 
 </resources>

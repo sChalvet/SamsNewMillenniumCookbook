@@ -5,11 +5,20 @@
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
-
+     <TextView
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+         android:paddingLeft="10dip"
+         android:paddingRight="10dip"
+         android:paddingTop="10dip"
+         android:text="@string/pickYourPoison"
+         android:textSize="20sp" />
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="362dp"
+        android:layout_weight="1.39" >
 
 	    <TableRow android:layout_weight="1" >
         
@@ -27,9 +36,11 @@
 
     <Spinner
         android:id="@+id/spnrFoodType"
-        android:layout_width="match_parent"
+        android:layout_width="160dp"
         android:layout_height="44dp"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:clipChildren="false"
+        android:spinnerMode="dropdown" />
     
     </TableRow>
 
@@ -50,6 +61,7 @@
     <Spinner
         android:id="@+id/spnrRecipeType"
         android:layout_height="44dp"
+        android:spinnerMode="dropdown"
         android:layout_gravity="center_vertical" />
     
     </TableRow>
@@ -71,6 +83,7 @@
     <Spinner
         android:id="@+id/spnrCooktime"
         android:layout_height="44dp"
+        android:spinnerMode="dropdown"
         android:layout_gravity="center_vertical" />
     
     </TableRow>
@@ -99,18 +112,29 @@
     </EditText>
     
     </TableRow>
-
-	    <TableRow android:layout_weight="1" >
-        
-	<Button
-	    android:id="@+id/btnSearch"
-	    android:layout_width="fill_parent"
+		</TableLayout>
+		
+	<TableLayout
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_gravity="bottom"
-	    android:layout_marginTop="25dip"
+	    android:layout_weight="1" >
+
+	<TableRow>
+
+	<EditText
+	    android:id="@+id/txtSearchKeyWords"
+	    android:layout_width="255dp"
+	    android:layout_gravity="center_vertical"
+	    android:hint="@string/hintSearch" />
+
+	<Button
+	    android:id="@+id/btnSearchRecipes"
+	    android:layout_gravity="center_vertical"
 	    android:text="@string/search" />
     
-    </TableRow></TableLayout>
+	</TableRow>
+    
+    </TableLayout>
  
 
     

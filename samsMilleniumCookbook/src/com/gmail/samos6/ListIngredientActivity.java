@@ -33,7 +33,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AllProductsActivity extends ListActivity {
+public class ListIngredientActivity extends ListActivity {
 	
 	
 	// Progress Dialog
@@ -45,11 +45,12 @@ public class AllProductsActivity extends ListActivity {
 	SamsListAdapter adapter;
 	Button btnSave;
 	Button btnAdd;
-	Button btnEdit;
 
 	ArrayList<HashMap<String, String>> productsList;
+	
+	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
-	// url to get all products list
+	
 	private static String url_all_products = "http://10.0.2.2/recipeApp/get_all_products.php";
 
 	// JSON Node names
@@ -72,10 +73,10 @@ public class AllProductsActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.all_products);
+		setContentView(R.layout.list_ingredients);
 		
-		//Instantiating the SQLite database
-		//final DatabaseHandler db = new DatabaseHandler(this);
+		
+
 		
 		
 		// Hashmap for ListView
@@ -90,7 +91,6 @@ public class AllProductsActivity extends ListActivity {
 		
 		btnSave = (Button) findViewById(R.id.btnSaveIngredients);
 		btnAdd = (Button) findViewById(R.id.btnAddIngredient);
-		btnEdit = (Button) findViewById(R.id.btnEditIngredients);
 				
 		// save selected ingredients click event
 		btnSave.setOnClickListener(new View.OnClickListener() {
@@ -176,7 +176,7 @@ public class AllProductsActivity extends ListActivity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pDialog = new ProgressDialog(AllProductsActivity.this);
+			pDialog = new ProgressDialog(ListIngredientActivity.this);
 			pDialog.setMessage("Loading Ingredients. Please wait...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(false);
@@ -278,7 +278,7 @@ public class AllProductsActivity extends ListActivity {
 					
 					List<String> list = new ArrayList<String>();
 					list = db.getAllIngredients();
-					adapter = new SamsListAdapter(AllProductsActivity.this, productsList, list, "IngredientList");
+					adapter = new SamsListAdapter(ListIngredientActivity.this, productsList, list, "IngredientList");
 					
 					/*ListAdapter adapter = new SimpleAdapter(AllProductsActivity.this, productsList,
 							R.layout.list_item, new String[] { TAG_INGREDIENTNAME, "cbxingred" },
