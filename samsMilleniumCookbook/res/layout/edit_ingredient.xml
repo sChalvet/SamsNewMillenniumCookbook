@@ -5,9 +5,14 @@
     android:orientation="vertical" >
 
     <!-- Ingredient Name -->
+	<TableLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="0" >
 
-    <TextView
-        android:id="@+id/ingredientName"
+		<TableRow android:layout_gravity="center_horizontal" >
+		    
+	<TextView
         android:layout_width="fill_parent"
         android:layout_height="46dp"
         android:layout_gravity="center_horizontal"
@@ -16,6 +21,20 @@
         android:paddingTop="10dip"
         android:text="@string/ingredientName"
         android:textSize="17sp" />
+		    
+    <TextView
+        android:id="@+id/txtviewIngredientName"
+        android:layout_width="fill_parent"
+        android:layout_height="46dp"
+        android:layout_gravity="left"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/ingredientName"
+        android:textSize="20sp" />
+    </TableRow>
+    
+    </TableLayout>
     
 	<TableLayout
 	    android:layout_width="match_parent"
@@ -158,21 +177,47 @@
 		
 	</TableLayout>
 	
-			<!-- addedBy Label -->
+		<TableLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="166dp"
+		    android:layout_gravity="center_vertical" >
 
+		<TableRow
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_gravity="center_vertical"
+		    android:layout_weight="1" >
+
+		    <!-- addedBy Label -->
+
+			<TextView
+			    android:layout_width="fill_parent"
+			    android:layout_height="match_parent"
+			    android:layout_weight="1"
+			    android:paddingLeft="10dip"
+			    android:paddingRight="10dip"
+			    android:paddingTop="10dip"
+			    android:text="@string/addedBy"
+			    android:textSize="17sp" />
+			
 		    <TextView
+		        android:id="@+id/txtviewAddedBy"
 		        android:layout_width="fill_parent"
-		        android:layout_height="102dp"
-		        android:layout_gravity="bottom"
+		        android:layout_height="match_parent"
+		        android:layout_weight="1"
 		        android:paddingLeft="10dip"
 		        android:paddingRight="10dip"
 		        android:paddingTop="10dip"
 		        android:text="@string/addedBy"
-		        android:textSize="17sp" />
+		        android:textSize="20sp" />
+
+		    </TableRow>
+		    
+		    </TableLayout>
 	
 	<LinearLayout
 	    android:layout_width="fill_parent"
-	    android:layout_height="match_parent"
+	    android:layout_height="67dp"
 	    android:layout_gravity="bottom"
 	    android:orientation="horizontal" >
 	    

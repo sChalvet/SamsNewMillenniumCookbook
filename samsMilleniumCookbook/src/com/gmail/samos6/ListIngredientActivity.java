@@ -74,11 +74,7 @@ public class ListIngredientActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_ingredients);
-		
-		
-
-		
-		
+	
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
 
@@ -93,35 +89,55 @@ public class ListIngredientActivity extends ListActivity {
 		btnAdd = (Button) findViewById(R.id.btnAddIngredient);
 				
 		// save selected ingredients click event
-		btnSave.setOnClickListener(new View.OnClickListener() {
+				btnSave.setOnClickListener(new View.OnClickListener() {
+							
+							@Override
+							public void onClick(View view) {
+								Log.d("allIngredient: ", "in Save onClick");
+								
+								List<String> list= new ArrayList<String>();
+								
+								list= adapter.getChecked();
+								
+								Log.d("inside btnSave: ", list.toString());
+								
+								db.deleteAllIngredient();
+								db.addListIngredient(list);
 					
-					@Override
-					public void onClick(View view) {
-						Log.d("allIngredient: ", "in Save onClick");
-						
-						List<String> list= new ArrayList<String>();
-						
-						list= adapter.getChecked();
-						
-						Log.d("inside btnSave: ", list.toString());
-						
-						db.deleteAllIngredient();
-						db.addListIngredient(list);
-			
-						
-						Toast.makeText(getApplicationContext(), "Your Pantry has been Saved", Toast.LENGTH_SHORT).show();
-						
-						// product successfully deleted
-						// notify previous activity by sending code 100
-						Intent i = getIntent();
-						// send result code 100 to notify about product deletion
-						setResult(100, i);
-						finish();
-						
-						
-					}
-				});	
+								
+								Toast.makeText(getApplicationContext(), "Your Pantry has been Saved", Toast.LENGTH_SHORT).show();
+								
+								// product successfully deleted
+								// notify previous activity by sending code 100
+								Intent i = getIntent();
+								// send result code 100 to notify about product deletion
+								setResult(100, i);
+								finish();
+								
+								
+							}
+						});	
+				
+				// save selected ingredients click event
+				btnAdd.setOnClickListener(new View.OnClickListener() {
+							
+							@Override
+							public void onClick(View view) {
+								Log.d("ListIngredient: ", "in Add onClick");
+								
+								// getting values from selected ListItem
+								String ingredientname = "ingredient name";
+										
+								// Starting new intent
+								Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
+								// sending ingredientName to next activity
+								intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
+								intent.putExtra("origine", "addIngredient");	
+								startActivity(intent);
+							}
+						});	
 		
+				
 		// on seleting single product
 		// launching EditIngredient Screen
 		
@@ -141,9 +157,11 @@ public class ListIngredientActivity extends ListActivity {
 				Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
 				// sending ingredientName to next activity
 				intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
+				intent.putExtra("origine", "listIngredient");
 				
 				// starting new activity and expecting some response back
-				startActivityForResult(intent, 100);
+				//startActivityForResult(intent, 100);
+				startActivity(intent);
 			}
 		});
 

@@ -27,15 +27,19 @@ public class SearchForRecipeActivity extends Activity{
 	
 	ArrayAdapter<String> spin_adapter;
 	
-	String[] foodType = { "Any", "Beef", "Poultry", "Egg", "Pork", "Seafood", "Lamb", "Pasta"};
-	String[] recipeType = { "Any", "Breackfast", "Main Dish", "Salad", "Soup", "Side Dish", "Bread", "Dessert", "Appetizer"};
-	String[] cookTime = { "Any", "10 min or Less", "20 min", "30 min", "40 min", "50 min", "1 hour", "1 hour 30 min", "2 hours or Longer", "Over Night"};
+	String[] foodType;
+	String[] recipeType;
+	String[] cookTime;
 	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_for_recipe);
+		
+		foodType = getResources().getStringArray(R.array.foodType);
+		recipeType = getResources().getStringArray(R.array.recipeType);
+		cookTime = getResources().getStringArray(R.array.cookTime);
 		
 		btnSearchRecipes = (Button) findViewById(R.id.btnSearchRecipes);
 		txtAuthorName = (EditText) findViewById(R.id.txtAuthorName);

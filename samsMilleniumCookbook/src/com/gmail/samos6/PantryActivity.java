@@ -113,9 +113,11 @@ public class PantryActivity extends ListActivity {
 				Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
 				// sending ingredientName to next activity
 				intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
+				intent.putExtra("origine", "pantry");
 				
 				// starting new activity and expecting some response back
-				startActivityForResult(intent, 100);
+				//startActivityForResult(intent, 100);
+				startActivity(intent);
 
 			}
 		});

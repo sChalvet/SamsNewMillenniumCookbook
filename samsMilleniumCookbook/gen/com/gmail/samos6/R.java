@@ -8,41 +8,48 @@
 package com.gmail.samos6;
 
 public final class R {
+    public static final class array {
+        public static final int cookTime=0x7f050002;
+        public static final int foodType=0x7f050000;
+        public static final int recipeType=0x7f050001;
+    }
     public static final class attr {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int btnAddIngredient=0x7f05000d;
-        public static final int btnCreateProduct=0x7f050003;
-        public static final int btnDeleteEditIngredient=0x7f05000c;
-        public static final int btnDeleteIngredients=0x7f050016;
-        public static final int btnEditPantry=0x7f050014;
-        public static final int btnPantry=0x7f050012;
-        public static final int btnSaveEditIngredient=0x7f05000b;
-        public static final int btnSaveIngredients=0x7f05000e;
-        public static final int btnSearch=0x7f050015;
-        public static final int btnSearchRecipes=0x7f05001c;
-        public static final int btnToRecipeSearch=0x7f050013;
-        public static final int btnViewProducts=0x7f050011;
-        public static final int ingredientCheckBox=0x7f050010;
-        public static final int ingredientName=0x7f050004;
-        public static final int inputCalorie=0x7f050005;
-        public static final int inputCarbs=0x7f050008;
-        public static final int inputDesc=0x7f050002;
-        public static final int inputFat=0x7f050007;
-        public static final int inputName=0x7f050000;
-        public static final int inputNotes=0x7f05000a;
-        public static final int inputPrice=0x7f050001;
-        public static final int inputProtein=0x7f050006;
-        public static final int inputType=0x7f050009;
-        public static final int spnrCooktime=0x7f050019;
-        public static final int spnrFoodType=0x7f050017;
-        public static final int spnrRecipeType=0x7f050018;
-        public static final int tableRowIngredient=0x7f05000f;
-        public static final int txtAuthorName=0x7f05001a;
-        public static final int txtSearchKeyWords=0x7f05001b;
+        public static final int btnAddIngredient=0x7f06000e;
+        public static final int btnCreateProduct=0x7f060003;
+        public static final int btnDeleteEditIngredient=0x7f06000d;
+        public static final int btnDeleteIngredients=0x7f060018;
+        public static final int btnEditPantry=0x7f060016;
+        public static final int btnPantry=0x7f060014;
+        public static final int btnSaveEditIngredient=0x7f06000c;
+        public static final int btnSaveIngredients=0x7f06000f;
+        public static final int btnSearch=0x7f060017;
+        public static final int btnSearchRecipes=0x7f06001e;
+        public static final int btnToRecipeSearch=0x7f060015;
+        public static final int btnViewProducts=0x7f060013;
+        public static final int ingredientCheckBox=0x7f060011;
+        public static final int ingredientName=0x7f060012;
+        public static final int inputCalorie=0x7f060005;
+        public static final int inputCarbs=0x7f060008;
+        public static final int inputDesc=0x7f060002;
+        public static final int inputFat=0x7f060007;
+        public static final int inputName=0x7f060000;
+        public static final int inputNotes=0x7f06000a;
+        public static final int inputPrice=0x7f060001;
+        public static final int inputProtein=0x7f060006;
+        public static final int inputType=0x7f060009;
+        public static final int spnrCooktime=0x7f06001b;
+        public static final int spnrFoodType=0x7f060019;
+        public static final int spnrRecipeType=0x7f06001a;
+        public static final int tableRowIngredient=0x7f060010;
+        public static final int txtAuthorName=0x7f06001c;
+        public static final int txtSearchKeyWords=0x7f06001d;
+        public static final int txtviewAddedBy=0x7f06000b;
+        public static final int txtviewIngredientName=0x7f060004;
     }
     public static final class layout {
         public static final int add_product=0x7f030000;
@@ -57,10 +64,10 @@ public final class R {
         public static final int addOne=0x7f040006;
         public static final int addedBy=0x7f04000e;
         public static final int app_name=0x7f040001;
-        public static final int byAuthor=0x7f040015;
-        public static final int byCooktime=0x7f040014;
-        public static final int byFoodType=0x7f040012;
-        public static final int byRecipeType=0x7f040013;
+        public static final int byAuthor=0x7f040016;
+        public static final int byCooktime=0x7f040015;
+        public static final int byFoodType=0x7f040013;
+        public static final int byRecipeType=0x7f040014;
         public static final int calories=0x7f040009;
         public static final int carbs=0x7f04000a;
         public static final int dateCreated=0x7f040010;
@@ -69,17 +76,18 @@ public final class R {
         public static final int editPantry=0x7f040004;
         public static final int fat=0x7f04000c;
         public static final int hello=0x7f040000;
-        public static final int hintSearch=0x7f040017;
+        public static final int hintSearch=0x7f040018;
         /**  part of editIngredientActivity 
          */
         public static final int ingredientName=0x7f040008;
         public static final int notes=0x7f04000d;
-        public static final int pickYourPoison=0x7f040016;
+        public static final int perGram=0x7f040011;
+        public static final int pickYourPoison=0x7f040017;
         public static final int protein=0x7f04000b;
         public static final int save=0x7f040002;
         /**  part of Search For Recipe  
          */
-        public static final int search=0x7f040011;
+        public static final int search=0x7f040012;
         public static final int searchRecipes=0x7f040003;
         public static final int type=0x7f04000f;
     }

@@ -13,12 +13,19 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditIngredientActivity extends Activity {
@@ -28,12 +35,15 @@ public class EditIngredientActivity extends Activity {
 	EditText txtProtein;
 	EditText txtFat;
 	EditText txtCarbs;
+	EditText txtNotes;
+	TextView txtIngredientName;
+	TextView txtAddedBy;
+	Spinner spnrType;
 	
 	
 	Button btnSave;
 	Button btnDelete;
 
-	String ingredientName;
 
 	// Progress Dialog
 	private ProgressDialog pDialog;
@@ -43,7 +53,6 @@ public class EditIngredientActivity extends Activity {
 
 	// single ingredient url
 	private static final String urlGetIngredientDetails = "http://10.0.2.2/recipeApp/getIngredientDetails.php";
-	            private static String url_all_products = "http://10.0.2.2/recipeApp/get_all_products.php";
 
 	// url to update product
 	private static final String url_update_product = "http://10.0.2.2/android_connect/update_product.php";
@@ -65,31 +74,76 @@ public class EditIngredientActivity extends Activity {
 	private static final String TAG_DATECREATED = "dateCreated";
 	private static final String TAG_DATEUPDATED = "dateUpdated";
 	
+	ArrayAdapter<String> spin_adapter; //used for the food type spinner
+	
+	String calories = "";
+	String protein = "";
+	String fat = "";
+	String carbs = "";
 	String type = "";
+	String notes = "null";
+	String addedBy = "";
+	String ingredientName;
+	String [] foodType;//will be set in onCreate
+	Boolean canEdit=false;
+	String origine= "";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_ingredient);
-
-		// save button
-		btnSave = (Button) findViewById(R.id.btnSaveEditIngredient);
-		btnDelete = (Button) findViewById(R.id.btnDeleteEditIngredient);
-
-		//txtCalories = (EditText) findViewById(R.id.inputNotes);
+		
+		//getting the foodType Array from the resources
+		foodType = getResources().getStringArray(R.array.foodType);
 		
 		// getting ingredient details from intent
 		Intent intent = getIntent();
 		
-		// getting ingredient (ingredientName) from intent
+		// getting data past from intent
 		ingredientName = intent.getStringExtra(TAG_INGREDIENTNAME);
+		origine = intent.getStringExtra("origine");
+		
+		if(origine.equalsIgnoreCase("addIngredient")){
+			canEdit=true;
+		}
+		
+		// Initializing all of the text fields and buttons
+		btnSave = (Button) findViewById(R.id.btnSaveEditIngredient);
+		btnDelete = (Button) findViewById(R.id.btnDeleteEditIngredient);
+		
+		txtNotes = (EditText) findViewById(R.id.inputNotes);
+		txtCalories = (EditText) findViewById(R.id.inputCalorie);
+		txtProtein= (EditText) findViewById(R.id.inputProtein);
+		txtFat= (EditText) findViewById(R.id.inputFat);
+		txtCarbs= (EditText) findViewById(R.id.inputCarbs);
+		
+		txtIngredientName= (TextView) findViewById(R.id.txtviewIngredientName);
+		txtAddedBy= (TextView) findViewById(R.id.txtviewAddedBy);
+
+			
+		spnrType= (Spinner) findViewById(R.id.inputType);
+		spin_adapter = new ArrayAdapter<String>(EditIngredientActivity.this, android.R.layout.simple_spinner_item, foodType);
+		spnrType.setAdapter(spin_adapter);
+		
+		//makes the ingredient name underlined
+		SpannableString content = new SpannableString(ingredientName);
+		content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+		txtIngredientName.setText(content);
+		
 		
 		Log.d("EditIngr_just in", ingredientName);
 
 		// Getting complete ingredient details in background thread
-		new GetIngredientDetails().execute();
+		// if canEdit is true at this point then new ingredient is being added
+		if(canEdit){
+			addDetails();
+		}else{
+			new GetIngredientDetails().execute();
+		}
 
 		//txtCalories.setText(type);
+		
+		
 		
 		Log.d("EditIngr_Back from GetIngre...", type);
 		// save button click event
@@ -98,7 +152,9 @@ public class EditIngredientActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// starting background task to update product
-				new SaveIngredientDetails().execute();
+				//new SaveIngredientDetails().execute();
+				Log.d("EditIngr_btn Save onclick", type);
+				txtCalories.setText(type);
 			}
 		});
 
@@ -112,6 +168,45 @@ public class EditIngredientActivity extends Activity {
 			}
 		});
 
+	}
+	
+	public void addDetails(){
+		
+		if(notes.equalsIgnoreCase("null")){
+			txtNotes.setHint("describe this ingredient");
+		}else{
+			txtNotes.setText(notes);
+		}
+		
+		txtCalories.setText(calories);
+		txtProtein.setText(protein);
+		txtFat.setText(fat);
+		txtCarbs.setText(carbs);
+		
+		
+		//makes the users name underlined
+		SpannableString content = new SpannableString(addedBy);
+		content.setSpan(new StyleSpan(Typeface.ITALIC), 0, content.length(), 0);
+		txtAddedBy.setText(content);
+
+		//finds what type of food it is and sets it in the spinner
+		for(int i=0; i<foodType.length;i++){
+			if(type.equalsIgnoreCase(foodType[i])){
+				spnrType.setSelection(i, true);
+				Log.d("EditIngredient_addDetails spiner =", spnrType.getSelectedItem().toString());
+				break;
+			}
+		}
+		
+		
+		txtCalories.setInputType(0);
+		txtProtein.setInputType(0);
+		txtFat.setInputType(0);
+		txtCarbs.setInputType(0);
+		spnrType.setEnabled(false);
+		
+
+		
 	}
 
 	/**
@@ -129,7 +224,7 @@ public class EditIngredientActivity extends Activity {
 			pDialog.setMessage("Loading Ingredient details. Please wait...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(false);
-			//pDialog.show();
+			pDialog.show();
 		}
 
 		/**
@@ -138,8 +233,8 @@ public class EditIngredientActivity extends Activity {
 		protected String doInBackground(String... args) {
 
 
-			/*// updating UI from Background Thread
-			runOnUiThread(new Runnable() {
+			// updating UI from Background Thread
+			/*runOnUiThread(new Runnable() {
 				public void run() {*/
 					// Check for success tag
 					int success;
@@ -164,20 +259,15 @@ public class EditIngredientActivity extends Activity {
 							// get first ingredient object from JSON Array
 							JSONObject product = products.getJSONObject(0);
 
-							// ingredient with this name found Edit Text 
-							txtCalories = (EditText) findViewById(R.id.inputNotes);
-							//txtCalories = (EditText) findViewById(R.id.inputCalorie);
-							//txtProtein = (EditText) findViewById(R.id.inputProtein);
-							//txtFat = (EditText) findViewById(R.id.inputFat);
-							//txtCarbs = (EditText) findViewById(R.id.inputCarbs);
-							Log.d("product.getString(TAG_TYPE)", product.getString(TAG_TYPE));
-							type=product.getString(TAG_TYPE);
-							// display ingredient data in EditText
-							//txtCalories.setText(product.getString(TAG_TYPE));
-							//txtCalories.setText(product.getString(TAG_CALORIES));
-							//txtProtein.setText(product.getString(TAG_PROTEIN));
-							//txtFat.setText(product.getString(TAG_FAT));
-							//txtCarbs.setText(product.getString(TAG_CARBS));
+							//Getting details from the query
+							Log.d("EditIngredient_DoinBackGround", "setting all of the details");
+							calories = product.getString(TAG_CALORIES);
+							protein = product.getString(TAG_PROTEIN);
+							fat = product.getString(TAG_FAT);
+							carbs = product.getString(TAG_CARBS);
+							type = product.getString(TAG_TYPE);
+							notes = product.getString(TAG_NOTES);
+							addedBy = product.getString(TAG_ADDEDBY);
 
 						}else{	
 							// ingredient with that name not found
@@ -188,7 +278,8 @@ public class EditIngredientActivity extends Activity {
 					}
 			/*	}
 			});*/
-
+					
+					Log.d("EditIngredient_DoInBackground", "before return");
 			return null;
 		}
 
@@ -197,8 +288,11 @@ public class EditIngredientActivity extends Activity {
 		 * After completing background task Dismiss the progress dialog
 		 * **/
 		protected void onPostExecute(String file_url) {
+			Log.d("EditIngredient_PostExecute", "in post execute");
+			//is called to add all of the details to the fields
+			addDetails();
 			// dismiss the dialog once got all details
-			//pDialog.dismiss();
+			pDialog.dismiss();
 		}
 	}
 

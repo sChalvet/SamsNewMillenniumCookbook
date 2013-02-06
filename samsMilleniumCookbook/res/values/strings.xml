@@ -11,15 +11,16 @@
     <string name="editOne">Edit</string>
     
     <!-- part of editIngredientActivity -->
-	<string name="ingredientName">Ingredient Name</string>
+	<string name="ingredientName">Ingredient Name:</string>
 	<string name="calories">Calories</string>
 	<string name="carbs">Carbs</string>
 	<string name="protein">Protein</string>
 	<string name="fat">Fat</string>
 	<string name="notes">Notes</string>
-	<string name="addedBy">Added By</string>
+	<string name="addedBy">Added By:</string>
 	<string name="type">Type</string>
 	<string name="dateCreated">Date Created</string>
+	<string name="perGram">Per 100 grams</string>
 	
 	
 	<!-- part of Search For Recipe  -->
@@ -30,5 +31,52 @@
 	<string name="byAuthor">By Author</string>
 	<string name="pickYourPoison">Pick Your Poison</string>
 	<string name="hintSearch">Search Key Words</string>
+	
+	
+	<string-array name="foodType"> 
+    <item>Other</item> 
+    <item>Poultry</item> 
+    <item>Egg</item>
+    <item>Pork</item>
+    <item>Seafood</item>
+    <item>Lamb</item>
+    <item>Pasta</item>
+    <item>Vegetables</item>
+    <item>Mushroom</item> 
+    <item>Dairy</item> 
+    <item>Cereal</item> 
+    <item>Fruit</item> 
+    <item>Candy</item> 
+    <item>Beef</item> 
+    <item>Soy</item>
+    <item>Oil</item>
+    <item>Rabbit</item> 
+    <item>Nuts</item> 
+	</string-array>
+	
+	<string-array name="recipeType"> 
+    <item>Any</item> 
+    <item>Breackfast</item> 
+    <item>Main Dish</item>
+    <item>Salad</item>
+    <item>Soup</item>
+    <item>Side Dish</item>
+    <item>Bread</item>
+    <item>Dessert</item> 
+    <item>Appetizer</item> 
+	</string-array>
+	
+	<string-array name="cookTime"> 
+    <item>Any</item> 
+    <item>10 min or Less</item> 
+    <item>20 min</item>
+    <item>30 min</item>
+    <item>40 min</item>
+    <item>50 min</item>
+    <item>1 hour</item>
+    <item>1 hour 30 min</item> 
+    <item>2 hours or Longer</item> 
+    <item>Over Night</item> 
+	</string-array>
 
 </resources>
