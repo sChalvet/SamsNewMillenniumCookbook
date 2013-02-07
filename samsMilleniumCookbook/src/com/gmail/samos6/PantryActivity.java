@@ -38,6 +38,8 @@ public class PantryActivity extends ListActivity {
 	final DatabaseHandler db = new DatabaseHandler(this);
 
 	private static final String TAG_INGREDIENTNAME = "ingredientName";
+	private static final String TAG_PANTRY = "pantry";
+	private static final String TAG_ORIGINE = "origine";
 	
 
 	@Override
@@ -45,7 +47,7 @@ public class PantryActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pantry_view);
 		
-		
+		String[] fdsgf = db.getUserInfo("123");
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
 
@@ -113,7 +115,7 @@ public class PantryActivity extends ListActivity {
 				Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
 				// sending ingredientName to next activity
 				intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
-				intent.putExtra("origine", "pantry");
+				intent.putExtra(TAG_ORIGINE, TAG_PANTRY);
 				
 				// starting new activity and expecting some response back
 				//startActivityForResult(intent, 100);

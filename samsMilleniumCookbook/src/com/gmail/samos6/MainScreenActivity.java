@@ -19,12 +19,29 @@ public class MainScreenActivity extends Activity{
 	Button btnPantry;
 	Button btnToRecipeSearch;
 	
+	String[] userInfo={"123", "samos6@gmail.com", "Sam", "Chalvet", "1987-11-15", "test123"};
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main_screen);
+	
+	super.onCreate(savedInstanceState); 
+	setContentView(R.layout.main_screen);
 		
-		final DatabaseHandler db = new DatabaseHandler(this);
+	final DatabaseHandler db = new DatabaseHandler(this);
+	
+	//db.checkTables();
+	
+	
+		
+	/*if(db.getUserName().equalsIgnoreCase("")){
+		Log.d("MainScreen", "User info is empty");
+		
+	}
+	
+	db.addUserInformation(userInfo);*/
+	
+	List<String> ls= new ArrayList<String>();
+	ls=db.getAllIngredients();
 		
 		// Buttons
 		btnViewProducts = (Button) findViewById(R.id.btnViewProducts);

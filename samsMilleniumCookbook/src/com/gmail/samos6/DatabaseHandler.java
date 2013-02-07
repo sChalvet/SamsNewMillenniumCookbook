@@ -21,35 +21,57 @@ public class DatabaseHandler extends SQLiteOpenHelper {
  
     // recipeApp table name
     private static final String TABLE_INGREDIENTSATHAND = "ingredientsAtHand";
+    private static final String TABLE_USERINFORMATION = "userInformation";
  
-    // ingredientsAtHand Table Columns names
+    // ingredientsAtHand Table Column names
     private static final String KEY_INGREDIENTNAME = "ingredientName";
-   // private static final String KEY_NAME = "name";
-   // private static final String KEY_PH_NO = "phone_number";
+
+    // userInformation Table column names
+    private static final String KEY_USERNAME = "userName";
+    private static final String KEY_EMAIL = "email";
+    private static final String KEY_JOINDATE = "joinDate";
+    private static final String KEY_FIRSTNAME = "firstName";
+    private static final String KEY_LASTNAME = "lastName";
+    private static final String KEY_DOB = "dob";
+    private static final String KEY_PASSWORD = "password";
  
     public DatabaseHandler(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    	super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
  
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_INGREDIENTSATHAND_TABLE = "CREATE TABLE " + TABLE_INGREDIENTSATHAND + "("
+        String CREATE_INGREDIENTSATHAND_TABLE = "CREATE TABLE " + TABLE_INGREDIENTSATHAND + " IF NOT EXISTS ("
                 + KEY_INGREDIENTNAME + " TEXT PRIMARY KEY)";
+        
+        String CREATE_USERINFORMATION_TABLE = "CREATE TABLE " + TABLE_USERINFORMATION + " IF NOT EXISTS ("
+        		+ KEY_USERNAME + " TEXT PRIMARY KEY, "
+        		+ KEY_EMAIL + " TEXT, "
+        		+ KEY_JOINDATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
+        		+ KEY_FIRSTNAME + " TEXT, "
+        		+ KEY_LASTNAME + " TEXT, "
+        		+ KEY_DOB + " TEXT, "
+        		+ KEY_PASSWORD + " TEXT )";
+        
+        Log.d("DB_onCreate db string=", CREATE_USERINFORMATION_TABLE);
         db.execSQL(CREATE_INGREDIENTSATHAND_TABLE);
+        db.execSQL(CREATE_USERINFORMATION_TABLE);
     }
  
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENTSATHAND);
+    	db.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENTSATHAND);
+    	db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERINFORMATION);
  
+    	Log.d("!!!!!!!!!!!!!!!!!!!!!!", "Tables have been droped");
         // Create tables again
         onCreate(db);
     }
     
- // Adding new ingredient
+    // Adding new ingredient
     public void addIngredient(String ingredient) {
     	
     	SQLiteDatabase db = this.getWritableDatabase();
@@ -139,16 +161,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     	
     }
     
- // Deleting All ingredient
+    // Deleting All ingredient
     public void deleteAllIngredient() {
     	
     		SQLiteDatabase db = this.getReadableDatabase();
     		db.delete(TABLE_INGREDIENTSATHAND, null,null);
     	    db.close();
-    	    Log.d("DB_delete all in :", TABLE_INGREDIENTSATHAND);
+    	    Log.d("DB_delete all in table:", TABLE_INGREDIENTSATHAND);
     	
     }
- // Deleting List ingredient
+    
+    
+ // Deleting List of ingredients
     public void deleteListIngredient(List<String> ingredient) {
     	   	
     	SQLiteDatabase db = this.getReadableDatabase();
@@ -158,12 +182,110 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     	}
                 	
          db.close(); // Closing database connection
-         Log.d("DB_delete:", ingredient.toString());
-         
+         Log.d("DB_delete:", ingredient.toString());	
+    }
+    
+    /***************************************************************************************************************
+     * 											Methods for Table UserInformation
+     ***************************************************************************************************************/
+    
+    // Deleting All userInformation
+    public void deleteUserInformation() {
+    	
+    		SQLiteDatabase db = this.getReadableDatabase();
+    		db.delete(TABLE_USERINFORMATION, null,null);
+    	    db.close();
+    	    Log.d("DB_delete all in table:", TABLE_USERINFORMATION);
     	
     }
     
+    // Adding many ingredients
+    public void addUserInformation(String[] userInfo) {
+    	
+    	SQLiteDatabase db = this.getWritableDatabase();
+ 	
+        Log.d("DB_addUserInformation receiving:", userInfo.toString());
+
+        String sql = "INSERT INTO "+TABLE_USERINFORMATION+" ("+ KEY_USERNAME+", "+KEY_EMAIL+", "
+        		+KEY_FIRSTNAME+", "+KEY_LASTNAME+", "+KEY_DOB+", "+KEY_PASSWORD+") "
+        	    +"VALUES ('" + userInfo[0] + "', '" + userInfo[1] + "', '" +userInfo[2] + "', '" +userInfo[3] + "', '"
+        	   + userInfo[4] + "', '" +userInfo[5] + "')";
+        
+        Log.d("DB_addUserInformation inserting:", sql);
+        
+        db.rawQuery(sql, null);
+        db.close();
+        
+        
+        
+    }
     
+    public void checkTables(){
+    	
+    	SQLiteDatabase db = this.getWritableDatabase();
+    	
+    	 String CREATE_USERINFORMATION_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_USERINFORMATION + "  ("
+         		+ KEY_USERNAME + " TEXT PRIMARY KEY, "
+         		+ KEY_EMAIL + " TEXT, "
+         		+ KEY_JOINDATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
+         		+ KEY_FIRSTNAME + " TEXT, "
+         		+ KEY_LASTNAME + " TEXT, "
+         		+ KEY_DOB + " TEXT, "
+         		+ KEY_PASSWORD + " TEXT )";
+         
+         Log.d("DB_checktables db string=", CREATE_USERINFORMATION_TABLE);
+         db.execSQL(CREATE_USERINFORMATION_TABLE);
+         
+         db.close();
+    }
+    
+ // get username
+    public String getUserName() {
+    	
+    	String query = "SELECT "+KEY_USERNAME+" FROM " + TABLE_USERINFORMATION;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.close();
+        
+    	Log.d("DB_getUserName returning:", cursor.toString());
+    	
+        db.close(); // Closing database connection
+    
+    	return cursor.toString();
+    	    
+    	
+    }
+    
+ // get username
+    public String[] getUserInfo(String userName) {
+    	
+    	String[] userInfo= new String[6];
+    	//String query = "SELECT * FROM " + TABLE_USERINFORMATION +" WHERE "+ KEY_USERNAME +" = "+ "'"+userName+"'";
+    	String query = "SELECT * FROM " + TABLE_USERINFORMATION ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        
+        int index =0;
+        if (cursor.moveToFirst()) {
+            do {
+            	userInfo[index]=cursor.getString(index);
+            	index++;
+            } while (cursor.moveToNext());
+            Log.d("DB_getUserInfo returning:", userInfo[2]);
+        }
+        else{
+        	Log.d("DB_getUserInfo nothing to return:", "nothing i tell you");
+        }
+        
+    	
+    	
+    	cursor.close();
+        db.close(); // Closing database connection
+    
+    	return userInfo;
+    	    
+    	
+    }
     
 }
 

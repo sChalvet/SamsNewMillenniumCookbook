@@ -22,7 +22,7 @@
         android:text="@string/ingredientName"
         android:textSize="17sp" />
 		    
-    <TextView
+    <EditText
         android:id="@+id/txtviewIngredientName"
         android:layout_width="fill_parent"
         android:layout_height="46dp"

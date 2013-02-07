@@ -36,7 +36,7 @@ public class EditIngredientActivity extends Activity {
 	EditText txtFat;
 	EditText txtCarbs;
 	EditText txtNotes;
-	TextView txtIngredientName;
+	EditText txtIngredientName;
 	TextView txtAddedBy;
 	Spinner spnrType;
 	
@@ -74,6 +74,11 @@ public class EditIngredientActivity extends Activity {
 	private static final String TAG_DATECREATED = "dateCreated";
 	private static final String TAG_DATEUPDATED = "dateUpdated";
 	
+	private static final String TAG_LISTINGREDIENT = "listIngredient";
+	private static final String TAG_PANTRY = "pantry";
+	private static final String TAG_ADDINGREDIENT = "addIngredient";
+	private static final String TAG_ORIGINE = "origine";
+	
 	ArrayAdapter<String> spin_adapter; //used for the food type spinner
 	
 	String calories = "";
@@ -101,7 +106,7 @@ public class EditIngredientActivity extends Activity {
 		
 		// getting data past from intent
 		ingredientName = intent.getStringExtra(TAG_INGREDIENTNAME);
-		origine = intent.getStringExtra("origine");
+		origine = intent.getStringExtra(TAG_ORIGINE);
 		
 		if(origine.equalsIgnoreCase("addIngredient")){
 			canEdit=true;
@@ -116,8 +121,8 @@ public class EditIngredientActivity extends Activity {
 		txtProtein= (EditText) findViewById(R.id.inputProtein);
 		txtFat= (EditText) findViewById(R.id.inputFat);
 		txtCarbs= (EditText) findViewById(R.id.inputCarbs);
+		txtIngredientName= (EditText) findViewById(R.id.txtviewIngredientName);
 		
-		txtIngredientName= (TextView) findViewById(R.id.txtviewIngredientName);
 		txtAddedBy= (TextView) findViewById(R.id.txtviewAddedBy);
 
 			
@@ -170,6 +175,13 @@ public class EditIngredientActivity extends Activity {
 
 	}
 	
+	/***************************************************************************************************
+	 *  							void addDetails()
+	 *  
+	 *  This method adds all of the ingredient details from the query. It also decides whether has the 
+	 *  right to edit certain feature or where the EditIngredient Class was called from.
+	 * 
+	 ****************************************************************************************************/
 	public void addDetails(){
 		
 		if(notes.equalsIgnoreCase("null")){
@@ -198,7 +210,8 @@ public class EditIngredientActivity extends Activity {
 			}
 		}
 		
-		
+		if(origine.equalsIgnoreCase(TAG_LISTINGREDIENT)||origine.equalsIgnoreCase(TAG_PANTRY))
+		txtIngredientName.setInputType(0);
 		txtCalories.setInputType(0);
 		txtProtein.setInputType(0);
 		txtFat.setInputType(0);

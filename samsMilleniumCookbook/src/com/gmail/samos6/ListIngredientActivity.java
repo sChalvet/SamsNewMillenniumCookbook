@@ -66,6 +66,11 @@ public class ListIngredientActivity extends ListActivity {
 	private static final String TAG_TYPE = "type";
 	private static final String TAG_DATECREATED = "dateCreated";
 	private static final String TAG_DATEUPDATED = "dateUpdated";
+	
+	private static final String TAG_LISTINGREDIENT = "listIngredient";
+	private static final String TAG_ADDINGREDIENT = "addIngredient";
+	private static final String TAG_ORIGINE = "origine";
+	
 
 	// products JSONArray
 	JSONArray products = null;
@@ -132,7 +137,7 @@ public class ListIngredientActivity extends ListActivity {
 								Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
 								// sending ingredientName to next activity
 								intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
-								intent.putExtra("origine", "addIngredient");	
+								intent.putExtra(TAG_ORIGINE, TAG_ADDINGREDIENT);	
 								startActivity(intent);
 							}
 						});	
@@ -157,7 +162,7 @@ public class ListIngredientActivity extends ListActivity {
 				Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
 				// sending ingredientName to next activity
 				intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
-				intent.putExtra("origine", "listIngredient");
+				intent.putExtra(TAG_ORIGINE, TAG_LISTINGREDIENT);
 				
 				// starting new activity and expecting some response back
 				//startActivityForResult(intent, 100);
