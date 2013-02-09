@@ -104,7 +104,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         
         
      
-        //db.close(); // Closing database connection
+        db.close(); // Closing database connection
         
     }
      
@@ -128,7 +128,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
      
-      //  db.close(); // Closing database connection
+        db.close(); // Closing database connection
     	return list;
     }
      

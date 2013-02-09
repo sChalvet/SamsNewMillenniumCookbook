@@ -39,7 +39,7 @@ public class PantryActivity extends ListActivity {
 
 	private static final String TAG_INGREDIENTNAME = "ingredientName";
 	private static final String TAG_PANTRY = "pantry";
-	private static final String TAG_ORIGINE = "origine";
+	private static final String TAG_ORIGIN = "origin";
 	
 
 	@Override
@@ -115,7 +115,7 @@ public class PantryActivity extends ListActivity {
 				Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
 				// sending ingredientName to next activity
 				intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
-				intent.putExtra(TAG_ORIGINE, TAG_PANTRY);
+				intent.putExtra(TAG_ORIGIN, TAG_PANTRY);
 				
 				// starting new activity and expecting some response back
 				//startActivityForResult(intent, 100);

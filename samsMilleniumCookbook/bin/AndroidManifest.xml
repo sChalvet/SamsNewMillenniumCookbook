@@ -49,7 +49,7 @@
         <!-- Edit ingredient Activity -->
         <activity
             android:name=".EditIngredientActivity"
-            android:label="Editing Ingredient Data" >
+            android:label="Ingredient Data" >
         </activity>
         
                 <!-- Edit ingredient Activity -->

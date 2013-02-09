@@ -37,23 +37,27 @@ public class SearchForRecipeActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_for_recipe);
 		
+		//getting arrays from from the values folder
 		foodType = getResources().getStringArray(R.array.foodType);
 		recipeType = getResources().getStringArray(R.array.recipeType);
 		cookTime = getResources().getStringArray(R.array.cookTime);
 		
+		//setting the btn and txt
 		btnSearchRecipes = (Button) findViewById(R.id.btnSearchRecipes);
 		txtAuthorName = (EditText) findViewById(R.id.txtAuthorName);
 		txtSearchKeyWords = (EditText) findViewById(R.id.txtSearchKeyWords);
 		
+		//setting the food type spinner
 		spnrFoodType = (Spinner) findViewById(R.id.spnrFoodType);
 		spin_adapter = new ArrayAdapter<String>(SearchForRecipeActivity.this, android.R.layout.simple_spinner_item, foodType);
 		spnrFoodType.setAdapter(spin_adapter);
 		
-		
+		//setting the recipe type spinner
 		spnrRecipeType = (Spinner) findViewById(R.id.spnrRecipeType);
 		spin_adapter = new ArrayAdapter<String>(SearchForRecipeActivity.this, android.R.layout.simple_spinner_item, recipeType);
 		spnrRecipeType.setAdapter(spin_adapter);
 		
+		//setting the cook time spinner
 		spnrCooktime = (Spinner) findViewById(R.id.spnrCooktime);
 		spin_adapter = new ArrayAdapter<String>(SearchForRecipeActivity.this, android.R.layout.simple_spinner_item, cookTime);
 		spnrCooktime.setAdapter(spin_adapter);

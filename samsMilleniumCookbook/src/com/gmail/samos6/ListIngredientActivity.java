@@ -69,7 +69,7 @@ public class ListIngredientActivity extends ListActivity {
 	
 	private static final String TAG_LISTINGREDIENT = "listIngredient";
 	private static final String TAG_ADDINGREDIENT = "addIngredient";
-	private static final String TAG_ORIGINE = "origine";
+	private static final String TAG_ORIGIN = "origin";
 	
 
 	// products JSONArray
@@ -131,13 +131,13 @@ public class ListIngredientActivity extends ListActivity {
 								Log.d("ListIngredient: ", "in Add onClick");
 								
 								// getting values from selected ListItem
-								String ingredientname = "ingredient name";
+								String ingredientname = "new ingredient";
 										
 								// Starting new intent
 								Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
 								// sending ingredientName to next activity
 								intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
-								intent.putExtra(TAG_ORIGINE, TAG_ADDINGREDIENT);	
+								intent.putExtra(TAG_ORIGIN, TAG_ADDINGREDIENT);	
 								startActivity(intent);
 							}
 						});	
@@ -162,7 +162,7 @@ public class ListIngredientActivity extends ListActivity {
 				Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
 				// sending ingredientName to next activity
 				intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
-				intent.putExtra(TAG_ORIGINE, TAG_LISTINGREDIENT);
+				intent.putExtra(TAG_ORIGIN, TAG_LISTINGREDIENT);
 				
 				// starting new activity and expecting some response back
 				//startActivityForResult(intent, 100);

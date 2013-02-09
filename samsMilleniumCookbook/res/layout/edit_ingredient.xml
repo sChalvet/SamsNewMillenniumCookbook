@@ -5,10 +5,10 @@
     android:orientation="vertical" >
 
     <!-- Ingredient Name -->
+
 	<TableLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_weight="0" >
+	    android:layout_height="86dp" >
 
 		<TableRow android:layout_gravity="center_horizontal" >
 		    
@@ -24,7 +24,7 @@
 		    
     <EditText
         android:id="@+id/txtviewIngredientName"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="46dp"
         android:layout_gravity="left"
         android:paddingLeft="10dip"
@@ -33,7 +33,20 @@
         android:text="@string/ingredientName"
         android:textSize="20sp" />
     </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/darker_gray" />
     
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:text="@string/perGram" />
+
     </TableLayout>
     
 	<TableLayout
@@ -170,6 +183,7 @@
 		    android:layout_height="wrap_content"
 		    android:layout_weight="2"
 		    android:gravity="top"
+		    android:selectAllOnFocus="true"
 		    android:inputType="textCapSentences|textAutoCorrect|textAutoComplete"
 		    android:lines="5" />
 		
@@ -179,7 +193,7 @@
 	
 		<TableLayout
 		    android:layout_width="fill_parent"
-		    android:layout_height="166dp"
+		    android:layout_height="92dp"
 		    android:layout_gravity="center_vertical" >
 
 		<TableRow
@@ -214,14 +228,28 @@
 		    </TableRow>
 		    
 		    </TableLayout>
+
+		        <View
+		            android:layout_width="match_parent"
+		            android:layout_height="1dp"
+		            android:layout_marginBottom="10dp"
+		            android:background="@android:color/darker_gray" />
+
+		<Button
+		    android:id="@+id/btnPublishIngredient"
+		    android:layout_width="fill_parent"
+		    android:layout_height="50dp"
+		    android:layout_gravity="bottom"
+		    android:text="@string/publishIngredient"
+		    android:visibility="invisible" />
 	
 	<LinearLayout
 	    android:layout_width="fill_parent"
-	    android:layout_height="67dp"
+	    android:layout_height="match_parent"
 	    android:layout_gravity="bottom"
 	    android:orientation="horizontal" >
 	    
-	<!-- Button Create Product -->
+	<!-- Button Save Edited ingredient-->
 
 	<Button
 	    android:id="@+id/btnSaveEditIngredient"
@@ -229,9 +257,10 @@
 	    android:layout_height="wrap_content"
 	    android:layout_gravity="bottom"
 	    android:layout_weight="1"
-	    android:text="@string/save" />
+	    android:text="@string/saveChanges"
+	    android:visibility="invisible" />
 	
-	<!-- Button Create Product -->
+	<!-- Button Delete Ingredient-->
 
 	<Button
 	    android:id="@+id/btnDeleteEditIngredient"
@@ -239,7 +268,8 @@
 	    android:layout_height="wrap_content"
 	    android:layout_gravity="bottom"
 	    android:layout_weight="1"
-	    android:text="@string/delete" />
+	    android:text="@string/delete"
+	    android:visibility="invisible" />
 	    
 	</LinearLayout>
 	

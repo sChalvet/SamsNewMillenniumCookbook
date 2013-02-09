@@ -42,6 +42,7 @@ public class EditIngredientActivity extends Activity {
 	
 	
 	Button btnSave;
+	Button btnPublish;
 	Button btnDelete;
 
 
@@ -55,13 +56,20 @@ public class EditIngredientActivity extends Activity {
 	private static final String urlGetIngredientDetails = "http://10.0.2.2/recipeApp/getIngredientDetails.php";
 
 	// url to update product
-	private static final String url_update_product = "http://10.0.2.2/android_connect/update_product.php";
-	
+	private static final String urlUpdateIngredient = "http://10.0.2.2/recipeApp/updateIngredient.php";
+		
 	// url to delete product
-	private static final String url_delete_product = "http://10.0.2.2/android_connect/delete_product.php";
+	private static final String url_delete_product = "http://10.0.2.2/recipeApp/delete_product.php";
 
+	// url to update product
+	private static final String urlCreateNewIngredient = "http://10.0.2.2/recipeApp/createIngredient.php";
+	
+	//Instantiating the SQLite database
+	final DatabaseHandler db = new DatabaseHandler(this);
+	
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
+	private static final String TAG_MESSAGE = "message";
 	private static final String TAG_PRODUCT = "product";
 	private static final String TAG_INGREDIENTNAME = "ingredientName";
 	private static final String TAG_CALORIES = "calories";
@@ -71,13 +79,13 @@ public class EditIngredientActivity extends Activity {
 	private static final String TAG_NOTES = "notes";
 	private static final String TAG_ADDEDBY = "addedBy";
 	private static final String TAG_TYPE = "type";
-	private static final String TAG_DATECREATED = "dateCreated";
-	private static final String TAG_DATEUPDATED = "dateUpdated";
+	//private static final String TAG_DATECREATED = "dateCreated";
+	//private static final String TAG_DATEUPDATED = "dateUpdated";
 	
 	private static final String TAG_LISTINGREDIENT = "listIngredient";
 	private static final String TAG_PANTRY = "pantry";
 	private static final String TAG_ADDINGREDIENT = "addIngredient";
-	private static final String TAG_ORIGINE = "origine";
+	private static final String TAG_ORIGIN = "origin";
 	
 	ArrayAdapter<String> spin_adapter; //used for the food type spinner
 	
@@ -91,8 +99,12 @@ public class EditIngredientActivity extends Activity {
 	String ingredientName;
 	String [] foodType;//will be set in onCreate
 	Boolean canEdit=false;
-	String origine= "";
-
+	String origin= "";
+	String user= "";
+	String defaultDiscription="";
+	String message="";
+	Boolean successful= false;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -100,20 +112,23 @@ public class EditIngredientActivity extends Activity {
 		
 		//getting the foodType Array from the resources
 		foodType = getResources().getStringArray(R.array.foodType);
+		defaultDiscription= getResources().getString(R.string.defaultDiscription);
 		
 		// getting ingredient details from intent
 		Intent intent = getIntent();
 		
 		// getting data past from intent
 		ingredientName = intent.getStringExtra(TAG_INGREDIENTNAME);
-		origine = intent.getStringExtra(TAG_ORIGINE);
+		origin = intent.getStringExtra(TAG_ORIGIN);
 		
-		if(origine.equalsIgnoreCase("addIngredient")){
-			canEdit=true;
-		}
+		//getting the user name
+		user="Van Keize";
+		//user=db.getUserName();
+	
 		
 		// Initializing all of the text fields and buttons
 		btnSave = (Button) findViewById(R.id.btnSaveEditIngredient);
+		btnPublish = (Button) findViewById(R.id.btnPublishIngredient);
 		btnDelete = (Button) findViewById(R.id.btnDeleteEditIngredient);
 		
 		txtNotes = (EditText) findViewById(R.id.inputNotes);
@@ -138,15 +153,22 @@ public class EditIngredientActivity extends Activity {
 		
 		Log.d("EditIngr_just in", ingredientName);
 
-		// Getting complete ingredient details in background thread
-		// if canEdit is true at this point then new ingredient is being added
-		if(canEdit){
+		//if redirected from Add Ingredient button then the publish button is set to visible
+		if(origin.equalsIgnoreCase(TAG_ADDINGREDIENT)){
+			canEdit=true;
+			btnPublish.setVisibility(1);
+
+			Log.d("EditIngredient_Origine test", "the origine is addIngredient btn");
+			
+			//call this method now because it is a new ingredient
 			addDetails();
+	
 		}else{
+			txtIngredientName.setEnabled(false);
+			// Getting complete ingredient details in background thread
 			new GetIngredientDetails().execute();
 		}
 
-		//txtCalories.setText(type);
 		
 		
 		
@@ -156,10 +178,22 @@ public class EditIngredientActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
+				// starting background task to update ingredient
+				new SaveIngredientDetails().execute();
+				Log.d("EditIngr_btn Save onclick", "updating");
+
+			}
+		});
+		
+		// publish button click event
+		btnPublish.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
 				// starting background task to update product
 				//new SaveIngredientDetails().execute();
-				Log.d("EditIngr_btn Save onclick", type);
-				txtCalories.setText(type);
+				Log.d("EditIngr_btn publish onclick", "creating new ingredient");
+				new CreateNewIngredient().execute();
 			}
 		});
 
@@ -184,8 +218,8 @@ public class EditIngredientActivity extends Activity {
 	 ****************************************************************************************************/
 	public void addDetails(){
 		
-		if(notes.equalsIgnoreCase("null")){
-			txtNotes.setHint("describe this ingredient");
+		if(notes.equalsIgnoreCase("null")||notes.equalsIgnoreCase("")){
+			txtNotes.setHint(defaultDiscription);
 		}else{
 			txtNotes.setText(notes);
 		}
@@ -197,9 +231,22 @@ public class EditIngredientActivity extends Activity {
 		
 		
 		//makes the users name underlined
-		SpannableString content = new SpannableString(addedBy);
-		content.setSpan(new StyleSpan(Typeface.ITALIC), 0, content.length(), 0);
-		txtAddedBy.setText(content);
+		//sets it to be the users name if the origin is from Add Ingredient button
+		if(origin.equalsIgnoreCase(TAG_ADDINGREDIENT)){
+			
+			txtIngredientName.setText(null);
+			txtIngredientName.setHint("New Ingredient");
+						
+			SpannableString content = new SpannableString(user);
+			content.setSpan(new StyleSpan(Typeface.ITALIC), 0, content.length(), 0);
+			txtAddedBy.setText(content);
+			
+		}else{
+			
+			SpannableString content = new SpannableString(addedBy);
+			content.setSpan(new StyleSpan(Typeface.ITALIC), 0, content.length(), 0);
+			txtAddedBy.setText(content);
+		}
 
 		//finds what type of food it is and sets it in the spinner
 		for(int i=0; i<foodType.length;i++){
@@ -210,13 +257,23 @@ public class EditIngredientActivity extends Activity {
 			}
 		}
 		
-		if(origine.equalsIgnoreCase(TAG_LISTINGREDIENT)||origine.equalsIgnoreCase(TAG_PANTRY))
-		txtIngredientName.setInputType(0);
-		txtCalories.setInputType(0);
-		txtProtein.setInputType(0);
-		txtFat.setInputType(0);
-		txtCarbs.setInputType(0);
-		spnrType.setEnabled(false);
+		//checks to see if the user is also the author of the ingredient
+		if(user.equalsIgnoreCase(addedBy)){
+			
+			Log.d("EditIngredient_AddDetails", "The user is the author");
+			btnSave.setVisibility(1);
+			btnDelete.setVisibility(1);
+			canEdit=true;
+		}
+		
+		if(!canEdit){
+			txtCalories.setInputType(0);
+			txtProtein.setInputType(0);
+			txtFat.setInputType(0);
+			txtCarbs.setInputType(0);
+			txtNotes.setInputType(0);
+			spnrType.setEnabled(false);
+		}
 		
 
 		
@@ -256,8 +313,7 @@ public class EditIngredientActivity extends Activity {
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
 						params.add(new BasicNameValuePair("ingredientName", ingredientName));
 
-						// getting product details by making HTTP request
-						// Note that product details url will use GET request
+						// getting Ingredient details by making HTTP request
 						JSONObject json = jsonParser.makeHttpRequest( urlGetIngredientDetails, "GET", params);
 
 						// check your log for json response
@@ -310,7 +366,7 @@ public class EditIngredientActivity extends Activity {
 	}
 
 	/**
-	 * Background Async Task to  Save product Details
+	 * Background Async Task to  Save ingredient Details
 	 * */
 	class SaveIngredientDetails extends AsyncTask<String, String, String> {
 
@@ -321,7 +377,7 @@ public class EditIngredientActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(EditIngredientActivity.this);
-			pDialog.setMessage("Saving product ...");
+			pDialog.setMessage("Saving ingredient Changes...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.show();
@@ -332,24 +388,28 @@ public class EditIngredientActivity extends Activity {
 		 * */
 		protected String doInBackground(String... args) {
 
-			// getting updated data from EditTexts
 			String calories = txtCalories.getText().toString();
 			String protein = txtProtein.getText().toString();
 			String fat = txtFat.getText().toString();
 			String carbs = txtCarbs.getText().toString();
-
+			String type = spnrType.getSelectedItem().toString();
+			String notes = txtNotes.getText().toString();
+			String ingredientName = txtIngredientName.getText().toString();		
+			
+			
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair(TAG_INGREDIENTNAME, ingredientName));
-			params.add(new BasicNameValuePair(TAG_CALORIES, calories));
-			params.add(new BasicNameValuePair(TAG_CARBS, carbs));
-			params.add(new BasicNameValuePair(TAG_PROTEIN, protein));
-			params.add(new BasicNameValuePair(TAG_FAT, fat));
+			params.add(new BasicNameValuePair("ingredientName", ingredientName));
+			params.add(new BasicNameValuePair("calories", calories));
+			params.add(new BasicNameValuePair("protein", protein));
+			params.add(new BasicNameValuePair("fat", fat));
+			params.add(new BasicNameValuePair("carbs", carbs));
+			params.add(new BasicNameValuePair("type", type));
+			params.add(new BasicNameValuePair("notes", notes));
 
 			// sending modified data through http request
 			// Notice that update product url accepts POST method
-			JSONObject json = jsonParser.makeHttpRequest(url_update_product,
-					"POST", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlUpdateIngredient, "GET", params);
 
 			// check json success tag
 			try {
@@ -376,13 +436,13 @@ public class EditIngredientActivity extends Activity {
 		 * After completing background task Dismiss the progress dialog
 		 * **/
 		protected void onPostExecute(String file_url) {
-			// dismiss the dialog once product uupdated
+			Toast.makeText(getApplicationContext(), "Ingredient Updated", Toast.LENGTH_LONG).show();
 			pDialog.dismiss();
 		}
 	}
 
 	/*****************************************************************
-	 * Background Async Task to Delete Product
+	 * Background Async Task to Delete Ingredient
 	 * */
 	class DeleteIngredient extends AsyncTask<String, String, String> {
 
@@ -443,8 +503,102 @@ public class EditIngredientActivity extends Activity {
 		 * **/
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog once product deleted
+			Toast.makeText(getApplicationContext(), "Ingredient Deleted", Toast.LENGTH_LONG).show();
 			pDialog.dismiss();
 
+		}
+
+	}
+	
+	
+	/**
+	 * Background Async Task to Create new ingredient
+	 * */
+	class CreateNewIngredient extends AsyncTask<String, String, String> {
+
+		/**
+		 * Before starting background thread Show Progress Dialog
+		 * */
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pDialog = new ProgressDialog(EditIngredientActivity.this);
+			pDialog.setMessage("Creating Ingredient..");
+			pDialog.setIndeterminate(false);
+			pDialog.setCancelable(true);
+			pDialog.show();
+		}
+
+		/**
+		 * Creating new ingredient
+		 * */
+		protected String doInBackground(String... args) {
+			
+			String calories = txtCalories.getText().toString();
+			String protein = txtProtein.getText().toString();
+			String fat = txtFat.getText().toString();
+			String carbs = txtCarbs.getText().toString();
+			String type = spnrType.getSelectedItem().toString();
+			String notes = txtNotes.getText().toString();
+			String addedBy = txtAddedBy.getText().toString();
+			String ingredientName = txtIngredientName.getText().toString();		
+
+			// Building Parameters
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("ingredientName", ingredientName));
+			params.add(new BasicNameValuePair("calories", calories));
+			params.add(new BasicNameValuePair("protein", protein));
+			params.add(new BasicNameValuePair("fat", fat));
+			params.add(new BasicNameValuePair("carbs", carbs));
+			params.add(new BasicNameValuePair("type", type));
+			params.add(new BasicNameValuePair("notes", notes));
+			params.add(new BasicNameValuePair("addedBy", addedBy));
+
+			// getting JSON Object
+			// Note that create product url accepts POST method
+			JSONObject json = jsonParser.makeHttpRequest(urlCreateNewIngredient, "GET", params);
+			
+			// check log cat for response
+			Log.d("EditIngredient_create Response", json.toString());
+
+			// check for success tag
+			try {
+				int success = json.getInt(TAG_SUCCESS);
+				message = json.getString(TAG_MESSAGE);
+
+				if (success == 1) {
+					
+					// successfully created ingredient
+					successful=true;
+					//Toast.makeText(getApplicationContext(), "Ingredient Created", Toast.LENGTH_SHORT).show();
+					
+					
+					Intent i = new Intent(getApplicationContext(), ListIngredientActivity.class);
+					startActivity(i);
+					
+					// closing this screen
+					finish();
+				} else {
+					Log.d("EditIngredient failed:", message);
+					//Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			return null;
+		}
+
+		/**
+		 * After completing background task Dismiss the progress dialog
+		 * **/
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog once done
+			pDialog.dismiss();
+			if(successful)
+				Toast.makeText(getApplicationContext(), "Ingredient Created", Toast.LENGTH_LONG).show();
+			else
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}
 
 	}

@@ -47,7 +47,7 @@ public class JSONParser {
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				HttpPost httpPost = new HttpPost(url);
 				httpPost.setEntity(new UrlEncodedFormEntity(params));
-
+				Log.d("JSOMParser POST params=", params.toString());
 				HttpResponse httpResponse = httpClient.execute(httpPost);
 				HttpEntity httpEntity = httpResponse.getEntity();
 				inputStream = httpEntity.getContent();
@@ -56,7 +56,7 @@ public class JSONParser {
 				// request method is GET
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				String paramString = URLEncodedUtils.format(params, "utf-8");
-				Log.d("JSOMParser params=", paramString);
+				Log.d("JSOMParser GET params=", paramString);
 				url += "?" + paramString;
 				HttpGet httpGet = new HttpGet(url);
 

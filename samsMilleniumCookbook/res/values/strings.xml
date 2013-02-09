@@ -5,11 +5,11 @@
     
     <string name="hello">Hello World, Check this recipe app out!</string>
     <string name="app_name">Sam\'s New Millennium Cookbook</string>
-    <string name="save">Save Changes</string>
+    <string name="saveToPantry">Save to Pantry</string>
     <string name="searchRecipes">Search Recipes</string>
     <string name="editPantry">Edit Pantry</string>
     <string name="delete">Delete</string>
-    <string name="addOne">Add Ingredient</string>
+    <string name="addOne">Create Ingredient</string>
     <string name="editOne">Edit</string>
     
     <!-- part of editIngredientActivity -->
@@ -22,8 +22,10 @@
 	<string name="addedBy">Added By:</string>
 	<string name="type">Type</string>
 	<string name="dateCreated">Date Created</string>
-	<string name="perGram">Per 100 grams</string>
-	
+	<string name="perGram">Per 100 grams:</string>
+	<string name="publishIngredient">Publish Ingredient</string>
+	<string name="defaultDiscription">No discription</string>
+	<string name="saveChanges">Save Changes</string>
 	
 	<!-- part of Search For Recipe  -->
 	<string name="search">Search</string>
