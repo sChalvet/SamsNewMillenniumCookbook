@@ -51,7 +51,7 @@ public class ListIngredientActivity extends ListActivity {
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
-	private static String url_all_products = "http://10.0.2.2/recipeApp/get_all_products.php";
+	private static String urlGetAllIngredients = "http://10.0.2.2/recipeApp/getAllIngredients.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -138,6 +138,7 @@ public class ListIngredientActivity extends ListActivity {
 								// sending ingredientName to next activity
 								intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
 								intent.putExtra(TAG_ORIGIN, TAG_ADDINGREDIENT);	
+								startActivityForResult(intent, 100);
 								startActivity(intent);
 							}
 						});	
@@ -165,7 +166,7 @@ public class ListIngredientActivity extends ListActivity {
 				intent.putExtra(TAG_ORIGIN, TAG_LISTINGREDIENT);
 				
 				// starting new activity and expecting some response back
-				//startActivityForResult(intent, 100);
+				startActivityForResult(intent, 100);
 				startActivity(intent);
 			}
 		});
@@ -179,7 +180,7 @@ public class ListIngredientActivity extends ListActivity {
 		// if result code 100
 		if (resultCode == 100) {
 			// if result code 100 is received 
-			// means user edited/deleted product
+			// means user edited/deleted ingredient
 			// reload this screen again
 			Intent intent = getIntent();
 			finish();
@@ -214,9 +215,8 @@ public class ListIngredientActivity extends ListActivity {
 			List<NameValuePair> params = new ArrayList<NameValuePair>(); 	
 
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
+			JSONObject json = jParser.makeHttpRequest(urlGetAllIngredients, "GET", params);
 			
-			// Check your log cat for JSON reponse
 			Log.d("All Products: ", json.toString());
 
 			try {

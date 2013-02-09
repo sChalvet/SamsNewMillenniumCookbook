@@ -47,7 +47,6 @@ public class PantryActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pantry_view);
 		
-		String[] fdsgf = db.getUserInfo("123");
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
 
@@ -118,7 +117,7 @@ public class PantryActivity extends ListActivity {
 				intent.putExtra(TAG_ORIGIN, TAG_PANTRY);
 				
 				// starting new activity and expecting some response back
-				//startActivityForResult(intent, 100);
+				startActivityForResult(intent, 100);
 				startActivity(intent);
 
 			}
@@ -133,7 +132,7 @@ public class PantryActivity extends ListActivity {
 		// if result code 100
 		if (resultCode == 100) {
 			// if result code 100 is received 
-			// means user edited/deleted product
+			// means user edited/deleted ingredient
 			// reload this screen again
 			Intent intent = getIntent();
 			finish();

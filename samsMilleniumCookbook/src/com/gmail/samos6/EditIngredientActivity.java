@@ -59,7 +59,7 @@ public class EditIngredientActivity extends Activity {
 	private static final String urlUpdateIngredient = "http://10.0.2.2/recipeApp/updateIngredient.php";
 		
 	// url to delete product
-	private static final String url_delete_product = "http://10.0.2.2/recipeApp/delete_product.php";
+	private static final String urlDeleteIngredient = "http://10.0.2.2/recipeApp/deleteIngredient.php";
 
 	// url to update product
 	private static final String urlCreateNewIngredient = "http://10.0.2.2/recipeApp/createIngredient.php";
@@ -202,7 +202,8 @@ public class EditIngredientActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				// deleting product in background thread
+				// deleting ingredient in background thread
+				Log.d("EditIngr_btn delete onclick", "deleting ingredient");
 				new DeleteIngredient().execute();
 			}
 		});
@@ -365,9 +366,9 @@ public class EditIngredientActivity extends Activity {
 		}
 	}
 
-	/**
-	 * Background Async Task to  Save ingredient Details
-	 * */
+	/**************************************************************************************************
+	 * 							Background Async Task to Save Ingredient changes
+	 **************************************************************************************************/
 	class SaveIngredientDetails extends AsyncTask<String, String, String> {
 
 		/**
@@ -408,7 +409,6 @@ public class EditIngredientActivity extends Activity {
 			params.add(new BasicNameValuePair("notes", notes));
 
 			// sending modified data through http request
-			// Notice that update product url accepts POST method
 			JSONObject json = jsonParser.makeHttpRequest(urlUpdateIngredient, "GET", params);
 
 			// check json success tag
@@ -421,6 +421,18 @@ public class EditIngredientActivity extends Activity {
 					// send result code 100 to notify about product update
 					setResult(100, i);
 					finish();
+					
+					/*Intent i = new Intent();
+					
+					if(origin.equalsIgnoreCase(TAG_LISTINGREDIENT)){  
+						 i = new Intent(getApplicationContext(), ListIngredientActivity.class);
+					}
+					else{
+						 i = new Intent(getApplicationContext(), PantryActivity.class);
+					}
+					
+					
+					startActivity(i);*/
 				} else {
 					// failed to update product
 				}
@@ -441,9 +453,9 @@ public class EditIngredientActivity extends Activity {
 		}
 	}
 
-	/*****************************************************************
-	 * Background Async Task to Delete Ingredient
-	 * */
+	/**************************************************************************************************
+	 * 							Background Async Task to Delete Ingredient
+	 **************************************************************************************************/
 	class DeleteIngredient extends AsyncTask<String, String, String> {
 
 		/**
@@ -453,7 +465,7 @@ public class EditIngredientActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(EditIngredientActivity.this);
-			pDialog.setMessage("Deleting Product...");
+			pDialog.setMessage("Deleting ingredient...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.show();
@@ -473,8 +485,7 @@ public class EditIngredientActivity extends Activity {
 				params.add(new BasicNameValuePair("ingredientName", ingredientName));
 
 				// getting product details by making HTTP request
-				JSONObject json = jsonParser.makeHttpRequest(
-						url_delete_product, "POST", params);
+				JSONObject json = jsonParser.makeHttpRequest(urlDeleteIngredient, "GET", params);
 
 				// check your log for json response
 				Log.d("Delete Ingredient", json.toString());
@@ -482,12 +493,26 @@ public class EditIngredientActivity extends Activity {
 				// json success tag
 				success = json.getInt(TAG_SUCCESS);
 				if (success == 1) {
-					// product successfully deleted
-					// notify previous activity by sending code 100
+					
+					
+					db.deleteIngredient(ingredientName);
+					
 					Intent i = getIntent();
-					// send result code 100 to notify about product deletion
+					// send result code 100 to notify about product update
 					setResult(100, i);
 					finish();
+					
+					/*Intent i = new Intent();
+					
+					if(origin.equalsIgnoreCase(TAG_LISTINGREDIENT)){  
+						 i = new Intent(getApplicationContext(), ListIngredientActivity.class);
+					}
+					else{
+						 i = new Intent(getApplicationContext(), PantryActivity.class);
+					}
+					
+					
+					startActivity(i);*/
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -511,9 +536,9 @@ public class EditIngredientActivity extends Activity {
 	}
 	
 	
-	/**
-	 * Background Async Task to Create new ingredient
-	 * */
+	/**************************************************************************************************
+	 * 							Background Async Task to Create New Ingredient
+	 **************************************************************************************************/
 	class CreateNewIngredient extends AsyncTask<String, String, String> {
 
 		/**
@@ -572,12 +597,16 @@ public class EditIngredientActivity extends Activity {
 					successful=true;
 					//Toast.makeText(getApplicationContext(), "Ingredient Created", Toast.LENGTH_SHORT).show();
 					
+					Intent i = getIntent();
+					// send result code 100 to notify about product update
+					setResult(100, i);
+					finish();
 					
-					Intent i = new Intent(getApplicationContext(), ListIngredientActivity.class);
+					/*Intent i = new Intent(getApplicationContext(), ListIngredientActivity.class);
 					startActivity(i);
 					
 					// closing this screen
-					finish();
+					finish();*/
 				} else {
 					Log.d("EditIngredient failed:", message);
 					//Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
