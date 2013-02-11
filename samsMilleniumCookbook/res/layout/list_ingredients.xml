@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
 
+<LinearLayout android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Product id (pid) - will be HIDDEN - used to pass to other activity -->
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="430dp"
-        android:layout_weight="4.69" />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" >
 
+        <TableRow
+            android:id="@+id/tableRowIngredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FF005500" >
 
-	<TableRow >
-	    
-	    <Button
-	        android:id="@+id/btnAddIngredient"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:text="@string/addOne" />
+            <TableLayout>
 
-	    <Button
-		        android:id="@+id/btnSaveIngredients"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_weight="1"
-		        android:text="@string/saveToPantry" />
-		   
-		   
-		   
-		   </TableRow>
-		   
-		</TableLayout>
+                <CheckBox
+                    android:id="@+id/ingredientCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusable="false" />
+            </TableLayout>
+
+            <TableLayout>
+
+                <TextView
+                    android:id="@+id/ingredientName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:paddingLeft="6dip"
+                    android:paddingTop="6dip"
+                    android:textSize="17dip"
+                    android:textStyle="bold" />
+            </TableLayout>
+        </TableRow>
+    </TableLayout>
+
+
 
 </LinearLayout>

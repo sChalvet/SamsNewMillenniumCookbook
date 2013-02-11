@@ -12,6 +12,16 @@
     <string name="addOne">Create Ingredient</string>
     <string name="editOne">Edit</string>
     
+    <!-- part of the ListRecipe Activity -->
+    <string name="recipeTitle">Recipe Title</string>
+    <string name="recipeSummery">Recipe Summery</string>
+    <string name="recipeReviewCount">#</string>
+    <string name="recipeReviews">Reviews</string>
+    <string name="recipePostedBy">Posted By:</string>
+    <string name="recipeAuthor">Name</string>
+    <string name="banner_alt">Recipe Pic</string>
+    
+    
     <!-- part of editIngredientActivity -->
 	<string name="ingredientName">Ingredient Name:</string>
 	<string name="calories">Calories</string>

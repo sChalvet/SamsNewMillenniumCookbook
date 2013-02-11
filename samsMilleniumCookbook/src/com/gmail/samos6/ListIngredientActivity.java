@@ -78,7 +78,7 @@ public class ListIngredientActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list_ingredients);
+		setContentView(R.layout.display_ingredients);
 	
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();

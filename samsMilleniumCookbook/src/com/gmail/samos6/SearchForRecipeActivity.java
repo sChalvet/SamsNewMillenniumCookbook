@@ -76,6 +76,9 @@ public class SearchForRecipeActivity extends Activity{
 				String keyword = txtSearchKeyWords.getText().toString();
 				
 				Log.d("SearchActivity_params=", name+" "+foodName+" "+recipeName+" "+cook+" "+keyword);
+				
+				Intent i = new Intent(getApplicationContext(), ListRecipeActivity.class);
+				startActivity(i);
 				//Log.d("SearchActivity_params=", "inside btnsearch listener");
 				
 				
