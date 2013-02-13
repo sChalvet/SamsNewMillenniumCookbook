@@ -95,13 +95,13 @@ public class ListRecipeActivity  extends ListActivity{
 				Log.d("ListRecipe: ", recipeName);
 						
 				// Starting new intent
-				//Intent intent = new Intent(getApplicationContext(), viewRecipeActivity.class);
+				Intent intent = new Intent(getApplicationContext(), RecipeViewActivity.class);
+				
 				// sending recipeName to next activity
-				//intent.putExtra(TAG_RECIPENAME, recipeName);
-				//intent.putExtra(TAG_ORIGIN, TAG_LISTINGREDIENT);
+				intent.putExtra(TAG_RECIPENAME, recipeName);
 				
 				// starting new activity and expecting some response back
-				//startActivityForResult(intent, 100);
+				startActivityForResult(intent, 100);
 				//startActivity(intent);
 			}
 		});

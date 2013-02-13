@@ -172,7 +172,7 @@ public class ListIngredientActivity extends ListActivity {
 		});
 
 	}
-
+	
 	// Response from Edit Product Activity
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

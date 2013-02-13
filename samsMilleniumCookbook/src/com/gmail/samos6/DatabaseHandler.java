@@ -42,10 +42,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_INGREDIENTSATHAND_TABLE = "CREATE TABLE " + TABLE_INGREDIENTSATHAND + " IF NOT EXISTS ("
+        String CREATE_INGREDIENTSATHAND_TABLE = "CREATE TABLE " + TABLE_INGREDIENTSATHAND + " ("
                 + KEY_INGREDIENTNAME + " TEXT PRIMARY KEY)";
         
-        String CREATE_USERINFORMATION_TABLE = "CREATE TABLE " + TABLE_USERINFORMATION + " IF NOT EXISTS ("
+        String CREATE_USERINFORMATION_TABLE = "CREATE TABLE " + TABLE_USERINFORMATION + " ("
         		+ KEY_USERNAME + " TEXT PRIMARY KEY, "
         		+ KEY_EMAIL + " TEXT, "
         		+ KEY_JOINDATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, "

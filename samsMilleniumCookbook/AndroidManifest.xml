@@ -29,6 +29,11 @@
             android:label="Ingredient List" >
         </activity>
         
+        <activity
+            android:name=".RecipeViewActivity"
+            android:label="Recipe Description" >
+        </activity>
+        
        	<activity
             android:name=".ListRecipeActivity"
             android:label="Recipe List" >

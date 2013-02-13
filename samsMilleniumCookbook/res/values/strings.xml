@@ -9,8 +9,17 @@
     <string name="searchRecipes">Search Recipes</string>
     <string name="editPantry">Edit Pantry</string>
     <string name="delete">Delete</string>
+    <string name="remove">Remove</string>
     <string name="addOne">Create Ingredient</string>
     <string name="editOne">Edit</string>
+    
+    <!-- part of RecipeView Activity -->
+    <string name="cookingDirections">Cooking Directions:</string>
+    <string name="ingredientList">Ingredient List:</string>
+    <string name="recipeName">Recipe Name</string>
+    <string name="recipeHandle">Open</string>
+    
+    
     
     <!-- part of the ListRecipe Activity -->
     <string name="recipeTitle">Recipe Title</string>
@@ -20,6 +29,7 @@
     <string name="recipePostedBy">Posted By:</string>
     <string name="recipeAuthor">Name</string>
     <string name="banner_alt">Recipe Pic</string>
+    <string name="summery">Summery</string>
     
     
     <!-- part of editIngredientActivity -->

@@ -2,27 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:measureWithLargestChild="false"
     android:orientation="vertical" >
 
-                 <TextView
-                     android:id="@+id/recipeName"
-                     android:layout_width="fill_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_gravity="center"
-                     android:text="@string/recipeTitle"
-                     android:textSize="22sp"
-                     android:textStyle="bold" 
-                     android:background="#BF005500"/>
+    <TextView
+      android:id="@+id/recipeName"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/recipeTitle"
+      android:textSize="22sp"
+      android:textStyle="bold" 
+      android:background="#BF005500"/>
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="1" 
+        android:background="#FF005500" >
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF005500" >
+            android:layout_height="wrap_content">
             
             <ImageView
                 android:id="@+id/recipeImage"
@@ -41,13 +42,13 @@
 
                 <RatingBar
                     android:id="@+id/ratingBar1"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="false"
+                    android:isIndicator="true"
                     android:maxHeight="10dp"
                     android:maxWidth="10dp"
-                    android:numStars="4"
-                    android:rating="3.5" />
+                    android:numStars="4" />
 	                    
 				                <TableRow
 				                    android:layout_width="match_parent"
@@ -99,7 +100,11 @@
 
         </TableRow>
 
-
+		 <TextView
+		     android:id="@+id/recipeSummery"
+		     android:layout_width="wrap_content"
+		     android:layout_height="match_parent"
+		     android:text="@string/summery" />
 
     </TableLayout>
 

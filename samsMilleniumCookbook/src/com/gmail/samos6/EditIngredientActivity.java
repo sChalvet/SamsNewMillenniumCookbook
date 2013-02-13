@@ -598,7 +598,7 @@ public class EditIngredientActivity extends Activity {
 					//Toast.makeText(getApplicationContext(), "Ingredient Created", Toast.LENGTH_SHORT).show();
 					
 					Intent i = getIntent();
-					// send result code 100 to notify about product update
+					// send result code 100 to notify about ingredient update
 					setResult(100, i);
 					finish();
 					
