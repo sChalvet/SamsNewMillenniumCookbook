@@ -59,6 +59,10 @@ public class ListRecipeActivity  extends ListActivity{
 	private static final String TAG_SUMMERY = "summery";
 	private static final String TAG_RATING = "rating";
 	private static final String TAG_NUMRATINGS = "numRatings";
+	private static final String TAG_PREPTIME = "prepTime";
+	private static final String TAG_COOKTIME = "cookTime";
+	private static final String TAG_AUTHOR = "author";
+	private static final String TAG_TOTALTIME = "totalTime";
 
 	private static final String TAG_ORIGIN = "origin";
 	
@@ -91,7 +95,7 @@ public class ListRecipeActivity  extends ListActivity{
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 						
 				// getting values from selected ListItem
-				String recipeName = ((TextView) view.findViewById(R.id.recipeName)).getText().toString();
+				String recipeName = ((TextView) view.findViewById(R.id.txtListRecipeRecipeName)).getText().toString();
 				Log.d("ListRecipe: ", recipeName);
 						
 				// Starting new intent
@@ -169,13 +173,28 @@ public class ListRecipeActivity  extends ListActivity{
 
 						// Storing each json item in variable						
 						String recipeName = c.getString(TAG_RECIPENAME);
+						String summery = c.getString(TAG_SUMMERY);
+						String rating = c.getString(TAG_RATING);
+						String numRatings = c.getString(TAG_NUMRATINGS);
+						String prepTime = c.getString(TAG_PREPTIME);
+						String cookTime = c.getString(TAG_COOKTIME);
+						String author = c.getString(TAG_AUTHOR);	
 						
+						int cookT = Integer.parseInt(cookTime);
+						int prepT = Integer.parseInt(prepTime);
 
+						String totalTime = Integer.toString(cookT+prepT);
 						// creating new HashMap
 						HashMap<String, String> map = new HashMap<String, String>();
 
 						// adding each child node to HashMap key => value
 						map.put(TAG_RECIPENAME, recipeName);
+						map.put(TAG_SUMMERY, summery);
+						map.put(TAG_RATING, rating);
+						map.put(TAG_NUMRATINGS, numRatings);
+						map.put(TAG_AUTHOR, author);
+						map.put(TAG_TOTALTIME, totalTime);
+						
 
 
 						// adding HashList to ArrayList
@@ -212,13 +231,12 @@ public class ListRecipeActivity  extends ListActivity{
 					 * Updating parsed JSON data into ListView
 					 * */
 					
-					/*List<String> list = new ArrayList<String>();
-					list = db.getAllIngredients();
-					adapter = new SamsListAdapter(ListRecipeActivity.this, productsList, list, "IngredientList");*/
 					
 					ListAdapter adapter = new SimpleAdapter(ListRecipeActivity.this, productsList,
-							R.layout.list_recipes, new String[] { TAG_RECIPENAME },
-							new int[] { R.id.recipeName});
+							R.layout.list_recipes, new String[] { TAG_RECIPENAME, TAG_SUMMERY, TAG_NUMRATINGS, 
+																	TAG_AUTHOR, TAG_TOTALTIME},
+							new int[] { R.id.txtListRecipeRecipeName, R.id.txtListRecipeSummery, 
+										R.id.txtListRecipeNumReviews, R.id.txtListRecipeAuthor, R.id.txtListRecipeTotalCookTime});
 					
 					// updating listview
 					//Log.d("allproducts: ", "setListAdapter(adapter)");

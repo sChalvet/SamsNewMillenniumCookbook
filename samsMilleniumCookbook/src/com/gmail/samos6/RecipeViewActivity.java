@@ -41,6 +41,8 @@ public class RecipeViewActivity extends Activity {
 	TextView txtNumReviews;
 	TextView txtIngredientList;
 	TextView txtCookingDirections;
+	TextView txtCookTime;
+	TextView txtPrepTime;
 	RatingBar rtbRating;
 	ImageView imgPicture;
 	SlidingDrawer slidingDrawer;
@@ -52,6 +54,8 @@ public class RecipeViewActivity extends Activity {
 	String ingredientList= "";
 	String cookingDirections= "";
 	String rating= "";
+	String cookTime= "Cook time: ";
+	String prepTime= "Prep time: ";
 	
 
 	// Progress Dialog
@@ -76,6 +80,8 @@ public class RecipeViewActivity extends Activity {
 	private static final String TAG_INGREDIENTLIST = "ingredientList";
 	private static final String TAG_COOKINGDIRECTIONS = "cookingDirections";
 	private static final String TAG_RATINGS = "rating";
+	private static final String TAG_COOKTIME = "cookTime";
+	private static final String TAG_PREPTIME = "prepTime";
 	
 	
 	@Override
@@ -97,6 +103,8 @@ public class RecipeViewActivity extends Activity {
 		txtNumReviews= (TextView) findViewById(R.id.txtRecipeViewNumReviews);
 		txtIngredientList= (TextView) findViewById(R.id.txtRecipeViewIngredientList);
 		txtCookingDirections= (TextView) findViewById(R.id.txtRecipeViewDirections);
+		txtCookTime= (TextView) findViewById(R.id.txtRecipeViewCooktime);
+		txtPrepTime= (TextView) findViewById(R.id.txtRecipeViewPreptime);
 		imgPicture= (ImageView) findViewById(R.id.recipeViewImage);	
 		slidingDrawer= (SlidingDrawer) findViewById(R.id.recipeViewSlidingDrawer);
 		rtbRating= (RatingBar) findViewById(R.id.recipeViewRatingBar);
@@ -132,6 +140,8 @@ public class RecipeViewActivity extends Activity {
 		txtNumReviews.setText(numReviews);
 		txtIngredientList.setText(ingredientList);
 		txtCookingDirections.setText(cookingDirections);
+		txtCookTime.setText(cookTime);
+		txtPrepTime.setText(prepTime);
 		//rtbRating.setLabelFor(5);//.setText(rating);
 		
 	}
@@ -188,6 +198,8 @@ public class RecipeViewActivity extends Activity {
 							ingredientList = product.getString(TAG_INGREDIENTLIST);
 							cookingDirections = product.getString(TAG_COOKINGDIRECTIONS);
 							rating = product.getString(TAG_RATINGS);
+							prepTime += product.getString(TAG_PREPTIME);
+							cookTime += product.getString(TAG_COOKTIME);
 							
 
 						}else{	

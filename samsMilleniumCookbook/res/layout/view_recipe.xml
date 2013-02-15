@@ -84,10 +84,11 @@
 				                    
 				                 <TextView
 				                     android:id="@+id/txtRecipeViewNumReviews"
-				                     android:layout_width="wrap_content"
-				                     android:layout_height="match_parent"
+				                     android:layout_width="fill_parent"
+				                     android:layout_height="fill_parent"
 				                     android:layout_gravity="right|center_vertical"
 				                     android:layout_weight="0"
+				                     android:paddingTop="12dp"
 				                     android:text="@string/recipeReviewCount"
 				                     android:textStyle="bold" />
 				                     
@@ -109,8 +110,45 @@
         </TableRow>
 
     </TableLayout>
+		
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
+    			<TableRow
+    			    android:layout_width="wrap_content"
+    			    android:layout_height="match_parent" >
+    			    
+    		<TextView
+    		    android:id="@+id/txtRecipeViewPreptime"
+    		    android:layout_width="wrap_content"
+    		    android:layout_height="fill_parent"
+    		    android:layout_gravity="center"
+    		    android:layout_weight="1"
+    		    android:paddingBottom="15dp"
+    		    android:paddingLeft="15dp"
+    		    android:paddingRight="15dp"
+    		    android:paddingTop="15dp"
+    		    android:text="Prep time: "
+    		    android:textAppearance="?android:attr/textAppearanceMedium" />
+    		
+    		<TextView
+    		    android:id="@+id/txtRecipeViewCooktime"
+    		    android:layout_width="wrap_content"
+    		    android:layout_height="fill_parent"
+    		    android:layout_gravity="center"
+    		    android:layout_weight="1"
+    		    android:paddingBottom="15dp"
+    		    android:paddingLeft="15dp"
+    		    android:paddingTop="15dp"
+    		    android:text="Cook time: "
+    		    android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+		        </TableRow>
 
+    </TableLayout>
+    
+				
 
 		        <TextView
 		            android:layout_width="match_parent"

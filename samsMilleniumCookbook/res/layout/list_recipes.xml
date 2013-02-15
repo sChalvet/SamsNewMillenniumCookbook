@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
     <TextView
-      android:id="@+id/recipeName"
+      android:id="@+id/txtListRecipeRecipeName"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
@@ -56,7 +56,7 @@
 				                    android:layout_weight="1" >
 				                    
 				                 <TextView
-				                     android:id="@+id/recipeNumReviews"
+				                     android:id="@+id/txtListRecipeNumReviews"
 				                     android:layout_width="wrap_content"
 				                     android:layout_height="match_parent"
 				                     android:layout_gravity="right"
@@ -84,11 +84,31 @@
 				                       android:text="@string/recipePostedBy" />
 				                     
 				                  <TextView
-				                      android:id="@+id/recipeAuthor"
+				                      android:id="@+id/txtListRecipeAuthor"
 				                      android:layout_width="wrap_content"
 				                      android:layout_height="match_parent"
 				                      android:layout_marginLeft="10dp"
 				                      android:text="@string/recipeAuthor"
+				                      android:textStyle="bold" />
+				                    
+				                </TableRow>
+				                
+				                <TableRow
+				                    android:layout_width="fill_parent"
+				                    android:layout_height="33dp"
+				                    android:layout_weight="1" >
+				                    
+				                   <TextView
+				                       android:layout_width="wrap_content"
+				                       android:layout_height="match_parent"
+				                       android:text="@string/totalPrepTime" />
+				                     
+				                  <TextView
+				                      android:id="@+id/txtListRecipeTotalCookTime"
+				                      android:layout_width="wrap_content"
+				                      android:layout_height="match_parent"
+				                      android:layout_marginLeft="10dp"
+				                      android:text="#"
 				                      android:textStyle="bold" />
 				                    
 				                </TableRow>
@@ -101,9 +121,10 @@
         </TableRow>
 
 		 <TextView
-		     android:id="@+id/recipeSummery"
+		     android:id="@+id/txtListRecipeSummery"
 		     android:layout_width="wrap_content"
 		     android:layout_height="match_parent"
+		     android:textSize="10sp"
 		     android:text="@string/summery" />
 
     </TableLayout>

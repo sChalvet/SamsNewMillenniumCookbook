@@ -380,7 +380,7 @@ public class EditIngredientActivity extends Activity {
 			pDialog = new ProgressDialog(EditIngredientActivity.this);
 			pDialog.setMessage("Saving ingredient Changes...");
 			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(true);
+			pDialog.setCancelable(false);
 			pDialog.show();
 		}
 
@@ -418,7 +418,7 @@ public class EditIngredientActivity extends Activity {
 				if (success == 1) {
 					// successfully updated
 					Intent i = getIntent();
-					// send result code 100 to notify about product update
+					//send result code 100 to notify about product update
 					setResult(100, i);
 					finish();
 					
