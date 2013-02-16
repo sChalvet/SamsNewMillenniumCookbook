@@ -23,10 +23,15 @@
             </intent-filter>
         </activity>
 
-        <!-- All Product Activity -->
+        
         <activity
             android:name=".ListIngredientActivity"
             android:label="Ingredient List" >
+        </activity>
+        
+        <activity
+            android:name=".CreateRecipeActivity"
+            android:label="Edit Recipe" >
         </activity>
         
         <activity
@@ -44,7 +49,6 @@
             android:label="Your Pantry" >
         </activity>
 
-        <!-- Add Product Activity -->
         <activity
             android:name=".NewProductActivity"
             android:label="Add New Product" >

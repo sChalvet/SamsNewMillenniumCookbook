@@ -13,11 +13,20 @@
     <string name="addOne">Create Ingredient</string>
     <string name="editOne">Edit</string>
     
+    <!-- part of CreateRecipe Activity -->
+    <string name="cookingHint">Do this first: ... \nThen do this: ... \nFinaly do this: ...</string>
+    <string name="ingredientHint">1oz of sliced green onions \n2 cups of vinegar \n5 teaspoons of arsenic \netc...</string>
+    <string name="summeryHint">A few key words to describe this\nrecipe...(70 caracters)</string>
+    <string name="recipeType">Recipe Type:</string>
+    <string name="publishRecipe">Publish Recipe</string>
+    
     <!-- part of RecipeView Activity -->
     <string name="cookingDirections">Cooking Directions:</string>
     <string name="ingredientList">Ingredient List:</string>
     <string name="recipeName">Recipe Name</string>
     <string name="recipeHandle">Open</string>
+    <string name="prepTime">Prep Time:</string>
+    <string name="cookTime">Cook Time:</string>
     
     
     
@@ -29,7 +38,7 @@
     <string name="recipePostedBy">Posted By:</string>
     <string name="recipeAuthor">Name</string>
     <string name="banner_alt">Recipe Pic</string>
-    <string name="summery">Summery</string>
+    <string name="summery">Summery:</string>
     <string name="totalPrepTime">Total time:</string>
     
     

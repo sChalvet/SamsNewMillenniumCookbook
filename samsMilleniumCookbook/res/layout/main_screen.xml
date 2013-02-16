@@ -30,10 +30,10 @@
         android:text="Search For Recipe"
         android:layout_marginTop="25dip"/>
         
-        <Button android:id="@+id/btnSeeRecipe"
+        <Button android:id="@+id/btnAddRecipe"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="See Recipe"
+        android:text="Add Recipe"
         android:layout_marginTop="25dip"/>
 
 </LinearLayout>

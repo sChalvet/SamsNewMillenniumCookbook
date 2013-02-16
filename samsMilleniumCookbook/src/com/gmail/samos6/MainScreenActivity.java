@@ -15,7 +15,7 @@ import android.widget.Button;
 public class MainScreenActivity extends Activity{
 	
 	Button btnViewProducts;
-	Button btnSeeRecipe;
+	Button btnAddRecipe;
 	Button btnNewProduct;
 	Button btnPantry;
 	Button btnToRecipeSearch;
@@ -49,15 +49,15 @@ public class MainScreenActivity extends Activity{
 		btnNewProduct = (Button) findViewById(R.id.btnCreateProduct);
 		btnPantry = (Button) findViewById(R.id.btnPantry);
 		btnToRecipeSearch = (Button) findViewById(R.id.btnToRecipeSearch);
-		btnSeeRecipe = (Button) findViewById(R.id.btnSeeRecipe);
+		btnAddRecipe = (Button) findViewById(R.id.btnAddRecipe);
 		
 
-		btnSeeRecipe.setOnClickListener(new View.OnClickListener() {
+		btnAddRecipe.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				// Launching All products Activity
-				Intent i = new Intent(getApplicationContext(), RecipeViewActivity.class);
+				Intent i = new Intent(getApplicationContext(), CreateRecipeActivity.class);
 				startActivity(i);
 				
 			}
