@@ -26,9 +26,12 @@ if (isset($_GET["recipeName"])) {
         // check for empty result
         if (mysql_num_rows($result) > 0) {
 			
+			//$getPic = mysql_query("SELECT img FROM picture WHERE picId = 1") or die(mysql_error());
+			
 			$response["product"] = array();
 			
             $row = mysql_fetch_array($result);
+			//$rowPic = mysql_fetch_array($getPic);
 	
 			$product = array();
 			
@@ -38,8 +41,10 @@ if (isset($_GET["recipeName"])) {
 			$product["cookingDirections"] = $row[3];
 			$product["rating"] = $row[4];
 			$product["prepTime"] = $row[5];
-			$product["cookTime"] = $row[6];			
-
+			$product["cookTime"] = $row[6];
+			//$product["image"] = imageCreateFromString($rowPic[0]);			
+	
+			//$im = imageCreateFromString($rowPic[0]);
             array_push($response["product"], $product);
 			
 			$response["success"] = 1;

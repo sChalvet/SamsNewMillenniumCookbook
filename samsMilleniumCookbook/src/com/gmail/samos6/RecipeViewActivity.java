@@ -14,6 +14,8 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -56,6 +58,9 @@ public class RecipeViewActivity extends Activity {
 	String rating= "";
 	String cookTime= "Cook time: ";
 	String prepTime= "Prep time: ";
+	String rawImage= "";
+	
+	Bitmap pic;
 	
 
 	// Progress Dialog
@@ -82,6 +87,7 @@ public class RecipeViewActivity extends Activity {
 	private static final String TAG_RATINGS = "rating";
 	private static final String TAG_COOKTIME = "cookTime";
 	private static final String TAG_PREPTIME = "prepTime";
+	private static final String TAG_IMAGE = "image";
 	
 	
 	@Override
@@ -120,11 +126,19 @@ public class RecipeViewActivity extends Activity {
 			public void onClick(View arg0) {
 				
 				Log.d("ViewRecipe_btnReviews onclick", "inside");
+				Intent intent = new Intent(getApplicationContext(), ListRecipeCommentsActivity.class);
+				
+				// sending recipeName to next activity
+				intent.putExtra(TAG_RECIPENAME, recipeName);
+				
+				// starting new activity and expecting some response back
+				startActivity(intent);
 
 			}
 		});
 
 	}
+	
 	
 	/***************************************************************************************************
 	 *  									void addDetails()
@@ -134,7 +148,8 @@ public class RecipeViewActivity extends Activity {
 	 ****************************************************************************************************/
 	public void addDetails(){
 		
-		
+		//pic = BitmapFactory.decodeFile(rawImage);
+		Log.d("RecipeView_addDetails image=", rawImage);
 		txtRecipeName.setText(recipeName);
 		txtAuthor.setText(author);
 		txtNumReviews.setText(numReviews);
@@ -142,6 +157,7 @@ public class RecipeViewActivity extends Activity {
 		txtCookingDirections.setText(cookingDirections);
 		txtCookTime.setText(cookTime);
 		txtPrepTime.setText(prepTime);
+		//imgPicture.setImageBitmap(pic);
 		//rtbRating.setLabelFor(5);//.setText(rating);
 		
 	}
@@ -200,6 +216,7 @@ public class RecipeViewActivity extends Activity {
 							rating = product.getString(TAG_RATINGS);
 							prepTime += product.getString(TAG_PREPTIME);
 							cookTime += product.getString(TAG_COOKTIME);
+							//rawImage = product.getString(TAG_IMAGE);
 							
 
 						}else{	

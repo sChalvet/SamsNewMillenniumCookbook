@@ -79,7 +79,7 @@ public class ListRecipeActivity  extends ListActivity{
 		productsList = new ArrayList<HashMap<String, String>>();
 
 		// Loading products in Background Thread
-		new LoadAllProducts().execute();
+		new LoadAllRecipes().execute();
 
 		// Get listview
 		final ListView lv = getListView();  //added final
@@ -129,9 +129,9 @@ public class ListRecipeActivity  extends ListActivity{
 	}
 
 	/**
-	 * Background Async Task to Load all product by making HTTP Request
+	 * Background Async Task to Load all Recipe by making HTTP Request
 	 * */
-	class LoadAllProducts extends AsyncTask<String, String, String> {
+	class LoadAllRecipes extends AsyncTask<String, String, String> {
 
 		/**
 		 * Before starting background thread Show Progress Dialog
@@ -202,12 +202,7 @@ public class ListRecipeActivity  extends ListActivity{
 					}
 				} else {
 					// no recipes found
-					// Launch Add New product Activity
-					Intent i = new Intent(getApplicationContext(),
-							NewProductActivity.class);
-					// Closing all previous activities
-					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(i);
+					Toast.makeText(getApplicationContext(), "Your no recipes found", Toast.LENGTH_SHORT).show();
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

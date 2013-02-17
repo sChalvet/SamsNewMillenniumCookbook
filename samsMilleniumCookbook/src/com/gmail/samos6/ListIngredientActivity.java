@@ -112,10 +112,10 @@ public class ListIngredientActivity extends ListActivity {
 								
 								Toast.makeText(getApplicationContext(), "Your Pantry has been Saved", Toast.LENGTH_SHORT).show();
 								
-								// product successfully deleted
+								// ingredients successfully saved
 								// notify previous activity by sending code 100
 								Intent i = getIntent();
-								// send result code 100 to notify about product deletion
+								// send result code 100 to notify about ingredient save
 								setResult(100, i);
 								finish();
 								

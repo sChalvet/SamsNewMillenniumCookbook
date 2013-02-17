@@ -18,7 +18,9 @@
 		    android:paddingLeft="10dp"
 		    android:textAppearance="?android:attr/textAppearanceLarge"
 		    android:textStyle="bold"
-		    android:typeface="serif" />
+		    android:typeface="serif" >
+		    <requestFocus />
+		    </EditText>
 
 				<ScrollView
 				    xmlns:android="http://schemas.android.com/apk/res/android"
@@ -77,10 +79,9 @@
     		    android:layout_height="wrap_content"
     		    android:layout_weight="1"
     		    android:inputType="number"
-    		    android:maxLength="3" >
+    		    android:maxLength="3" />
 
-    		    <requestFocus />
-    		</EditText>
+    		 
     		
     		<TextView
     		    android:layout_width="wrap_content"

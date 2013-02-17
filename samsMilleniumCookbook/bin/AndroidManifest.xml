@@ -30,6 +30,21 @@
         </activity>
         
         <activity
+            android:name=".CreateNewCommentActivity"
+            android:label="New Comment" >
+        </activity>
+        
+        <activity
+            android:name=".EditCommentActivity"
+            android:label="Edit Comment" >
+        </activity>
+        
+        <activity
+            android:name=".ListRecipeCommentsActivity"
+            android:label="Recipe Comments" >
+        </activity>
+        
+        <activity
             android:name=".CreateRecipeActivity"
             android:label="Edit Recipe" >
         </activity>

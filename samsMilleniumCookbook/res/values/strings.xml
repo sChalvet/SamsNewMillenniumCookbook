@@ -12,6 +12,7 @@
     <string name="remove">Remove</string>
     <string name="addOne">Create Ingredient</string>
     <string name="editOne">Edit</string>
+    <string name="addComment">Add a Comment</string>
     
     <!-- part of CreateRecipe Activity -->
     <string name="cookingHint">Do this first: ... \nThen do this: ... \nFinaly do this: ...</string>
@@ -20,6 +21,14 @@
     <string name="recipeType">Recipe Type:</string>
     <string name="publishRecipe">Publish Recipe</string>
     
+    <!-- part of ListRecipeComments Activity -->
+    <string name="postedBy">Posted by:</string>
+    
+    <!-- part of CreateNewComment Activity -->
+    <string name="commentHint">New Comment Here</string>
+    <string name="postComment">Post</string>
+    <string name="yourRating">Your Rating: </string>
+        
     <!-- part of RecipeView Activity -->
     <string name="cookingDirections">Cooking Directions:</string>
     <string name="ingredientList">Ingredient List:</string>
@@ -111,6 +120,20 @@
     <item>1 hour 30 min</item> 
     <item>2 hours or Longer</item> 
     <item>Over Night</item> 
+	</string-array>
+
+	<string-array name="spinnerRating"> 
+    <item>0</item> 
+    <item>1</item> 
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item> 
+    <item>8</item> 
+    <item>9</item>
+    <item>10</item> 
 	</string-array>
 
 </resources>

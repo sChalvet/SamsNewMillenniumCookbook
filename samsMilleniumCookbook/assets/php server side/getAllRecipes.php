@@ -24,9 +24,13 @@ if (mysql_num_rows($result) > 0) {
     // looping through all results
     // products node
     $response["products"] = array();
-    
+    //$getPic = mysql_query("SELECT img FROM recipe WHERE picId = '1'") or die(mysql_error());
+	
     while ($row = mysql_fetch_array($result)) {
         // temp user array
+		
+		//$row1 = mysql_fetch_array($result)
+		
         $product = array();
         $product["recipeName"] = $row[0];
 		$product["summery"] = $row[1];
@@ -37,9 +41,7 @@ if (mysql_num_rows($result) > 0) {
 		$product["cookTime"] = $row[6];
 		
 
-	//echo "<script type='text/javascript'>alert('".$product["ingredientName"]."');</script>";
-
-        // push single product into final response array
+        // push single recipe into final response array
         array_push($response["products"], $product);
     }
     // success
