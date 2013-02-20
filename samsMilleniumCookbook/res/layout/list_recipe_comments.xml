@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="#FF005500"
+    android:orientation="vertical" >
+
+    <RatingBar
+        android:id="@+id/listRecipeCommentsRatingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:fitsSystemWindows="true"
+        android:isIndicator="true"
+        android:maxHeight="10dp"
+        android:maxWidth="10dp"
+        android:numStars="5"
+        android:rating="1"
+        android:stepSize="1" />
+
+    <TextView
+        android:id="@+id/txtListRecipeCommentsComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:padding="10dp"
+        android:text="Comments..."
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FF00FFAA"
+        android:textSize="17sp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0" >
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="3dp"
+            android:text="@string/postedBy"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txtListRecipeCommentsAuthorName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textColor="#BBBBBB"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/txtListRecipeCommentsPostDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp" />
+        
+        </TableRow>
+
+       
+
+    </TableLayout>
+
+
+
+</LinearLayout>

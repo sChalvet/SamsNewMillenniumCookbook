@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <TextView
+        android:id="@+id/txtCreateCommentRecipeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/recipeName"
+        android:paddingBottom="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="italic"
+        android:typeface="serif" />
+
+    <EditText
+        android:id="@+id/txtCreateCommentComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DD222222"
+        android:ems="10"
+        android:hint="@string/commentHint"
+        android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
+        android:maxLength="200"
+        android:paddingBottom="15dp"
+        android:textColor="#EEEEEEAA" >
+
+        <requestFocus />
+        
+    </EditText>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            
+  		<TextView
+  		    android:layout_width="match_parent"
+  		    android:layout_height="wrap_content"
+  		    android:layout_gravity="center"
+  		    android:text="@string/yourRating" />
+
+    	<Spinner
+        android:id="@+id/CreateRecipeRatingSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" 
+        android:entries="@array/spinnerRating"/>
+
+    	<Button
+    	    android:id="@+id/btnCreateCommentPost"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_gravity="right"
+    	    android:layout_weight="1"
+    	    android:paddingLeft="20dp"
+    	    android:paddingRight="20dp"
+    	    android:text="@string/postComment" />
+          
+        </TableRow>
+        
+        
+    </TableLayout>
+    
+
+</LinearLayout>
