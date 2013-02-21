@@ -51,8 +51,8 @@ public class ListIngredientActivity extends ListActivity {
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
-	private static String urlGetAllIngredients = "http://10.0.2.2/recipeApp/getAllIngredients.php";
-
+	//private static String urlGetAllIngredients = "http://10.0.2.2/recipeApp/getAllIngredients.php";
+	String urlGetAllIngredients;
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_PRODUCTS = "products";
@@ -79,6 +79,9 @@ public class ListIngredientActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.display_ingredients);
+		
+		//getting url from resources
+		urlGetAllIngredients = getResources().getString(R.string.urlGetAllIngredients);
 	
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();

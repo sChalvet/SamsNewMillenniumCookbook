@@ -52,8 +52,8 @@ public class SavedRecipesActivity  extends ListActivity{
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
-	private static String urlGetFavRecipes = "http://10.0.2.2/recipeApp/getFavRecipes.php";
-
+	//private static String urlGetFavRecipes = "http://10.0.2.2/recipeApp/getFavRecipes.php";
+	 String urlGetFavRecipes;
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_PRODUCTS = "products";
@@ -75,6 +75,9 @@ public class SavedRecipesActivity  extends ListActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.display_fav_recipes);
 	
+		//getting url from resources
+		urlGetFavRecipes = getResources().getString(R.string.urlGetFavRecipes);
+		
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
 

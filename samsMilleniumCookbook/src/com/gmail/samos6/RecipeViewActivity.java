@@ -72,8 +72,8 @@ public class RecipeViewActivity extends Activity {
 	JSONParser jsonParser = new JSONParser();
 
 	// single ingredient url
-	private static final String urlGetRecipeDetails = "http://10.0.2.2/recipeApp/getRecipeDetails.php";
-	
+	//private static final String urlGetRecipeDetails = "http://10.0.2.2/recipeApp/getRecipeDetails.php";
+	String urlGetRecipeDetails;
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
@@ -97,6 +97,8 @@ public class RecipeViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.view_recipe);
 		
+		//getting url from resources
+		urlGetRecipeDetails = getResources().getString(R.string.urlGetRecipeDetails);
 		
 		// getting ingredient details from intent
 		Intent intent = getIntent();

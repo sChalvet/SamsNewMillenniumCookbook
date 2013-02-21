@@ -69,8 +69,10 @@ public class CreateRecipeActivity extends Activity {
 	JSONParser jsonParser = new JSONParser();
 
 	// single ingredient url
-	private static final String urlCreateRecipe = "http://10.0.2.2/recipeApp/createRecipe.php";
-	private static final String urlUpdateRecipe = "http://10.0.2.2/recipeApp/updateRecipe.php";
+	//private static final String urlCreateRecipe = "http://10.0.2.2/recipeApp/createRecipe.php";
+	//private static final String urlUpdateRecipe = "http://10.0.2.2/recipeApp/updateRecipe.php";
+	String urlCreateRecipe;
+	String urlUpdateRecipe; 
 	
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
@@ -95,6 +97,10 @@ public class CreateRecipeActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_recipe);
+		
+		//getting url from resources
+		urlCreateRecipe = getResources().getString(R.string.urlCreateRecipe);
+		urlUpdateRecipe = getResources().getString(R.string.urlUpdateRecipe);
 		
 		recipeType = getResources().getStringArray(R.array.recipeType);
 		

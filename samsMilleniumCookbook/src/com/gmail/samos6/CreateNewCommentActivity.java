@@ -42,8 +42,10 @@ public class CreateNewCommentActivity extends Activity {
 	String message="";
 
 	// url to create new product
-	private static String urlCreateNewRating = "http://10.0.2.2/recipeApp/CreateNewRating.php";
-
+	//private static String urlCreateNewRating = "http://10.0.2.2/recipeApp/CreateNewRating.php";
+	String urlCreateNewRating ;
+	
+	
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_RECIPENAME = "recipeName";
@@ -54,6 +56,8 @@ public class CreateNewCommentActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_comment);
 
+		//getting url from resources
+		urlCreateNewRating = getResources().getString(R.string.urlCreateNewRating);
 		// Edit Text
 		txtRecipeName = (TextView) findViewById(R.id.txtCreateCommentRecipeName);
 		txtComment = (EditText) findViewById(R.id.txtCreateCommentComment);

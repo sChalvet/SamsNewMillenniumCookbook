@@ -50,7 +50,8 @@ public class ListRecipeActivity  extends ListActivity{
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
-	private static String urlGetAllRecipes = "http://10.0.2.2/recipeApp/getAllRecipes.php";
+	//private static String urlGetAllRecipes = "http://10.0.2.2/recipeApp/getAllRecipes.php";
+	String urlGetAllRecipes;
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -75,6 +76,9 @@ public class ListRecipeActivity  extends ListActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.display_recipes);
 	
+		//getting url from resources
+		urlGetAllRecipes = getResources().getString(R.string.urlGetAllRecipes);
+		
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
 

@@ -126,85 +126,101 @@ public final class R {
         public static final int view_recipe=0x7f03000f;
     }
     public static final class string {
-        public static final int addComment=0x7f04000f;
-        public static final int addOne=0x7f04000d;
-        public static final int addedBy=0x7f040032;
-        public static final int app_name=0x7f040002;
-        public static final int banner_alt=0x7f040029;
-        public static final int byAuthor=0x7f04003d;
-        public static final int byCooktime=0x7f04003c;
-        public static final int byFoodType=0x7f04003a;
-        public static final int byRecipeType=0x7f04003b;
-        public static final int calories=0x7f04002d;
-        public static final int carbs=0x7f04002e;
+        public static final int addComment=0x7f04001c;
+        public static final int addOne=0x7f04001a;
+        public static final int addedBy=0x7f04003f;
+        public static final int app_name=0x7f04000f;
+        public static final int banner_alt=0x7f040036;
+        public static final int byAuthor=0x7f04004a;
+        public static final int byCooktime=0x7f040049;
+        public static final int byFoodType=0x7f040047;
+        public static final int byRecipeType=0x7f040048;
+        public static final int calories=0x7f04003a;
+        public static final int carbs=0x7f04003b;
         /**  part of CreateNewComment Activity 
          */
-        public static final int commentHint=0x7f040017;
-        public static final int cookTime=0x7f04001f;
+        public static final int commentHint=0x7f040024;
+        public static final int cookTime=0x7f04002c;
         /**  part of RecipeView Activity 
          */
-        public static final int cookingDirections=0x7f04001a;
+        public static final int cookingDirections=0x7f040027;
         /**  part of CreateRecipe Activity 
          */
-        public static final int cookingHint=0x7f040011;
-        public static final int dateCreated=0x7f040034;
-        public static final int defaultDiscription=0x7f040037;
-        public static final int delete=0x7f04000b;
-        public static final int dropFromList=0x7f040010;
-        public static final int editOne=0x7f04000e;
-        public static final int editPantry=0x7f04000a;
-        public static final int fat=0x7f040030;
-        public static final int favoriteRecipe=0x7f040021;
-        public static final int hello=0x7f040001;
-        public static final int hintSearch=0x7f04003f;
-        public static final int ingredientHint=0x7f040012;
-        public static final int ingredientList=0x7f04001b;
+        public static final int cookingHint=0x7f04001e;
+        public static final int dateCreated=0x7f040041;
+        public static final int defaultDiscription=0x7f040044;
+        public static final int delete=0x7f040018;
+        public static final int dropFromList=0x7f04001d;
+        public static final int editOne=0x7f04001b;
+        public static final int editPantry=0x7f040017;
+        public static final int fat=0x7f04003d;
+        public static final int favoriteRecipe=0x7f04002e;
+        public static final int hello=0x7f04000e;
+        public static final int hintSearch=0x7f04004c;
+        public static final int ingredientHint=0x7f04001f;
+        public static final int ingredientList=0x7f040028;
         /**  part of editIngredientActivity 
          */
-        public static final int ingredientName=0x7f04002c;
-        public static final int mainAddRecipe=0x7f040005;
-        public static final int mainFavoriteRecipes=0x7f040006;
-        public static final int mainSavedRecipes=0x7f040007;
-        public static final int mainSearchForRecipe=0x7f040004;
+        public static final int ingredientName=0x7f040039;
+        public static final int mainAddRecipe=0x7f040012;
+        public static final int mainFavoriteRecipes=0x7f040013;
+        public static final int mainSavedRecipes=0x7f040014;
+        public static final int mainSearchForRecipe=0x7f040011;
         /**  part of Main Activity  
          */
-        public static final int mainSeePantry=0x7f040003;
-        public static final int notes=0x7f040031;
-        public static final int perGram=0x7f040035;
-        public static final int pickYourPoison=0x7f04003e;
-        public static final int postComment=0x7f040018;
+        public static final int mainSeePantry=0x7f040010;
+        public static final int notes=0x7f04003e;
+        public static final int perGram=0x7f040042;
+        public static final int pickYourPoison=0x7f04004b;
+        public static final int postComment=0x7f040025;
         /**  part of ListRecipeComments Activity 
          */
-        public static final int postedBy=0x7f040016;
-        public static final int prepTime=0x7f04001e;
-        public static final int protein=0x7f04002f;
-        public static final int publishIngredient=0x7f040036;
-        public static final int publishRecipe=0x7f040015;
-        public static final int recipeAuthor=0x7f040028;
-        public static final int recipeHandle=0x7f04001d;
-        public static final int recipeName=0x7f04001c;
-        public static final int recipePostedBy=0x7f040027;
-        public static final int recipeReviewCount=0x7f040025;
-        public static final int recipeReviews=0x7f040026;
-        public static final int recipeSummery=0x7f040024;
+        public static final int postedBy=0x7f040023;
+        public static final int prepTime=0x7f04002b;
+        public static final int protein=0x7f04003c;
+        public static final int publishIngredient=0x7f040043;
+        public static final int publishRecipe=0x7f040022;
+        public static final int recipeAuthor=0x7f040035;
+        public static final int recipeHandle=0x7f04002a;
+        public static final int recipeName=0x7f040029;
+        public static final int recipePostedBy=0x7f040034;
+        public static final int recipeReviewCount=0x7f040032;
+        public static final int recipeReviews=0x7f040033;
+        public static final int recipeSummery=0x7f040031;
         /**  part of the ListRecipe Activity 
          */
-        public static final int recipeTitle=0x7f040023;
-        public static final int recipeType=0x7f040014;
-        public static final int remove=0x7f04000c;
-        public static final int saveChanges=0x7f040038;
-        public static final int saveRecipe=0x7f040020;
-        public static final int saveToPantry=0x7f040008;
+        public static final int recipeTitle=0x7f040030;
+        public static final int recipeType=0x7f040021;
+        public static final int remove=0x7f040019;
+        public static final int saveChanges=0x7f040045;
+        public static final int saveRecipe=0x7f04002d;
+        public static final int saveToPantry=0x7f040015;
         /**  part of Search For Recipe  
          */
-        public static final int search=0x7f040039;
-        public static final int searchRecipes=0x7f040009;
-        public static final int summery=0x7f04002a;
-        public static final int summeryHint=0x7f040013;
-        public static final int totalPrepTime=0x7f04002b;
-        public static final int type=0x7f040033;
-        public static final int userName=0x7f040000;
-        public static final int viewRatings=0x7f040022;
-        public static final int yourRating=0x7f040019;
+        public static final int search=0x7f040046;
+        public static final int searchRecipes=0x7f040016;
+        public static final int summery=0x7f040037;
+        public static final int summeryHint=0x7f040020;
+        public static final int totalPrepTime=0x7f040038;
+        public static final int type=0x7f040040;
+        public static final int urlCreateNewIngredient=0x7f040003;
+        public static final int urlCreateNewRating=0x7f040008;
+        public static final int urlCreateRecipe=0x7f040006;
+        public static final int urlDeleteIngredient=0x7f040002;
+        public static final int urlGetAllComments=0x7f040004;
+        public static final int urlGetAllIngredients=0x7f04000a;
+        public static final int urlGetAllRecipes=0x7f040009;
+        public static final int urlGetFavRecipes=0x7f04000b;
+        /**  urlGetAllComments = getResources().getString(R.string.urlGetAllComments); 
+ Url's are pulled into the app from here 
+         */
+        public static final int urlGetIngredientDetails=0x7f040000;
+        public static final int urlGetRecipeDetails=0x7f04000c;
+        public static final int urlUpdateIngredient=0x7f040001;
+        public static final int urlUpdateRecipe=0x7f040007;
+        public static final int url_create_product=0x7f040005;
+        public static final int userName=0x7f04000d;
+        public static final int viewRatings=0x7f04002f;
+        public static final int yourRating=0x7f040026;
     }
 }

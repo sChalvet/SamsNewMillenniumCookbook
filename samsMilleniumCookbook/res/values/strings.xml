@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    
+    <!-- urlGetAllComments = getResources().getString(R.string.urlGetAllComments); -->
+    <!-- <string name="urlGetIngredientDetails">http://10.0.2.2/recipeApp/getIngredientDetails.php</string> -->
+    
+    <!-- Url's are pulled into the app from here -->
+    <string name="urlGetIngredientDetails">http://192.168.254.45/recipeApp/getIngredientDetails.php</string>
+    <string name="urlUpdateIngredient">http://192.168.254.45/recipeApp/updateIngredient.php</string>
+    <string name="urlDeleteIngredient">http://192.168.254.45/recipeApp/deleteIngredient.php</string>
+    <string name="urlCreateNewIngredient">http://192.168.254.45/recipeApp/createIngredient.php</string>
+    <string name="urlGetAllComments">http://192.168.254.45/recipeApp/getAllComments.php</string>
+    <string name="url_create_product">http://192.168.254.45/android_connect/create_product.php</string>
+    <string name="urlCreateRecipe">http://192.168.254.45/recipeApp/createRecipe.php</string>
+    <string name="urlUpdateRecipe">http://192.168.254.45/recipeApp/updateRecipe.php</string>
+    <string name="urlCreateNewRating">http://192.168.254.45/recipeApp/CreateNewRating.php</string>
+    <string name="urlGetAllRecipes">http://192.168.254.45/recipeApp/getAllRecipes.php</string>
+    <string name="urlGetAllIngredients">http://192.168.254.45/recipeApp/getAllIngredients.php</string>
+    <string name="urlGetFavRecipes">http://192.168.254.45/recipeApp/getFavRecipes.php</string>
+    <string name="urlGetRecipeDetails">http://192.168.254.45/recipeApp/getRecipeDetails.php</string>
+    
+    
     <string name="userName">Unknown</string>
     
     <string name="hello">Hello World, Check this recipe app out!</string>

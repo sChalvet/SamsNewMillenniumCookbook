@@ -51,8 +51,8 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
-	private static String urlGetAllComments = "http://10.0.2.2/recipeApp/getAllComments.php";
-
+	//private static String urlGetAllComments = "http://10.0.2.2/recipeApp/getAllComments.php";
+	String urlGetAllComments;
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_PRODUCTS = "products";
@@ -74,6 +74,7 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.display_comments);
 	
+		urlGetAllComments = getResources().getString(R.string.urlGetAllComments);
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
 		

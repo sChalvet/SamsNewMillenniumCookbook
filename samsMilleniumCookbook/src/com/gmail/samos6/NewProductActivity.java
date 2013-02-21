@@ -30,8 +30,9 @@ public class NewProductActivity extends Activity {
 	EditText inputDesc;
 
 	// url to create new product
-	private static String url_create_product = "http://10.0.2.2/android_connect/create_product.php";
-
+	//private static String url_create_product = "http://10.0.2.2/android_connect/create_product.php";
+	String url_create_product;
+	
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 
@@ -40,6 +41,8 @@ public class NewProductActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_product);
 
+		//getting url from resources
+		url_create_product = getResources().getString(R.string.url_create_product);
 		// Edit Text
 		inputName = (EditText) findViewById(R.id.inputName);
 		inputPrice = (EditText) findViewById(R.id.inputPrice);

@@ -52,6 +52,7 @@ public class EditIngredientActivity extends Activity {
 	// JSON parser class
 	JSONParser jsonParser = new JSONParser();
 
+	/*
 	// single ingredient url
 	private static final String urlGetIngredientDetails = "http://10.0.2.2/recipeApp/getIngredientDetails.php";
 
@@ -63,6 +64,19 @@ public class EditIngredientActivity extends Activity {
 
 	// url to update product
 	private static final String urlCreateNewIngredient = "http://10.0.2.2/recipeApp/createIngredient.php";
+	*/
+	
+	// single ingredient url
+	String urlGetIngredientDetails;
+
+	// url to update product
+	String urlUpdateIngredient;
+		
+	// url to delete product
+	String urlDeleteIngredient;
+
+	// url to update product
+	String urlCreateNewIngredient;
 	
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
@@ -109,6 +123,12 @@ public class EditIngredientActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_ingredient);
+		
+		//getting URL's from resources
+		urlGetIngredientDetails= getResources().getString(R.string.urlGetIngredientDetails);
+		urlUpdateIngredient= getResources().getString(R.string.urlUpdateIngredient);
+		urlDeleteIngredient= getResources().getString(R.string.urlDeleteIngredient);
+		urlCreateNewIngredient= getResources().getString(R.string.urlCreateNewIngredient);
 		
 		//getting the foodType Array from the resources
 		foodType = getResources().getStringArray(R.array.foodType);
