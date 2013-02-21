@@ -193,50 +193,53 @@
 		</LinearLayout>
 		</ScrollView>
 
-    <SlidingDrawer
+<SlidingDrawer
         android:id="@+id/recipeCreateSlidingDrawer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/inputCreateRecipeName"
         android:layout_gravity="bottom"
         android:allowSingleTap="false"
         android:animateOnClick="true"
         android:content="@+id/content"
         android:handle="@+id/handle"
-        android:topOffset="300dp" >
-
+        android:topOffset="350dp" >
+		    
         <Button
             android:id="@+id/handle"
-            android:background="#90FF0000"
-            android:layout_width="304dp"
+            android:layout_width="match_parent"
             android:layout_height="22dp"
+            android:background="#BBFF0000"
             android:text="@string/recipeHandle" />
 
         <LinearLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
             android:background="#000000"
             android:orientation="vertical" >
 			
             <Button
-            android:id="@+id/btnCreateRecipeSubmit"  
-            android:layout_width="304dp"
-            android:layout_height="35dp"
-            android:text="@string/publishRecipe" />
+                android:id="@+id/btnCreateRecipeSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="@string/publishRecipe" />
                     
             <Button
-            android:layout_width="304dp"
-            android:layout_height="35dp"
-            android:text="@string/recipeHandle" />
+                android:id="@+id/btnRecipeViewFavoriteRecipe"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="@string/favoriteRecipe" />
                             
             <Button
-            android:layout_width="304dp"
-            android:layout_height="35dp"
-            android:text="@string/recipeHandle" />
+                android:id="@+id/btnRecipeViewViewRatings"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="@string/viewRatings" />
 
         </LinearLayout>
     </SlidingDrawer>
+    
+    
 
 </RelativeLayout>

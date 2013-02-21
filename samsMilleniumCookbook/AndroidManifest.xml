@@ -29,6 +29,16 @@
             android:label="Ingredient List" >
         </activity>
         
+       <activity
+            android:name=".FavoriteRecipesActivity"
+            android:label="Your Favorite Recipes" >
+        </activity>
+        
+       <activity
+            android:name=".SavedRecipesActivity"
+            android:label="Recipes You Saved to Try Later" >
+        </activity>
+        
         <activity
             android:name=".CreateNewCommentActivity"
             android:label="New Comment" >

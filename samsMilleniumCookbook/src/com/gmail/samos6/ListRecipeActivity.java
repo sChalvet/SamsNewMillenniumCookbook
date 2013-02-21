@@ -202,7 +202,7 @@ public class ListRecipeActivity  extends ListActivity{
 					}
 				} else {
 					// no recipes found
-					Toast.makeText(getApplicationContext(), "Your no recipes found", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getApplicationContext(), "Your no recipes found", Toast.LENGTH_SHORT).show();
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

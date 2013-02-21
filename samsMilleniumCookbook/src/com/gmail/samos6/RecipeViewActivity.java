@@ -49,6 +49,8 @@ public class RecipeViewActivity extends Activity {
 	ImageView imgPicture;
 	SlidingDrawer slidingDrawer;
 	Button btnReviews;
+	Button btnSave;
+	Button btnFavorite;
 	
 	String recipeName;
 	String author= "";
@@ -103,7 +105,10 @@ public class RecipeViewActivity extends Activity {
 		recipeName = intent.getStringExtra(TAG_RECIPENAME);
 			
 		// Initializing all of the text fields and buttons
-		btnReviews = (Button) findViewById(R.id.btnRecipeViewReviews);
+		btnReviews = (Button) findViewById(R.id.btnRecipeViewViewRatings);
+		btnSave = (Button) findViewById(R.id.btnRecipeViewSaveRecipe);
+		btnFavorite = (Button) findViewById(R.id.btnRecipeViewFavoriteRecipe);
+		
 		txtRecipeName = (TextView) findViewById(R.id.txtRecipeViewRecipeName);
 		txtAuthor = (TextView) findViewById(R.id.txtRecipeViewAuthor);
 		txtNumReviews= (TextView) findViewById(R.id.txtRecipeViewNumReviews);
@@ -119,7 +124,7 @@ public class RecipeViewActivity extends Activity {
 	
 		new GetRecipeDetails().execute();
 		
-		// save button click event
+		// See Reviews button click event
 		btnReviews.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -133,6 +138,32 @@ public class RecipeViewActivity extends Activity {
 				
 				// starting new activity and expecting some response back
 				startActivity(intent);
+
+			}
+		});
+		
+		// Save Recipe For latter button click event
+		btnSave.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				
+				Log.d("ViewRecipe_btnSave onclick", "inside");
+				db.addSavedRecipe(recipeName);
+				Toast.makeText(getApplicationContext(), recipeName+" has been saved for later", Toast.LENGTH_LONG).show();
+
+			}
+		});
+		
+		// Favorite Recipe button click event
+		btnFavorite.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				
+				Log.d("ViewRecipe_btnFavorite onclick", "inside");
+				db.addFavoriteRecipe(recipeName);
+				Toast.makeText(getApplicationContext(), recipeName+" has been added to your Favorite Recipes", Toast.LENGTH_LONG).show();
 
 			}
 		});

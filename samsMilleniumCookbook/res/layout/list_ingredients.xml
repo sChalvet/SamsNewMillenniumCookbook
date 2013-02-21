@@ -16,7 +16,7 @@
             android:id="@+id/tableRowIngredient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#FF005500" >
+            android:background="@drawable/list_ingredient_gradient" >
 
             <TableLayout>
 

@@ -6,34 +6,42 @@
     android:gravity="center_horizontal">
 	
     <!--  Sample Dashboard screen with Two buttons -->
-    <Button android:id="@+id/btnViewProducts"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="View Products"
-        android:layout_marginTop="25dip"/>
     
-    <Button android:id="@+id/btnCreateProduct"
+    <Button android:id="@+id/btnMainCreateProduct"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Add New Products"
         android:layout_marginTop="25dip"/>
 
-        <Button android:id="@+id/btnPantry"
+        <Button android:id="@+id/btnMainPantry"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="See Pantry"
+        android:text="@string/mainSeePantry"
         android:layout_marginTop="25dip"/>
         
-        <Button android:id="@+id/btnToRecipeSearch"
+        <Button android:id="@+id/btnMainToRecipeSearch"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Search For Recipe"
+        android:text="@string/mainSearchForRecipe"
         android:layout_marginTop="25dip"/>
         
-        <Button android:id="@+id/btnAddRecipe"
+        <Button android:id="@+id/btnMainAddRecipe"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Add Recipe"
+        android:text="@string/mainAddRecipe"
         android:layout_marginTop="25dip"/>
+        
+        <Button android:id="@+id/btnMainFavRecipe"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mainFavoriteRecipes"
+        android:layout_marginTop="25dip"/>
+                
+        <Button
+            android:id="@+id/btnMainSavedRecipe"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dip"
+            android:text="@string/mainSavedRecipes" />
 
 </LinearLayout>

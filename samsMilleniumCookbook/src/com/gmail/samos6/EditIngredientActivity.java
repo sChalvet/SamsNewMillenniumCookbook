@@ -164,7 +164,7 @@ public class EditIngredientActivity extends Activity {
 			addDetails();
 	
 		}else{
-			txtIngredientName.setEnabled(false);
+			//txtIngredientName.setEnabled(false);
 			// Getting complete ingredient details in background thread
 			new GetIngredientDetails().execute();
 		}

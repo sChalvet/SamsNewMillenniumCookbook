@@ -14,7 +14,8 @@ import android.widget.Button;
 
 public class MainScreenActivity extends Activity{
 	
-	Button btnViewProducts;
+	Button btnSaved;
+	Button btnFavorites;
 	Button btnAddRecipe;
 	Button btnNewProduct;
 	Button btnPantry;
@@ -30,26 +31,14 @@ public class MainScreenActivity extends Activity{
 		
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
-	//db.checkTables();
-	
-	
-		
-	/*if(db.getUserName().equalsIgnoreCase("")){
-		Log.d("MainScreen", "User info is empty");
-		
-	}
-	
-	db.addUserInformation(userInfo);*/
-	
-	List<String> ls= new ArrayList<String>();
-	ls=db.getAllIngredients();
 		
 		// Buttons
-		btnViewProducts = (Button) findViewById(R.id.btnViewProducts);
+		btnSaved = (Button) findViewById(R.id.btnMainSavedRecipe);
+		btnFavorites = (Button) findViewById(R.id.btnMainFavRecipe);
 		btnNewProduct = (Button) findViewById(R.id.btnCreateProduct);
-		btnPantry = (Button) findViewById(R.id.btnPantry);
-		btnToRecipeSearch = (Button) findViewById(R.id.btnToRecipeSearch);
-		btnAddRecipe = (Button) findViewById(R.id.btnAddRecipe);
+		btnPantry = (Button) findViewById(R.id.btnMainPantry);
+		btnToRecipeSearch = (Button) findViewById(R.id.btnMainToRecipeSearch);
+		btnAddRecipe = (Button) findViewById(R.id.btnMainAddRecipe);
 		
 
 		btnAddRecipe.setOnClickListener(new View.OnClickListener() {
@@ -63,12 +52,23 @@ public class MainScreenActivity extends Activity{
 			}
 		});
 		
-		btnViewProducts.setOnClickListener(new View.OnClickListener() {
+		btnSaved.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				// Launching All products Activity
-				Intent i = new Intent(getApplicationContext(), ListIngredientActivity.class);
+				Intent i = new Intent(getApplicationContext(), SavedRecipesActivity.class);
+				startActivity(i);
+				
+			}
+		});
+		
+		btnFavorites.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				// Launching All products Activity
+				Intent i = new Intent(getApplicationContext(), FavoriteRecipesActivity.class);
 				startActivity(i);
 				
 			}
@@ -104,7 +104,7 @@ public class MainScreenActivity extends Activity{
 		});
 		
 		// view products click event
-		btnNewProduct.setOnClickListener(new View.OnClickListener() {
+		/*btnNewProduct.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
@@ -113,6 +113,6 @@ public class MainScreenActivity extends Activity{
 				startActivity(i);
 				
 			}
-		});
+		});*/
 	}
 }

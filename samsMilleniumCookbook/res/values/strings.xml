@@ -5,6 +5,15 @@
     
     <string name="hello">Hello World, Check this recipe app out!</string>
     <string name="app_name">Sam\'s New Millennium Cookbook</string>
+    
+    <!-- part of Main Activity  -->
+    <string name="mainSeePantry">See Your Pantry</string>
+    <string name="mainSearchForRecipe">Search For Recipes</string>
+    <string name="mainAddRecipe">Create a Recipe</string>
+    <string name="mainFavoriteRecipes">Your Favorite Recipes</string>
+    <string name="mainSavedRecipes">Your Saved Recipes</string>  
+    
+    
     <string name="saveToPantry">Save to Pantry</string>
     <string name="searchRecipes">Search Recipes</string>
     <string name="editPantry">Edit Pantry</string>
@@ -13,6 +22,7 @@
     <string name="addOne">Create Ingredient</string>
     <string name="editOne">Edit</string>
     <string name="addComment">Add a Comment</string>
+    <string name="dropFromList">Drop From List</string>
     
     <!-- part of CreateRecipe Activity -->
     <string name="cookingHint">Do this first: ... \nThen do this: ... \nFinaly do this: ...</string>
@@ -36,6 +46,9 @@
     <string name="recipeHandle">Open</string>
     <string name="prepTime">Prep Time:</string>
     <string name="cookTime">Cook Time:</string>
+    <string name="saveRecipe">Save Recipe for Later</string>
+    <string name="favoriteRecipe">Favorite Recipe</string>
+    <string name="viewRatings">See Comments and Rate</string>
     
     
     
