@@ -13,7 +13,9 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -63,6 +65,9 @@ public class RecipeViewActivity extends Activity {
 	String rawImage= "";
 	
 	Bitmap pic;
+	
+	//used to see if user canceled the AsyncTask
+	Boolean bCancelled=false;
 	
 
 	// Progress Dialog
@@ -194,6 +199,18 @@ public class RecipeViewActivity extends Activity {
 		//rtbRating.setLabelFor(5);//.setText(rating);
 		
 	}
+	
+	/**
+	 * Enables user to cancel the AsychTask by hitting the back button
+	 */
+	OnCancelListener cancelListener=new OnCancelListener(){
+	    @Override
+	    public void onCancel(DialogInterface arg0){
+	    	//used to see if user canceled the AsyncTask
+	    	bCancelled=true;
+	        finish();
+	    }
+	};
 
 	/**
 	 * Background Async Task to Get complete recipe details
@@ -209,7 +226,8 @@ public class RecipeViewActivity extends Activity {
 			pDialog = new ProgressDialog(RecipeViewActivity.this);
 			pDialog.setMessage("Loading Recipe details. Please wait...");
 			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(false);
+			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
 			pDialog.show();
 		}
 
@@ -220,7 +238,8 @@ public class RecipeViewActivity extends Activity {
 
 					// Check for success tag
 					int success;
-					try {
+					//if the AsyncTask has Not been cancelled then continue
+					if(!bCancelled) try {
 						// Building Parameters
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
 						params.add(new BasicNameValuePair("recipeName", recipeName));

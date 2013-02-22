@@ -11,7 +11,9 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +42,9 @@ public class CreateNewCommentActivity extends Activity {
 	//these 2 variables are used to test the results and errors from the server
 	Boolean successful =false;
 	String message="";
+	
+	//used to see if user canceled the AsyncTask
+	Boolean bCancelled=false;
 
 	// url to create new product
 	//private static String urlCreateNewRating = "http://10.0.2.2/recipeApp/CreateNewRating.php";
@@ -83,6 +88,18 @@ public class CreateNewCommentActivity extends Activity {
 			}
 		});
 	}
+	
+	/**
+	 * Enables user to cancel the AsychTask by hitting the back button
+	 */
+	OnCancelListener cancelListener=new OnCancelListener(){
+	    @Override
+	    public void onCancel(DialogInterface arg0){
+	    	//used to see if user canceled the AsyncTask
+	    	bCancelled=true;
+	        finish();
+	    }
+	};
 
 	/**
 	 * Background Async Task to Create new Comment
@@ -99,6 +116,7 @@ public class CreateNewCommentActivity extends Activity {
 			pDialog.setMessage("Posting Comment...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
 			pDialog.show();
 		}
 
@@ -120,11 +138,12 @@ public class CreateNewCommentActivity extends Activity {
 			// getting JSON Object
 			JSONObject json = jsonParser.makeHttpRequest(urlCreateNewRating, "GET", params);
 			
-			// check log cat for response
-			Log.d("Create Comment", json.toString());
-
-			// check for success tag
-			try {
+			//if asyncTask has not been cancelled then continue
+			if(!bCancelled) try {
+				
+				// check log cat for response
+				Log.d("Create Comment", json.toString());
+				
 				int success = json.getInt(TAG_SUCCESS);
 
 				if (success == 1) {

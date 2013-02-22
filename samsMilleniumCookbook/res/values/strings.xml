@@ -4,6 +4,7 @@
     
     <!-- urlGetAllComments = getResources().getString(R.string.urlGetAllComments); -->
     <!-- <string name="urlGetIngredientDetails">http://10.0.2.2/recipeApp/getIngredientDetails.php</string> -->
+    <!-- <string name="urlGetIngredientDetails">http://192.168.254.45/recipeApp/getIngredientDetails.php</string> -->
     
     <!-- Url's are pulled into the app from here -->
     <string name="urlGetIngredientDetails">http://192.168.254.45/recipeApp/getIngredientDetails.php</string>
@@ -11,7 +12,7 @@
     <string name="urlDeleteIngredient">http://192.168.254.45/recipeApp/deleteIngredient.php</string>
     <string name="urlCreateNewIngredient">http://192.168.254.45/recipeApp/createIngredient.php</string>
     <string name="urlGetAllComments">http://192.168.254.45/recipeApp/getAllComments.php</string>
-    <string name="url_create_product">http://192.168.254.45/android_connect/create_product.php</string>
+    <string name="url_create_product">http://192.168.254.45/recipeApp/create_product.php</string>
     <string name="urlCreateRecipe">http://192.168.254.45/recipeApp/createRecipe.php</string>
     <string name="urlUpdateRecipe">http://192.168.254.45/recipeApp/updateRecipe.php</string>
     <string name="urlCreateNewRating">http://192.168.254.45/recipeApp/CreateNewRating.php</string>
@@ -50,6 +51,7 @@
     <string name="summeryHint">A few key words to describe this\nrecipe...(70 caracters)</string>
     <string name="recipeType">Recipe Type:</string>
     <string name="publishRecipe">Publish Recipe</string>
+    <string name="takeApic">Take a Picture</string>
     
     <!-- part of ListRecipeComments Activity -->
     <string name="postedBy">Posted by:</string>

@@ -12,6 +12,8 @@ import org.json.JSONObject;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -71,7 +73,9 @@ public class ListIngredientActivity extends ListActivity {
 	private static final String TAG_ADDINGREDIENT = "addIngredient";
 	private static final String TAG_ORIGIN = "origin";
 	
-
+	//used to see if user canceled the AsyncTask
+	Boolean bCancelled=false;
+	
 	// products JSONArray
 	JSONArray products = null;
 
@@ -176,6 +180,17 @@ public class ListIngredientActivity extends ListActivity {
 
 	}
 	
+	/**
+	 * Enables user to cancel the AsychTask by hitting the back button
+	 */
+	OnCancelListener cancelListener=new OnCancelListener(){
+	    @Override
+	    public void onCancel(DialogInterface arg0){
+	        bCancelled=true;
+	        finish();
+	    }
+	};
+	
 	// Response from Edit Product Activity
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -206,7 +221,9 @@ public class ListIngredientActivity extends ListActivity {
 			pDialog = new ProgressDialog(ListIngredientActivity.this);
 			pDialog.setMessage("Loading Ingredients. Please wait...");
 			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(false);
+			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
+			bCancelled=false;
 			pDialog.show();
 		}
 
@@ -220,9 +237,11 @@ public class ListIngredientActivity extends ListActivity {
 			// getting JSON string from URL
 			JSONObject json = jParser.makeHttpRequest(urlGetAllIngredients, "GET", params);
 			
-			Log.d("All Products: ", json.toString());
-
-			try {
+			
+			//if the asyncTask has not been cancelled then continue
+			if(!bCancelled) try {
+				Log.d("All Ingredients: ", json.toString());
+				
 				// Checking for SUCCESS TAG
 				int success = json.getInt(TAG_SUCCESS);
 

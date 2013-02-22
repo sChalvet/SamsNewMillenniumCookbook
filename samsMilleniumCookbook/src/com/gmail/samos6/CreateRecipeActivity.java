@@ -13,7 +13,10 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -47,6 +50,7 @@ public class CreateRecipeActivity extends Activity {
 	SlidingDrawer slidingDrawer;
 	
 	Button btnPublish;
+	Button btnTakePhoto;
 	
 	String recipeName= "";
 	String ingredientList= "";
@@ -64,6 +68,9 @@ public class CreateRecipeActivity extends Activity {
 
 	// Progress Dialog
 	private ProgressDialog pDialog;
+	
+	//used to see if user canceled the AsyncTask
+	Boolean bCancelled=false;
 
 	// JSON parser class
 	JSONParser jsonParser = new JSONParser();
@@ -130,12 +137,13 @@ public class CreateRecipeActivity extends Activity {
 		slidingDrawer= (SlidingDrawer) findViewById(R.id.recipeCreateSlidingDrawer);
 		
 		btnPublish= (Button) findViewById(R.id.btnCreateRecipeSubmit);
+		btnTakePhoto= (Button) findViewById(R.id.btnCreateRecipeTakePhoto);
 			
 		Log.d("CreateRecipe_just in", "Inside");
 	
 		
 		
-		// save button click event
+		// publish to DB button click event
 		btnPublish.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -147,7 +155,45 @@ public class CreateRecipeActivity extends Activity {
 
 			}
 		});
+		
+		// take pic button click event
+		btnTakePhoto.setOnClickListener(new View.OnClickListener() {
 
+			@Override
+			public void onClick(View arg0) {
+				Log.d("CreateRecipe_btnTakePhoto onclick", "inside");
+				
+				Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(intent, 0);
+				
+
+			}
+		});
+
+	}
+	
+	/**
+	 * Enables user to cancel the AsychTask by hitting the back button
+	 */
+	OnCancelListener cancelListener=new OnCancelListener(){
+	    @Override
+	    public void onCancel(DialogInterface arg0){
+	    	//used to see if user canceled the AsyncTask
+	    	bCancelled=true;
+	        finish();
+	    }
+	};
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		if(requestCode == 0){
+			Bitmap theImage = (Bitmap) data.getExtras().get("data");
+			imgPicture.setImageBitmap(theImage);
+			
+		}
+		
+		
 	}
 	
 	/**
@@ -165,7 +211,9 @@ public class CreateRecipeActivity extends Activity {
 			pDialog.setMessage("Creating Recipe..");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
 			pDialog.show();
+			
 		}
 
 		/**
@@ -194,14 +242,14 @@ public class CreateRecipeActivity extends Activity {
 
 			// getting JSON Object
 			// Note that create product url accepts POST method
-			JSONObject json = jsonParser.makeHttpRequest(urlCreateRecipe,
-					"GET", params);
-			
-			// check log cat for response
-			Log.d("Create Response", json.toString());
+			JSONObject json = jsonParser.makeHttpRequest(urlCreateRecipe, "GET", params);
 
-			// check for success tag
-			try {
+			//if asyncTask has Not been cancelled then continue
+			if (!bCancelled) try {
+				
+				// check log cat for response
+				Log.d("Create Response", json.toString());
+				
 				int success = json.getInt(TAG_SUCCESS);
 
 				if (success == 1) {

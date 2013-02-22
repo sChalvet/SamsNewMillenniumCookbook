@@ -12,7 +12,9 @@ import org.json.JSONObject;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -64,6 +66,9 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 	
 	String recipeName="";
 	Button btnAddComment;
+	
+	//used to see if user canceled the AsyncTask
+	Boolean bCancelled=false;
 	
 
 	// products JSONArray
@@ -150,6 +155,18 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 		}
 
 	}
+	
+	/**
+	 * Enables user to cancel the AsychTask by hitting the back button
+	 */
+	OnCancelListener cancelListener=new OnCancelListener(){
+	    @Override
+	    public void onCancel(DialogInterface arg0){
+	    	//used to see if user canceled the AsyncTask
+	    	bCancelled=true;
+	        finish();
+	    }
+	};
 
 	/**
 	 * Background Async Task to Load all product by making HTTP Request
@@ -165,7 +182,8 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 			pDialog = new ProgressDialog(ListRecipeCommentsActivity.this);
 			pDialog.setMessage("Loading Comments. Please wait...");
 			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(false);
+			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
 			pDialog.show();
 		}
 
@@ -182,9 +200,11 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 			// getting JSON string from URL
 			JSONObject json = jParser.makeHttpRequest(urlGetAllComments, "GET", params);
 			
-			Log.d("All Comments: ", json.toString());
-
-			try {
+			
+			//if AsyncTask was not cancelled then carry on
+			if(!bCancelled) try {
+				
+				Log.d("All Comments: ", json.toString());
 				// Checking for SUCCESS TAG
 				int success = json.getInt(TAG_SUCCESS);
 

@@ -7,7 +7,9 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +33,9 @@ public class PantryActivity extends ListActivity {
 	Button btnEdit;
 	Button btnSearch;
 	Button btnDeleteIngredient;
+	
+	//used to see if user canceled the AsyncTask
+	Boolean bCancelled=false;
 
 	ArrayList<HashMap<String, String>> productsList;
 	
@@ -140,6 +145,18 @@ public class PantryActivity extends ListActivity {
 		}
 
 	}
+	
+	/**
+	 * Enables user to cancel the AsychTask by hitting the back button
+	 */
+	OnCancelListener cancelListener=new OnCancelListener(){
+	    @Override
+	    public void onCancel(DialogInterface arg0){
+	    	//used to see if user canceled the AsyncTask
+	    	bCancelled=true;
+	        finish();
+	    }
+	};
 
 	/**
 	 * Background Async Task to Load all product by making HTTP Request
@@ -155,7 +172,8 @@ public class PantryActivity extends ListActivity {
 			pDialog = new ProgressDialog(PantryActivity.this);
 			pDialog.setMessage("Loading Ingredients. Please wait...");
 			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(false);
+			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
 			pDialog.show();
 		}
 
@@ -163,32 +181,38 @@ public class PantryActivity extends ListActivity {
 		 * getting All products from SQLite
 		 * */
 		protected String doInBackground(String... args) {
-			// Building Parameters
-			List<String> ingredientList = new ArrayList<String>(); 	
-
-			ingredientList = db.getAllIngredients();
 			
-			//if(ingredientList.size()==0)
-			//	Toast.makeText(getApplicationContext(), "Your Pantry is empty", Toast.LENGTH_SHORT).show();
-			
-			// Check your log cat for DB response
-			Log.d("Pantry: ", ingredientList.toString());
-
-			// looping through All Ingredients
-			for (int i = 0; i < ingredientList.size(); i++) {				
-				String ingredientName = ingredientList.get(i);
+			//if AsyncTask has Not been cancelled continue
+			if(!bCancelled){
 				
-				// creating new HashMap
-				HashMap<String, String> map = new HashMap<String, String>();
-
-				// adding each child node to HashMap key => value
-				map.put(TAG_INGREDIENTNAME, ingredientName);
-						
-				// adding HashList to ArrayList
-				productsList.add(map);
-			}
-			
-			Log.d("Pantry_productList: ", productsList.toString());
+				// Building Parameters
+				
+				List<String> ingredientList = new ArrayList<String>(); 	
+	
+				ingredientList = db.getAllIngredients();
+				
+				//if(ingredientList.size()==0)
+				//	Toast.makeText(getApplicationContext(), "Your Pantry is empty", Toast.LENGTH_SHORT).show();
+				
+				// Check your log cat for DB response
+				Log.d("Pantry: ", ingredientList.toString());
+	
+				// looping through All Ingredients
+				for (int i = 0; i < ingredientList.size(); i++) {				
+					String ingredientName = ingredientList.get(i);
+					
+					// creating new HashMap
+					HashMap<String, String> map = new HashMap<String, String>();
+	
+					// adding each child node to HashMap key => value
+					map.put(TAG_INGREDIENTNAME, ingredientName);
+							
+					// adding HashList to ArrayList
+					productsList.add(map);
+				}
+				
+				Log.d("Pantry_productList: ", productsList.toString());
+			}//end if
 
 			return null;
 		}

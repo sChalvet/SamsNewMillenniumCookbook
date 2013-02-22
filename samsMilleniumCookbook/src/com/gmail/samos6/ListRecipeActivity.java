@@ -11,7 +11,9 @@ import org.json.JSONObject;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,6 +42,9 @@ public class ListRecipeActivity  extends ListActivity{
 
 	// Creating JSON Parser object
 	JSONParser jParser = new JSONParser();
+	
+	//used to see if user canceled the AsyncTask
+	Boolean bCancelled=false;
 
 	SamsListAdapter adapter;
 	Button btnSave;
@@ -131,6 +136,18 @@ public class ListRecipeActivity  extends ListActivity{
 		}
 
 	}
+	
+	/**
+	 * Enables user to cancel the AsychTask by hitting the back button
+	 */
+	OnCancelListener cancelListener=new OnCancelListener(){
+	    @Override
+	    public void onCancel(DialogInterface arg0){
+	    	//used to see if user canceled the AsyncTask
+	    	bCancelled=true;
+	        finish();
+	    }
+	};
 
 	/**
 	 * Background Async Task to Load all Recipe by making HTTP Request
@@ -146,7 +163,8 @@ public class ListRecipeActivity  extends ListActivity{
 			pDialog = new ProgressDialog(ListRecipeActivity.this);
 			pDialog.setMessage("Loading Recipes. Please wait...");
 			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(false);
+			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
 			pDialog.show();
 		}
 
@@ -160,9 +178,10 @@ public class ListRecipeActivity  extends ListActivity{
 			// getting JSON string from URL
 			JSONObject json = jParser.makeHttpRequest(urlGetAllRecipes, "GET", params);
 			
-			Log.d("All Recipes: ", json.toString());
-
-			try {
+			//if AsyncTask has Not been cancelled then continue
+			if (!bCancelled) try {
+				
+				Log.d("All Recipes: ", json.toString());
 				// Checking for SUCCESS TAG
 				int success = json.getInt(TAG_SUCCESS);
 

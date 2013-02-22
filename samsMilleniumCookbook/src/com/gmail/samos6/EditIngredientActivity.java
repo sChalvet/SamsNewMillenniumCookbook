@@ -12,7 +12,9 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -48,6 +50,9 @@ public class EditIngredientActivity extends Activity {
 
 	// Progress Dialog
 	private ProgressDialog pDialog;
+	
+	//used to see if user canceled the AsyncTask
+	Boolean bCancelled=false;
 
 	// JSON parser class
 	JSONParser jsonParser = new JSONParser();
@@ -299,6 +304,18 @@ public class EditIngredientActivity extends Activity {
 
 		
 	}
+	
+	/**
+	 * Enables user to cancel the AsychTask by hitting the back button
+	 */
+	OnCancelListener cancelListener=new OnCancelListener(){
+	    @Override
+	    public void onCancel(DialogInterface arg0){
+	    	//used to see if user canceled the AsyncTask
+	    	bCancelled=true;
+	        finish();
+	    }
+	};
 
 	/**
 	 * Background Async Task to Get complete product details
@@ -314,7 +331,8 @@ public class EditIngredientActivity extends Activity {
 			pDialog = new ProgressDialog(EditIngredientActivity.this);
 			pDialog.setMessage("Loading Ingredient details. Please wait...");
 			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(false);
+			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
 			pDialog.show();
 		}
 
@@ -323,13 +341,11 @@ public class EditIngredientActivity extends Activity {
 		 * */
 		protected String doInBackground(String... args) {
 
-
-			// updating UI from Background Thread
-			/*runOnUiThread(new Runnable() {
-				public void run() {*/
 					// Check for success tag
 					int success;
-					try {
+					
+					//if asyncTask has not been cancelled then continue
+					if (!bCancelled) try {
 						// Building Parameters
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
 						params.add(new BasicNameValuePair("ingredientName", ingredientName));
@@ -366,8 +382,7 @@ public class EditIngredientActivity extends Activity {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
-			/*	}
-			});*/
+
 					
 					Log.d("EditIngredient_DoInBackground", "before return");
 			return null;
@@ -400,7 +415,8 @@ public class EditIngredientActivity extends Activity {
 			pDialog = new ProgressDialog(EditIngredientActivity.this);
 			pDialog.setMessage("Saving ingredient Changes...");
 			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(false);
+			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
 			pDialog.show();
 		}
 
@@ -431,8 +447,8 @@ public class EditIngredientActivity extends Activity {
 			// sending modified data through http request
 			JSONObject json = jsonParser.makeHttpRequest(urlUpdateIngredient, "GET", params);
 
-			// check json success tag
-			try {
+			//if asyncTask has not been cancelled then continue
+			if (!bCancelled) try {
 				int success = json.getInt(TAG_SUCCESS);
 				
 				if (success == 1) {
@@ -488,6 +504,7 @@ public class EditIngredientActivity extends Activity {
 			pDialog.setMessage("Deleting ingredient...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
 			pDialog.show();
 		}
 
@@ -499,7 +516,9 @@ public class EditIngredientActivity extends Activity {
 
 			// Check for success tag
 			int success;
-			try {
+			
+			//if asyncTask has not been cancelled then continue
+			if (!bCancelled) try {
 				// Building Parameters
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("ingredientName", ingredientName));
@@ -571,6 +590,7 @@ public class EditIngredientActivity extends Activity {
 			pDialog.setMessage("Creating Ingredient..");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
 			pDialog.show();
 		}
 
@@ -602,12 +622,13 @@ public class EditIngredientActivity extends Activity {
 			// getting JSON Object
 			// Note that create product url accepts POST method
 			JSONObject json = jsonParser.makeHttpRequest(urlCreateNewIngredient, "GET", params);
-			
-			// check log cat for response
-			Log.d("EditIngredient_create Response", json.toString());
-
-			// check for success tag
-			try {
+		
+			//if asyncTask has not been cancelled then continue
+			if (!bCancelled) try {	
+				
+				// check log cat for response
+				Log.d("EditIngredient_create Response", json.toString());
+				
 				int success = json.getInt(TAG_SUCCESS);
 				message = json.getString(TAG_MESSAGE);
 

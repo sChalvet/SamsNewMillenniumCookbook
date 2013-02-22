@@ -14,7 +14,9 @@ import com.gmail.samos6.EditIngredientActivity.CreateNewIngredient;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -48,6 +50,9 @@ public class FavoriteRecipesActivity  extends ListActivity{
 	Button btnDrop;
 
 	ArrayList<HashMap<String, String>> productsList;
+	
+	//used to see if user canceled the AsyncTask
+	Boolean bCancelled=false;
 	
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
@@ -152,6 +157,20 @@ public class FavoriteRecipesActivity  extends ListActivity{
 		}
 
 	}
+	
+	/**
+	 * Enables user to cancel the AsychTask by hitting the back button
+	 */
+	OnCancelListener cancelListener=new OnCancelListener(){
+	    @Override
+	    public void onCancel(DialogInterface arg0){
+	    	//used to see if user canceled the AsyncTask
+	    	bCancelled=true;
+	        finish();
+	    }
+	};
+	
+	
 
 	/**
 	 * Background Async Task to Load all Recipe by making HTTP Request
@@ -167,7 +186,8 @@ public class FavoriteRecipesActivity  extends ListActivity{
 			pDialog = new ProgressDialog(FavoriteRecipesActivity.this);
 			pDialog.setMessage("Loading Recipes. Please wait...");
 			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(false);
+			pDialog.setCancelable(true);
+			pDialog.setOnCancelListener(cancelListener);
 			pDialog.show();
 		}
 
@@ -191,9 +211,10 @@ public class FavoriteRecipesActivity  extends ListActivity{
 			// getting JSON string from URL
 			JSONObject json = jParser.makeHttpRequest(urlGetFavRecipes, "GET", params);
 			
-			Log.d("All Favorite Recipes json: ", json.toString());
-
-			try {
+			
+			//if the asyncTask has not been cancelled then continue
+			if(!bCancelled) try {
+				Log.d("All Favorite Recipes json: ", json.toString());
 				// Checking for SUCCESS TAG
 				int success = json.getInt(TAG_SUCCESS);
 
