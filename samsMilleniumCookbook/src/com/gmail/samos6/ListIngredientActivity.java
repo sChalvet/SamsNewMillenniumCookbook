@@ -32,6 +32,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -99,6 +100,7 @@ public class ListIngredientActivity extends ListActivity {
 		
 		btnSave = (Button) findViewById(R.id.btnSaveIngredients);
 		btnAdd = (Button) findViewById(R.id.btnAddIngredient);
+		
 				
 		// save selected ingredients click event
 				btnSave.setOnClickListener(new View.OnClickListener() {
@@ -178,6 +180,19 @@ public class ListIngredientActivity extends ListActivity {
 			}
 		});
 
+	}
+	
+	
+	
+	public void letterClicked(View view) {
+		
+		Log.d("letterClicked: ", "in onClick");
+		int id = view.getId();
+		
+		String letter = ((Button) view.findViewById(id)).getText().toString();
+		Toast.makeText(getApplicationContext(), "You  clicked:"+letter, Toast.LENGTH_SHORT).show();
+		
+		
 	}
 	
 	/**

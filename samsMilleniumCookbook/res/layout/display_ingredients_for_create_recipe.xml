@@ -10,56 +10,46 @@
         android:layout_weight="1" >
 
 
-	<TableRow>
+	<TableRow android:id="@+id/tblRow1">
 	    
-	    <Button
-	        android:id="@+id/btnIngredientListA"
+	    <TextView
+	        android:id="@+id/txtIngredientListA"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
-	        android:onClick="letterClicked"
 	        android:text="A" />
-	    <Button
-	        android:id="@+id/btnIngredientListB"
+
+	    <TextView
+	        android:id="@+id/txtIngredientListB"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
-	        android:onClick="letterClicked"
 	        android:text="B" />
-	    <Button
-	        android:id="@+id/btnIngredientListC"
+	    <TextView
+	        android:id="@+id/txtIngredientListC"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
-	        android:onClick="letterClicked"
 	        android:text="C" />
-	    <Button
-	        android:id="@+id/btnIngredientListD"
+	    <TextView
+	        android:id="@+id/txtIngredientListD"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
-	        android:onClick="letterClicked"
 	        android:text="D" />
-	    <Button
-	        android:id="@+id/btnIngredientListE"
+	    <TextView
+	        android:id="@+id/txtIngredientListE"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
-	        android:onClick="letterClicked"
 	        android:text="E" />
-	    <Button
-	        android:id="@+id/btnIngredientListF"
+	   <TextView
+	        android:id="@+id/txtIngredientListF"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
-	        android:onClick="letterClicked"
-	        android:text="F" />		   
+	        android:text="F" />
+		   
 		   
 		   
 		   </TableRow>
@@ -83,18 +73,12 @@
 	<TableRow >
 	    
 	    <Button
-	        android:id="@+id/btnAddIngredient"
+	        android:id="@+id/btnGetIngredientsDone"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:text="@string/addOne" />
+	        android:text="@string/done" />
 
-	    <Button
-		        android:id="@+id/btnSaveIngredients"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_weight="1"
-		        android:text="@string/saveToPantry" />
 		   
 		   
 		   

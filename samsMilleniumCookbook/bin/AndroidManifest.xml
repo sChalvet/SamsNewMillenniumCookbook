@@ -30,6 +30,11 @@
             android:label="Ingredient List" >
         </activity>
         
+        <activity
+            android:name=".GetIngredientActivity"
+            android:label="Ingredient List" >
+        </activity>
+        
        <activity
             android:name=".FavoriteRecipesActivity"
             android:label="Your Favorite Recipes" >

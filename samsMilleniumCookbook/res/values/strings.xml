@@ -44,6 +44,7 @@
     <string name="editOne">Edit</string>
     <string name="addComment">Add a Comment</string>
     <string name="dropFromList">Drop From List</string>
+    <string name="done">Done</string>
     
     <!-- part of CreateRecipe Activity -->
     <string name="cookingHint">Do this first: ... \nThen do this: ... \nFinaly do this: ...</string>

@@ -75,9 +75,7 @@ public class CreateRecipeActivity extends Activity {
 	// JSON parser class
 	JSONParser jsonParser = new JSONParser();
 
-	// single ingredient url
-	//private static final String urlCreateRecipe = "http://10.0.2.2/recipeApp/createRecipe.php";
-	//private static final String urlUpdateRecipe = "http://10.0.2.2/recipeApp/updateRecipe.php";
+	//Creating the variable that will hold the url when it is pulled from resources
 	String urlCreateRecipe;
 	String urlUpdateRecipe; 
 	
@@ -116,15 +114,6 @@ public class CreateRecipeActivity extends Activity {
 		spnrRecipeType = (Spinner) findViewById(R.id.spnrCreateRecipeType);
 		spin_adapter = new ArrayAdapter<String>(CreateRecipeActivity.this, android.R.layout.simple_spinner_item, recipeType);
 		spnrRecipeType.setAdapter(spin_adapter);
-		
-		//implement a call to this activity to edit recipe
-		if(false){
-			// getting ingredient details from intent
-			Intent intent = getIntent();
-			
-			// getting data past from intent
-			recipeName = intent.getStringExtra(TAG_RECIPENAME);
-		}
 			
 		// Initializing all of the text fields and buttons
 		txtRecipeName = (EditText) findViewById(R.id.inputCreateRecipeName);
