@@ -32,7 +32,7 @@ public class SamsListAdapter extends BaseAdapter {
 public SamsListAdapter(Context context) {
     mInflater = LayoutInflater.from(context);
 }
-/*
+/**
  * SamsListAdapter is used to personalize the screen output and calculation
  * List<String> pantry ---> holds a record of what is in the pantry, it is not really used if this class is called by the pantry it self
  * String origine      ---> holds the name of the originator of the call because the output is treated slightly differently
@@ -62,6 +62,23 @@ public int getCount() {
 
 public Object getItem(int item) {
     return data.get(item);
+}
+
+public int getPositionOf(String letter){
+	int position=-1;
+	String name=null;
+	for(int index=0; index<data.size(); index++){
+		name=data.get(index).get("ingredientName");
+		
+		if(name.startsWith(letter)){
+			position=index;
+			return position;
+		}
+	}
+	
+	
+	
+	return position;
 }
 
 public List<String> getChecked() {

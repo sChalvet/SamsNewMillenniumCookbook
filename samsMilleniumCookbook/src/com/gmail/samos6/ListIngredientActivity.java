@@ -48,6 +48,7 @@ public class ListIngredientActivity extends ListActivity {
 	SamsListAdapter adapter;
 	Button btnSave;
 	Button btnAdd;
+    ListView lv;
 
 	ArrayList<HashMap<String, String>> productsList;
 	
@@ -95,7 +96,7 @@ public class ListIngredientActivity extends ListActivity {
 		new LoadAllProducts().execute();
 
 		// Get listview
-		final ListView lv = getListView();  //added final
+		lv = getListView(); 
 		
 		
 		btnSave = (Button) findViewById(R.id.btnSaveIngredients);
@@ -190,7 +191,15 @@ public class ListIngredientActivity extends ListActivity {
 		int id = view.getId();
 		
 		String letter = ((Button) view.findViewById(id)).getText().toString();
-		Toast.makeText(getApplicationContext(), "You  clicked:"+letter, Toast.LENGTH_SHORT).show();
+		int position = adapter.getPositionOf(letter);
+		
+		if (position==-1){
+			Toast.makeText(getApplicationContext(), "No Ingredient starting with the letter "+letter, Toast.LENGTH_SHORT).show();
+		}else{
+			lv.setSelectionFromTop(position, 0);
+			Toast.makeText(getApplicationContext(), "Moving to the letter "+letter, Toast.LENGTH_SHORT).show();
+		}
+
 		
 		
 	}

@@ -171,5 +171,43 @@
     <item>9</item>
     <item>10</item> 
 	</string-array>
+	
+	<string-array name="measurement"> 
+    <item>cup</item> 
+    <item>dash</item>
+	<item>drop</item>
+	<item>gallon</item>
+	<item>gram</item>
+	<item>kilo</item> 
+    <item>liter</item>
+    <item>mlLiter</item>
+    <item>ounce</item>
+	<item>pinch</item> 
+    <item>pint</item>
+    <item>pound</item> 
+    <item>quart</item>
+    <item>shot</item>
+    <item>teaspoon</item>
+    <item>tablespoon</item>
+	</string-array>
+	
+	<string-array name="amount"> 
+    <item>1/8</item> 
+    <item>1/4</item>
+	<item>1/2</item>
+	<item>1</item>
+	<item>2</item>
+	<item>3</item> 
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+	<item>7</item> 
+    <item>8</item>
+    <item>9</item> 
+    <item>10</item>
+    <item>11</item>
+    <item>12</item>
+    <item>13</item>
+	</string-array>
 
 </resources>
