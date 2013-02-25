@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This is for requesting the details of a 
+ * This is for requesting the details of a *
  * single ingredient
  */
 

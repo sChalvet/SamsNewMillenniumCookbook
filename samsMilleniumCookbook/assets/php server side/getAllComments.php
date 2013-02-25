@@ -20,7 +20,7 @@ if (isset($_GET["recipeName"])) {
     $recipeName = $_GET['recipeName'];
 
     // get comments from recipecomments table
-	$result = mysql_query("SELECT authorName, postTime, comment, rating FROM recipecomments WHERE recipeName ='$recipeName'") or die(mysql_error());
+	$result = mysql_query("SELECT authorName, postTime, comment, rating FROM recipecomments WHERE recipeName ='$recipeName' ORDER BY postTime DESC") or die(mysql_error());
 	
 	// check for empty result
     if (!empty($result)) {

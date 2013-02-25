@@ -56,7 +56,7 @@ public class RecipeViewActivity extends Activity {
 	
 	String recipeName;
 	String author= "";
-	String numReviews= "";
+	String numRatings= "";
 	String ingredientList= "";
 	String cookingDirections= "";
 	String rating= "";
@@ -88,7 +88,7 @@ public class RecipeViewActivity extends Activity {
 	private static final String TAG_PRODUCT = "product";
 	private static final String TAG_RECIPENAME = "recipeName";
 	private static final String TAG_AUTHOR = "author";
-	private static final String TAG_NUMREVIEWS = "numReviews";
+	private static final String TAG_NUMRATINGS = "numRatings";
 	private static final String TAG_INGREDIENTLIST = "ingredientList";
 	private static final String TAG_COOKINGDIRECTIONS = "cookingDirections";
 	private static final String TAG_RATINGS = "rating";
@@ -190,7 +190,7 @@ public class RecipeViewActivity extends Activity {
 		Log.d("RecipeView_addDetails image=", rawImage);
 		txtRecipeName.setText(recipeName);
 		txtAuthor.setText(author);
-		txtNumReviews.setText(numReviews);
+		txtNumReviews.setText(numRatings);
 		txtIngredientList.setText(ingredientList);
 		txtCookingDirections.setText(cookingDirections);
 		txtCookTime.setText(cookTime);
@@ -262,7 +262,7 @@ public class RecipeViewActivity extends Activity {
 							//Getting details from the query
 							Log.d("RecipeView_DoinBackGround", "setting all of the details");
 							author = product.getString(TAG_AUTHOR);
-							numReviews = product.getString(TAG_NUMREVIEWS);
+							numRatings = product.getString(TAG_NUMRATINGS);
 							ingredientList = product.getString(TAG_INGREDIENTLIST);
 							cookingDirections = product.getString(TAG_COOKINGDIRECTIONS);
 							rating = product.getString(TAG_RATINGS);
