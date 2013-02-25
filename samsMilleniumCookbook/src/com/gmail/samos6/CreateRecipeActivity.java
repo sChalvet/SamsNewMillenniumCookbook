@@ -27,10 +27,12 @@ import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,12 +53,12 @@ public class CreateRecipeActivity extends Activity {
 	Inflater inflater;
 
 	EditText txtRecipeName;
-	EditText txtIngredientList;
 	EditText txtCookingDirections;
 	EditText txtCookTime;
 	EditText txtPrepTime;
 	EditText txtSummery;
 	Spinner spnrRecipeType;
+	Spinner spnrServings;
 	ImageView imgPicture;
 	SlidingDrawer slidingDrawer;
 	
@@ -73,6 +75,7 @@ public class CreateRecipeActivity extends Activity {
 	String summery= "";
 	String author= "Van Keizer";
 	String[] recipeType;
+	String[] recipeServings;
 	
 	boolean successful = false;
 	String message = "";
@@ -85,6 +88,7 @@ public class CreateRecipeActivity extends Activity {
 	List<EditText> listDescription= new ArrayList<EditText>();
 	List<Spinner> listSpnrMeasurement= new ArrayList<Spinner>();
 	List<Spinner> listSpnrAmount= new ArrayList<Spinner>();
+	List<CheckBox> listVital= new ArrayList<CheckBox>();
 	
 	//this stores the number of ingredients selected
 	int numIngredients=0;
@@ -108,17 +112,15 @@ public class CreateRecipeActivity extends Activity {
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_MESSAGE = "message";
-	private static final String TAG_PRODUCT = "product";
 	private static final String TAG_RECIPENAME = "recipeName";
 	private static final String TAG_AUTHOR = "author";
-	private static final String TAG_NUMREVIEWS = "numReviews";
 	private static final String TAG_INGREDIENTLIST = "ingredientList";
 	private static final String TAG_COOKINGDIRECTIONS = "cookingDirections";
-	private static final String TAG_RATINGS = "rating";
 	private static final String TAG_COOKTIME = "cookTime";
 	private static final String TAG_PREPTIME = "prepTime";
 	private static final String TAG_SUMMERY = "summery";
 	private static final String TAG_TYPE = "type";
+	private static final String TAG_SERVINGS = "servings";
 	
 	
 	@Override
@@ -131,16 +133,21 @@ public class CreateRecipeActivity extends Activity {
 		urlUpdateRecipe = getResources().getString(R.string.urlUpdateRecipe);
 		
 		recipeType = getResources().getStringArray(R.array.recipeType);
+		recipeServings = getResources().getStringArray(R.array.spinnerServings);
 		
 		
 		//setting the recipe type spinner
 		spnrRecipeType = (Spinner) findViewById(R.id.spnrCreateRecipeType);
 		spin_adapter = new ArrayAdapter<String>(CreateRecipeActivity.this, android.R.layout.simple_spinner_item, recipeType);
 		spnrRecipeType.setAdapter(spin_adapter);
+		
+		//setting the servings spinner
+		spnrServings = (Spinner) findViewById(R.id.spnrCreateRecipeServings);
+		spin_adapter = new ArrayAdapter<String>(CreateRecipeActivity.this, android.R.layout.simple_spinner_item, recipeServings);
+		spnrServings.setAdapter(spin_adapter);
 			
 		// Initializing all of the text fields and buttons
 		txtRecipeName = (EditText) findViewById(R.id.inputCreateRecipeName);
-		txtIngredientList= (EditText) findViewById(R.id.inputRecipeCreateIngredientList);
 		txtCookingDirections= (EditText) findViewById(R.id.inputRecipeCreateDirections);
 		txtCookTime= (EditText) findViewById(R.id.inputRecipeCreateCooktime);
 		txtPrepTime= (EditText) findViewById(R.id.inputRecipeCreatePreptime);
@@ -156,25 +163,51 @@ public class CreateRecipeActivity extends Activity {
 			
 		Log.d("CreateRecipe_just in", "Inside");
 	
-		
+		Toast.makeText(getApplicationContext(), "First pick all the ingredients that you will be using", Toast.LENGTH_LONG).show();
+		Intent intent = new Intent(getApplicationContext(), GetIngredientActivity.class);
+		startActivityForResult(intent,100);
 		
 		// publish to DB button click event
 		btnPublish.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View view) {
-				Log.d("CreateRecipe_btnPost onclick", "inside");
+				Log.d("CreateRecipe_btnPublish onclick", "inside");
 				
-				for(int i=0; i<numIngredients; i++){
-					String name = listIngredientName.get(i).getText().toString(); 
-					String am = listSpnrAmount.get(i).getSelectedItem().toString(); 
-					String mea = listSpnrMeasurement.get(i).getSelectedItem().toString(); 
-					String des = listDescription.get(i).getText().toString(); 
-					Log.d("CreateRecipe_btnPost onclick s=", am+" "+mea+" of "+des+" "+name);
+				String recipeName= txtRecipeName.getText().toString();
+				String cookingDirections= txtCookingDirections.getText().toString();
+				String cookTime= txtCookTime.getText().toString();
+				String prepTime= txtPrepTime.getText().toString();
+				String summery= txtSummery.getText().toString();
+				String msg = "";
+				boolean incomplete=false;
+				
+				Log.d("CreateRecipe_btnPublish recipename=", recipeName);
+				
+				if(recipeName.matches("")){
+					msg = "You need a recipe name.";
+					incomplete=true;
+				}else if(cookingDirections.matches("")){
+					msg = "Please add some cooking directions.";
+					incomplete=true;
+				}else if(cookingDirections.matches("")){
+					msg = "Please add some cooking directions.";
+					incomplete=true;
+				}else if(cookTime.matches("") || prepTime.matches("")){
+					msg = "Please enter a time for cook time and prep time or 0.";
+					incomplete=true;
+				}else if(summery.matches("")){
+					msg = "Please enter a short summery.";
+					incomplete=true;
+				}else if(numIngredients==0){
+					msg = "Please add at least one ingredient.";
+					incomplete=true;
+				}else{
+					new CreateNewRecipe().execute();
 				}
 				
-				//new CreateNewRecipe().execute();
-				
+				if(incomplete)
+					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 
 			}
 		});
@@ -184,13 +217,11 @@ public class CreateRecipeActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(getApplicationContext(), GetIngredientActivity.class);
 
-				startActivityForResult(intent,100);
 				Log.d("CreateRecipe_btnTakePhoto onclick", "inside");
 				
-				//Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-				//startActivityForResult(intent, 0);
+				Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(intent, 0);
 				
 
 			}
@@ -232,13 +263,13 @@ public class CreateRecipeActivity extends Activity {
 			list = extras.getStringArrayList("myarraylist");
 			Log.d("inside ActivityResults got this list: ", list.toString());
 			
-			//use the recieved ingredients and get them ready for user
-			createIngredientListView(list);
+			//use the received ingredients and get them ready for user
+			createIngredientListView();
 		}
 
 	}
 	
-private void createIngredientListView(List<String> list){
+private void createIngredientListView(){
 	
 	//http://prasans.info/2011/03/add-edittexts-dynamically-and-retrieve-values-android/
 	listLayout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
@@ -247,25 +278,58 @@ private void createIngredientListView(List<String> list){
 	for(int index=0; index<list.size(); index++){
 		
 		TextView txtIngredientName = new TextView(this);
-		txtIngredientName.setId(index);
+		txtIngredientName.setTextSize(21f);
 		txtIngredientName.setText(list.get(index)+":");
-		listLayout.addView(txtIngredientName);
+		txtIngredientName.setPadding(0, 30, 0, 0);
+		txtIngredientName.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		listIngredientName.add(txtIngredientName);
+		listLayout.addView(txtIngredientName);
 		
-		listLayout.addView(ingredientRow(index));
+		
+		listLayout.addView(ingredientRow1(index));
+		listLayout.addView(ingredientRow2(index));
 	}
-	//View view =  (View) findViewById(R.id.ingredientRowLayout);
-	//listLayout.addView((View) findViewById(R.id.ingredientRowLayout));
-	
 	
 }
 
-private TableLayout ingredientRow(int index) {
+private TableLayout ingredientRow1(int index) {
+	TableLayout tableLayout = new TableLayout(this);
+	tableLayout.setStretchAllColumns(true);
+	
+	TableRow tableRow = new TableRow(this);
+	tableRow.setLayoutParams(new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+	
+	TextView txtVital = new TextView(this);
+	txtVital.setTextSize(13f);
+	txtVital.setText("Is this ingredient vital?");
+	txtVital.setPadding(30, 0, 0, 22);
+	txtVital.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 20f));
+	txtVital.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
+	
+	CheckBox ckBox = new CheckBox(this);
+	ckBox.setPadding(0, 0, 0, 0);
+	ckBox.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 0f));
+	ckBox.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
+	ckBox.setSelected(true);
+	listVital.add(ckBox);
+	
+	
+    //adding all of the created widgets into the tableRow
+	//then adding that tableRow into the tableLayout
+	tableRow.addView(txtVital);
+	tableRow.addView(ckBox);
+    tableLayout.addView(tableRow);
+    
+    return tableLayout;
+}
+
+private TableLayout ingredientRow2(int index) {
 	
 	//amount.setLayoutParams(new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 0.1f));
 	
 	String[] measurement = getResources().getStringArray(R.array.measurement);
 	String[] Unitamount = getResources().getStringArray(R.array.amount);
+
 	
 	TableLayout tableLayout = new TableLayout(this);
 	tableLayout.setStretchAllColumns(true);
@@ -305,14 +369,19 @@ private TableLayout ingredientRow(int index) {
 	txtDiscription.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f));
 	listDescription.add(txtDiscription);
 	
-    
+    //adding all of the created widgets into the tableRow
+	//then adding that tableRow into the tableLayout
 	tableRow.addView(amount);
 	tableRow.addView(unit);
 	tableRow.addView(txtDiscription);
     tableLayout.addView(tableRow);
+    
     return tableLayout;
 }
-	
+
+
+
+
 	/**
 	 * Background Async Task to Create new Recipe
 	 * */
@@ -338,16 +407,55 @@ private TableLayout ingredientRow(int index) {
 		 * */
 		protected String doInBackground(String... args) {
 			
+			String ingredientList="";
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			
+			
+			//this loop gets the data from the ingredient list
+			for(int i=0; i<numIngredients; i++){
+				String name = listIngredientName.get(i).getText().toString(); 
+				String amount = listSpnrAmount.get(i).getSelectedItem().toString(); 
+				String measurement = listSpnrMeasurement.get(i).getSelectedItem().toString(); 
+				String description = listDescription.get(i).getText().toString(); 
+				Boolean vital = listVital.get(i).isChecked(); 
+				
+				int val = vital? 1 : 0;	
+				
+				//needed to remove the : from the end of the string
+				name = name.substring(0, name.length()-1);
+				
+				params.add(new BasicNameValuePair("ingredientName"+Integer.toString(i), name));
+				params.add(new BasicNameValuePair("amount"+Integer.toString(i), amount));
+				params.add(new BasicNameValuePair("measurement"+Integer.toString(i), measurement));
+				params.add(new BasicNameValuePair("discription"+Integer.toString(i), description));
+				params.add(new BasicNameValuePair("important"+Integer.toString(i), Integer.toString(val)));
+				
+				
+				//adds the plural's' to the end of measurement
+				if(listSpnrAmount.get(i).getSelectedItemPosition()>3)
+					measurement+="s";
+				
+				//screens the possibility that no unit is needed
+				if(measurement.equalsIgnoreCase("no unit")||measurement.equalsIgnoreCase("no units"))
+					measurement="";
+				else
+					measurement+=" of";
+				
+				ingredientList +="--> "+amount+" "+measurement+" "+description+" "+name+"\n";
+
+			}
+			
+			Log.d("CreateRecipe ingredientList=", ingredientList);
+			
 			String recipeName= txtRecipeName.getText().toString();
-			String ingredientList= txtIngredientList.getText().toString();
 			String cookingDirections= txtCookingDirections.getText().toString();
 			String cookTime= txtCookTime.getText().toString();
 			String prepTime= txtPrepTime.getText().toString();
 			String summery= txtSummery.getText().toString();
 			String recipeType = spnrRecipeType.getSelectedItem().toString();
+			String servings = spnrServings.getSelectedItem().toString();
 
 			// Building Parameters
-			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair(TAG_RECIPENAME, recipeName));
 			params.add(new BasicNameValuePair(TAG_INGREDIENTLIST, ingredientList));
 			params.add(new BasicNameValuePair(TAG_COOKINGDIRECTIONS, cookingDirections));
@@ -355,8 +463,11 @@ private TableLayout ingredientRow(int index) {
 			params.add(new BasicNameValuePair(TAG_PREPTIME, prepTime));
 			params.add(new BasicNameValuePair(TAG_SUMMERY, summery));
 			params.add(new BasicNameValuePair(TAG_TYPE, recipeType));
+			params.add(new BasicNameValuePair(TAG_SERVINGS, servings));
 			params.add(new BasicNameValuePair(TAG_AUTHOR, author));
 
+			Log.d("CreateRecipes params: ", params.toString());
+			
 			// getting JSON Object
 			// Note that create product url accepts POST method
 			JSONObject json = jsonParser.makeHttpRequest(urlCreateRecipe, "GET", params);
@@ -381,7 +492,7 @@ private TableLayout ingredientRow(int index) {
 				} else {
 					// failed to create Recipe
 					 message = json.getString(TAG_MESSAGE);
-					Log.d("CreateRecipe_Background", "oops! Failed to create recipe"+message);
+					Log.d("CreateRecipe_Background", "oops! Failed to create recipe "+message);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

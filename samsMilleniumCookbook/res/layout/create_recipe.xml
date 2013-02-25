@@ -20,9 +20,8 @@
 		    android:paddingLeft="10dp"
 		    android:textAppearance="?android:attr/textAppearanceLarge"
 		    android:textStyle="bold"
-		    android:typeface="serif" >
-		    <requestFocus />
-		    </EditText>
+		    android:typeface="serif" />
+
 
 				<ScrollView
 				    xmlns:android="http://schemas.android.com/apk/res/android"
@@ -127,7 +126,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 		    
-    		<TableRow android:layout_weight="1" >
+    		<TableRow
+    		    android:layout_width="match_parent"
+    		    android:layout_height="match_parent"
+    		    android:layout_weight="1" >
 
     		<TextView
     		    android:layout_width="wrap_content"
@@ -141,10 +143,36 @@
 
     	   <Spinner
     	       android:id="@+id/spnrCreateRecipeType"
-    	       android:layout_width="125dp"
+    	       android:layout_width="match_parent"
     	       android:layout_height="match_parent"
     	       android:layout_gravity="center_vertical"
     	       android:spinnerMode="dropdown" />
+    	   
+    
+    </TableRow>
+		    
+    		<TableRow
+    		    android:layout_width="match_parent"
+    		    android:layout_height="match_parent"
+    		    android:layout_weight="1" >
+
+    		<TextView
+    		    android:layout_width="wrap_content"
+    		    android:layout_height="wrap_content"
+    		    android:paddingBottom="15dp"
+    		    android:paddingLeft="10dp"
+    		    android:paddingRight="0dp"
+    		    android:paddingTop="15dp"
+    		    android:text="@string/servings"
+    		    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    	   <Spinner
+    	       android:id="@+id/spnrCreateRecipeServings"
+    	       android:layout_width="match_parent"
+    	       android:layout_height="match_parent"
+    	       android:layout_gravity="center_vertical"
+    	       android:spinnerMode="dropdown" />
+    	   
     
     </TableRow>
      </TableLayout>
@@ -181,19 +209,6 @@
 		        android:layout_height="wrap_content"
 		        android:orientation="vertical" >
 		    </LinearLayout>
-
-			<EditText
-			    android:id="@+id/inputRecipeCreateIngredientList"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    android:layout_gravity="center_horizontal"
-			    android:layout_weight="1"
-			    android:background="#07000000"
-			    android:ems="10"
-			    android:hint="@string/ingredientHint"
-			    android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
-			    android:padding="20dp"
-			    android:textColor="#EEEEEEAA" />
 
 			<TextView
 			    android:layout_width="wrap_content"
@@ -250,10 +265,10 @@
                 android:text="@string/publishRecipe" />
                     
             <Button
-                android:id="@+id/btnRecipeViewFavoriteRecipe"
+                android:id="@+id/btnCreateRecipeAddIngredient"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:text="@string/favoriteRecipe" />
+                android:text="@string/addIngredients" />
                             
             <Button
                 android:id="@+id/btnRecipeViewViewRatings"

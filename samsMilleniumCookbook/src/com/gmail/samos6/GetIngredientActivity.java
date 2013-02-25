@@ -150,29 +150,20 @@ public class GetIngredientActivity extends ListActivity {
 				});				
 		
 		
-		/*lv.setOnItemClickListener(new OnItemClickListener() {
+		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				//view.setBackgroundColor(Color.CYAN);
-				//view.findViewById(R.id.tableRowIngredient).setBackgroundColor(Color.CYAN);
-						
-				// getting values from selected ListItem
-				String ingredientname = ((TextView) view.findViewById(R.id.ingredientName)).getText().toString();
-						
-				// Starting new intent
-				Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
-				// sending ingredientName to next activity
-				intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
-				intent.putExtra(TAG_ORIGIN, TAG_LISTINGREDIENT);
+				Log.d("GetIngredient inside listClick: ", "position = "+Integer.toString(position));
+				if(((CheckBox) view.findViewById(R.id.ingredientCheckBox)).isChecked())
+					((CheckBox) view.findViewById(R.id.ingredientCheckBox)).setChecked(false);
+				else
+					((CheckBox) view.findViewById(R.id.ingredientCheckBox)).setChecked(true);
 				
-				// starting new activity and expecting some response back
-				startActivityForResult(intent, 100);
-				startActivity(intent);
+				adapter.toogleSelection(position, view);
 			}
-		});*/
+		});
 
 	}
 	
@@ -196,8 +187,7 @@ public class GetIngredientActivity extends ListActivity {
 		}else{
 			lv.setSelectionFromTop(position, 0);
 			Toast.makeText(getApplicationContext(), "Moving to the letter "+letter, Toast.LENGTH_SHORT).show();
-		}	
-		
+		}			
 	}
 	
 	/**
@@ -316,7 +306,7 @@ public class GetIngredientActivity extends ListActivity {
 					
 					List<String> list = new ArrayList<String>();
 					//list = db.getAllIngredients();
-					adapter = new SamsListAdapter(GetIngredientActivity.this, productsList, list, "IngredientList");
+					adapter = new SamsListAdapter(GetIngredientActivity.this, productsList, list, "getIngredient");
 					
 					
 					setListAdapter(adapter);

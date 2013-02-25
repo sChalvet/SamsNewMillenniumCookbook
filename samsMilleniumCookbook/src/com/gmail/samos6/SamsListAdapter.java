@@ -44,7 +44,7 @@ public SamsListAdapter(Activity activity, ArrayList<HashMap<String, String>> pro
     this.data = productsList;
     this.pantry = pantry;
     this.origin = origin;
-    Log.d("Adapter_data", data.toString());
+    //Log.d("Adapter_data", data.toString());
 }
 
 public void clear() {
@@ -75,9 +75,7 @@ public int getPositionOf(String letter){
 			return position;
 		}
 	}
-	
-	
-	
+
 	return position;
 }
 
@@ -111,6 +109,18 @@ public long getItemId(int position) {
     return position;
 }
 
+public boolean toogleSelection(int index, View view) {
+	
+	Log.d("SamsAdapter_toogleSelection", "inside");
+
+	if(data.get(index).get("reminder") == "True")
+		data.get(index).put("reminder", "False");		
+	else
+		data.get(index).put("reminder", "True");
+		
+	return true;
+}
+
 public View getView(final int position, View convertView, ViewGroup parent) {
 	
 
@@ -142,7 +152,7 @@ public View getView(final int position, View convertView, ViewGroup parent) {
 	    for(int index=0; index<pantry.size(); index++){
 	    	
 	    	if(ingredient.equalsIgnoreCase(pantry.get(index).toString()) ){
-	    		checkBox="true";
+	    		checkBox="True";
 	    	}		
 	    }
     }
@@ -175,7 +185,6 @@ public View getView(final int position, View convertView, ViewGroup parent) {
             Log.d("Adapter_onClick= ", pantry.toString() );
         }
     });
-    
 
     Log.d("SamsListAdapter: ", "return convertView");
     return convertView;

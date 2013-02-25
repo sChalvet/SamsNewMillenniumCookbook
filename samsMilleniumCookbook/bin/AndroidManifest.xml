@@ -32,7 +32,7 @@
         
         <activity
             android:name=".GetIngredientActivity"
-            android:label="Ingredient List" >
+            android:label="Choose Ingredients for Recipe" >
         </activity>
         
        <activity
