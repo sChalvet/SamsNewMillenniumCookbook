@@ -65,14 +65,9 @@ public class CreateRecipeActivity extends Activity {
 	LinearLayout listLayout;
 	
 	Button btnPublish;
+	Button btnAddIngredient;
 	Button btnTakePhoto;
 	
-	String recipeName= "";
-	String ingredientList= "";
-	String cookingDirections= "";
-	String cookTime= "";
-	String prepTime= "";
-	String summery= "";
 	String author= "Van Keizer";
 	String[] recipeType;
 	String[] recipeServings;
@@ -83,12 +78,13 @@ public class CreateRecipeActivity extends Activity {
 	ArrayAdapter<String> spin_adapter;
 	
 	//these lists store the values of the generated ingredient list
-	List<String> list= new ArrayList<String>();
+	List<String> ingredientList= new ArrayList<String>();
 	List<TextView> listIngredientName= new ArrayList<TextView>();
 	List<EditText> listDescription= new ArrayList<EditText>();
 	List<Spinner> listSpnrMeasurement= new ArrayList<Spinner>();
 	List<Spinner> listSpnrAmount= new ArrayList<Spinner>();
 	List<CheckBox> listVital= new ArrayList<CheckBox>();
+	List<TableLayout> listTable= new ArrayList<TableLayout>();
 	
 	//this stores the number of ingredients selected
 	int numIngredients=0;
@@ -160,6 +156,7 @@ public class CreateRecipeActivity extends Activity {
 		
 		btnPublish= (Button) findViewById(R.id.btnCreateRecipeSubmit);
 		btnTakePhoto= (Button) findViewById(R.id.btnCreateRecipeTakePhoto);
+		btnAddIngredient= (Button) findViewById(R.id.btnCreateRecipeAddIngredient);
 			
 		Log.d("CreateRecipe_just in", "Inside");
 	
@@ -217,16 +214,31 @@ public class CreateRecipeActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-
+				
 				Log.d("CreateRecipe_btnTakePhoto onclick", "inside");
-				
 				Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-				startActivityForResult(intent, 0);
-				
+				startActivityForResult(intent, 0);	
 
 			}
 		});
+		
+		// Add Ingredient button click event
+				btnAddIngredient.setOnClickListener(new View.OnClickListener() {
 
+					@Override
+					public void onClick(View arg0) {
+
+						Log.d("CreateRecipe_btnAddIngredient onclick", "inside");
+						
+						Intent intent = new Intent(getApplicationContext(), GetIngredientActivity.class);
+						Bundle b = new Bundle();
+	                    b.putStringArrayList("IngredientList", (ArrayList<String>) ingredientList);
+	                    intent.putExtras(b);
+						startActivityForResult(intent,100);
+						
+
+					}
+				});
 	}
 	
 	/**
@@ -258,40 +270,85 @@ public class CreateRecipeActivity extends Activity {
 		// if result code 100, coming from GetIngredientActivity
 		if (resultCode == 100) {
 			
+			List<String> receivedList= new ArrayList<String>();
+			List<String> addList= new ArrayList<String>();
+			List<String> cutList= new ArrayList<String>();
 			Bundle extras= data.getExtras();
 			
-			list = extras.getStringArrayList("myarraylist");
-			Log.d("inside ActivityResults got this list: ", list.toString());
+			receivedList = extras.getStringArrayList("IngredientList");
+			Log.d("inside ActivityResults got this list: ", receivedList.toString());
 			
-			//use the received ingredients and get them ready for user
-			createIngredientListView();
+			if(ingredientList.isEmpty()){
+				ingredientList=receivedList;
+				createIngredientListView(ingredientList);
+			}else{
+				//here we figure out what has been added and what has been dropped
+				//when user changed his ingredient selection after using AddIngredient button
+				addList= cloneList(receivedList);
+				addList.removeAll(ingredientList);
+				cutList= cloneList(ingredientList);
+				cutList.removeAll(receivedList);
+				
+				//dropping any fields that were dropped
+				dropFromList(cutList);
+				
+				//ingredientList is kept up to date one what ingredients the recipe contains
+				ingredientList.addAll(addList);
+				ingredientList.removeAll(cutList);
+				
+				Log.d("inside ActivityResults list final: ", ingredientList.toString());
+				Log.d("inside ActivityResults list cut: ", cutList.toString());
+				Log.d("inside ActivityResults list add: ", addList.toString());
+				
+				//adding the needed fields for the added ingredients
+				createIngredientListView(addList);
+			}
+			
+			
+			numIngredients=ingredientList.size();
+			
 		}
 
 	}
 	
-private void createIngredientListView(){
+private void createIngredientListView(List<String> list){
 	
 	//http://prasans.info/2011/03/add-edittexts-dynamically-and-retrieve-values-android/
 	listLayout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 	
-	numIngredients=list.size();
+	
 	for(int index=0; index<list.size(); index++){
+		
+		TableLayout tableLayout = new TableLayout(this);
+		tableLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.create_recipe_ingredient_list));
 		
 		TextView txtIngredientName = new TextView(this);
 		txtIngredientName.setTextSize(21f);
-		txtIngredientName.setText(list.get(index)+":");
+		txtIngredientName.setText(list.get(index));
 		txtIngredientName.setPadding(0, 30, 0, 0);
 		txtIngredientName.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		listIngredientName.add(txtIngredientName);
-		listLayout.addView(txtIngredientName);
 		
+		//packing everything into a tableLayout
+		tableLayout.addView(txtIngredientName);
+		tableLayout.addView(ingredientRow1(index));
+		tableLayout.addView(ingredientRow2(index));
 		
-		listLayout.addView(ingredientRow1(index));
-		listLayout.addView(ingredientRow2(index));
+		//this tableLayout now contains all of the layout for one ingredient
+		//storing it into listTable in case we need to drop an ingredient
+		listTable.add(tableLayout);
+		
+		//adding one ingredient view to the list
+		listLayout.addView(tableLayout);
 	}
 	
 }
 
+/**
+ * creates a table layout with the vital checkbox and text
+ * @param index
+ * @return TableLayout
+ */
 private TableLayout ingredientRow1(int index) {
 	TableLayout tableLayout = new TableLayout(this);
 	tableLayout.setStretchAllColumns(true);
@@ -323,6 +380,13 @@ private TableLayout ingredientRow1(int index) {
     return tableLayout;
 }
 
+/**
+ * Creates a TableLayout with with 2 spinners (amount and unit)
+ * and one text field for the ingredient description (diced, chopped, etc...)
+ * 
+ * @param index
+ * @return TableLayout
+ */
 private TableLayout ingredientRow2(int index) {
 	
 	//amount.setLayoutParams(new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 0.1f));
@@ -379,7 +443,51 @@ private TableLayout ingredientRow2(int index) {
     return tableLayout;
 }
 
+/**
+ * Clones an ArrayList
+ * @param list
+ * @return clonedList
+ */
+private List<String> cloneList(List<String> list) {
+    List<String> clone = new ArrayList<String>(list.size());
+    for(int i=0; i<list.size();i++){
+    	clone.add(list.get(i));
+    }
+    return clone;
+}
 
+/**
+ * 	drops any ingredient table that is no longer needed
+ * @param list
+ */
+private void dropFromList(List<String> list) {
+    
+	Log.d("inside dropList: ", list.toString());
+	
+	for(int i=0; i<list.size() ; i++){
+		
+		//adding ':' to the end of the list because the text field has one as well
+		//list.set(i, list.get(i).toString()+":");
+		
+		for(int y=0; y<listIngredientName.size(); y++){
+			Log.d("inside loop: ", list.get(i).toString()+"=?="+listIngredientName.get(y).getText().toString());
+			if(list.get(i).toString().equalsIgnoreCase(listIngredientName.get(y).getText().toString())){
+				
+				Log.d("inside if: ", list.get(i).toString());
+				
+				listTable.get(y).setVisibility(View.GONE);
+				listIngredientName.remove(y);
+				listDescription.remove(y);
+				listSpnrMeasurement.remove(y);
+				listSpnrAmount.remove(y);
+				listVital.remove(y);
+				listTable.remove(y);
+			}
+		}	
+	}	
+	
+	Log.d("inside dropList: ", list.toString());
+}
 
 
 	/**
@@ -413,6 +521,7 @@ private TableLayout ingredientRow2(int index) {
 			
 			//this loop gets the data from the ingredient list
 			for(int i=0; i<numIngredients; i++){
+				//if(listIngredientName.get(i))
 				String name = listIngredientName.get(i).getText().toString(); 
 				String amount = listSpnrAmount.get(i).getSelectedItem().toString(); 
 				String measurement = listSpnrMeasurement.get(i).getSelectedItem().toString(); 
@@ -422,7 +531,7 @@ private TableLayout ingredientRow2(int index) {
 				int val = vital? 1 : 0;	
 				
 				//needed to remove the : from the end of the string
-				name = name.substring(0, name.length()-1);
+				//name = name.substring(0, name.length()-1);
 				
 				params.add(new BasicNameValuePair("ingredientName"+Integer.toString(i), name));
 				params.add(new BasicNameValuePair("amount"+Integer.toString(i), amount));

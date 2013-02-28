@@ -51,6 +51,7 @@ public class GetIngredientActivity extends ListActivity {
     ListView lv;
 
 	ArrayList<HashMap<String, String>> productsList;
+	List<String> list = new ArrayList<String>();
 	
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
@@ -95,6 +96,14 @@ public class GetIngredientActivity extends ListActivity {
 		// Loading products in Background Thread
 		new LoadAllIngredients().execute();
 
+		//checks to see if any info was passed over (happens if this is accessed more than once)
+		if( getIntent().getExtras() != null){
+			Bundle extras= getIntent().getExtras();
+			list = extras.getStringArrayList("IngredientList");
+			Log.d("inside getExtra from intent: ", list.toString());
+		}
+		
+		
 		// Get listview
 		lv = getListView(); 
 		
@@ -110,7 +119,7 @@ public class GetIngredientActivity extends ListActivity {
 				public void onClick(View view) {
 					Log.d("GetIngredient: ", "in Done onClick");
 								
-					List<String> list= new ArrayList<String>();
+					//list= new ArrayList<String>();
 								
 					list= adapter.getChecked();
 								
@@ -120,7 +129,7 @@ public class GetIngredientActivity extends ListActivity {
 								
 					Intent intent= getIntent();
                     Bundle b = new Bundle();
-                    b.putStringArrayList("myarraylist", (ArrayList<String>) list);
+                    b.putStringArrayList("IngredientList", (ArrayList<String>) list);
                     intent.putExtras(b);
                     setResult(100, intent);
                     finish();
@@ -304,7 +313,6 @@ public class GetIngredientActivity extends ListActivity {
 					 * Updating parsed JSON data into ListView
 					 * */
 					
-					List<String> list = new ArrayList<String>();
 					//list = db.getAllIngredients();
 					adapter = new SamsListAdapter(GetIngredientActivity.this, productsList, list, "getIngredient");
 					

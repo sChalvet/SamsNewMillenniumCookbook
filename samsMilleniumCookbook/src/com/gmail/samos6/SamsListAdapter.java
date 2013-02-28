@@ -44,7 +44,7 @@ public SamsListAdapter(Activity activity, ArrayList<HashMap<String, String>> pro
     this.data = productsList;
     this.pantry = pantry;
     this.origin = origin;
-    //Log.d("Adapter_data", data.toString());
+    Log.d("Adapter_pantry =", this.pantry.toString());
 }
 
 public void clear() {
@@ -83,7 +83,9 @@ public List<String> getChecked() {
 	
 	List<String> s= new ArrayList<String>();
 
-	if(origin.equalsIgnoreCase("IngredientList")){	//if call comes from ingredientlist.class then use this logic
+	//if call comes from the right class then return the checked ingredients
+	//and return what is already in the pantry
+	if(origin.equalsIgnoreCase("IngredientList") || origin.equalsIgnoreCase("getIngredient")){	
 		for(int index=0; index<data.size(); index++){
 			if(data.get(index).get("reminder") == "True" || pantry.contains(data.get(index).get("ingredientName")))
 				s.add(data.get(index).get("ingredientName"));
@@ -145,13 +147,14 @@ public View getView(final int position, View convertView, ViewGroup parent) {
     String checkBox = data.get(position).get("reminder");
      Log.d("Adapter loading ingredient: ", ingredient+" at pos:"+Integer.toString(position));
     
-     //if the call is not coming from the Pantry class this this puts  
-     //a check mark on every ingredient that is listed in the Pantry.
-     if(origin.equalsIgnoreCase("IngredientList")){
+    
+     //if 'pantry' contains data already then set a check mark on every ingredient that is listed.
+     if(origin.equalsIgnoreCase("IngredientList") || origin.equalsIgnoreCase("getIngredient")){
 	    //checks to see if ingredient is already in pantry
 	    for(int index=0; index<pantry.size(); index++){
 	    	
 	    	if(ingredient.equalsIgnoreCase(pantry.get(index).toString()) ){
+	    		Log.d("Adapter Pantry adding: ", ingredient);
 	    		checkBox="True";
 	    	}		
 	    }
