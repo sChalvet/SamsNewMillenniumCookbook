@@ -242,7 +242,7 @@
         android:animateOnClick="true"
         android:content="@+id/content"
         android:handle="@+id/handle"
-        android:topOffset="350dp" >
+        android:topOffset="390dp" >
 		    
         <Button
             android:id="@+id/handle"
@@ -254,7 +254,7 @@
         <LinearLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="22dp"
+            android:layout_height="wrap_content"
             android:background="#000000"
             android:orientation="vertical" >
 			
@@ -269,13 +269,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:text="@string/addIngredients" />
-                            
-            <Button
-                android:id="@+id/btnRecipeViewViewRatings"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:text="@string/viewRatings" />
-
+                           
         </LinearLayout>
     </SlidingDrawer>
     

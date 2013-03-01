@@ -53,7 +53,6 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
-	//private static String urlGetAllComments = "http://10.0.2.2/recipeApp/getAllComments.php";
 	String urlGetAllComments;
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";

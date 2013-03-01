@@ -17,7 +17,7 @@ public class MainScreenActivity extends Activity{
 	Button btnSaved;
 	Button btnFavorites;
 	Button btnAddRecipe;
-	Button btnNewProduct;
+	Button btnUserInfo;
 	Button btnPantry;
 	Button btnToRecipeSearch;
 	
@@ -35,7 +35,7 @@ public class MainScreenActivity extends Activity{
 		// Buttons
 		btnSaved = (Button) findViewById(R.id.btnMainSavedRecipe);
 		btnFavorites = (Button) findViewById(R.id.btnMainFavRecipe);
-		btnNewProduct = (Button) findViewById(R.id.btnCreateProduct);
+		btnUserInfo = (Button) findViewById(R.id.btnMainUserInfo);
 		btnPantry = (Button) findViewById(R.id.btnMainPantry);
 		btnToRecipeSearch = (Button) findViewById(R.id.btnMainToRecipeSearch);
 		btnAddRecipe = (Button) findViewById(R.id.btnMainAddRecipe);
@@ -47,6 +47,17 @@ public class MainScreenActivity extends Activity{
 			public void onClick(View view) {
 				// Launching All products Activity
 				Intent i = new Intent(getApplicationContext(), CreateRecipeActivity.class);
+				startActivity(i);
+				
+			}
+		});
+		
+		btnUserInfo.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				// Launching All products Activity
+				Intent i = new Intent(getApplicationContext(), PreferencesActivity.class);
 				startActivity(i);
 				
 			}

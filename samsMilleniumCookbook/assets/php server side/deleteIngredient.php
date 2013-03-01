@@ -16,12 +16,13 @@ if (isset($_GET['ingredientName'])) {
 
     // connecting to db
     $db = new DB_CONNECT();
+	$conn=$db->connect();
 
     // mysql update row with matched pid
-    $result = mysql_query("DELETE FROM ingredientList WHERE ingredientName = '$ingredientName'");
+    $result = mysqli_query($conn, "DELETE FROM ingredientList WHERE ingredientName = '$ingredientName'");
     
     // check if row deleted or not
-    if (mysql_affected_rows() > 0) {
+    if (mysqli_affected_rows() > 0) {
         // successfully updated
         $response["success"] = 1;
         $response["message"] = "Ingredient successfully deleted";

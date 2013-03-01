@@ -14,24 +14,26 @@ require_once __DIR__ . '/db_connect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
+$conn=$db->connect();
 
 // check for post data
 if (isset($_GET["recipeName"])) {
     $recipeName = $_GET['recipeName'];
 
     // get a product from products table
-   $result = mysql_query("SELECT userName, ingredientDiscription, directions, prepTime, cookTime FROM recipe WHERE recipeName = '$recipeName'");
+   $result = mysqli_query($conn, "SELECT userName, ingredientDiscription, directions, prepTime, cookTime FROM recipe WHERE recipeName = '$recipeName'");
 
     if (!empty($result)) {
         // check for empty result
-        if (mysql_num_rows($result) > 0) {
+        if (mysqli_num_rows($result) > 0) {
+		
 			$rating=0;
 			$numRatings=0;
 			//$getPic = mysql_query("SELECT img FROM picture WHERE picId = 1") or die(mysql_error());
 			
 			$response["product"] = array();
 			
-            $row = mysql_fetch_array($result);
+            $row = mysqli_fetch_array($result);
 			//$rowPic = mysql_fetch_array($getPic);
 	
 			$product = array();
@@ -42,18 +44,18 @@ if (isset($_GET["recipeName"])) {
 			$product["prepTime"] = $row[3];
 			$product["cookTime"] = $row[4];
 			
-			$countResult = mysql_query("SELECT count(*) FROM recipecomments where recipename = '$recipeName'") or die(mysql_error());
-			if(mysql_num_rows($countResult) > 0){
-				$CountRow = mysql_fetch_array($countResult);
+			$countResult = mysqli_query($conn, "SELECT count(*) FROM recipecomments where recipename = '$recipeName'");
+			if(mysqli_num_rows($countResult) > 0){
+				$CountRow = mysqli_fetch_array($countResult);
 				$numRatings=$CountRow[0];
 			}
 			
 			$product["numRatings"] = $numRatings;
 			$response["message"] = "Found $numRatings ratings";
 			
-			$ratingResult = mysql_query("SELECT sum(rating) FROM recipecomments where recipename = '$recipeName'") or die(mysql_error());
-			if(mysql_num_rows($ratingResult) > 0){
-				$ratingRow = mysql_fetch_array($ratingResult);
+			$ratingResult = mysqli_query($conn, "SELECT sum(rating) FROM recipecomments where recipename = '$recipeName'");
+			if(mysqli_num_rows($ratingResult) > 0){
+				$ratingRow = mysqli_fetch_array($ratingResult);
 				if($CountRow[0]>0)
 					$rating=$ratingRow[0]/$CountRow[0];
 			}	

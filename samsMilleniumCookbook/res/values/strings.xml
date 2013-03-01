@@ -5,6 +5,7 @@
     <!-- urlGetAllComments = getResources().getString(R.string.urlGetAllComments); -->
     <!-- <string name="urlGetIngredientDetails">http://10.0.2.2/recipeApp/getIngredientDetails.php</string> -->
     <!-- <string name="urlGetIngredientDetails">http://192.168.254.45/recipeApp/getIngredientDetails.php</string> -->
+    <!-- <string name="urlGetIngredientDetails">http://joe.cs.unca.edu/~chalvesa/app/getIngredientDetails.php</string> -->
     
     <!-- Url's are pulled into the app from here -->
     <string name="urlGetIngredientDetails">http://192.168.254.45/recipeApp/getIngredientDetails.php</string>
@@ -15,11 +16,12 @@
     <string name="url_create_product">http://192.168.254.45/recipeApp/create_product.php</string>
     <string name="urlCreateRecipe">http://192.168.254.45/recipeApp/createRecipe.php</string>
     <string name="urlUpdateRecipe">http://192.168.254.45/recipeApp/updateRecipe.php</string>
-    <string name="urlCreateNewRating">http://192.168.254.45/recipeApp/CreateNewRating.php</string>
+    <string name="urlCreateNewRating">http://192.168.254.45/recipeApp/createNewRating.php</string>
     <string name="urlGetAllRecipes">http://192.168.254.45/recipeApp/getAllRecipes.php</string>
     <string name="urlGetAllIngredients">http://192.168.254.45/recipeApp/getAllIngredients.php</string>
     <string name="urlGetFavRecipes">http://192.168.254.45/recipeApp/getFavRecipes.php</string>
     <string name="urlGetRecipeDetails">http://192.168.254.45/recipeApp/getRecipeDetails.php</string>
+    <string name="urlEditRecipe">http://192.168.254.45/recipeApp/editRecipe.php</string>
     
     
     <string name="userName">Unknown</string>
@@ -53,7 +55,7 @@
     <string name="recipeType">Recipe Type:</string>
     <string name="publishRecipe">Publish Recipe</string>
     <string name="takeApic">Take a Picture</string>
-    <string name="addIngredients">Add more ingredients</string>
+    <string name="addIngredients">Add/Remove ingredients</string>
     <string name="servings">Servings:</string>
     
     <!-- part of ListRecipeComments Activity -->
@@ -74,6 +76,7 @@
     <string name="saveRecipe">Save Recipe for Later</string>
     <string name="favoriteRecipe">Favorite Recipe</string>
     <string name="viewRatings">See Comments and Rate</string>
+    <string name="editRecipe">Edit Recipe</string>
     
     
     
@@ -112,6 +115,21 @@
 	<string name="byAuthor">By Author</string>
 	<string name="pickYourPoison">Pick Your Poison</string>
 	<string name="hintSearch">Search Key Words</string>
+	
+	<!-- part of preferences  -->
+	<string name="nickName">Nick Name</string>
+	<string name="email">Email</string>
+	<string name="firstName">First Name</string>
+	<string name="lastName">Last Name</string>
+	<string name="password">Password</string>
+	<string name="prefNickName">Enter a nick name:</string>
+	<string name="prefEmail">Enter your email:</string>
+	<string name="prefFirstName">Enter your first name:</string>
+	<string name="prefLastName">Enter your last name:</string>
+	<string name="prefPassword">Enter a password:</string>
+	<string name="yourInfo">Your Info</string>
+	<string name="prefHintNickName">Will be seen by others</string>
+	<string name="saveInfo">Create Account</string>
 	
 	
 	<string-array name="foodType"> 

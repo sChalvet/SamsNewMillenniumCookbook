@@ -9,25 +9,22 @@ $response = array();
 
 // check for required fields
 if (isset($_GET["recipeName"])) {
-//if(true){
-    
-	//var_dump($_GET);
-	
+
 	$recipeName = $_GET['recipeName'];		
     $comment = $_GET["comment"];
     $rating = $_GET["rating"];
     $authorName = $_GET["authorName"];
 
-    //var_dump( $error);
 
     // include db connect class
     require_once __DIR__ . '/db_connect.php';
 
     // connecting to db
     $db = new DB_CONNECT();
-
+	$conn=$db->connect();
+	
     // mysql inserting a new row
-    $result = mysql_query("INSERT INTO recipecomments(recipeName, comment, rating, authorName)"
+    $result = mysqli_query($conn, "INSERT INTO recipecomments(recipeName, comment, rating, authorName)"
 					."VALUES('$recipeName', '$comment', '$rating', '$authorName')");
 
 	
@@ -41,7 +38,7 @@ if (isset($_GET["recipeName"])) {
         echo json_encode($response);
     } else {
         // failed to insert row
-		$error = mysql_error();
+		$error = mysqli_error();
         $response["success"] = 0;
         $response["message"] = $error;
         

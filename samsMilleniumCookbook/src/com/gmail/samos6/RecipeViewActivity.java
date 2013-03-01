@@ -53,6 +53,7 @@ public class RecipeViewActivity extends Activity {
 	Button btnReviews;
 	Button btnSave;
 	Button btnFavorite;
+	Button btnEdit;
 	
 	String recipeName;
 	String author= "";
@@ -115,6 +116,7 @@ public class RecipeViewActivity extends Activity {
 		btnReviews = (Button) findViewById(R.id.btnRecipeViewViewRatings);
 		btnSave = (Button) findViewById(R.id.btnRecipeViewSaveRecipe);
 		btnFavorite = (Button) findViewById(R.id.btnRecipeViewFavoriteRecipe);
+		btnEdit = (Button) findViewById(R.id.btnRecipeViewEdit);
 		
 		txtRecipeName = (TextView) findViewById(R.id.txtRecipeViewRecipeName);
 		txtAuthor = (TextView) findViewById(R.id.txtRecipeViewAuthor);
@@ -174,6 +176,41 @@ public class RecipeViewActivity extends Activity {
 
 			}
 		});
+		
+		// Favorite Recipe button click event
+		btnEdit.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				
+				Log.d("ViewRecipe_btnEdit onclick", "inside");
+				Intent intent = new Intent(getApplicationContext(), EditRecipeActivity.class);
+				
+				// sending recipeName to next activity
+				intent.putExtra(TAG_RECIPENAME, recipeName);
+				
+				//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				// starting new activity and expecting some response back
+				startActivityForResult(intent, 100);
+			}
+		});
+
+	}
+	
+	// Response from EditRecipe Activity
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		// if result code 100
+		if (resultCode == 100) {
+			// if result code 100 is received 
+			// means user may have changed the recipe
+			// reload this screen again
+			Intent intent = getIntent();
+			recipeName = intent.getStringExtra(TAG_RECIPENAME);
+			finish();
+			startActivity(intent);
+		}
 
 	}
 	

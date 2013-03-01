@@ -10,9 +10,7 @@ $response = array();
 
 // check for required fields
 if (isset($_GET["ingredientName"])) {
-//if(true){
     
-	//var_dump($_GET);
 	
 	$ingredientName = $_GET['ingredientName'];		
     $calories = $_GET["calories"];
@@ -22,29 +20,17 @@ if (isset($_GET["ingredientName"])) {
     $type = $_GET["type"];
     $notes = $_GET["notes"];
 	$addedBy = $_GET["addedBy"];
-    
-	/*if( $calories==""||$protein==""||$fat==""||$carbs==""){
-	
-	// one of the fields is blanck
-		$error = "Make sure you put something in each field.";
-        $response["success"] = 0;
-        $response["message"] = $error;
-        
-        // echoing JSON response
-        echo json_encode($response);
-		
-	}*/
 
-    //var_dump( $error);
 
     // include db connect class
     require_once __DIR__ . '/db_connect.php';
 
     // connecting to db
     $db = new DB_CONNECT();
+	$conn=$db->connect();
 
     // mysql inserting a new row
-    $result = mysql_query("INSERT INTO ingredientlist(ingredientName, calories, protein, fat, carbs, notes, addedBy, type)"
+    $result = mysqli_query($conn, "INSERT INTO ingredientlist(ingredientName, calories, protein, fat, carbs, notes, addedBy, type)"
 					."VALUES('$ingredientName', '$calories', '$protein', '$fat', '$carbs', '$notes', '$addedBy', '$type')");
 
 	
@@ -58,7 +44,7 @@ if (isset($_GET["ingredientName"])) {
         echo json_encode($response);
     } else {
         // failed to insert row
-		$error = mysql_error();
+		$error = mysqli_error();
         $response["success"] = 0;
         $response["message"] = $error;
         

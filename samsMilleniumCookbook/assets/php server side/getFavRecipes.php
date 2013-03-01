@@ -26,19 +26,20 @@ if (isset($_GET["list0"])) {
 
 	// connecting to db
 	$db = new DB_CONNECT();
-		
+	$conn=$db->connect();
+	
 	// get all products from products table
-	$result = mysql_query("SELECT recipeName, summery, userName, prepTime, cookTime FROM recipe WHERE recipeName IN ($recipeName)") or die(mysql_error());
+	$result = mysqli_query($conn, "SELECT recipeName, summery, userName, prepTime, cookTime FROM recipe WHERE recipeName IN ($recipeName)") or die(mysql_error());
 
 
 	// check for empty result
-	if (mysql_num_rows($result) > 0) {
+	if (mysqli_num_rows($result) > 0) {
 		// looping through all results
 		// products node
 		$response["products"] = array();
 		//$getPic = mysql_query("SELECT img FROM recipe WHERE picId = '1'") or die(mysql_error());
 		
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = mysqli_fetch_array($result)) {
 			
 			$rating=0;
 			$numRatings=0;
@@ -50,18 +51,18 @@ if (isset($_GET["list0"])) {
 			$product["prepTime"] = $row[3];
 			$product["cookTime"] = $row[4];
 			
-			$countResult = mysql_query("SELECT count(*) FROM recipecomments where recipename = '$row[0]'") or die(mysql_error());
-			if(mysql_num_rows($countResult) > 0){
-				$CountRow = mysql_fetch_array($countResult);
+			$countResult = mysqli_query($conn, "SELECT count(*) FROM recipecomments where recipename = '$row[0]'");
+			if(mysqli_num_rows($countResult) > 0){
+				$CountRow = mysqli_fetch_array($countResult);
 				$numRatings=$CountRow[0];
 			}
 			
 			$product["numRatings"] = $numRatings;
 			$response["message"] = "Found $numRatings ratings";
 			
-			$ratingResult = mysql_query("SELECT sum(rating) FROM recipecomments where recipename = '$row[0]'") or die(mysql_error());
-			if(mysql_num_rows($ratingResult) > 0){
-				$ratingRow = mysql_fetch_array($ratingResult);
+			$ratingResult = mysqli_query($conn, "SELECT sum(rating) FROM recipecomments where recipename = '$row[0]'");
+			if(mysqli_num_rows($ratingResult) > 0){
+				$ratingRow = mysqli_fetch_array($ratingResult);
 				if($CountRow[0]>0)
 					$rating=$ratingRow[0]/$CountRow[0];
 			}	
@@ -79,7 +80,6 @@ if (isset($_GET["list0"])) {
 		// echoing JSON response
 		echo json_encode($response);
 		
-		//echo "<script type='text/javascript'>alert('".$response."');</script>";
 	} else {
 		// no products found
 		$response["success"] = 0;

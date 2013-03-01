@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+	<EditTextPreference
+	    android:title="@string/nickName"
+	    android:key="nickName"
+	    android:summary="@string/prefNickName"
+	    android:hint = "@string/prefHintNickName">
+	    
+	</EditTextPreference>
+	
+	<EditTextPreference
+	    android:title="@string/email"
+	    android:key="email"
+	    android:summary="@string/prefEmail"
+	    android:inputType="textEmailAddress">
+	    
+	</EditTextPreference>
+	
+	<EditTextPreference
+	    android:title="@string/firstName"
+	    android:key="firstName"
+	    android:summary="@string/prefFirstName">
+	    
+	</EditTextPreference>
+	
+	<EditTextPreference
+	    android:title="@string/lastName"
+	    android:key="lastName"
+	    android:summary="@string/prefLastName">
+	    
+	</EditTextPreference>
+	<EditTextPreference
+	    android:title="@string/password"
+	    android:key="password"
+	    android:summary="@string/prefPassword"
+	    android:inputType="textVisiblePassword">
+	    
+	</EditTextPreference>
+	
+
+</PreferenceScreen>

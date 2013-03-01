@@ -14,19 +14,20 @@ require_once __DIR__ . '/db_connect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
+$conn=$db->connect();
 
 // check for post data
 if (isset($_GET["recipeName"])) {
     $recipeName = $_GET['recipeName'];
 
     // get comments from recipecomments table
-	$result = mysql_query("SELECT authorName, postTime, comment, rating FROM recipecomments WHERE recipeName ='$recipeName' ORDER BY postTime DESC") or die(mysql_error());
+	$result = mysqli_query($conn, "SELECT authorName, postTime, comment, rating FROM recipecomments WHERE recipeName ='$recipeName' ORDER BY postTime DESC");
 	
 	// check for empty result
     if (!empty($result)) {
         $response["products"] = array();
 		
-        while ($row = mysql_fetch_array($result)) {
+        while ($row = mysqli_fetch_array($result)) {
 	
 			$product = array();
 			

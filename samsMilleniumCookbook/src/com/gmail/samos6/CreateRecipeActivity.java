@@ -69,6 +69,8 @@ public class CreateRecipeActivity extends Activity {
 	Button btnTakePhoto;
 	
 	String author= "Van Keizer";
+	
+	//used to fill the spinners
 	String[] recipeType;
 	String[] recipeServings;
 	
@@ -160,6 +162,7 @@ public class CreateRecipeActivity extends Activity {
 			
 		Log.d("CreateRecipe_just in", "Inside");
 	
+		//send user to pick ingredients first
 		Toast.makeText(getApplicationContext(), "First pick all the ingredients that you will be using", Toast.LENGTH_LONG).show();
 		Intent intent = new Intent(getApplicationContext(), GetIngredientActivity.class);
 		startActivityForResult(intent,100);

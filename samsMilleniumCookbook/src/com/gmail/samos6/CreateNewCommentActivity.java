@@ -47,7 +47,6 @@ public class CreateNewCommentActivity extends Activity {
 	Boolean bCancelled=false;
 
 	// url to create new product
-	//private static String urlCreateNewRating = "http://10.0.2.2/recipeApp/CreateNewRating.php";
 	String urlCreateNewRating ;
 	
 	

@@ -20,16 +20,17 @@ if (isset($_GET['ingredientName'])) {
     $notes = $_GET["notes"];
 	$dateUpdated = date("Y-m-d H:i:s");
 	
-	var_dump($dateUpdated);
+	//var_dump($dateUpdated);
 
     // include db connect class
     require_once __DIR__ . '/db_connect.php';
 
     // connecting to db
     $db = new DB_CONNECT();
+	$conn=$db->connect();
 
     // mysql update row with matched pid
-    $result = mysql_query("UPDATE ingredientList SET calories = '$calories', protein = '$protein', fat = '$fat', "
+    $result = mysqli_query($conn, "UPDATE ingredientList SET calories = '$calories', protein = '$protein', fat = '$fat', "
 			."carbs = '$carbs', type = '$type', notes = '$notes', dateUpdated = '$dateUpdated'  WHERE ingredientName = '$ingredientName'");
 
     // check if row inserted or not

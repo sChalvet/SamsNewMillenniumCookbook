@@ -40,11 +40,12 @@ if (isset($_GET["recipeName"])) {
 
     // connecting to db
     $db = new DB_CONNECT();
+	$conn=$db->connect();
 
 	//checking to see if this recipeName has been used
-    $result = mysql_query("SELECT userName FROM recipe WHERE recipeName = '$recipeName'");
-	if (mysql_num_rows($result) > 0) {
-		$row = mysql_fetch_array($result);
+    $result = mysqli_query($conn, "SELECT userName FROM recipe WHERE recipeName = '$recipeName'");
+	if (mysqli_num_rows($result) > 0) {
+		$row = mysqli_fetch_array($result);
 		// Recipe name is taken
         $response["success"] = 2;
         $response["message"] = "Sorry, this recipe name has already been taken by: ".$row[0];
@@ -55,16 +56,16 @@ if (isset($_GET["recipeName"])) {
 		
 		
 		// mysql inserting a new row
-		$result1 = mysql_query("INSERT INTO recipe(recipeName, userName, ingredientDiscription, directions, cookTime, prepTime, summery, type, servings)"
+		$result1 = mysqli_query($conn, "INSERT INTO recipe(recipeName, userName, ingredientDiscription, directions, cookTime, prepTime, summery, type, servings)"
 						."VALUES('$recipeName', '$author', '$ingredientList', '$cookingDirections', '$cookTime', '$prepTime', '$summery', '$type', '$servings')");
 
 		//empties the table for that recipeName in case there have been changes made or ingredients removed
-		$result = mysql_query("DELETE FROM recipeingredients WHERE recipeName = '$recipeName'");
+		$result = mysqli_query($conn, "DELETE FROM recipeingredients WHERE recipeName = '$recipeName'");
 		
 		for($i=0; $i< sizeof($arrayIngredientName); $i++){
 		
 			// mysql inserting a new row for each ingredient
-			$result2 = mysql_query("INSERT INTO recipeingredients(recipeName, ingredientName, amount, measurement, description, important)"
+			$result2 = mysqli_query($conn, "INSERT INTO recipeingredients(recipeName, ingredientName, amount, measurement, description, important)"
 						."VALUES ('$recipeName', $arrayIngredientName[$i], $arrayAmount[$i], $arrayMeasurement[$i], $arrayDiscription[$i], $arrayImportant[$i])");
 		}
 		
@@ -79,7 +80,7 @@ if (isset($_GET["recipeName"])) {
 			echo json_encode($response);
 		} else {
 			// failed to insert row
-			$error = mysql_error();
+			$error = mysqli_error();
 			$response["success"] = 3;
 			$response["message"] = $error;
 			
