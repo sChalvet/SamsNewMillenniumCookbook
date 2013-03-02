@@ -123,7 +123,6 @@ public class PantryActivity extends ListActivity {
 				
 				// starting new activity and expecting some response back
 				startActivityForResult(intent, 100);
-				startActivity(intent);
 
 			}
 		});

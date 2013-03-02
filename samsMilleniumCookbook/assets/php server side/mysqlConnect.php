@@ -40,6 +40,16 @@ $ingredientName='Almond';
 			$product["addedBy"] = $row[5];
 			$product["type"] = $row[6];
 			
+				//preference access
+				SharedPreferences prefs;
+				String userName="";
+				String password="";
+				
+				//setting user name and password from preferences
+				prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+				userName =prefs.getString("nickName", "guest");
+				password =prefs.getString("password", "");
+			
 			
 			$product["ingredientName"] = $row[0];
 			$product["calories"] = $row[1];

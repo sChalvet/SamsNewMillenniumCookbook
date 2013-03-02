@@ -55,7 +55,6 @@ public class ListIngredientActivity extends ListActivity {
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
-	//private static String urlGetAllIngredients = "http://10.0.2.2/recipeApp/getAllIngredients.php";
 	String urlGetAllIngredients;
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -149,14 +148,12 @@ public class ListIngredientActivity extends ListActivity {
 								intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
 								intent.putExtra(TAG_ORIGIN, TAG_ADDINGREDIENT);	
 								startActivityForResult(intent, 100);
-								startActivity(intent);
 							}
 						});	
 		
 				
-		// on seleting single product
-		// launching EditIngredient Screen
-		
+		// on selecting single ingredient
+		// launching EditIngredient Screen		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -177,7 +174,6 @@ public class ListIngredientActivity extends ListActivity {
 				
 				// starting new activity and expecting some response back
 				startActivityForResult(intent, 100);
-				startActivity(intent);
 			}
 		});
 

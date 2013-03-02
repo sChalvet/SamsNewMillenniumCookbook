@@ -15,9 +15,11 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
@@ -53,12 +55,17 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
+	//preference access
+	SharedPreferences prefs;
+	String userName="";
+	String password="";
+	
 	String urlGetAllComments;
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_PRODUCTS = "products";
 	private static final String TAG_RECIPENAME = "recipeName";
-	private static final String TAG_AUTHORNAME = "authorName";
+	private static final String TAG_AUTHOR = "author";
 	private static final String TAG_POSTTIME = "postTime";
 	private static final String TAG_COMMENT = "comment";
 	private static final String TAG_RATING = "rating";
@@ -78,6 +85,11 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.display_comments);
 	
+		//setting user name and password from preferences
+		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		userName =prefs.getString("nickName", "guest");
+		password =prefs.getString("password", "");
+		
 		urlGetAllComments = getResources().getString(R.string.urlGetAllComments);
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
@@ -120,20 +132,13 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						
-				// getting values from selected ListItem
-				String recipeName = ((TextView) view.findViewById(R.id.txtListRecipeRecipeName)).getText().toString();
-				Log.d("ListRecipe: ", recipeName);
-						
+									
 				// Starting new intent
-				Intent intent = new Intent(getApplicationContext(), RecipeViewActivity.class);
-				
+				Intent intent = new Intent(getApplicationContext(), EditCommentActivity.class);				
 				// sending recipeName to next activity
-				intent.putExtra(TAG_RECIPENAME, recipeName);
-				
+				intent.putExtra(TAG_RECIPENAME, recipeName);			
 				// starting new activity and expecting some response back
 				startActivityForResult(intent, 100);
-				//startActivity(intent);
 			}
 		});
 
@@ -217,7 +222,7 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 						JSONObject c = products.getJSONObject(i);
 
 						// Storing each json item in variable						
-						String authorName = c.getString(TAG_AUTHORNAME);
+						String authorName = c.getString(TAG_AUTHOR);
 						String rating = c.getString(TAG_RATING);
 						String postTime = c.getString(TAG_POSTTIME);
 						String comment = c.getString(TAG_COMMENT);
@@ -226,7 +231,7 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 						HashMap<String, String> map = new HashMap<String, String>();
 
 						// adding each child node to HashMap key => value
-						map.put(TAG_AUTHORNAME, authorName);
+						map.put(TAG_AUTHOR, authorName);
 						map.put(TAG_RATING, rating);
 						map.put(TAG_POSTTIME, postTime);
 						map.put(TAG_COMMENT, comment);

@@ -14,8 +14,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +39,11 @@ public class CreateNewCommentActivity extends Activity {
 	Button btnPost;
 	
 	String recipeName;
-	String userName = "Van das gutter";
+
+	//preference access
+	SharedPreferences prefs;
+	String userName="";
+	String password="";
 	
 	//these 2 variables are used to test the results and errors from the server
 	Boolean successful =false;
@@ -54,12 +60,20 @@ public class CreateNewCommentActivity extends Activity {
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_RECIPENAME = "recipeName";
 	private static final String TAG_MESSAGE = "message";
+	private static final String TAG_AUTHOR = "author";
+	private static final String TAG_COMMENT = "comment";
+	private static final String TAG_RATING = "rating";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_comment);
 
+		//setting user name and password from preferences
+		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		userName =prefs.getString("nickName", "guest");
+		password =prefs.getString("password", "");
+		
 		//getting url from resources
 		urlCreateNewRating = getResources().getString(R.string.urlCreateNewRating);
 		// Edit Text
@@ -129,10 +143,10 @@ public class CreateNewCommentActivity extends Activity {
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("recipeName", recipeName));
-			params.add(new BasicNameValuePair("comment", comment));
-			params.add(new BasicNameValuePair("rating", rating));
-			params.add(new BasicNameValuePair("authorName", userName));
+			params.add(new BasicNameValuePair(TAG_RECIPENAME, recipeName));
+			params.add(new BasicNameValuePair(TAG_COMMENT, comment));
+			params.add(new BasicNameValuePair(TAG_RATING, rating));
+			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
 
 			// getting JSON Object
 			JSONObject json = jsonParser.makeHttpRequest(urlCreateNewRating, "GET", params);

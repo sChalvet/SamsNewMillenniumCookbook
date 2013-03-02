@@ -98,7 +98,7 @@ public View getView(final int position, View convertView, ViewGroup parent) {
     }
 
 	
-    String author = data.get(position).get("authorName");
+    String author = data.get(position).get("author");
     String date = data.get(position).get("postTime");
     String comment = data.get(position).get("comment");
     String rating = data.get(position).get("rating");

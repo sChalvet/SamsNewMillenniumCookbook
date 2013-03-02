@@ -16,11 +16,13 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
@@ -54,6 +56,11 @@ public class RecipeViewActivity extends Activity {
 	Button btnSave;
 	Button btnFavorite;
 	Button btnEdit;
+	
+	//preference access
+	SharedPreferences prefs;
+	String userName="";
+	String password="";
 	
 	String recipeName;
 	String author= "";
@@ -102,6 +109,11 @@ public class RecipeViewActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.view_recipe);
+		
+		//setting user name and password from preferences
+		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		userName =prefs.getString("nickName", "guest");
+		password =prefs.getString("password", "");
 		
 		//getting url from resources
 		urlGetRecipeDetails = getResources().getString(R.string.urlGetRecipeDetails);
@@ -184,14 +196,19 @@ public class RecipeViewActivity extends Activity {
 			public void onClick(View arg0) {
 				
 				Log.d("ViewRecipe_btnEdit onclick", "inside");
-				Intent intent = new Intent(getApplicationContext(), EditRecipeActivity.class);
 				
-				// sending recipeName to next activity
-				intent.putExtra(TAG_RECIPENAME, recipeName);
-				
-				//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				// starting new activity and expecting some response back
-				startActivityForResult(intent, 100);
+				if(userName.equalsIgnoreCase(author)){
+					Intent intent = new Intent(getApplicationContext(), EditRecipeActivity.class);
+					
+					// sending recipeName to next activity
+					intent.putExtra(TAG_RECIPENAME, recipeName);
+					
+					//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					// starting new activity and expecting some response back
+					startActivityForResult(intent, 100);
+				}else{
+					Toast.makeText(getApplicationContext(), "Sorry "+userName+" only "+author+" can edit this recipe.", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 

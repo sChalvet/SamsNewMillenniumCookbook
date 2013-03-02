@@ -17,10 +17,12 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.SpannableString;
@@ -79,7 +81,11 @@ public class EditRecipeActivity extends Activity {
 	String oldRecipeName;
 	String recipeName;
 	
-	String author= "Van Keizer";
+	//preference access
+	SharedPreferences prefs;
+	String userName="";
+	String password="";
+	
 	String cookingDirections= "";
 	String cookTime= "";
 	String prepTime= "";
@@ -155,6 +161,12 @@ public class EditRecipeActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_recipe);
+		
+		//setting user name and password from preferences
+		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		userName =prefs.getString("nickName", "guest");
+		password =prefs.getString("password", "");
+		
 		
 		//getting url from resources
 		urlEditRecipe = getResources().getString(R.string.urlEditRecipe);
@@ -672,7 +684,7 @@ private void dropFromList(List<String> list) {
 			params.add(new BasicNameValuePair(TAG_SUMMERY, summery));
 			params.add(new BasicNameValuePair(TAG_TYPE, recipeType));
 			params.add(new BasicNameValuePair(TAG_SERVINGS, servings));
-			params.add(new BasicNameValuePair(TAG_AUTHOR, author));
+			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
 
 			Log.d("EditRecipe params: ", params.toString());
 			

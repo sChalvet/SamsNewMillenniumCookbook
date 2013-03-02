@@ -58,6 +58,7 @@ public class GetIngredientActivity extends ListActivity {
 	
 
 	String urlGetAllIngredients;
+	
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_PRODUCTS = "products";

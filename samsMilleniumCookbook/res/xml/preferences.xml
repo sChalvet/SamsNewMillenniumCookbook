@@ -4,6 +4,7 @@
 	<EditTextPreference
 	    android:title="@string/nickName"
 	    android:key="nickName"
+	    android:text = "guest"
 	    android:summary="@string/prefNickName"
 	    android:hint = "@string/prefHintNickName">
 	    

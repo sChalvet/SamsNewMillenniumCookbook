@@ -30,8 +30,13 @@
             android:label="Ingredient List" >
         </activity>
         
+        <activity
+            android:name=".editCommentActivity"
+            android:label="Editting Comment" >
+        </activity>
+        
          <activity
-            android:name=".PreferencesActivity"
+            android:name=".AccountCreationActivity"
             android:label="Your Info" >
         </activity>       
         <activity

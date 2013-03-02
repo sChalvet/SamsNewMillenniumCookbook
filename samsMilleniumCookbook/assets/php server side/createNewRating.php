@@ -13,7 +13,7 @@ if (isset($_GET["recipeName"])) {
 	$recipeName = $_GET['recipeName'];		
     $comment = $_GET["comment"];
     $rating = $_GET["rating"];
-    $authorName = $_GET["authorName"];
+    $authorName = $_GET["author"];
 
 
     // include db connect class

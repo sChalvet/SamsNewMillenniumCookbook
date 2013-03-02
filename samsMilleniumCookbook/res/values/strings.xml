@@ -22,6 +22,9 @@
     <string name="urlGetFavRecipes">http://192.168.254.45/recipeApp/getFavRecipes.php</string>
     <string name="urlGetRecipeDetails">http://192.168.254.45/recipeApp/getRecipeDetails.php</string>
     <string name="urlEditRecipe">http://192.168.254.45/recipeApp/editRecipe.php</string>
+    <string name="urlCreateAccount">http://192.168.254.45/recipeApp/createAccount.php</string>
+    <string name="urlLogin">http://192.168.254.45/recipeApp/login.php</string>
+    <string name="urlEditComment">http://192.168.254.45/recipeApp/editComment.php</string>
     
     
     <string name="userName">Unknown</string>
@@ -34,7 +37,10 @@
     <string name="mainSearchForRecipe">Search For Recipes</string>
     <string name="mainAddRecipe">Create a Recipe</string>
     <string name="mainFavoriteRecipes">Your Favorite Recipes</string>
-    <string name="mainSavedRecipes">Your Saved Recipes</string>  
+    <string name="mainSavedRecipes">Your Saved Recipes</string>
+    <string name="createAccount">Create an account</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>  
     
     
     <string name="saveToPantry">Save to Pantry</string>
@@ -127,7 +133,6 @@
 	<string name="prefFirstName">Enter your first name:</string>
 	<string name="prefLastName">Enter your last name:</string>
 	<string name="prefPassword">Enter a password:</string>
-	<string name="yourInfo">Your Info</string>
 	<string name="prefHintNickName">Will be seen by others</string>
 	<string name="saveInfo">Create Account</string>
 	

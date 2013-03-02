@@ -31,7 +31,7 @@ if (isset($_GET["recipeName"])) {
 	
 			$product = array();
 			
-			$product["authorName"] = $row[0];
+			$product["author"] = $row[0];
 			$product["postTime"] = $row[1];
 			$product["comment"] = $row[2];
 			$product["rating"] = $row[3];	

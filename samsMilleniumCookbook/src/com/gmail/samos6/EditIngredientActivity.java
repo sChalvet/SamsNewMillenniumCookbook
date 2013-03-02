@@ -15,9 +15,11 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
@@ -46,6 +48,11 @@ public class EditIngredientActivity extends Activity {
 	Button btnSave;
 	Button btnPublish;
 	Button btnDelete;
+	
+	//preference access
+	SharedPreferences prefs;
+	String userName="";
+	String password="";
 
 
 	// Progress Dialog
@@ -56,20 +63,6 @@ public class EditIngredientActivity extends Activity {
 
 	// JSON parser class
 	JSONParser jsonParser = new JSONParser();
-
-	/*
-	// single ingredient url
-	private static final String urlGetIngredientDetails = "http://10.0.2.2/recipeApp/getIngredientDetails.php";
-
-	// url to update product
-	private static final String urlUpdateIngredient = "http://10.0.2.2/recipeApp/updateIngredient.php";
-		
-	// url to delete product
-	private static final String urlDeleteIngredient = "http://10.0.2.2/recipeApp/deleteIngredient.php";
-
-	// url to update product
-	private static final String urlCreateNewIngredient = "http://10.0.2.2/recipeApp/createIngredient.php";
-	*/
 	
 	// single ingredient url
 	String urlGetIngredientDetails;
@@ -119,7 +112,6 @@ public class EditIngredientActivity extends Activity {
 	String [] foodType;//will be set in onCreate
 	Boolean canEdit=false;
 	String origin= "";
-	String user= "";
 	String defaultDiscription="";
 	String message="";
 	Boolean successful= false;
@@ -128,6 +120,11 @@ public class EditIngredientActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_ingredient);
+		
+		//setting user name and password from preferences
+		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		userName =prefs.getString("nickName", "guest");
+		password =prefs.getString("password", "");
 		
 		//getting URL's from resources
 		urlGetIngredientDetails= getResources().getString(R.string.urlGetIngredientDetails);
@@ -146,9 +143,6 @@ public class EditIngredientActivity extends Activity {
 		ingredientName = intent.getStringExtra(TAG_INGREDIENTNAME);
 		origin = intent.getStringExtra(TAG_ORIGIN);
 		
-		//getting the user name
-		user="Van Keize";
-		//user=db.getUserName();
 	
 		
 		// Initializing all of the text fields and buttons
@@ -263,7 +257,7 @@ public class EditIngredientActivity extends Activity {
 			txtIngredientName.setText(null);
 			txtIngredientName.setHint("New Ingredient");
 						
-			SpannableString content = new SpannableString(user);
+			SpannableString content = new SpannableString(userName);
 			content.setSpan(new StyleSpan(Typeface.ITALIC), 0, content.length(), 0);
 			txtAddedBy.setText(content);
 			
@@ -284,7 +278,7 @@ public class EditIngredientActivity extends Activity {
 		}
 		
 		//checks to see if the user is also the author of the ingredient
-		if(user.equalsIgnoreCase(addedBy)){
+		if(userName.equalsIgnoreCase(addedBy)){
 			
 			Log.d("EditIngredient_AddDetails", "The user is the author");
 			btnSave.setVisibility(1);
