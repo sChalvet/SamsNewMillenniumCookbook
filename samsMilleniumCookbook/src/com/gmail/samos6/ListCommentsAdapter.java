@@ -76,6 +76,23 @@ public long getItemId(int position) {
     return position;
 }
 
+public String getAuthor(int position){
+	
+	return data.get(position).get("author");
+}
+
+public boolean hasAlredyPosted(String author){
+	
+	for(int i=0; i<data.size();i++){
+		if(author.equalsIgnoreCase(data.get(i).get("author")))
+			return true;
+	}
+	
+	
+	return false;
+}
+
+
 public View getView(final int position, View convertView, ViewGroup parent) {
 	
 

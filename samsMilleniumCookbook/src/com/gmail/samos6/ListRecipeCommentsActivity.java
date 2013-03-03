@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -96,11 +97,8 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 		
 		// getting recipeName from intent
 		Intent intent = getIntent();
-		
 		// getting data past from intent
 		recipeName = intent.getStringExtra(TAG_RECIPENAME);
-
-
 		// Loading comments in Background Thread
 		new LoadAllComments().execute();
 
@@ -115,13 +113,24 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 			public void onClick(View view) {
 				Log.d("ListComments: ", "in btnAddComment onClick");
 				
-				Intent intent = new Intent(getApplicationContext(), CreateNewCommentActivity.class);
-				
-				// sending recipeName to next activity
-				intent.putExtra(TAG_RECIPENAME, recipeName);
-				
-				// starting new activity and expecting some response back
-				startActivityForResult(intent, 100);
+				if(!adapter.hasAlredyPosted(userName)){
+					Intent intent = new Intent(getApplicationContext(), CreateNewCommentActivity.class);
+					
+					// sending recipeName to next activity
+					intent.putExtra(TAG_RECIPENAME, recipeName);
+					
+					// starting new activity and expecting some response back
+					startActivityForResult(intent, 100);
+				}
+				else{
+					Toast.makeText(getApplicationContext(), "Editing your previous comment.", Toast.LENGTH_LONG).show();
+					// Starting new intent
+					Intent intent = new Intent(getApplicationContext(), EditCommentActivity.class);				
+					// sending recipeName to next activity
+					intent.putExtra(TAG_RECIPENAME, recipeName);			
+					// starting new activity and expecting some response back
+					startActivityForResult(intent, 100);
+				}
 				
 				
 			}
@@ -132,13 +141,21 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-									
-				// Starting new intent
-				Intent intent = new Intent(getApplicationContext(), EditCommentActivity.class);				
-				// sending recipeName to next activity
-				intent.putExtra(TAG_RECIPENAME, recipeName);			
-				// starting new activity and expecting some response back
-				startActivityForResult(intent, 100);
+						
+				if(userName.equalsIgnoreCase(adapter.getAuthor(position))){
+					// Starting new intent
+					Intent intent = new Intent(getApplicationContext(), EditCommentActivity.class);				
+					// sending recipeName to next activity
+					intent.putExtra(TAG_RECIPENAME, recipeName);			
+					// starting new activity and expecting some response back
+					startActivityForResult(intent, 100);
+				}else{
+					Toast.makeText(getApplicationContext(), "You can only edit your own comment.", Toast.LENGTH_LONG).show();
+					//Toast.setView(Gravity.CENTER);
+				}
+				
+					
+
 			}
 		});
 
@@ -213,7 +230,7 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 				int success = json.getInt(TAG_SUCCESS);
 
 				if (success == 1) {
-					// products found
+					// comment found
 					// Getting Array of Products
 					products = json.getJSONArray(TAG_PRODUCTS);
 
@@ -241,13 +258,12 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 					}
 				} else {
 					// no Comments found
-					
-					//Toast.makeText(getApplicationContext(), "There are no comments", Toast.LENGTH_LONG).show();
-					// Launch Add New product Activity
-					Intent i = new Intent(getApplicationContext(),NewProductActivity.class);
+					// Launch create new comment
+					Intent intent = new Intent(getApplicationContext(),CreateNewCommentActivity.class);
 					// Closing all previous activities
-					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(i);
+					intent.putExtra(TAG_RECIPENAME, recipeName);
+					//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivityForResult(intent, 100);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

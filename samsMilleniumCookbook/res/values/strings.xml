@@ -16,7 +16,7 @@
     <string name="url_create_product">http://192.168.254.45/recipeApp/create_product.php</string>
     <string name="urlCreateRecipe">http://192.168.254.45/recipeApp/createRecipe.php</string>
     <string name="urlUpdateRecipe">http://192.168.254.45/recipeApp/updateRecipe.php</string>
-    <string name="urlCreateNewRating">http://192.168.254.45/recipeApp/createNewRating.php</string>
+    <string name="urlCreateComment">http://192.168.254.45/recipeApp/createComment.php</string>
     <string name="urlGetAllRecipes">http://192.168.254.45/recipeApp/getAllRecipes.php</string>
     <string name="urlGetAllIngredients">http://192.168.254.45/recipeApp/getAllIngredients.php</string>
     <string name="urlGetFavRecipes">http://192.168.254.45/recipeApp/getFavRecipes.php</string>
@@ -25,6 +25,7 @@
     <string name="urlCreateAccount">http://192.168.254.45/recipeApp/createAccount.php</string>
     <string name="urlLogin">http://192.168.254.45/recipeApp/login.php</string>
     <string name="urlEditComment">http://192.168.254.45/recipeApp/editComment.php</string>
+    <string name="urlUpdateComment">http://192.168.254.45/recipeApp/updateComment.php</string>
     
     
     <string name="userName">Unknown</string>
@@ -135,7 +136,11 @@
 	<string name="prefPassword">Enter a password:</string>
 	<string name="prefHintNickName">Will be seen by others</string>
 	<string name="saveInfo">Create Account</string>
+	<string name="prefDefaultUserName">Guest</string>
 	
+	<!-- values used throughout  -->
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
 	
 	<string-array name="foodType"> 
     <item>Other</item> 

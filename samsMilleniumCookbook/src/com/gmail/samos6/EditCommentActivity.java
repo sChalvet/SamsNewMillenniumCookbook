@@ -58,7 +58,7 @@ public class EditCommentActivity extends Activity {
 	Boolean bCancelled=false;
 
 	// url to create new product
-	String urlCreateNewRating;
+	String urlupdateComment;
 	String urlEditComment;
 	
 	
@@ -69,7 +69,7 @@ public class EditCommentActivity extends Activity {
 	private static final String TAG_RECIPENAME = "recipeName";
 	private static final String TAG_COMMENT = "comment";
 	private static final String TAG_RATING = "rating";
-	private static final String TAG_AUTHORNAME = "author";
+	private static final String TAG_AUTHOR = "author";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -82,7 +82,7 @@ public class EditCommentActivity extends Activity {
 		password =prefs.getString("password", "");
 		
 		//getting url from resources
-		urlCreateNewRating = getResources().getString(R.string.urlCreateNewRating);
+		urlupdateComment = getResources().getString(R.string.urlUpdateComment);
 		urlEditComment = getResources().getString(R.string.urlEditComment);
 		
 		// Edit Text
@@ -109,8 +109,10 @@ public class EditCommentActivity extends Activity {
 
 			@Override
 			public void onClick(View view) {
+				//resetting success
+				successful=false;
 				// creating new Comment in background thread
-				new CreateNewComment().execute();
+				new UpdateComment().execute();
 			}
 		});
 	}
@@ -136,9 +138,9 @@ public class EditCommentActivity extends Activity {
 	};
 
 	/**
-	 * Background Async Task to Create new Comment
+	 * Background Async Task to update a Comment
 	 * */
-	class CreateNewComment extends AsyncTask<String, String, String> {
+	class UpdateComment extends AsyncTask<String, String, String> {
 
 		/**
 		 * Before starting background thread Show Progress Dialog
@@ -155,7 +157,7 @@ public class EditCommentActivity extends Activity {
 		}
 
 		/**
-		 * Creating product
+		 * updating comment
 		 * */
 		protected String doInBackground(String... args) {
 			
@@ -168,10 +170,10 @@ public class EditCommentActivity extends Activity {
 			params.add(new BasicNameValuePair(TAG_RECIPENAME, recipeName));
 			params.add(new BasicNameValuePair(TAG_COMMENT, comment));
 			params.add(new BasicNameValuePair(TAG_RATING, rating));
-			params.add(new BasicNameValuePair(TAG_AUTHORNAME, userName));
+			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
 
 			// getting JSON Object
-			JSONObject json = jsonParser.makeHttpRequest(urlCreateNewRating, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlupdateComment, "GET", params);
 			
 			//if asyncTask has not been cancelled then continue
 			if(!bCancelled) try {
@@ -184,7 +186,7 @@ public class EditCommentActivity extends Activity {
 				if (success == 1) {
 					
 					successful=true;
-					// successfully created Comment
+					// successfully updated Comment
 					// notify previous activity by sending code 100
 					Intent i = getIntent();
 					// send result code 100 to notify that the mission was accomplished
@@ -194,8 +196,8 @@ public class EditCommentActivity extends Activity {
 					finish();
 				} else {
 					message = json.getString(TAG_MESSAGE);
-					// failed to create Comment
-					Log.d("Failed to create new comment", "failed");
+					// failed to update Comment
+					Log.d("Failed to update comment", "failed");
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -212,7 +214,7 @@ public class EditCommentActivity extends Activity {
 			pDialog.dismiss();
 			
 			if(successful)
-				Toast.makeText(getApplicationContext(), "Comment Posted", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "Comment Updated", Toast.LENGTH_LONG).show();
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}
@@ -247,7 +249,7 @@ public class EditCommentActivity extends Activity {
 			
 			//including recipeName for the query
 			params.add(new BasicNameValuePair(TAG_RECIPENAME, recipeName));
-			params.add(new BasicNameValuePair(TAG_AUTHORNAME, userName));
+			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
 			
 			// getting JSON string from URL
 			JSONObject json = jsonParser.makeHttpRequest(urlEditComment, "GET", params);
@@ -277,6 +279,14 @@ public class EditCommentActivity extends Activity {
 				} else {
 					// no Comments found
 					message = json.getString(TAG_MESSAGE);
+					
+					// no comment found
+					// Launch CreateCommentActivity
+					Intent i = new Intent(getApplicationContext(), CreateNewCommentActivity.class);
+					// Closing all previous activities
+					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(i);
+					
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -291,10 +301,8 @@ public class EditCommentActivity extends Activity {
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog after getting comment		
 			pDialog.dismiss();
-			if(successful){
-				Toast.makeText(getApplicationContext(), "Ingredient Created", Toast.LENGTH_LONG).show();
+			if(successful)
 				addDetails();
-			}
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 

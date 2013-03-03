@@ -9,8 +9,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.gmail.samos6.CreateRecipeActivity.CreateNewRecipe;
+import com.gmail.samos6.MainScreenActivity.LoginClass;
+
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +28,9 @@ import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,6 +63,7 @@ public class EditIngredientActivity extends Activity {
 
 	// Progress Dialog
 	private ProgressDialog pDialog;
+	private AlertDialog.Builder alert;
 	
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
@@ -97,6 +104,7 @@ public class EditIngredientActivity extends Activity {
 	private static final String TAG_LISTINGREDIENT = "listIngredient";
 	private static final String TAG_PANTRY = "pantry";
 	private static final String TAG_ADDINGREDIENT = "addIngredient";
+	private static final String TAG_REFRESHINGREDIENT = "refreshIngredient";
 	private static final String TAG_ORIGIN = "origin";
 	
 	ArrayAdapter<String> spin_adapter; //used for the food type spinner
@@ -109,6 +117,7 @@ public class EditIngredientActivity extends Activity {
 	String notes = "null";
 	String addedBy = "";
 	String ingredientName;
+	String oldIngredientName="";
 	String [] foodType;//will be set in onCreate
 	Boolean canEdit=false;
 	String origin= "";
@@ -140,7 +149,7 @@ public class EditIngredientActivity extends Activity {
 		Intent intent = getIntent();
 		
 		// getting data past from intent
-		ingredientName = intent.getStringExtra(TAG_INGREDIENTNAME);
+		oldIngredientName = ingredientName = intent.getStringExtra(TAG_INGREDIENTNAME);
 		origin = intent.getStringExtra(TAG_ORIGIN);
 		
 	
@@ -170,10 +179,10 @@ public class EditIngredientActivity extends Activity {
 		txtIngredientName.setText(content);
 		
 		
-		Log.d("EditIngr_just in", ingredientName);
+		Log.d("EditIngr_just in", ingredientName+" old ingredientname: "+oldIngredientName);
 
 		//if redirected from Add Ingredient button then the publish button is set to visible
-		if(origin.equalsIgnoreCase(TAG_ADDINGREDIENT)){
+		if(origin.equalsIgnoreCase(TAG_ADDINGREDIENT) || origin.equalsIgnoreCase(TAG_REFRESHINGREDIENT)){
 			canEdit=true;
 			btnPublish.setVisibility(1);
 
@@ -198,9 +207,23 @@ public class EditIngredientActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// starting background task to update ingredient
-				new SaveIngredientDetails().execute();
 				Log.d("EditIngr_btn Save onclick", "updating");
 
+				String ingredientName = txtIngredientName.getText().toString();	
+				
+				String msg = "";
+				boolean incomplete=false;
+				
+				
+				if(ingredientName.matches("")){
+					msg = "You need an ingredient name.";
+					incomplete=true;
+				}else{
+					new SaveIngredientDetails().execute();
+				}
+				
+				if(incomplete)
+					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 			}
 		});
 		
@@ -210,9 +233,24 @@ public class EditIngredientActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// starting background task to update product
-				//new SaveIngredientDetails().execute();
 				Log.d("EditIngr_btn publish onclick", "creating new ingredient");
-				new CreateNewIngredient().execute();
+				
+				String ingredientName = txtIngredientName.getText().toString();	
+				
+				String msg = "";
+				boolean incomplete=false;
+				
+				
+				if(ingredientName.matches("")){
+					msg = "You need an ingredient name.";
+					incomplete=true;
+				}else{
+					new CreateNewIngredient().execute();
+				}
+				
+				if(incomplete)
+					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+
 			}
 		});
 
@@ -227,6 +265,56 @@ public class EditIngredientActivity extends Activity {
 			}
 		});
 
+	}
+	
+	/**
+	 * This method is called when an ingredient is stale (the name doesn't match in the MySQL DB)
+	 * the user can choose to add it or it gets removed from his SQLite DB
+	 */
+	private void addIngredient(){
+		
+		alert = new AlertDialog.Builder(EditIngredientActivity.this);
+		alert.setTitle("Add Ingredient");
+		alert.setMessage("Sorry, this Ingredient was either renamed or deleted from the database.\n" +
+							"Would you like to add it again?");
+
+		alert
+		.setCancelable(false)
+		.setPositiveButton(R.string.yes,new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				
+				Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
+				// sending ingredientName to next activity
+				intent.putExtra(TAG_INGREDIENTNAME, ingredientName);
+				intent.putExtra(TAG_ORIGIN, TAG_REFRESHINGREDIENT);	
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivityForResult(intent, 100);
+				
+				dialog.cancel();
+			}
+		  })
+		.setNegativeButton(R.string.no,new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				//removing ingredient from db since user does not want to add it
+				if(db.hasIngredient(ingredientName)){
+					db.deleteIngredient(ingredientName);
+					Log.d("inside alert get ingredient", "inside if");					
+				}
+				dialog.cancel();
+				Intent i = getIntent();
+				// send result code 100 to notify about ingredient update
+				setResult(100, i);
+				finish();
+			}
+		});
+
+		// create alert dialog
+		AlertDialog alertChoice = alert.create();
+
+		alertChoice.show();
+
+		
+		
 	}
 	
 	/***************************************************************************************************
@@ -261,6 +349,10 @@ public class EditIngredientActivity extends Activity {
 			content.setSpan(new StyleSpan(Typeface.ITALIC), 0, content.length(), 0);
 			txtAddedBy.setText(content);
 			
+		}else if(origin.equalsIgnoreCase(TAG_REFRESHINGREDIENT)){		
+			SpannableString content = new SpannableString(userName);
+			content.setSpan(new StyleSpan(Typeface.ITALIC), 0, content.length(), 0);
+			txtAddedBy.setText(content);		
 		}else{
 			
 			SpannableString content = new SpannableString(addedBy);
@@ -337,6 +429,8 @@ public class EditIngredientActivity extends Activity {
 
 					// Check for success tag
 					int success;
+					//reset this for upcoming test
+					successful=false;
 					
 					//if asyncTask has not been cancelled then continue
 					if (!bCancelled) try {
@@ -353,6 +447,8 @@ public class EditIngredientActivity extends Activity {
 						// json success tag
 						success = json.getInt(TAG_SUCCESS);
 						if (success == 1) {
+							
+							successful=true;
 							// successfully received product details
 							JSONArray products = json.getJSONArray(TAG_PRODUCT); // JSON Array
 							
@@ -371,7 +467,8 @@ public class EditIngredientActivity extends Activity {
 
 						}else{	
 							// ingredient with that name not found
-							//Toast.makeText(getApplicationContext(), "Nothing found", Toast.LENGTH_SHORT).show();
+							message = json.getString(TAG_SUCCESS);
+							Log.d("ingredient not fount: ", message);
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
@@ -388,10 +485,17 @@ public class EditIngredientActivity extends Activity {
 		 * **/
 		protected void onPostExecute(String file_url) {
 			Log.d("EditIngredient_PostExecute", "in post execute");
+			pDialog.dismiss();
+			if(successful){
 			//is called to add all of the details to the fields
 			addDetails();
-			// dismiss the dialog once got all details
-			pDialog.dismiss();
+			}else{
+				//if the ingredient name was changed then the users personal database is stale
+				//User is asked if they want to add ingredient in addIngredient().
+				addIngredient();
+			}
+			
+			
 		}
 	}
 
@@ -419,17 +523,22 @@ public class EditIngredientActivity extends Activity {
 		 * */
 		protected String doInBackground(String... args) {
 
-			String calories = txtCalories.getText().toString();
-			String protein = txtProtein.getText().toString();
-			String fat = txtFat.getText().toString();
-			String carbs = txtCarbs.getText().toString();
-			String type = spnrType.getSelectedItem().toString();
-			String notes = txtNotes.getText().toString();
-			String ingredientName = txtIngredientName.getText().toString();		
+			calories = txtCalories.getText().toString();
+			protein = txtProtein.getText().toString();
+			fat = txtFat.getText().toString();
+			carbs = txtCarbs.getText().toString();
+			type = spnrType.getSelectedItem().toString();
+			notes = txtNotes.getText().toString();
+			ingredientName = txtIngredientName.getText().toString();		
+			
+			//reseting it
+			successful=false;
+			
 			
 			
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("oldIngredientName", oldIngredientName));
 			params.add(new BasicNameValuePair("ingredientName", ingredientName));
 			params.add(new BasicNameValuePair("calories", calories));
 			params.add(new BasicNameValuePair("protein", protein));
@@ -444,27 +553,23 @@ public class EditIngredientActivity extends Activity {
 			//if asyncTask has not been cancelled then continue
 			if (!bCancelled) try {
 				int success = json.getInt(TAG_SUCCESS);
+				message = json.getString(TAG_MESSAGE);
 				
 				if (success == 1) {
+					
+					successful = true;
+					
+
+					
 					// successfully updated
 					Intent i = getIntent();
 					//send result code 100 to notify about product update
 					setResult(100, i);
 					finish();
 					
-					/*Intent i = new Intent();
-					
-					if(origin.equalsIgnoreCase(TAG_LISTINGREDIENT)){  
-						 i = new Intent(getApplicationContext(), ListIngredientActivity.class);
-					}
-					else{
-						 i = new Intent(getApplicationContext(), PantryActivity.class);
-					}
-					
-					
-					startActivity(i);*/
 				} else {
 					// failed to update product
+					Log.d("update Ingredient", "failed: "+message);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -478,8 +583,19 @@ public class EditIngredientActivity extends Activity {
 		 * After completing background task Dismiss the progress dialog
 		 * **/
 		protected void onPostExecute(String file_url) {
-			Toast.makeText(getApplicationContext(), "Ingredient Updated", Toast.LENGTH_LONG).show();
 			pDialog.dismiss();
+			if(successful){
+				//if the user changes the name of an ingredient this this updates the DB
+				if(db.hasIngredient(oldIngredientName) && !oldIngredientName.equalsIgnoreCase(ingredientName)){
+					Log.d("inside post edit ingredient", "inside if");
+					db.deleteIngredient(oldIngredientName);
+					db.addIngredient(ingredientName);					
+				}
+				Toast.makeText(getApplicationContext(), "Ingredient Updated", Toast.LENGTH_LONG).show();
+			}else{
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+			}
+			
 		}
 	}
 

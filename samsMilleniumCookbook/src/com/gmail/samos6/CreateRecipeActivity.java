@@ -275,13 +275,18 @@ public class CreateRecipeActivity extends Activity {
 		
 		//result from taking a pic of recipe
 		if(requestCode == 0){
+			Log.d("inside ActivityResults", "pic result");	
 			Bitmap theImage = (Bitmap) data.getExtras().get("data");
 			imgPicture.setImageBitmap(theImage);
+			
+			Toast.makeText(getApplicationContext(), "Sorry. Uploading pictures to database \nhas not yet been implemented.", Toast.LENGTH_LONG).show();
 			
 		}
 		
 		// if result code 100, coming from GetIngredientActivity
-		if (resultCode == 100) {
+		if (resultCode == 100 || requestCode == 100) {
+			
+			Log.d("inside ActivityResults", "result from GetIngredientActivity");	
 			
 			List<String> receivedList= new ArrayList<String>();
 			List<String> addList= new ArrayList<String>();

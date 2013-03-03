@@ -124,7 +124,7 @@ public class GetIngredientActivity extends ListActivity {
 								
 					list= adapter.getChecked();
 								
-					Log.d("inside btnDone: ", list.toString());					
+					Log.d("inside Get ingredient btnDone: ", list.toString());					
 								
 					//Toast.makeText(getApplicationContext(), "Your Pantry has been Saved", Toast.LENGTH_SHORT).show();
 								
@@ -155,7 +155,6 @@ public class GetIngredientActivity extends ListActivity {
 						intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
 						intent.putExtra(TAG_ORIGIN, TAG_ADDINGREDIENT);	
 						startActivityForResult(intent, 100);
-						startActivity(intent);
 					}
 				});				
 		
@@ -219,10 +218,9 @@ public class GetIngredientActivity extends ListActivity {
 		if (resultCode == 100) {
 			// if result code 100 is received 
 			// means user edited/deleted ingredient
-			// reload this screen again
-			Intent intent = getIntent();
-			finish();
-			startActivity(intent);
+			//clears the adapter for new incoming items
+			adapter.clear();
+			new LoadAllIngredients().execute();
 		}
 
 	}

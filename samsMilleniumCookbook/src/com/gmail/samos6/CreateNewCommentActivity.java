@@ -53,7 +53,7 @@ public class CreateNewCommentActivity extends Activity {
 	Boolean bCancelled=false;
 
 	// url to create new product
-	String urlCreateNewRating ;
+	String urlCreateCommnet ;
 	
 	
 	// JSON Node names
@@ -75,19 +75,19 @@ public class CreateNewCommentActivity extends Activity {
 		password =prefs.getString("password", "");
 		
 		//getting url from resources
-		urlCreateNewRating = getResources().getString(R.string.urlCreateNewRating);
+		urlCreateCommnet = getResources().getString(R.string.urlCreateComment);
 		// Edit Text
 		txtRecipeName = (TextView) findViewById(R.id.txtCreateCommentRecipeName);
 		txtComment = (EditText) findViewById(R.id.txtCreateCommentComment);
 		spnrRating = (Spinner) findViewById(R.id.CreateRecipeRatingSpinner);
 		
 		// getting recipeName from intent
-		Intent intent = getIntent();
-		
+		Intent intent = getIntent();	
 		// getting data past from intent
 		recipeName = intent.getStringExtra(TAG_RECIPENAME);
-		
 		txtRecipeName.setText(recipeName);
+		
+		
 		// Create button
 		btnPost = (Button) findViewById(R.id.btnCreateCommentPost);
 
@@ -149,7 +149,7 @@ public class CreateNewCommentActivity extends Activity {
 			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
 
 			// getting JSON Object
-			JSONObject json = jsonParser.makeHttpRequest(urlCreateNewRating, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlCreateCommnet, "GET", params);
 			
 			//if asyncTask has not been cancelled then continue
 			if(!bCancelled) try {

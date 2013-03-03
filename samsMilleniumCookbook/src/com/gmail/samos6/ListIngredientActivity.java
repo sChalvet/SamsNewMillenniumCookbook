@@ -9,15 +9,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.gmail.samos6.GetIngredientActivity.LoadAllIngredients;
+
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
@@ -41,6 +45,11 @@ public class ListIngredientActivity extends ListActivity {
 	
 	// Progress Dialog
 	private ProgressDialog pDialog;
+	
+	//preference access
+	SharedPreferences prefs;
+	String userName="";
+	String password="";
 
 	// Creating JSON Parser object
 	JSONParser jParser = new JSONParser();
@@ -85,6 +94,11 @@ public class ListIngredientActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.display_ingredients);
 		
+		//setting user name and password from preferences
+		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		userName =prefs.getString("nickName", "guest");
+		password =prefs.getString("password", "");
+		
 		//getting url from resources
 		urlGetAllIngredients = getResources().getString(R.string.urlGetAllIngredients);
 	
@@ -101,7 +115,8 @@ public class ListIngredientActivity extends ListActivity {
 		btnSave = (Button) findViewById(R.id.btnSaveIngredients);
 		btnAdd = (Button) findViewById(R.id.btnAddIngredient);
 		
-				
+		Toast.makeText(getApplicationContext(), "Can't find what you need?\nThen please add it.", Toast.LENGTH_SHORT).show();
+		
 		// save selected ingredients click event
 				btnSave.setOnClickListener(new View.OnClickListener() {
 							
@@ -139,15 +154,19 @@ public class ListIngredientActivity extends ListActivity {
 							public void onClick(View view) {
 								Log.d("ListIngredient: ", "in Add onClick");
 								
-								// getting values from selected ListItem
-								String ingredientname = "new ingredient";
-										
-								// Starting new intent
-								Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
-								// sending ingredientName to next activity
-								intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
-								intent.putExtra(TAG_ORIGIN, TAG_ADDINGREDIENT);	
-								startActivityForResult(intent, 100);
+								if(!userName.equalsIgnoreCase("guest")){
+									// getting values from selected ListItem
+									String ingredientname = "new ingredient";
+											
+									// Starting new intent
+									Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
+									// sending ingredientName to next activity
+									intent.putExtra(TAG_INGREDIENTNAME, ingredientname);
+									intent.putExtra(TAG_ORIGIN, TAG_ADDINGREDIENT);	
+									startActivityForResult(intent, 100);
+								}else{
+									Toast.makeText(getApplicationContext(), "Please Log in to create ingredients", Toast.LENGTH_LONG).show();
+								}
 							}
 						});	
 		
@@ -157,8 +176,7 @@ public class ListIngredientActivity extends ListActivity {
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 
 				//view.setBackgroundColor(Color.CYAN);
 				//view.findViewById(R.id.tableRowIngredient).setBackgroundColor(Color.CYAN);
@@ -180,7 +198,10 @@ public class ListIngredientActivity extends ListActivity {
 	}
 	
 	
-	
+	/**
+	 * used for browsing the list of ingredients with more ease
+	 * @param view
+	 */
 	public void letterClicked(View view) {
 		
 		Log.d("letterClicked: ", "in onClick");
@@ -219,10 +240,9 @@ public class ListIngredientActivity extends ListActivity {
 		if (resultCode == 100) {
 			// if result code 100 is received 
 			// means user edited/deleted ingredient
-			// reload this screen again
-			Intent intent = getIntent();
-			finish();
-			startActivity(intent);
+			// reload this adapter again
+			adapter.clear();
+			new LoadAllProducts().execute();
 		}
 
 	}
@@ -274,50 +294,27 @@ public class ListIngredientActivity extends ListActivity {
 					for (int i = 0; i < products.length(); i++) {
 						JSONObject c = products.getJSONObject(i);
 
-						// Storing each json item in variable
-						//String id = c.getString(TAG_PID);
-						//String name = c.getString(TAG_NAME);
-						
+						// Storing  json item in variable					
 						String ingredientName = c.getString(TAG_INGREDIENTNAME);
-					 /* String calories = c.getString(TAG_CALORIES);
-						String protein = c.getString(TAG_PROTEIN);
-						String fat = c.getString(TAG_FAT);
-						String carbs = c.getString(TAG_CARBS);
-						String notes = c.getString(TAG_NOTES);  */
-						//String addedBy = c.getString(TAG_ADDEDBY);  
-						//String type = c.getString(TAG_TYPE);
-					  /*  String dateCreated = c.getString(TAG_DATECREATED);
-						String dateUpdated = c.getString(TAG_DATEUPDATED);*/
+
 						
 
 						// creating new HashMap
 						HashMap<String, String> map = new HashMap<String, String>();
 
 						// adding each child node to HashMap key => value
-						//map.put(TAG_PID, id);
-						//map.put(TAG_NAME, name);
 						map.put(TAG_INGREDIENTNAME, ingredientName);
-					/*	map.put(TAG_CALORIES, calories);
-						map.put(TAG_PROTEIN, protein);
-						map.put(TAG_FAT, fat);
-						map.put(TAG_CARBS, carbs);
-						map.put(TAG_NOTES, notes);*/
-						//map.put(TAG_ADDEDBY, addedBy);
-						//map.put(TAG_TYPE, type);
-					/*	map.put(TAG_DATECREATED, dateCreated);
-						map.put(TAG_DATEUPDATED, dateUpdated);*/
 
 						// adding HashList to ArrayList
 						productsList.add(map);
 					}
 				} else {
-					// no products found
+					// no Ingredient found
 					// Launch Add New product Activity
-					Intent i = new Intent(getApplicationContext(),
-							NewProductActivity.class);
+					/*Intent i = new Intent(getApplicationContext(), NewProductActivity.class);
 					// Closing all previous activities
 					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(i);
+					startActivity(i);*/
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

@@ -172,6 +172,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
     
     /**
+     * <b>name</b>: hasIngredient
+     * <br/><b>purpose</b>: checks to see if this ingredient is in the DB
+     * <br/><b>returns</b>: true if it is, false if it is not
+     */
+    public boolean hasIngredient(String ingredient) {
+    	
+    	String query = "SELECT  '"+ingredient+"' FROM " + TABLE_INGREDIENTSATHAND;
+    	
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	 
+        Cursor cursor = db.rawQuery(query, null);
+        
+        
+        // if it contains the ingredient
+        if (cursor.moveToFirst()) {
+        	db.close(); // Closing database connection
+        	return true;
+        }else{
+        	db.close(); // Closing database connection
+        	return false;
+        }
+
+    	
+    }
+    
+    /**
      * <b>name</b>: deleteAllIngredient
      * <br/><b>purpose</b>: deletes all ingredients from DB
      * <br/><b>returns</b>: void

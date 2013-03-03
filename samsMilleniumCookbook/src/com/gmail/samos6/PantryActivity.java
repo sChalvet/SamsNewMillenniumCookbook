@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -36,6 +37,8 @@ public class PantryActivity extends ListActivity {
 	
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
+	
+	Boolean isEmpty=false;
 
 	ArrayList<HashMap<String, String>> productsList;
 	
@@ -56,7 +59,7 @@ public class PantryActivity extends ListActivity {
 		productsList = new ArrayList<HashMap<String, String>>();
 
 		// Loading products in Background Thread
-		new LoadAllProducts().execute();
+		new LoadingPantry().execute();
 
 		// Get listview
 		final ListView lv = getListView();  //added final
@@ -160,7 +163,7 @@ public class PantryActivity extends ListActivity {
 	/**
 	 * Background Async Task to Load all product by making HTTP Request
 	 * */
-	class LoadAllProducts extends AsyncTask<String, String, String> {
+	class LoadingPantry extends AsyncTask<String, String, String> {
 
 		/**
 		 * Before starting background thread Show Progress Dialog
@@ -190,27 +193,30 @@ public class PantryActivity extends ListActivity {
 	
 				ingredientList = db.getAllIngredients();
 				
-				//if(ingredientList.size()==0)
-				//	Toast.makeText(getApplicationContext(), "Your Pantry is empty", Toast.LENGTH_SHORT).show();
-				
-				// Check your log cat for DB response
-				Log.d("Pantry: ", ingredientList.toString());
-	
-				// looping through All Ingredients
-				for (int i = 0; i < ingredientList.size(); i++) {				
-					String ingredientName = ingredientList.get(i);
+				//checking if pantry database is empty
+				if(ingredientList.size()>0){			
+					// Check your log cat for DB response
+					Log.d("Pantry: ", ingredientList.toString());
+		
+					// looping through All Ingredients
+					for (int i = 0; i < ingredientList.size(); i++) {				
+						String ingredientName = ingredientList.get(i);
+						
+						// creating new HashMap
+						HashMap<String, String> map = new HashMap<String, String>();
+		
+						// adding each child node to HashMap key => value
+						map.put(TAG_INGREDIENTNAME, ingredientName);
+								
+						// adding HashList to ArrayList
+						productsList.add(map);
+					}
 					
-					// creating new HashMap
-					HashMap<String, String> map = new HashMap<String, String>();
-	
-					// adding each child node to HashMap key => value
-					map.put(TAG_INGREDIENTNAME, ingredientName);
-							
-					// adding HashList to ArrayList
-					productsList.add(map);
+					Log.d("Pantry_productList: ", productsList.toString());
+				}else{
+					//pantry DB is empty
+					isEmpty=true;
 				}
-				
-				Log.d("Pantry_productList: ", productsList.toString());
 			}//end if
 
 			return null;
@@ -223,22 +229,32 @@ public class PantryActivity extends ListActivity {
 			// dismiss the dialog after getting all products
 			pDialog.dismiss();
 			
-			
-			// updating UI from Background Thread
-			runOnUiThread(new Runnable() {
-				public void run() {
-					/**
-					 * Updating parsed JSON data into ListView
-					 * */
-					
-					List<String> list = new ArrayList<String>();
-					list = db.getAllIngredients();
-					Log.d("Pantry_callingAdapter with: ", list.toString());
-					adapter = new SamsListAdapter(PantryActivity.this, productsList, list, "Pantry");
-					
-					setListAdapter(adapter);
-				}
-			});
+			if(isEmpty){
+				Toast toast = Toast.makeText(getApplicationContext(), "Your Pantry is empty.\nPick some ingredients from our database.", Toast.LENGTH_LONG);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();
+				
+				// Starting new intent
+				Intent i = new Intent(getApplicationContext(), ListIngredientActivity.class);
+				// starting new activity and expecting some response back
+				startActivityForResult(i, 100);		
+			}else{
+				// updating UI from Background Thread
+				runOnUiThread(new Runnable() {
+					public void run() {
+						/**
+						 * Updating parsed JSON data into ListView
+						 * */
+						
+						List<String> list = new ArrayList<String>();
+						list = db.getAllIngredients();
+						Log.d("Pantry_callingAdapter with: ", list.toString());
+						adapter = new SamsListAdapter(PantryActivity.this, productsList, list, "Pantry");
+						
+						setListAdapter(adapter);
+					}
+				});
+			}
 
 		}
 		

@@ -101,7 +101,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
 		android:singleLine="true"
-		android:inputType="numberDecimal"/> 
+		android:inputType="numberDecimal"
+		android:maxLength="3"/> 
 		    
 		    <!-- Input Protein -->
 
@@ -111,7 +112,8 @@
 		    android:layout_height="wrap_content"
 		    android:layout_weight="1"
 		    android:inputType="numberDecimal"
-		    android:singleLine="true" />
+		    android:singleLine="true" 
+		    android:maxLength="3"/>
 	
 		<!-- Input Fat -->
 		<EditText android:id="@+id/inputFat" 
@@ -119,7 +121,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
 	    android:singleLine="true"
-	    android:inputType="numberDecimal"/>
+	    android:inputType="numberDecimal"
+	    android:maxLength="3"/>
 	
 	    <!-- Input Carbs -->
 		<EditText android:id="@+id/inputCarbs" 
@@ -127,7 +130,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
 	    android:singleLine="true"
-	    android:inputType="numberDecimal"/>
+	    android:inputType="numberDecimal"
+	    android:maxLength="3"/>
 	    	    
     	</TableRow>
    	</TableLayout>

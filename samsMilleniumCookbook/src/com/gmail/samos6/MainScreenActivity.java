@@ -54,6 +54,8 @@ public class MainScreenActivity extends Activity{
 	String password;
 	String urlLogin;
 	
+	String userName="";
+	
 	boolean successful = false;
 	String message = "";
 	
@@ -88,6 +90,15 @@ public class MainScreenActivity extends Activity{
 	
 	prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 	
+	if(prefs.getString("nickName", null)==null){
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putString("nickName", "Guest");
+		editor.commit();
+	}
+	
+	//getting user name
+	userName =prefs.getString("nickName", "guest");
+	
 	//getting url from resources
 	urlLogin = getResources().getString(R.string.urlLogin);
 		
@@ -106,9 +117,15 @@ public class MainScreenActivity extends Activity{
 			
 			@Override
 			public void onClick(View view) {
+				
+				if(!userName.equalsIgnoreCase("Guest")){
 				// Launching CreateRecipeActivity
 				Intent i = new Intent(getApplicationContext(), CreateRecipeActivity.class);
 				startActivity(i);
+				}else{
+					Toast.makeText(getApplicationContext(), "Log in to create recipes", Toast.LENGTH_LONG).show();
+					loginAlertDialog();
+				}
 				
 			}
 		});
@@ -118,7 +135,7 @@ public class MainScreenActivity extends Activity{
 			@Override
 			public void onClick(View view) {
 				String name =prefs.getString("nickName", null);
-				Toast.makeText(getApplicationContext(), name+" is now loged in.", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "You are "+name, Toast.LENGTH_LONG).show();
 				
 			}
 		});
@@ -129,6 +146,7 @@ public class MainScreenActivity extends Activity{
 			public void onClick(View view) {
 				// calling logout();
 				logOut();
+				Toast.makeText(getApplicationContext(), "You have Logged out!", Toast.LENGTH_LONG).show();
 				
 			}
 		});
@@ -183,74 +201,83 @@ public class MainScreenActivity extends Activity{
 			
 			@Override
 			public void onClick(View view) {
+				
 				// Launching Login alert box
-				
-		        LayoutInflater factory = LayoutInflater.from(MainScreenActivity.this);            
-		        final View textEntryView = factory.inflate(R.layout.login_form, null);
-		        
-		        
-				txtNickName= (EditText) textEntryView.findViewById(R.id.MainNickName);
-				txtPassword= (EditText) textEntryView.findViewById(R.id.MainPassword);	
-				btnAlertLogin= (Button) textEntryView.findViewById(R.id.btnMainAlertLogin);
-				btnAlertCreateAccount= (Button) textEntryView.findViewById(R.id.btnMainAlertCreateAccount);
-		        		
-				
-				alert = new AlertDialog.Builder(MainScreenActivity.this).create();
-				alert.setTitle(R.string.login);
-				
-				alert.setView(textEntryView);
-
-				btnAlertLogin.setOnClickListener(new OnClickListener() {
-				    @Override
-                    public void onClick(View v) {
-                	nickName=  txtNickName.getText().toString();
-					password=  txtPassword.getText().toString();	
-					
-					String msg = "";
-					boolean incomplete=false;
-					
-					Log.d("MainScreen alert", "in onclick");
-					
-					if(nickName.matches("")){
-						msg = "Please enter your username.";
-						incomplete=true;
-					}else if(password.matches("")){
-						msg = "Please enter your password.";
-						incomplete=true;
-					}else{
-						new Login().execute();
-						
-					}
-					
-					if(incomplete)
-						Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-				    }
-                }); 
-				
-				btnAlertCreateAccount.setOnClickListener(new View.OnClickListener() {
-					
-					@Override
-					public void onClick(View view) {
-						// Launching AccountCreationActivity
-						alert.cancel();
-						Intent i = new Intent(getApplicationContext(), AccountCreationActivity.class);
-						startActivity(i);
-						
-					}
-				});
-				
-				alert.show();
-				
+				loginAlertDialog();		
 			}
 		});
 		
 	}
 	
 	/**
-	 * Enables user to cancel the AsychTask by hitting the back button
+	 * Spawns a login dialog box
+	 */
+	private void loginAlertDialog(){
+	  
+	      LayoutInflater factory = LayoutInflater.from(MainScreenActivity.this);            
+	        final View textEntryView = factory.inflate(R.layout.login_form, null);
+	        
+	        
+			txtNickName= (EditText) textEntryView.findViewById(R.id.MainNickName);
+			txtPassword= (EditText) textEntryView.findViewById(R.id.MainPassword);	
+			btnAlertLogin= (Button) textEntryView.findViewById(R.id.btnMainAlertLogin);
+			btnAlertCreateAccount= (Button) textEntryView.findViewById(R.id.btnMainAlertCreateAccount);
+	        		
+			
+			alert = new AlertDialog.Builder(MainScreenActivity.this).create();
+			alert.setTitle(R.string.login);
+			
+			alert.setView(textEntryView);
+
+			btnAlertLogin.setOnClickListener(new OnClickListener() {
+			    @Override
+              public void onClick(View v) {
+          	nickName=  txtNickName.getText().toString();
+				password=  txtPassword.getText().toString();	
+				
+				String msg = "";
+				boolean incomplete=false;
+				
+				Log.d("MainScreen alert", "in onclick");
+				
+				if(nickName.matches("")){
+					msg = "Please enter your username.";
+					incomplete=true;
+				}else if(password.matches("")){
+					msg = "Please enter your password.";
+					incomplete=true;
+				}else{
+					new LoginClass().execute();
+					
+				}
+				
+				if(incomplete)
+					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+			    }
+          }); 
+			
+			btnAlertCreateAccount.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View view) {
+					// Launching AccountCreationActivity
+					alert.cancel();
+					Intent i = new Intent(getApplicationContext(), AccountCreationActivity.class);
+					startActivity(i);
+					
+				}
+			});
+			
+			alert.show();
+		
+	};
+	
+	/**
+	 * logIn method that sets the users preferences.
 	 */
 	private void logIn(){
 	  
+		userName=nickName;
 		SharedPreferences.Editor editor = prefs.edit();
 		
 		editor.putString("nickName", nickName);
@@ -270,6 +297,7 @@ public class MainScreenActivity extends Activity{
 	 */
 	private void logOut(){
 	  
+		userName="Guest";
 		SharedPreferences.Editor editor = prefs.edit();
 		
 		editor.putString("nickName", "guest");
@@ -297,7 +325,7 @@ public class MainScreenActivity extends Activity{
 	/**
 	 * Background Async Task to Login
 	 * */
-	class Login extends AsyncTask<String, String, String> {
+	class LoginClass extends AsyncTask<String, String, String> {
 
 		/**
 		 * Before starting background thread Show Progress Dialog
@@ -320,7 +348,8 @@ public class MainScreenActivity extends Activity{
 		protected String doInBackground(String... args) {
 			
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			
+			//reset test variable
+			successful=false;
 			// Building Parameters
 			params.add(new BasicNameValuePair(TAG_NICKNAME, nickName));
 			params.add(new BasicNameValuePair(TAG_PASSWORD, password));
@@ -334,7 +363,7 @@ public class MainScreenActivity extends Activity{
 			if (!bCancelled) try {
 				
 				// check log cat for response
-				Log.d("Create Response", json.toString());
+				Log.d("login Response", json.toString());
 				
 				int success = json.getInt(TAG_SUCCESS);
 
@@ -378,9 +407,9 @@ public class MainScreenActivity extends Activity{
 			if(successful){
 				logIn();
 				Toast.makeText(getApplicationContext(), nickName+" is now loged in.", Toast.LENGTH_LONG).show();
-			}
-			else
+			}else{
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+			}
 		}
 
 	}
