@@ -38,6 +38,10 @@
          <activity
             android:name=".AccountCreationActivity"
             android:label="Your Info" >
+        </activity>
+        <activity
+            android:name=".SearchForRecipeByIngredientActivity"
+            android:label="Recipes Found" >
         </activity>       
         <activity
             

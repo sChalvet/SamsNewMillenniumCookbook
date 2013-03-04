@@ -68,8 +68,32 @@ public class PantryActivity extends ListActivity {
 		btnSearch = (Button) findViewById(R.id.btnSearch);
 		btnEdit = (Button) findViewById(R.id.btnEditPantry);
 		btnDeleteIngredient = (Button) findViewById(R.id.btnDeleteIngredients);
+			
+		
+		// Search by ingredient on click Event
+		btnSearch.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+
+				Log.d("Pantry_Search onclick", "inside");
 				
-				// view products click event
+				List<String> ingredientList = adapter.getChecked();
+				
+				Log.d("Pantry_Search onclick list=", ingredientList.toString());
+				
+				Intent intent = new Intent(getApplicationContext(), SearchForRecipeByIngredientActivity.class);
+				Bundle b = new Bundle();
+                b.putStringArrayList("IngredientList", (ArrayList<String>) ingredientList);
+                intent.putExtras(b);
+				startActivityForResult(intent,100);
+				
+
+			}
+		});
+		
+		
+		// Add to pantry click event
 		btnEdit.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

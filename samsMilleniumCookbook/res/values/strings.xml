@@ -26,6 +26,7 @@
     <string name="urlLogin">http://192.168.254.45/recipeApp/login.php</string>
     <string name="urlEditComment">http://192.168.254.45/recipeApp/editComment.php</string>
     <string name="urlUpdateComment">http://192.168.254.45/recipeApp/updateComment.php</string>
+    <string name="urlGetAllRecipesByIngredient">http://192.168.254.45/recipeApp/getAllRecipesByIngredient.php</string>
     
     
     <string name="userName">Unknown</string>

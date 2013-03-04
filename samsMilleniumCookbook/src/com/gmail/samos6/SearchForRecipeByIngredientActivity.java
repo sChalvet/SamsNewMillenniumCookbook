@@ -10,8 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.gmail.samos6.EditIngredientActivity.CreateNewIngredient;
-
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -37,7 +35,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FavoriteRecipesActivity  extends ListActivity{
+public class SearchForRecipeByIngredientActivity  extends ListActivity{
 	
 	
 	// Progress Dialog
@@ -47,9 +45,9 @@ public class FavoriteRecipesActivity  extends ListActivity{
 	JSONParser jParser = new JSONParser();
 
 	ListFavoriteAdapter adapter;
-	Button btnDrop;
 
 	ArrayList<HashMap<String, String>> productsList;
+	List<String> ingredientList = new ArrayList<String>();
 	
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
@@ -57,7 +55,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
-	String urlGetFavRecipes;
+	String urlGetAllRecipesByIngredient;
 	
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -78,10 +76,10 @@ public class FavoriteRecipesActivity  extends ListActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.display_fav_recipes);
+		setContentView(R.layout.display_recipes);
 	
 		//getting url from resources
-		urlGetFavRecipes = getResources().getString(R.string.urlGetFavRecipes);
+		urlGetAllRecipesByIngredient = getResources().getString(R.string.urlGetAllRecipesByIngredient);
 		
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
@@ -93,38 +91,22 @@ public class FavoriteRecipesActivity  extends ListActivity{
 		final ListView lv = getListView();  //added final
 		
 		
-		btnDrop = (Button) 	findViewById(R.id.btnFavDropFromList);
-		
-		// Drop button click event
-		btnDrop.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				Log.d("FavRecipes_Drop: ", "inside OnClick");
-				
-				List<String> list = new ArrayList<String>();
-				
-				list= adapter.getChecked();
-				Log.d("FavRecipes_Drop list= ", list.toString());
-				
-				if(!list.isEmpty()){
-					db.deleteListFavRecipes(list);
-					Intent intent = getIntent();
-					finish();
-					startActivity(intent);
-				}
-				
-			}
-		});
+		if( getIntent().getExtras() != null){
+			Bundle extras= getIntent().getExtras();
+			ingredientList = extras.getStringArrayList("IngredientList");
+			Log.d("SearchForRecipeByIngredient list: ", ingredientList.toString());
+		}
 
-		//on seleting single recipe launching recipe Screen
+		
+
+		//on selecting single recipe launching recipe Screen
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 						
 				// getting values from selected ListItem
-				String recipeName = ((TextView) view.findViewById(R.id.txtListFavRecipeRecipeName)).getText().toString();
+				String recipeName = ((TextView) view.findViewById(R.id.txtListRecipeRecipeName)).getText().toString();
 				Log.d("ListFavoriteRecipe: ", recipeName);
 						
 				// Starting new intent
@@ -181,7 +163,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pDialog = new ProgressDialog(FavoriteRecipesActivity.this);
+			pDialog = new ProgressDialog(SearchForRecipeByIngredientActivity.this);
 			pDialog.setMessage("Loading Recipes. Please wait...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
@@ -194,20 +176,17 @@ public class FavoriteRecipesActivity  extends ListActivity{
 		 * */
 		protected String doInBackground(String... args) {
 			// Building Parameters
-
-			List<String> list= new ArrayList<String>();
-			list = db.getAllFavRecipes();
 			
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			
-			for(int i=0; i<list.size(); i++){
-				params.add(new BasicNameValuePair("list"+Integer.toString(i), list.get(i).toString()));
+			for(int i=0; i<ingredientList.size(); i++){
+				params.add(new BasicNameValuePair("list"+Integer.toString(i), ingredientList.get(i).toString()));
 			}
 			
 			Log.d("All Favorite Recipes params: ", params.toString());
 			
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(urlGetFavRecipes, "GET", params);
+			JSONObject json = jParser.makeHttpRequest(urlGetAllRecipesByIngredient, "GET", params);
 			
 			
 			//if the asyncTask has not been cancelled then continue
@@ -281,7 +260,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 					 * */
 					
 					
-					adapter = new ListFavoriteAdapter(FavoriteRecipesActivity.this, productsList);
+					adapter = new ListFavoriteAdapter(SearchForRecipeByIngredientActivity.this, productsList);
 					
 					// updating listview
 					setListAdapter(adapter);
