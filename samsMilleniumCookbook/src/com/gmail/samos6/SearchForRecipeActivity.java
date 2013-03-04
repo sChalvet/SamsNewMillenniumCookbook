@@ -27,9 +27,17 @@ public class SearchForRecipeActivity extends Activity{
 	
 	ArrayAdapter<String> spin_adapter;
 	
+	//needed to add the "any" option to the food type
+	String[] foodTypeTemp;
 	String[] foodType;
 	String[] recipeType;
 	String[] cookTime;
+	
+	private static final String TAG_AUTHOR = "author";
+	private static final String TAG_FOODNAME = "foodName";
+	private static final String TAG_RECIPETYPE = "recipeType";
+	private static final String TAG_COOKTIME = "cookTime";
+	private static final String TAG_KEYWORD = "keyWord";
 	
 	
 	@Override
@@ -38,9 +46,16 @@ public class SearchForRecipeActivity extends Activity{
 		setContentView(R.layout.search_for_recipe);
 		
 		//getting arrays from from the values folder
-		foodType = getResources().getStringArray(R.array.foodType);
+		foodTypeTemp = getResources().getStringArray(R.array.foodType);
 		recipeType = getResources().getStringArray(R.array.recipeType);
 		cookTime = getResources().getStringArray(R.array.cookTime);
+		
+		//this appends 'any' to the begining of foodType (used only for this search)
+		foodType = new String[foodTypeTemp.length+1];
+		foodType[0]="Any";
+		for(int i=1; i<(foodTypeTemp.length+1); i++){
+			foodType[i]=foodTypeTemp[i-1];
+		}
 		
 		//setting the btn and txt
 		btnSearchRecipes = (Button) findViewById(R.id.btnSearchRecipes);
@@ -69,17 +84,22 @@ public class SearchForRecipeActivity extends Activity{
 			@Override
 			public void onClick(View view) {
 
-				String name =  txtAuthorName.getText().toString();
+				String author =  txtAuthorName.getText().toString();
 				String foodName = spnrFoodType.getSelectedItem().toString();
-				String recipeName = spnrRecipeType.getSelectedItem().toString();
+				String recipeType = spnrRecipeType.getSelectedItem().toString();
 				String cook = spnrCooktime.getSelectedItem().toString();
 				String keyword = txtSearchKeyWords.getText().toString();
 				
-				Log.d("SearchActivity_params=", name+" "+foodName+" "+recipeName+" "+cook+" "+keyword);
+				Log.d("SearchActivity_params=", author+" "+foodName+" "+recipeType+" "+cook+" "+keyword);
 				
-				Intent i = new Intent(getApplicationContext(), ListRecipeActivity.class);
-				startActivity(i);
-				//Log.d("SearchActivity_params=", "inside btnsearch listener");
+				Intent intent = new Intent(getApplicationContext(), ListRecipeActivity.class);
+				intent.putExtra(TAG_AUTHOR, author);
+				intent.putExtra(TAG_FOODNAME, foodName);	
+				intent.putExtra(TAG_RECIPETYPE, recipeType);
+				intent.putExtra(TAG_COOKTIME, cook);	
+				intent.putExtra(TAG_KEYWORD, keyword);	
+				startActivity(intent);
+				
 				
 				
 				

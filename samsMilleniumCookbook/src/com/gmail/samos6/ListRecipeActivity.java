@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,13 +50,18 @@ public class ListRecipeActivity  extends ListActivity{
 	SamsListAdapter adapter;
 	Button btnSave;
 	Button btnAdd;
+	
+	String searchAuthor;
+	String searchFoodName;
+	String searchRecipeType;
+	String searchKeyWord;
+	String searchCookTime;
 
 	ArrayList<HashMap<String, String>> productsList;
 	
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
-	//private static String urlGetAllRecipes = "http://10.0.2.2/recipeApp/getAllRecipes.php";
 	String urlGetAllRecipes;
 
 	// JSON Node names
@@ -66,10 +72,13 @@ public class ListRecipeActivity  extends ListActivity{
 	private static final String TAG_RATING = "rating";
 	private static final String TAG_NUMRATINGS = "numRatings";
 	private static final String TAG_PREPTIME = "prepTime";
-	private static final String TAG_COOKTIME = "cookTime";
-	private static final String TAG_AUTHOR = "author";
 	private static final String TAG_TOTALTIME = "totalTime";
-
+	private static final String TAG_COOKTIME = "cookTime";
+	
+	private static final String TAG_AUTHOR = "author";
+	private static final String TAG_FOODNAME = "foodName";
+	private static final String TAG_RECIPETYPE = "recipeType";
+	private static final String TAG_KEYWORD = "keyWord";
 	private static final String TAG_ORIGIN = "origin";
 	
 
@@ -86,7 +95,17 @@ public class ListRecipeActivity  extends ListActivity{
 		
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
-
+		
+		// getting ingredient details from intent
+		Intent intent = getIntent();
+		// getting data past from intent
+		searchAuthor = intent.getStringExtra(TAG_AUTHOR);
+		searchFoodName = intent.getStringExtra(TAG_FOODNAME);
+		searchRecipeType = intent.getStringExtra(TAG_RECIPETYPE);
+		searchKeyWord = intent.getStringExtra(TAG_KEYWORD);
+		searchCookTime = intent.getStringExtra(TAG_COOKTIME);
+		
+		
 		// Loading products in Background Thread
 		new LoadAllRecipes().execute();
 
@@ -115,7 +134,6 @@ public class ListRecipeActivity  extends ListActivity{
 				
 				// starting new activity and expecting some response back
 				startActivityForResult(intent, 100);
-				//startActivity(intent);
 			}
 		});
 
@@ -174,7 +192,15 @@ public class ListRecipeActivity  extends ListActivity{
 		protected String doInBackground(String... args) {
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>(); 	
+			
+			params.add(new BasicNameValuePair(TAG_AUTHOR, searchAuthor));
+			params.add(new BasicNameValuePair(TAG_FOODNAME, searchFoodName));
+			params.add(new BasicNameValuePair(TAG_RECIPETYPE, searchRecipeType));
+			params.add(new BasicNameValuePair(TAG_KEYWORD, searchKeyWord));
+			params.add(new BasicNameValuePair(TAG_COOKTIME, searchCookTime));
 
+			Log.d("SearchRecipes params: ", params.toString());
+			
 			// getting JSON string from URL
 			JSONObject json = jParser.makeHttpRequest(urlGetAllRecipes, "GET", params);
 			

@@ -284,7 +284,7 @@ public class CreateRecipeActivity extends Activity {
 		}
 		
 		// if result code 100, coming from GetIngredientActivity
-		if (resultCode == 100 || requestCode == 100) {
+		if (resultCode == 100) {
 			
 			Log.d("inside ActivityResults", "result from GetIngredientActivity");	
 			

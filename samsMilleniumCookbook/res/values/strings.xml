@@ -185,8 +185,8 @@
     <item>40 min</item>
     <item>50 min</item>
     <item>1 hour</item>
-    <item>1 hour 30 min</item> 
-    <item>2 hours or Longer</item> 
+    <item>2 hour</item> 
+    <item>Longer than 2 hours</item> 
     <item>Over Night</item> 
 	</string-array>
 
