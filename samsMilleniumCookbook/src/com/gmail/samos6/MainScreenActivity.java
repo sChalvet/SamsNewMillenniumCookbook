@@ -232,28 +232,29 @@ public class MainScreenActivity extends Activity{
 			btnAlertLogin.setOnClickListener(new OnClickListener() {
 			    @Override
               public void onClick(View v) {
-          	nickName=  txtNickName.getText().toString();
-				password=  txtPassword.getText().toString();	
+			    	
+			    	nickName=  txtNickName.getText().toString();
+			    	password=  txtPassword.getText().toString();	
 				
-				String msg = "";
-				boolean incomplete=false;
-				
-				Log.d("MainScreen alert", "in onclick");
-				
-				if(nickName.matches("")){
-					msg = "Please enter your username.";
-					incomplete=true;
-				}else if(password.matches("")){
-					msg = "Please enter your password.";
-					incomplete=true;
-				}else{
-					new LoginClass().execute();
+					String msg = "";
+					boolean incomplete=false;
 					
-				}
-				
-				if(incomplete)
-					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-			    }
+					Log.d("MainScreen alert", "in onclick");
+					
+					if(nickName.matches("")){
+						msg = "Please enter your username.";
+						incomplete=true;
+					}else if(password.matches("")){
+						msg = "Please enter your password.";
+						incomplete=true;
+					}else{
+						new LoginClass().execute();
+						
+					}
+					
+					if(incomplete)
+						Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+				    }
           }); 
 			
 			btnAlertCreateAccount.setOnClickListener(new View.OnClickListener() {
@@ -298,6 +299,7 @@ public class MainScreenActivity extends Activity{
 	private void logOut(){
 	  
 		userName="Guest";
+		password="";
 		SharedPreferences.Editor editor = prefs.edit();
 		
 		editor.putString("nickName", "guest");

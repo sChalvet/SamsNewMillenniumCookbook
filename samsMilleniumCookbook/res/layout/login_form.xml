@@ -10,6 +10,7 @@
         android:id="@+id/MainNickName"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:hint="@string/nickName"
         android:inputType="text" >
 	    
@@ -17,8 +18,9 @@
 	
     <EditText
         android:id="@+id/MainPassword"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:hint="@string/password"
         android:inputType="text|textPassword" >
 	    

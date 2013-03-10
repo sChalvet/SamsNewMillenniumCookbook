@@ -47,7 +47,7 @@ public class ListRecipeActivity  extends ListActivity{
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
 
-	SamsListAdapter adapter;
+	RecipeLazyAdapter adapter;
 	Button btnSave;
 	Button btnAdd;
 	
@@ -74,6 +74,7 @@ public class ListRecipeActivity  extends ListActivity{
 	private static final String TAG_PREPTIME = "prepTime";
 	private static final String TAG_TOTALTIME = "totalTime";
 	private static final String TAG_COOKTIME = "cookTime";
+	private static final String TAG_IMAGEURL = "imageUrl";
 	
 	private static final String TAG_AUTHOR = "author";
 	private static final String TAG_FOODNAME = "foodName";
@@ -227,7 +228,8 @@ public class ListRecipeActivity  extends ListActivity{
 						String numRatings = c.getString(TAG_NUMRATINGS);
 						String prepTime = c.getString(TAG_PREPTIME);
 						String cookTime = c.getString(TAG_COOKTIME);
-						String author = c.getString(TAG_AUTHOR);	
+						String author = c.getString(TAG_AUTHOR);
+						String imageUrl = c.getString(TAG_IMAGEURL);
 						
 						int cookT = Integer.parseInt(cookTime);
 						int prepT = Integer.parseInt(prepTime);
@@ -243,8 +245,7 @@ public class ListRecipeActivity  extends ListActivity{
 						map.put(TAG_NUMRATINGS, numRatings);
 						map.put(TAG_AUTHOR, author);
 						map.put(TAG_TOTALTIME, totalTime);
-						
-
+						map.put(TAG_IMAGEURL, imageUrl);
 
 						// adding HashList to ArrayList
 						productsList.add(map);
@@ -276,12 +277,14 @@ public class ListRecipeActivity  extends ListActivity{
 					 * */
 					
 					
-					ListAdapter adapter = new SimpleAdapter(ListRecipeActivity.this, productsList,
+					adapter = new RecipeLazyAdapter(ListRecipeActivity.this, productsList);
+					
+					/*ListAdapter adapter = new SimpleAdapter(ListRecipeActivity.this, productsList,
 							R.layout.list_recipes, new String[] { TAG_RECIPENAME, TAG_SUMMERY, TAG_NUMRATINGS, 
 																	TAG_AUTHOR, TAG_TOTALTIME},
 							new int[] { R.id.txtListRecipeRecipeName, R.id.txtListRecipeSummery, 
 										R.id.txtListRecipeNumReviews, R.id.txtListRecipeAuthor, R.id.txtListRecipeTotalCookTime});
-					
+					*/
 					// updating listview
 					//Log.d("allproducts: ", "setListAdapter(adapter)");
 					

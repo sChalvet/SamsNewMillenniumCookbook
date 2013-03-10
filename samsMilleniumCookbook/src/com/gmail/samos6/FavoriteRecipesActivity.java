@@ -70,6 +70,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 	private static final String TAG_COOKTIME = "cookTime";
 	private static final String TAG_AUTHOR = "author";
 	private static final String TAG_TOTALTIME = "totalTime";
+	private static final String TAG_IMAGEURL = "imageUrl";
 	
 
 	// products JSONArray
@@ -232,7 +233,9 @@ public class FavoriteRecipesActivity  extends ListActivity{
 						String numRatings = c.getString(TAG_NUMRATINGS);
 						String prepTime = c.getString(TAG_PREPTIME);
 						String cookTime = c.getString(TAG_COOKTIME);
-						String author = c.getString(TAG_AUTHOR);	
+						String author = c.getString(TAG_AUTHOR);
+						String imageUrl = c.getString(TAG_IMAGEURL);
+						
 						
 						int cookT = Integer.parseInt(cookTime);
 						int prepT = Integer.parseInt(prepTime);
@@ -248,6 +251,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 						map.put(TAG_NUMRATINGS, numRatings);
 						map.put(TAG_AUTHOR, author);
 						map.put(TAG_TOTALTIME, totalTime);
+						map.put(TAG_IMAGEURL, imageUrl);
 						
 
 

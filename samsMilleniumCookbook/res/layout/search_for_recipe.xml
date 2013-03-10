@@ -15,7 +15,18 @@
          android:text="@string/pickYourPoison"
          android:textSize="20sp" />
 
-    <TableLayout
+     <ScrollView
+         android:id="@+id/scrollView1"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:fillViewport="true" >
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" 
+             android:orientation="vertical">
+             
+ <TableLayout
         android:layout_width="match_parent"
         android:layout_height="362dp"
         android:layout_weight="1.39" >
@@ -135,10 +146,10 @@
 	</TableRow>
     
     </TableLayout>
- 
+                 
+         </LinearLayout>
+     </ScrollView>
 
-    
 
-   
 
 </LinearLayout>

@@ -44,7 +44,12 @@ if (isset($_GET["ingredientName"])) {
         echo json_encode($response);
     } else {
         // failed to insert row
-		$error = mysqli_error();
+		$error = mysqli_error($conn);
+		$pos=stripos($error, "Duplicate");
+		//use !== because duplicate can be a position 0
+		if($pos !== false)
+			$error="That ingredient name is already in use.";
+			
         $response["success"] = 0;
         $response["message"] = $error;
         

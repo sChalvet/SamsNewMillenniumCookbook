@@ -25,31 +25,40 @@ if (isset($_GET["recipeName"])) {
 	
 	// check for empty result
     if (!empty($result)) {
-        $response["products"] = array();
 		
-        while ($row = mysqli_fetch_array($result)) {
+		if (mysqli_num_rows($result) > 0) {
+			$response["products"] = array();
+		
+			while ($row = mysqli_fetch_array($result)) {
 	
-			$product = array();
-			
-			$product["author"] = $row[0];
-			$product["postTime"] = $row[1];
-			$product["comment"] = $row[2];
-			$product["rating"] = $row[3];	
-			
-			array_push($response["products"], $product);
-    }
-    // success
-    $response["success"] = 1;
-	$response["message"] = "All is well";
-	
-	
-    // echoing JSON response
-    echo json_encode($response);
+				$product = array();
+				
+				$product["author"] = $row[0];
+				$product["postTime"] = $row[1];
+				$product["comment"] = $row[2];
+				$product["rating"] = $row[3];	
+				
+				array_push($response["products"], $product);
+			}
+			// success
+			$response["success"] = 1;
+			$response["message"] = "All is well";
+		
+		
+			// echoing JSON response
+			echo json_encode($response);
+		}else{
+		$response["success"] = 0;
+		$response["message"] = "no comments for this recipe";
+		// echoing JSON response
+		echo json_encode($response);
+		
+		}
 	
 	
     } else {
         // no Comments found
-        $response["success"] = 0;
+        $response["success"] = 2;
         $response["message"] = "No Comments found";
 
         // echo no users JSON

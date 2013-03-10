@@ -9,8 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -74,6 +72,11 @@ public class RecipeViewActivity extends Activity {
 	
 	Bitmap pic;
 	
+    String image_url = "http://thinkprogress.org/wp-content/uploads/2012/07/Guns_1000.jpg";
+    
+    // ImageLoader class instance
+    Images_ImageLoader imgLoader;
+	
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
 	
@@ -110,6 +113,8 @@ public class RecipeViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.view_recipe);
 		
+		imgLoader = new Images_ImageLoader(getApplicationContext());
+		
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
@@ -142,7 +147,9 @@ public class RecipeViewActivity extends Activity {
 		rtbRating= (RatingBar) findViewById(R.id.recipeViewRatingBar);
 			
 		Log.d("ViewRecipe_just in", recipeName);
-	
+		
+		imgLoader.DisplayImage(image_url, imgPicture);
+		
 		new GetRecipeDetails().execute();
 		
 		// See Reviews button click event
@@ -151,14 +158,18 @@ public class RecipeViewActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				
-				Log.d("ViewRecipe_btnReviews onclick", "inside");
-				Intent intent = new Intent(getApplicationContext(), ListRecipeCommentsActivity.class);
-				
-				// sending recipeName to next activity
-				intent.putExtra(TAG_RECIPENAME, recipeName);
-				
-				// starting new activity and expecting some response back
-				startActivity(intent);
+				if(!userName.equalsIgnoreCase("guest")){
+					Log.d("ViewRecipe_btnReviews onclick", "inside");
+					Intent intent = new Intent(getApplicationContext(), ListRecipeCommentsActivity.class);
+					
+					// sending recipeName to next activity
+					intent.putExtra(TAG_RECIPENAME, recipeName);
+					
+					// starting new activity and expecting some response back
+					startActivity(intent);
+				}else{
+					Toast.makeText(getApplicationContext(), "I'm sorry you must first login", Toast.LENGTH_LONG).show();
+				}
 
 			}
 		});

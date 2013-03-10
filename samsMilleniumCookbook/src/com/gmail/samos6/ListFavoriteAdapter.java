@@ -15,14 +15,27 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class ListFavoriteAdapter extends BaseAdapter {
+	
+	private static final String TAG_RECIPENAME = "recipeName";
+	private static final String TAG_SUMMERY = "summery";
+	private static final String TAG_RATING = "rating";
+	private static final String TAG_NUMRATINGS = "numRatings";
+	private static final String TAG_TOTALTIME = "totalTime";
+	private static final String TAG_AUTHOR = "author";
+	private static final String TAG_IMAGEURL = "imageUrl";
+	
+	
 	private LayoutInflater mInflater;
 	public ArrayList<HashMap<String, String>> data;
 	ViewHolder viewHolder;
 	public static HashMap<Integer,String> myList=new HashMap<Integer,String>();
+    public Images_ImageLoader imageLoader; 
 
 	
 
@@ -34,6 +47,9 @@ public ListFavoriteAdapter(Context context) {
  */
 public ListFavoriteAdapter(Activity activity, ArrayList<HashMap<String, String>> productsList) {
     super();
+    
+    imageLoader=new Images_ImageLoader(activity.getApplicationContext());
+    
     mInflater = activity.getLayoutInflater();
     this.data = productsList;
 
@@ -95,7 +111,8 @@ public View getView(final int position, View convertView, ViewGroup parent) {
         viewHolder.summery = (TextView) convertView.findViewById(R.id.txtListFavRecipeSummery);
         viewHolder.numRatings = (TextView) convertView.findViewById(R.id.txtListFavRecipeNumReviews);
         viewHolder.totalTime = (TextView) convertView.findViewById(R.id.txtListFavRecipeTotalCookTime);
-
+        viewHolder.rtbRating = (RatingBar)convertView.findViewById(R.id.listFavRecipesRatingBar);
+        viewHolder.recipeImage =(ImageView)convertView.findViewById(R.id.listFavRecipeImage);
         convertView.setTag(viewHolder);
 
     } else {
@@ -103,12 +120,14 @@ public View getView(final int position, View convertView, ViewGroup parent) {
     }
 
    
-    String recipeName = data.get(position).get("recipeName");
+    String recipeName = data.get(position).get(TAG_RECIPENAME);
     String checkBox = data.get(position).get("reminder");
-    String author = data.get(position).get("author");
-    String summery = data.get(position).get("summery");
-    String numRatings = data.get(position).get("numRatings");
-    String totalTime = data.get(position).get("totalTime");
+    String author = data.get(position).get(TAG_AUTHOR);
+    String summery = data.get(position).get(TAG_SUMMERY);
+    String numRatings = data.get(position).get(TAG_NUMRATINGS);
+    String totalTime = data.get(position).get(TAG_TOTALTIME);
+    String rating = data.get(position).get(TAG_RATING);
+    String imageUrl = data.get(position).get(TAG_IMAGEURL);
      Log.d("Adapter loading recipe: ", recipeName+" at pos:"+Integer.toString(position));
     
  
@@ -117,6 +136,9 @@ public View getView(final int position, View convertView, ViewGroup parent) {
      viewHolder.numRatings.setText(numRatings);
      viewHolder.totalTime.setText(totalTime);
      viewHolder.summery.setText(summery);
+     viewHolder.recipeImage =(ImageView)convertView.findViewById(R.id.listFavRecipeImage);
+     viewHolder.rtbRating.setRating(Float.valueOf(rating));
+     imageLoader.DisplayImage(imageUrl, viewHolder.recipeImage);
     
     try {
     if (checkBox.equalsIgnoreCase("true")) {
@@ -149,6 +171,8 @@ public View getView(final int position, View convertView, ViewGroup parent) {
 static class ViewHolder {
 
 	CheckBox checkBox;
+	ImageView recipeImage;
+	RatingBar rtbRating;
 	TextView recipeName;
 	TextView summery;
 	TextView numRatings;

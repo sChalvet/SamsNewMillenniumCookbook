@@ -8,6 +8,8 @@
 // array for JSON response
 $response = array();
 
+date_default_timezone_set('America/New_York');
+
 // check for required fields
 if (isset($_GET["recipeName"])) {
     
@@ -32,6 +34,7 @@ if (isset($_GET["recipeName"])) {
     $summery = $_GET["summery"];
 	$type = $_GET["type"];
 	$servings = $_GET["servings"];
+	$hasImage = $_GET["hasImage"];
 	$dateUpdated = date("Y-m-d H:i:s");
 
     // include db connect class
@@ -57,7 +60,7 @@ if (isset($_GET["recipeName"])) {
 		
 		// mysql inserting a new row
 		$result1 = mysqli_query($conn, "UPDATE recipe SET recipeName='$recipeName', ingredientDiscription='$ingredientList', directions='$cookingDirections', cookTime='$cookTime',"
-							." prepTime='$prepTime', summery='$summery', type='$type', servings='$servings', modifyDate='$dateUpdated'"
+							." prepTime='$prepTime', summery='$summery', type='$type', servings='$servings', modifyDate='$dateUpdated', hasImage='$hasImage'"
 						." WHERE recipeName = '$oldRecipeName'");
 
 		//empties the table for that recipeName in case there have been changes made or ingredients removed

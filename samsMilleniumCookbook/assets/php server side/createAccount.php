@@ -3,7 +3,9 @@
 /*
  * Following code will create a new User Account
  */
-
+date_default_timezone_set('America/New_York');
+ 
+ 
 // array for JSON response
 $response = array();
 

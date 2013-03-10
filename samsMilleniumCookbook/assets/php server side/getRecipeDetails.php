@@ -21,7 +21,7 @@ if (isset($_GET["recipeName"])) {
     $recipeName = $_GET['recipeName'];
 
     // get a product from products table
-   $result = mysqli_query($conn, "SELECT userName, ingredientDiscription, directions, prepTime, cookTime FROM recipe WHERE recipeName = '$recipeName'");
+   $result = mysqli_query($conn, "SELECT userName, ingredientDiscription, directions, prepTime, cookTime, hasRecipe FROM recipe WHERE recipeName = '$recipeName'");
 
     if (!empty($result)) {
         // check for empty result
@@ -29,7 +29,6 @@ if (isset($_GET["recipeName"])) {
 		
 			$rating=0;
 			$numRatings=0;
-			//$getPic = mysql_query("SELECT img FROM picture WHERE picId = 1") or die(mysql_error());
 			
 			$response["product"] = array();
 			
@@ -43,6 +42,11 @@ if (isset($_GET["recipeName"])) {
 			$product["cookingDirections"] = $row[2];
 			$product["prepTime"] = $row[3];
 			$product["cookTime"] = $row[4];
+			if(intval($row[5])){
+				$product["imageUrl"] = $_SERVER['PATH_INFO']."/recipeImages/".$recipeName.".jpg";
+			}else{
+				$product["imageUrl"] = "no pic";
+			}
 			
 			$countResult = mysqli_query($conn, "SELECT count(*) FROM recipecomments where recipename = '$recipeName'");
 			if(mysqli_num_rows($countResult) > 0){

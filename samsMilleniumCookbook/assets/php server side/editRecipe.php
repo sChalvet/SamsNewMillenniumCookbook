@@ -44,6 +44,7 @@ if (isset($_GET["recipeName"])) {
 			$product["servings"] = $row[3];
 			$product["cookingDirections"] = $row[4];
 			$product["type"] = $row[5];
+			$product["imageUrl"] = "http://3.bp.blogspot.com/-Hzcfxomkius/TgQ4Do1I5YI/AAAAAAAABkQ/IBIdX39Lq-4/s1600/Golden-Gun-29593.jpg";
 		
 			//getting all of the ingredients for this recipe
 			$ingredientList = mysqli_query($conn, "SELECT ingredientName, amount, measurement, description, important FROM recipeingredients WHERE recipeName = '$recipeName'");

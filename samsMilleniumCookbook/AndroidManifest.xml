@@ -8,6 +8,7 @@
         		android:maxSdkVersion="17"
         		android:targetSdkVersion="10"/>
         <uses-feature android:name="android.hardware.camera"></uses-feature>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:configChanges="keyboardHidden|orientation"
@@ -16,6 +17,7 @@
 
         <activity
             android:name=".MainScreenActivity"
+            android:screenOrientation= "portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,98 +29,117 @@
         
         <activity
             android:name=".ListIngredientActivity"
+            android:screenOrientation= "portrait"
             android:label="Ingredient List" >
         </activity>
         
         <activity
             android:name=".editCommentActivity"
+            android:screenOrientation= "portrait"
             android:label="Editting Comment" >
         </activity>
         
          <activity
             android:name=".AccountCreationActivity"
+            android:screenOrientation= "portrait"
             android:label="Your Info" >
         </activity>
         <activity
             android:name=".SearchForRecipeByIngredientActivity"
+            android:screenOrientation= "portrait"
             android:label="Recipes Found" >
         </activity>       
         <activity
             
             android:name=".EditRecipeActivity"
+            android:screenOrientation= "portrait"
             android:label="Editing Recipe" >
         </activity>
         
         <activity
             android:name=".GetIngredientActivity"
+            android:screenOrientation= "portrait"
             android:label="Choose Ingredients for Recipe" >
         </activity>
         
        <activity
             android:name=".FavoriteRecipesActivity"
+            android:screenOrientation= "portrait"
             android:label="Your Favorite Recipes" >
         </activity>
         
        <activity
             android:name=".SavedRecipesActivity"
+            android:screenOrientation= "portrait"
             android:label="Recipes You Saved to Try Later" >
         </activity>
         
         <activity
             android:name=".CreateNewCommentActivity"
+            android:screenOrientation= "portrait"
             android:label="New Comment" >
         </activity>
         
         <activity
             android:name=".EditCommentActivity"
+            android:screenOrientation= "portrait"
             android:label="Edit Comment" >
         </activity>
         
         <activity
             android:name=".ListRecipeCommentsActivity"
+            android:screenOrientation= "portrait"
             android:label="Recipe Comments" >
         </activity>
         
         <activity
             android:name=".CreateRecipeActivity"
+            android:screenOrientation= "portrait"
             android:label="Edit Recipe" >
         </activity>
         
         <activity
             android:name=".RecipeViewActivity"
+            android:screenOrientation= "portrait"
             android:label="Recipe Description" >
         </activity>
         
        	<activity
             android:name=".ListRecipeActivity"
+            android:screenOrientation= "portrait"
             android:label="Recipe List" >
         </activity>
         
         <activity
             android:name=".PantryActivity"
+            android:screenOrientation= "portrait"
             android:label="Your Pantry" >
         </activity>
 
         <activity
             android:name=".NewProductActivity"
+            android:screenOrientation= "portrait"
             android:label="Add New Product" >
         </activity>
 
         <!-- Edit Product Activity -->
         <activity
             android:name=".EditProductActivity"
+            android:screenOrientation= "portrait"
             android:label="Edit Product" >
         </activity>
         
         <!-- Edit ingredient Activity -->
         <activity
             android:name=".EditIngredientActivity"
+            android:screenOrientation= "portrait"
             android:label="Ingredient Data" >
         </activity>
         
                 <!-- Edit ingredient Activity -->
         <activity
             android:name=".SearchForRecipeActivity"
+            android:screenOrientation= "portrait"
             android:label="SearchForRecipeActivity" >
         </activity>
         

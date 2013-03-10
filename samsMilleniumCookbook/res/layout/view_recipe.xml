@@ -208,7 +208,7 @@
             android:id="@+id/handle"
             android:layout_width="match_parent"
             android:layout_height="22dp"
-            android:background="#BBFF0000"
+            android:background="@drawable/drawer"
             android:text="@string/recipeHandle" />
 
         <LinearLayout

@@ -1,10 +1,16 @@
 package com.gmail.samos6;
 
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +34,7 @@ import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -70,6 +77,8 @@ public class CreateRecipeActivity extends Activity {
 	Button btnAddIngredient;
 	Button btnTakePhoto;
 	
+	Bitmap recipeImage=null;
+	
 	//preference access
 	SharedPreferences prefs;
 	String userName="";
@@ -79,8 +88,12 @@ public class CreateRecipeActivity extends Activity {
 	String[] recipeType;
 	String[] recipeServings;
 	
-	boolean successful = false;
+	boolean successfulRecipe = false;
+	boolean successfulPicture = false;
 	String message = "";
+	
+	//will contain the image id from db
+	int hasImage=0;
 	
 	ArrayAdapter<String> spin_adapter;
 	
@@ -108,6 +121,7 @@ public class CreateRecipeActivity extends Activity {
 	//Creating the variable that will hold the url when it is pulled from resources
 	String urlCreateRecipe;
 	String urlUpdateRecipe; 
+	String urlUploadImage; 
 	
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
@@ -124,6 +138,8 @@ public class CreateRecipeActivity extends Activity {
 	private static final String TAG_SUMMERY = "summery";
 	private static final String TAG_TYPE = "type";
 	private static final String TAG_SERVINGS = "servings";
+	private static final String TAG_IMAGE = "image";
+	private static final String TAG_HASIMAGE = "hasImage";
 	
 	
 	@Override
@@ -139,6 +155,7 @@ public class CreateRecipeActivity extends Activity {
 		//getting url from resources
 		urlCreateRecipe = getResources().getString(R.string.urlCreateRecipe);
 		urlUpdateRecipe = getResources().getString(R.string.urlUpdateRecipe);
+		urlUploadImage = getResources().getString(R.string.urlUploadImage);
 		
 		recipeType = getResources().getStringArray(R.array.recipeType);
 		recipeServings = getResources().getStringArray(R.array.spinnerServings);
@@ -276,10 +293,10 @@ public class CreateRecipeActivity extends Activity {
 		//result from taking a pic of recipe
 		if(requestCode == 0){
 			Log.d("inside ActivityResults", "pic result");	
-			Bitmap theImage = (Bitmap) data.getExtras().get("data");
-			imgPicture.setImageBitmap(theImage);
+			recipeImage = (Bitmap) data.getExtras().get("data");
+			imgPicture.setImageBitmap(recipeImage);
 			
-			Toast.makeText(getApplicationContext(), "Sorry. Uploading pictures to database \nhas not yet been implemented.", Toast.LENGTH_LONG).show();
+			//Toast.makeText(getApplicationContext(), "Sorry. Uploading pictures to database \nhas not yet been implemented.", Toast.LENGTH_LONG).show();
 			
 		}
 		
@@ -529,7 +546,7 @@ private void dropFromList(List<String> list) {
 		}
 
 		/**
-		 * Creating product
+		 * Creating recipe
 		 * */
 		protected String doInBackground(String... args) {
 			
@@ -568,7 +585,7 @@ private void dropFromList(List<String> list) {
 				else
 					measurement+=" of";
 				
-				ingredientList +="--> "+amount+" "+measurement+" "+description+" "+name+"\n";
+				ingredientList +="> "+amount+" "+measurement+" "+description+" "+name+"\n";
 
 			}
 			
@@ -595,10 +612,62 @@ private void dropFromList(List<String> list) {
 
 			Log.d("CreateRecipes params: ", params.toString());
 			
+			//checks to see if user took a picture
+			if(recipeImage!=null){
+				//compress' the image and then puts it in a base64 string to send
+				//over to uploadImage.php
+		        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		        recipeImage.compress(Bitmap.CompressFormat.JPEG, 90, stream); //compress to which format you want.
+		        byte [] byte_arr = stream.toByteArray();
+		        String image_str = Base64.encodeToString(byte_arr, 1);
+		        ArrayList<NameValuePair> picParams = new  ArrayList<NameValuePair>();
+	
+		        picParams.add(new BasicNameValuePair(TAG_IMAGE,image_str));
+		        picParams.add(new BasicNameValuePair(TAG_RECIPENAME,recipeName));
+				
+		        JSONObject json2 = jsonParser.makeHttpRequest(urlUploadImage, "POST", picParams);
+		        
+		        //resetting variable just in case
+		        successfulPicture=false;
+		        
+				//if asyncTask has Not been cancelled then continue
+				if (!bCancelled) try {
+					
+					// check log cat for response
+					Log.d("Create Response", json2.toString());
+					
+					int success = json2.getInt(TAG_SUCCESS);
+	
+					if (success == 1) {
+						
+						successfulPicture=true;
+						
+						hasImage= json2.getInt(TAG_HASIMAGE);
+						
+						Log.d("CreateRecipe_Background picUpload", json2.getString(TAG_MESSAGE));
+						
+						// closing this screen
+						//finish();
+					} else {
+						// failed to upload pic
+						 message = json2.getString(TAG_MESSAGE);
+						Log.d("CreateRecipe_Background", "oops! Failed to upload pic:  "+message);
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}//end if recipeImage!= null
+			
+			//if user has not taken a picture then it will be 0
+			params.add(new BasicNameValuePair(TAG_HASIMAGE, Integer.toString(hasImage)));
+						
 			// getting JSON Object
 			// Note that create product url accepts POST method
 			JSONObject json = jsonParser.makeHttpRequest(urlCreateRecipe, "GET", params);
 
+	        //resetting variable just in case
+	        successfulRecipe=false;
+	        
 			//if asyncTask has Not been cancelled then continue
 			if (!bCancelled) try {
 				
@@ -609,16 +678,14 @@ private void dropFromList(List<String> list) {
 
 				if (success == 1) {
 					
-					successful=true;
+					successfulRecipe=true;
 					// successfully created Recipe
-					//Intent i = new Intent(getApplicationContext(), ListIngredientActivity.class);
-					//startActivity(i);
 					Log.d("CreateRecipe_Background", "Success! Recipe Created");
 					// closing this screen
 					finish();
 				} else {
 					// failed to create Recipe
-					 message = json.getString(TAG_MESSAGE);
+					 message += json.getString(TAG_MESSAGE);
 					Log.d("CreateRecipe_Background", "oops! Failed to create recipe "+message);
 				}
 			} catch (JSONException e) {
@@ -634,7 +701,7 @@ private void dropFromList(List<String> list) {
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog once done
 			pDialog.dismiss();
-			if(successful)
+			if(successfulRecipe && successfulPicture)
 				Toast.makeText(getApplicationContext(), "Recipe Created", Toast.LENGTH_LONG).show();
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();

@@ -32,6 +32,7 @@ if (isset($_GET["recipeName"])) {
     $summery = $_GET["summery"];
 	$type = $_GET["type"];
 	$servings = $_GET["servings"];
+	$hasImage = $_GET["hasImage"];
 
     //var_dump( $error);
 
@@ -56,8 +57,8 @@ if (isset($_GET["recipeName"])) {
 		
 		
 		// mysql inserting a new row
-		$result1 = mysqli_query($conn, "INSERT INTO recipe(recipeName, userName, ingredientDiscription, directions, cookTime, prepTime, summery, type, servings)"
-						."VALUES('$recipeName', '$author', '$ingredientList', '$cookingDirections', '$cookTime', '$prepTime', '$summery', '$type', '$servings')");
+		$result1 = mysqli_query($conn, "INSERT INTO recipe(recipeName, userName, ingredientDiscription, directions, cookTime, prepTime, summery, type, servings, hasImage)"
+						."VALUES('$recipeName', '$author', '$ingredientList', '$cookingDirections', '$cookTime', '$prepTime', '$summery', '$type', '$servings', '$hasImage')");
 
 		//empties the table for that recipeName in case there have been changes made or ingredients removed
 		$result = mysqli_query($conn, "DELETE FROM recipeingredients WHERE recipeName = '$recipeName'");
@@ -80,7 +81,7 @@ if (isset($_GET["recipeName"])) {
 			echo json_encode($response);
 		} else {
 			// failed to insert row
-			$error = mysqli_error();
+			$error = mysqli_error($conn);
 			$response["success"] = 3;
 			$response["message"] = $error;
 			

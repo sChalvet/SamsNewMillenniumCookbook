@@ -23,10 +23,11 @@
     <string name="urlGetRecipeDetails">http://192.168.254.45/recipeApp/getRecipeDetails.php</string>
     <string name="urlEditRecipe">http://192.168.254.45/recipeApp/editRecipe.php</string>
     <string name="urlCreateAccount">http://192.168.254.45/recipeApp/createAccount.php</string>
-    <string name="urlLogin">http://192.168.254.45/recipeApp/login.php</string>
+    <string name="urlLogin">http://192.168.254.45/recipeApp/logIn.php</string>
     <string name="urlEditComment">http://192.168.254.45/recipeApp/editComment.php</string>
     <string name="urlUpdateComment">http://192.168.254.45/recipeApp/updateComment.php</string>
     <string name="urlGetAllRecipesByIngredient">http://192.168.254.45/recipeApp/getAllRecipesByIngredient.php</string>
+    <string name="urlUploadImage">http://192.168.254.45/recipeApp/uploadImage.php</string>
     
     
     <string name="userName">Unknown</string>
@@ -144,24 +145,25 @@
 	<string name="no">No</string>
 	
 	<string-array name="foodType"> 
-    <item>Other</item> 
-    <item>Poultry</item> 
-    <item>Egg</item>
-    <item>Pork</item>
-    <item>Seafood</item>
-    <item>Lamb</item>
-    <item>Pasta</item>
-    <item>Vegetables</item>
-    <item>Mushroom</item> 
-    <item>Dairy</item> 
-    <item>Cereal</item> 
-    <item>Fruit</item> 
-    <item>Candy</item> 
+    <item>Other</item>
     <item>Beef</item> 
-    <item>Soy</item>
-    <item>Oil</item>
-    <item>Rabbit</item> 
+    <item>Candy</item>
+    <item>Cereal</item>
+    <item>Dairy</item>
+    <item>Egg</item>
+    <item>Fruit</item>   
+    <item>Lamb</item>
+    <item>Mushroom</item> 
     <item>Nuts</item> 
+    <item>Oil</item> 
+    <item>Pasta</item>
+    <item>Pork</item>
+    <item>Poultry</item> 
+    <item>Rabbit</item>
+    <item>Seafood</item> 
+    <item>Soy</item> 
+    <item>Spice/Herbs/Condiments</item> 
+    <item>Vegetables</item>
 	</string-array>
 	
 	<string-array name="recipeType"> 

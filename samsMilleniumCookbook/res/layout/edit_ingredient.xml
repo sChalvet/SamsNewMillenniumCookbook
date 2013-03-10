@@ -8,7 +8,7 @@
 
 	<TableLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="86dp" >
+	    android:layout_height="60dp" >
 
 		<TableRow android:layout_gravity="center_horizontal" >
 		    
@@ -27,11 +27,13 @@
         android:layout_width="wrap_content"
         android:layout_height="46dp"
         android:layout_gravity="left"
+        android:inputType="textCapWords"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
         android:text="@string/ingredientName"
         android:textSize="20sp" />
+
     </TableRow>
 
     <View
@@ -39,20 +41,29 @@
         android:layout_height="1dp"
         android:layout_marginBottom="20dp"
         android:background="@android:color/darker_gray" />
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_weight="1"
-        android:text="@string/perGram" />
 
     </TableLayout>
-    
-	<TableLayout
+
+	<ScrollView
+	    android:id="@+id/scrollView1"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" 
+	        android:orientation="vertical">
+
+<TableLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_weight="0" >
+
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:text="@string/perGram" />
 
 		<TableRow android:layout_gravity="center_horizontal" >
 
@@ -102,7 +113,7 @@
         android:layout_weight="1"
 		android:singleLine="true"
 		android:inputType="numberDecimal"
-		android:maxLength="3"/> 
+		android:maxLength="5"/> 
 		    
 		    <!-- Input Protein -->
 
@@ -113,7 +124,7 @@
 		    android:layout_weight="1"
 		    android:inputType="numberDecimal"
 		    android:singleLine="true" 
-		    android:maxLength="3"/>
+		    android:maxLength="5"/>
 	
 		<!-- Input Fat -->
 		<EditText android:id="@+id/inputFat" 
@@ -122,7 +133,7 @@
         android:layout_weight="1"
 	    android:singleLine="true"
 	    android:inputType="numberDecimal"
-	    android:maxLength="3"/>
+	    android:maxLength="5"/>
 	
 	    <!-- Input Carbs -->
 		<EditText android:id="@+id/inputCarbs" 
@@ -131,7 +142,7 @@
         android:layout_weight="1"
 	    android:singleLine="true"
 	    android:inputType="numberDecimal"
-	    android:maxLength="3"/>
+	    android:maxLength="5"/>
 	    	    
     	</TableRow>
    	</TableLayout>
@@ -276,5 +287,10 @@
 	    android:visibility="invisible" />
 	    
 	</LinearLayout>
-	
+	        
+	        
+	    </LinearLayout>
+	</ScrollView>
+    
+		
 </LinearLayout>

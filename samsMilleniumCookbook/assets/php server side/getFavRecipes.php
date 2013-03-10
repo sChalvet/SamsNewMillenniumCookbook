@@ -29,7 +29,7 @@ if (isset($_GET["list0"])) {
 	$conn=$db->connect();
 	
 	// get all products from products table
-	$result = mysqli_query($conn, "SELECT recipeName, summery, userName, prepTime, cookTime FROM recipe WHERE recipeName IN ($recipeName)") or die(mysql_error());
+	$result = mysqli_query($conn, "SELECT recipeName, summery, userName, prepTime, cookTime, hasImage FROM recipe WHERE recipeName IN ($recipeName)");
 
 
 	// check for empty result
@@ -50,6 +50,11 @@ if (isset($_GET["list0"])) {
 			$product["author"] = $row[2];
 			$product["prepTime"] = $row[3];
 			$product["cookTime"] = $row[4];
+			if(intval($row[5])){
+				$product["imageUrl"] = $_SERVER['PATH_INFO']."/recipeImages/".$recipeName.".jpg";
+			}else{
+				$product["imageUrl"] = "no pic";
+			}
 			
 			$countResult = mysqli_query($conn, "SELECT count(*) FROM recipecomments where recipename = '$row[0]'");
 			if(mysqli_num_rows($countResult) > 0){

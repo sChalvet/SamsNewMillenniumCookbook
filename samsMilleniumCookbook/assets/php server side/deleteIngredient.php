@@ -22,7 +22,7 @@ if (isset($_GET['ingredientName'])) {
     $result = mysqli_query($conn, "DELETE FROM ingredientList WHERE ingredientName = '$ingredientName'");
     
     // check if row deleted or not
-    if (mysqli_affected_rows() > 0) {
+    if (mysqli_affected_rows($conn) > 0) {
         // successfully updated
         $response["success"] = 1;
         $response["message"] = "Ingredient successfully deleted";

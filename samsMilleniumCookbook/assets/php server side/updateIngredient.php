@@ -8,10 +8,13 @@
 // array for JSON response
 $response = array();
 
+date_default_timezone_set('America/New_York');
+
 // check for required fields
 if (isset($_GET['ingredientName'])) {
     
-	$ingredientName = $_GET['ingredientName'];		
+	$ingredientName = $_GET['ingredientName'];
+	$oldIngredientName = $_GET['oldIngredientName'];	
     $calories = $_GET["calories"];
     $protein = $_GET["protein"];
     $fat = $_GET["fat"];
@@ -30,8 +33,8 @@ if (isset($_GET['ingredientName'])) {
 	$conn=$db->connect();
 
     // mysql update row with matched pid
-    $result = mysqli_query($conn, "UPDATE ingredientList SET calories = '$calories', protein = '$protein', fat = '$fat', "
-			."carbs = '$carbs', type = '$type', notes = '$notes', dateUpdated = '$dateUpdated'  WHERE ingredientName = '$ingredientName'");
+    $result = mysqli_query($conn, "UPDATE ingredientlist SET ingredientName='$ingredientName', calories = '$calories', protein = '$protein', fat = '$fat', "
+			."carbs = '$carbs', type = '$type', notes = '$notes', dateUpdated = '$dateUpdated'  WHERE ingredientName = '$oldIngredientName'");
 
     // check if row inserted or not
     if ($result) {
@@ -42,6 +45,19 @@ if (isset($_GET['ingredientName'])) {
         // echoing JSON response
         echo json_encode($response);
     } else {
+	
+		// failed to insert row
+		$error = mysqli_error($conn);
+		$pos=stripos($error, "Duplicate");
+		//use !== because duplicate can be a position 0
+		if($pos !== false)
+			$error="That ingredient name is already in use.";
+			
+        $response["success"] = 0;
+        $response["message"] = $error;
+        
+        // echoing JSON response
+        echo json_encode($response);
         
     }
 } else {
