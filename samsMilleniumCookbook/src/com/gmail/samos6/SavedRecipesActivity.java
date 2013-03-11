@@ -57,7 +57,9 @@ public class SavedRecipesActivity  extends ListActivity{
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
 	
-	 String urlGetFavRecipes;
+	String urlGetFavRecipes;
+	String urlRoot;
+		
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_PRODUCTS = "products";
@@ -69,6 +71,7 @@ public class SavedRecipesActivity  extends ListActivity{
 	private static final String TAG_COOKTIME = "cookTime";
 	private static final String TAG_AUTHOR = "author";
 	private static final String TAG_TOTALTIME = "totalTime";
+	private static final String TAG_IMAGEURL = "imageUrl";
 	
 
 	// products JSONArray
@@ -81,6 +84,7 @@ public class SavedRecipesActivity  extends ListActivity{
 	
 		//getting url from resources
 		urlGetFavRecipes = getResources().getString(R.string.urlGetFavRecipes);
+		urlRoot = getResources().getString(R.string.urlRoot);
 		
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
@@ -231,7 +235,8 @@ public class SavedRecipesActivity  extends ListActivity{
 						String numRatings = c.getString(TAG_NUMRATINGS);
 						String prepTime = c.getString(TAG_PREPTIME);
 						String cookTime = c.getString(TAG_COOKTIME);
-						String author = c.getString(TAG_AUTHOR);	
+						String author = c.getString(TAG_AUTHOR);
+						String imageUrl = urlRoot+c.getString(TAG_IMAGEURL); //adding urlRoot to the image url
 						
 						int cookT = Integer.parseInt(cookTime);
 						int prepT = Integer.parseInt(prepTime);
@@ -247,6 +252,7 @@ public class SavedRecipesActivity  extends ListActivity{
 						map.put(TAG_NUMRATINGS, numRatings);
 						map.put(TAG_AUTHOR, author);
 						map.put(TAG_TOTALTIME, totalTime);
+						map.put(TAG_IMAGEURL, imageUrl);
 						
 
 

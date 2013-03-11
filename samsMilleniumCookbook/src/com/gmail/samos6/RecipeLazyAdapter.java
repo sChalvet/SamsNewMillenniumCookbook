@@ -74,7 +74,7 @@ public class RecipeLazyAdapter extends BaseAdapter {
         txtNumReviews.setText(data.get(position).get(TAG_NUMRATINGS));
         txtAuthor.setText(data.get(position).get(TAG_AUTHOR));
         txtTotalCookTime.setText(data.get(position).get(TAG_TOTALTIME));
-        rtbRating.setRating(Float.valueOf(data.get(position).get(TAG_RATING)));
+        rtbRating.setRating(Float.valueOf(data.get(position).get(TAG_RATING))/2);
         imageLoader.DisplayImage(data.get(position).get(TAG_IMAGEURL), recipeImage);
         
         return vi;

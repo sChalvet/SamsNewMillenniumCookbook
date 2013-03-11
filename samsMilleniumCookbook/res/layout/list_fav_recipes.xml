@@ -15,10 +15,17 @@
       android:textSize="22sp"
       android:textStyle="bold" />
 
-   
+    <RatingBar
+        android:id="@+id/listFavRecipesRatingBar"
+        style="@style/recipeRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:isIndicator="true"
+        android:numStars="5" />
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" >
 
@@ -70,18 +77,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0" >
-
-                <RatingBar
-                    android:id="@+id/listFavRecipesRatingBar"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fitsSystemWindows="false"
-                    android:isIndicator="true"
-                    android:maxHeight="10dp"
-                    android:maxWidth="10dp"
-                    android:numStars="6"
-                    android:stepSize="1" />
 	                    
 				                <TableRow
 				                    android:layout_width="match_parent"
@@ -153,16 +148,17 @@
 
         </TableRow>
 
-		 <TextView
-		     android:id="@+id/txtListFavRecipeSummery"
-		     android:layout_width="wrap_content"
-		     android:layout_height="match_parent"
-		     android:textSize="10sp"
-		     android:text="@string/summery" />
-
     </TableLayout>
             </TableLayout>
         </TableRow>
+
+        <TextView
+            android:id="@+id/txtListFavRecipeSummery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/summery"
+            android:textSize="10sp" />
+
     </TableLayout>
 
 </LinearLayout>

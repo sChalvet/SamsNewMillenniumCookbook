@@ -35,6 +35,8 @@ public class AccountCreationActivity extends Activity{
 	EditText txtFirstName;
 	EditText txtLastName;
 	EditText txtPassword;
+	EditText txtTestQuestion;
+	EditText txtTestAnswer;
 	
 	// Progress Dialog
 	private ProgressDialog pDialog;
@@ -50,6 +52,8 @@ public class AccountCreationActivity extends Activity{
 	String firstName;
 	String lastName;
 	String password;
+	String testQuestion;
+	String testAnswer;
 	
 	//Creating the variable that will hold the url when it is pulled from resources
 	String urlCreateAccount;
@@ -69,6 +73,8 @@ public class AccountCreationActivity extends Activity{
 	private static final String TAG_FIRSTNAME = "firstName";
 	private static final String TAG_LASTNAME = "lastName";
 	private static final String TAG_PASSWORD = "password";
+	private static final String TAG_TESTQUESTION = "testQuestion";
+	private static final String TAG_TESTANSWER = "testAnswer";
 	
 	
 	@Override
@@ -89,7 +95,8 @@ public class AccountCreationActivity extends Activity{
 		txtFirstName = (EditText) findViewById(R.id.userFirstName);
 		txtLastName = (EditText) findViewById(R.id.userLastName);
 		txtPassword = (EditText) findViewById(R.id.userPassword);
-
+		txtTestQuestion = (EditText) findViewById(R.id.userTestQuestion);
+		txtTestAnswer = (EditText) findViewById(R.id.userTestQuestionAnswer);
 		
 		// Create Account click event
 		btnCreateAccount.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +112,8 @@ public class AccountCreationActivity extends Activity{
 				firstName = txtFirstName.getText().toString();
 				lastName = txtLastName.getText().toString();
 				password = txtPassword.getText().toString();
+				testQuestion = txtTestQuestion.getText().toString();
+				testAnswer = txtTestAnswer.getText().toString();
 				String msg = "";
 				boolean incomplete=false;
 				
@@ -122,6 +131,12 @@ public class AccountCreationActivity extends Activity{
 					incomplete=true;
 				}else if(password.matches("")){
 					msg = "Please enter a password.";
+					incomplete=true;
+				}else if(testQuestion.matches("")){
+					msg = "Please enter your test question.";
+					incomplete=true;
+				}else if(testAnswer.matches("")){
+					msg = "Please enter your test question answer.";
 					incomplete=true;
 				}else{
 					new CreateNewAccount().execute();
@@ -197,6 +212,8 @@ public class AccountCreationActivity extends Activity{
 			params.add(new BasicNameValuePair(TAG_FIRSTNAME, firstName));
 			params.add(new BasicNameValuePair(TAG_LASTNAME, lastName));
 			params.add(new BasicNameValuePair(TAG_PASSWORD, password));
+			params.add(new BasicNameValuePair(TAG_TESTQUESTION, testQuestion));
+			params.add(new BasicNameValuePair(TAG_TESTANSWER, testAnswer));
 
 			Log.d("CreateAccount params: ", params.toString());
 			

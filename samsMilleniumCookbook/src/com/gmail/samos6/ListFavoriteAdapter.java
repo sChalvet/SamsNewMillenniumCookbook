@@ -137,7 +137,7 @@ public View getView(final int position, View convertView, ViewGroup parent) {
      viewHolder.totalTime.setText(totalTime);
      viewHolder.summery.setText(summery);
      viewHolder.recipeImage =(ImageView)convertView.findViewById(R.id.listFavRecipeImage);
-     viewHolder.rtbRating.setRating(Float.valueOf(rating));
+     viewHolder.rtbRating.setRating(Float.valueOf(rating)/2);
      imageLoader.DisplayImage(imageUrl, viewHolder.recipeImage);
     
     try {

@@ -42,7 +42,8 @@
         android:layout_below="@id/pref1"
         android:layout_gravity="top"
         android:hint="@string/prefHintNickName"
-        android:inputType="text" >
+        android:inputType="text"
+        android:maxLength="20" >
 	    
 	</EditText>
 	
@@ -64,7 +65,8 @@
 	    android:layout_below="@id/pref2"
 	    android:layout_gravity="top"
 	    android:hint="@string/email"
-	    android:inputType="textWebEmailAddress" >
+	    android:inputType="textWebEmailAddress"
+	    android:maxLength="30" >
 	    
 	</EditText>
 	
@@ -82,10 +84,11 @@
 	    android:id="@+id/userFirstName"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_gravity="top"
 	    android:layout_below="@id/pref3"
+	    android:layout_gravity="top"
 	    android:hint="@string/firstName"
-	    android:inputType="textCapWords" >
+	    android:inputType="textCapWords"
+	    android:maxLength="20" >
 	    
 	</EditText>
 	
@@ -100,12 +103,13 @@
 	</TextView>
 	
 	<EditText
-	    android:id="@+id/userLastName" 
+	    android:id="@+id/userLastName"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:hint="@string/lastName"
 	    android:layout_below="@id/pref4"
-	    android:inputType="textCapWords" >
+	    android:hint="@string/lastName"
+	    android:inputType="textCapWords"
+	    android:maxLength="20" >
 	    
 	</EditText>
 	
@@ -125,7 +129,50 @@
 	    android:layout_height="wrap_content"
 	    android:hint="@string/password"
 	    android:layout_below="@id/pref6"
-	    android:inputType="textVisiblePassword">
+	    android:inputType="textVisiblePassword"
+	    android:maxLength="30" >
+	    
+	</EditText>
+	
+		<TextView
+	    android:id="@+id/pref7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_below="@id/userPassword"
+        android:text="@string/prefTestQuestion" >
+	    
+	</TextView>
+
+	<EditText
+	    android:id="@+id/userTestQuestion"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/pref7"
+	    android:hint="@string/testQuestion"
+	    android:inputType="textCapSentences|textAutoCorrect|textAutoComplete"
+	    android:maxLength="80" >
+	    
+	</EditText>
+	
+		<TextView
+	    android:id="@+id/pref8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_below="@id/userTestQuestion"
+        android:text="@string/prefTestAnswer" >
+	    
+	</TextView>
+
+	<EditText
+	    android:id="@+id/userTestQuestionAnswer"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/pref8"
+	    android:hint="@string/testAnswer"
+	    android:paddingBottom="10dp"
+	    android:inputType="text" >
 	    
 	</EditText>
 	
@@ -133,6 +180,7 @@
     	    android:id="@+id/btnPreferenceSave"
     	    android:layout_width="match_parent"
     	    android:layout_height="wrap_content"
+    	    android:layout_below="@id/userTestQuestionAnswer"
     	    android:layout_alignParentBottom="true"
     	    android:text="@string/saveInfo" />
 

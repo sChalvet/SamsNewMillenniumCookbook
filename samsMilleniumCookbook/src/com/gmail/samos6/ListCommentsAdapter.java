@@ -124,7 +124,7 @@ public View getView(final int position, View convertView, ViewGroup parent) {
     viewHolder.author.setText(author);
     viewHolder.date.setText(date);
     viewHolder.comment.setText(comment);
-    viewHolder.ratingBar.setRating(Float.valueOf(rating));
+    viewHolder.ratingBar.setRating(Float.valueOf(rating)/2);
     
     
 

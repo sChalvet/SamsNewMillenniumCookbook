@@ -133,6 +133,8 @@
 	<string name="firstName">First Name</string>
 	<string name="lastName">Last Name</string>
 	<string name="password">Password</string>
+	<string name="testQuestion">for ex: Mothers maiden name</string>
+	<string name="testAnswer">Ans: Catalina Madalina Hoopa Stona Wanna dona</string>
 	<string name="prefNickName">Enter a nick name:</string>
 	<string name="prefEmail">Enter your email:</string>
 	<string name="prefFirstName">Enter your first name:</string>
@@ -141,6 +143,8 @@
 	<string name="prefHintNickName">Will be seen by others</string>
 	<string name="saveInfo">Create Account</string>
 	<string name="prefDefaultUserName">Guest</string>
+	<string name="prefTestQuestion">Enter a test question:</string>
+	<string name="prefTestAnswer">Enter your answer to the question:</string>
 	
 	<!-- values used throughout  -->
 	<string name="yes">Yes</string>

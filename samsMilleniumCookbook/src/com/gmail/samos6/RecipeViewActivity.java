@@ -269,7 +269,7 @@ public class RecipeViewActivity extends Activity {
 		txtServings.setText(servings);
 		if(hasImage==1)
 			imgLoader.DisplayImage(urlRoot+imageUrl, imgPicture);
-		rtbRating.setRating(Float.valueOf(rating));
+		rtbRating.setRating(Float.valueOf(rating)/2);
 		
 	}
 	
