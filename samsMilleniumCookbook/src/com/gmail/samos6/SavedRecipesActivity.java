@@ -57,7 +57,6 @@ public class SavedRecipesActivity  extends ListActivity{
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
 	
-	//private static String urlGetFavRecipes = "http://10.0.2.2/recipeApp/getFavRecipes.php";
 	 String urlGetFavRecipes;
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -206,7 +205,7 @@ public class SavedRecipesActivity  extends ListActivity{
 			Log.d("All Saved Recipes params: ", params.toString());
 			
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(urlGetFavRecipes, "GET", params);
+			JSONObject json = jParser.makeHttpRequest(urlGetFavRecipes, "POST", params);
 			
 			
 			//if asyncTask has Not been cancelled then continue

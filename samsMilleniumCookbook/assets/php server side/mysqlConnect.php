@@ -50,6 +50,16 @@ $ingredientName='Almond';
 				userName =prefs.getString("nickName", "guest");
 				password =prefs.getString("password", "");
 			
+			android:background="@drawable/background"
+			                <RatingBar
+                    android:id="@+id/ratingBarListRecipe"
+                    style="@style/recipeRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:numStars="2"
+                    android:stepSize="0.1" />
+					
 			
 			$product["ingredientName"] = $row[0];
 			$product["calories"] = $row[1];

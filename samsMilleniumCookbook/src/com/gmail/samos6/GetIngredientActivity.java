@@ -253,7 +253,7 @@ public class GetIngredientActivity extends ListActivity {
 			List<NameValuePair> params = new ArrayList<NameValuePair>(); 	
 
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(urlGetAllIngredients, "GET", params);
+			JSONObject json = jParser.makeHttpRequest(urlGetAllIngredients, "POST", params);
 			
 			
 			//if the asyncTask has not been cancelled then continue

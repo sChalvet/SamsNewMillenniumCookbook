@@ -17,9 +17,9 @@ $db = new DB_CONNECT();
 $conn=$db->connect();
 
 // check for post data
-if (isset($_GET["recipeName"])) {
-    $recipeName = $_GET['recipeName'];
-	$author = $_GET['author'];
+if (isset($_REQUEST["recipeName"])) {
+    $recipeName = $_REQUEST['recipeName'];
+	$author = $_REQUEST['author'];
 
     // get a product from products table
    $result = mysqli_query($conn, "SELECT comment, rating FROM recipecomments WHERE recipeName = '$recipeName' AND authorName= '$author'");

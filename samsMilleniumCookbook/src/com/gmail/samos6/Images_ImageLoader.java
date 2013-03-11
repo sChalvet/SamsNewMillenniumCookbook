@@ -45,8 +45,14 @@ public class Images_ImageLoader {
     public void DisplayImage(String url, int loader, ImageView imageView)
     {
     	defaultImage = loader;
+    	Bitmap bitmap=null;
+    	
+    	if(!url.equalsIgnoreCase("no pic")){
+    		bitmap=memoryCache.get(url);
+    	}
+    	
         imageViews.put(imageView, url);
-        Bitmap bitmap=memoryCache.get(url);
+        //Bitmap bitmap=memoryCache.get(url);
         if(bitmap!=null)
             imageView.setImageBitmap(bitmap);
         else
@@ -54,6 +60,7 @@ public class Images_ImageLoader {
             queuePhoto(url, imageView);
             imageView.setImageResource(loader);
         }
+        
     }
     
     /**

@@ -359,7 +359,7 @@ public class MainScreenActivity extends Activity{
 			Log.d("Login params: ", params.toString());
 			
 			// getting JSON Object
-			JSONObject json = jsonParser.makeHttpRequest(urlLogin, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlLogin, "POST", params);
 
 			//if asyncTask has Not been cancelled then continue
 			if (!bCancelled) try {

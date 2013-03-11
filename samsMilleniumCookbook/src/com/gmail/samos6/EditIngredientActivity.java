@@ -439,7 +439,7 @@ public class EditIngredientActivity extends Activity {
 						params.add(new BasicNameValuePair("ingredientName", ingredientName));
 
 						// getting Ingredient details by making HTTP request
-						JSONObject json = jsonParser.makeHttpRequest( urlGetIngredientDetails, "GET", params);
+						JSONObject json = jsonParser.makeHttpRequest( urlGetIngredientDetails, "POST", params);
 
 						// check your log for json response
 						Log.d("Single Product Details", json.toString());
@@ -548,7 +548,7 @@ public class EditIngredientActivity extends Activity {
 			params.add(new BasicNameValuePair("notes", notes));
 
 			// sending modified data through http request
-			JSONObject json = jsonParser.makeHttpRequest(urlUpdateIngredient, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlUpdateIngredient, "POST", params);
 
 			//if asyncTask has not been cancelled then continue
 			if (!bCancelled) try {
@@ -634,7 +634,7 @@ public class EditIngredientActivity extends Activity {
 				params.add(new BasicNameValuePair("ingredientName", ingredientName));
 
 				// getting product details by making HTTP request
-				JSONObject json = jsonParser.makeHttpRequest(urlDeleteIngredient, "GET", params);
+				JSONObject json = jsonParser.makeHttpRequest(urlDeleteIngredient, "POST", params);
 
 				// check your log for json response
 				Log.d("Delete Ingredient", json.toString());
@@ -731,7 +731,7 @@ public class EditIngredientActivity extends Activity {
 
 			// getting JSON Object
 			// Note that create product url accepts POST method
-			JSONObject json = jsonParser.makeHttpRequest(urlCreateNewIngredient, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlCreateNewIngredient, "POST", params);
 		
 			//if asyncTask has not been cancelled then continue
 			if (!bCancelled) try {	

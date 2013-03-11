@@ -8,12 +8,12 @@
 $response = array();
 
 // check for required fields
-if (isset($_GET["recipeName"])) {
+if (isset($_REQUEST["recipeName"])) {
 
-	$recipeName = $_GET['recipeName'];		
-    $comment = $_GET["comment"];
-    $rating = $_GET["rating"];
-    $authorName = $_GET["author"];
+	$recipeName = $_REQUEST['recipeName'];		
+    $comment = $_REQUEST["comment"];
+    $rating = $_REQUEST["rating"];
+    $authorName = $_REQUEST["author"];
 
 
     // include db connect class

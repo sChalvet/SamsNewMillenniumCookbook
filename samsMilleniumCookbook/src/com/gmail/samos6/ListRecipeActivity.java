@@ -10,6 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.gmail.samos6.ListIngredientActivity.LoadAllProducts;
+
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -63,6 +65,7 @@ public class ListRecipeActivity  extends ListActivity{
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
 	String urlGetAllRecipes;
+	String urlRoot;
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -93,6 +96,7 @@ public class ListRecipeActivity  extends ListActivity{
 	
 		//getting url from resources
 		urlGetAllRecipes = getResources().getString(R.string.urlGetAllRecipes);
+		urlRoot = getResources().getString(R.string.urlRoot);
 		
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
@@ -138,6 +142,16 @@ public class ListRecipeActivity  extends ListActivity{
 			}
 		});
 
+	}
+	
+	
+	@Override
+	protected void onRestart() {
+	    super.onRestart();
+	    
+	    Log.d("list recipe inside", "on restart");
+		adapter.clear();
+		new LoadAllRecipes().execute();
 	}
 
 	// Response from Edit Product Activity
@@ -203,7 +217,7 @@ public class ListRecipeActivity  extends ListActivity{
 			Log.d("SearchRecipes params: ", params.toString());
 			
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(urlGetAllRecipes, "GET", params);
+			JSONObject json = jParser.makeHttpRequest(urlGetAllRecipes, "POST", params);
 			
 			//if AsyncTask has Not been cancelled then continue
 			if (!bCancelled) try {
@@ -229,7 +243,7 @@ public class ListRecipeActivity  extends ListActivity{
 						String prepTime = c.getString(TAG_PREPTIME);
 						String cookTime = c.getString(TAG_COOKTIME);
 						String author = c.getString(TAG_AUTHOR);
-						String imageUrl = c.getString(TAG_IMAGEURL);
+						String imageUrl = urlRoot+c.getString(TAG_IMAGEURL); //adding the urlRoot to the url returned by php
 						
 						int cookT = Integer.parseInt(cookTime);
 						int prepT = Integer.parseInt(prepTime);

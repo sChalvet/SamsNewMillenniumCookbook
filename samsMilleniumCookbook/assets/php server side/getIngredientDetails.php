@@ -16,8 +16,8 @@ require_once __DIR__ . '/db_connect.php';
 $db = new DB_CONNECT();
 
 // check for post data
-if (isset($_GET["ingredientName"])) {
-    $ingredientName = $_GET['ingredientName'];
+if (isset($_REQUEST["ingredientName"])) {
+    $ingredientName = $_REQUEST['ingredientName'];
 
     // get a product from products table
    $result = $db->connect()->query("SELECT calories, protein, fat, carbs, notes, addedBy, type FROM ingredientlist WHERE ingredientName = '$ingredientName'");

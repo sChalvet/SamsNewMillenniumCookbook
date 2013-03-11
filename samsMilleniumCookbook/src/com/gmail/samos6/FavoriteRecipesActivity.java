@@ -58,6 +58,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
 	String urlGetFavRecipes;
+	String urlRoot;
 	
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -83,6 +84,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 	
 		//getting url from resources
 		urlGetFavRecipes = getResources().getString(R.string.urlGetFavRecipes);
+		urlRoot = getResources().getString(R.string.urlRoot);
 		
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
@@ -208,7 +210,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 			Log.d("All Favorite Recipes params: ", params.toString());
 			
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(urlGetFavRecipes, "GET", params);
+			JSONObject json = jParser.makeHttpRequest(urlGetFavRecipes, "POST", params);
 			
 			
 			//if the asyncTask has not been cancelled then continue
@@ -234,7 +236,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 						String prepTime = c.getString(TAG_PREPTIME);
 						String cookTime = c.getString(TAG_COOKTIME);
 						String author = c.getString(TAG_AUTHOR);
-						String imageUrl = c.getString(TAG_IMAGEURL);
+						String imageUrl = urlRoot+c.getString(TAG_IMAGEURL); //adding urlRoot to the image url
 						
 						
 						int cookT = Integer.parseInt(cookTime);

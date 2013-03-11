@@ -5,18 +5,16 @@
  * match the contents of an array
  */
 
-if (isset($_GET["list0"])) {
-    $array[0] = "'".$_GET["list0"]."'";
+if (isset($_REQUEST["list0"])) {
+    $array[0] = "'".$_REQUEST["list0"]."'";
 	$i=1;
-	while(isset($_GET["list".$i])){
-		$array[$i] = "'".$_GET["list".$i]."'";
+	while(isset($_REQUEST["list".$i])){
+		$array[$i] = "'".$_REQUEST["list".$i]."'";
 		$i++;
 	}
 	
+	//thearray is packed with recipenames this puts them all in a string with a , seperating them
 	$recipeName = implode(', ' , $array);
-	
-	//var_dump( $_GET);
-	//var_dump( $recipeName);
 	
 	// array for JSON response
 	$response = array();
@@ -50,8 +48,12 @@ if (isset($_GET["list0"])) {
 			$product["author"] = $row[2];
 			$product["prepTime"] = $row[3];
 			$product["cookTime"] = $row[4];
+			
+			//if row[5] (hasImage) is true then its got a url
 			if(intval($row[5])){
-				$product["imageUrl"] = $_SERVER['PATH_INFO']."/recipeImages/".$recipeName.".jpg";
+				//this makes "Test Recipe" into "Test_Recipe" important for searching for images
+				$imageName = str_replace(" ", "_", $row[0]);
+				$product["imageUrl"] = "recipeImages/".$imageName.".jpg";
 			}else{
 				$product["imageUrl"] = "no pic";
 			}

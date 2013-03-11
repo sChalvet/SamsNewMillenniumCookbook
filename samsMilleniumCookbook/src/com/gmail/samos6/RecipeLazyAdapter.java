@@ -41,6 +41,10 @@ public class RecipeLazyAdapter extends BaseAdapter {
     public int getCount() {
         return data.size();
     }
+    
+    public void clear() {
+        this.data.clear();
+    }
 
     public Object getItem(int position) {
         return position;

@@ -134,9 +134,6 @@ public class PantryActivity extends ListActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-
-				//view.setBackgroundColor(Color.CYAN);
-				//view.findViewById(R.id.tableRowIngredient).setBackgroundColor(Color.CYAN);
 						
 				// getting values from selected ListItem
 				String ingredientname = ((TextView) view.findViewById(R.id.ingredientName)).getText().toString();

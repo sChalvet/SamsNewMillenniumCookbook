@@ -10,14 +10,14 @@ date_default_timezone_set('America/New_York');
 $response = array();
 
 // check for required fields
-if (isset($_GET["nickName"])) {
+if (isset($_REQUEST["nickName"])) {
     
 	
-	$nickName = $_GET['nickName'];		
-    $email = $_GET["email"];
-    $firstName = $_GET["firstName"];
-    $lastName = $_GET["lastName"];
-	$password = $_GET["password"];
+	$nickName = $_REQUEST['nickName'];		
+    $email = $_REQUEST["email"];
+    $firstName = $_REQUEST["firstName"];
+    $lastName = $_REQUEST["lastName"];
+	$password = $_REQUEST["password"];
 	$dateUpdated = date("Y-m-d H:i:s");
 
 

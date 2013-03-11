@@ -24,6 +24,9 @@ if (isset($_REQUEST['image'])) {
 	
 	$binary=base64_decode($base);
 	header('Content-Type: image/jpg; charset=utf-8');
+	
+	//this makes "Test Recipe" into "Test_Recipe" import for searching for images
+	$recipeName = str_replace(" ", "_", $recipeName);
 	$file = fopen('recipeImages/'.$recipeName.'.jpg', 'wb');
 
     // check if row inserted or not

@@ -18,12 +18,12 @@ $db = new DB_CONNECT();
 $conn=$db->connect();
 
 // check for post data
-if (isset($_GET["foodName"])) {
-    $foodName = $_GET['foodName'];
-	$author = $_GET['author'];
-	$recipeType = $_GET['recipeType'];
-	$keyWord = $_GET['keyWord'];
-	$cookTime = $_GET['cookTime'];
+if (isset($_REQUEST["foodName"])) {
+    $foodName = $_REQUEST['foodName'];
+	$author = $_REQUEST['author'];
+	$recipeType = $_REQUEST['recipeType'];
+	$keyWord = $_REQUEST['keyWord'];
+	$cookTime = $_REQUEST['cookTime'];
 	
 	//used to store the query
 	$cookTimeQuery="";
@@ -155,8 +155,12 @@ if (isset($_GET["foodName"])) {
 			$product["author"] = $row[2];
 			$product["prepTime"] = $row[3];
 			$product["cookTime"] = $row[4];
+			
+			//if row[5] (hasImage) is true then its got a url
 			if(intval($row[5])){
-				$product["imageUrl"] = "http://192.168.254.45/recipeApp/recipeImages/Test_Huh.jpg";
+				//this makes "Test Recipe" into "Test_Recipe" important for searching for images
+				$imageName = str_replace(" ", "_", $row[0]);
+				$product["imageUrl"] = "recipeImages/".$imageName.".jpg";
 			}else{
 				$product["imageUrl"] = "no pic";
 			}

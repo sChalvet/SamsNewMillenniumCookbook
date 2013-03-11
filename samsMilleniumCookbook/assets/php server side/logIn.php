@@ -8,11 +8,11 @@
 $response = array();
 
 // check for required fields
-if (isset($_GET["nickName"])) {
+if (isset($_REQUEST["nickName"])) {
     
 	
-	$nickName = $_GET['nickName'];		
-    $password = $_GET["password"];
+	$nickName = $_REQUEST['nickName'];		
+    $password = $_REQUEST["password"];
 
 
     // include db connect class

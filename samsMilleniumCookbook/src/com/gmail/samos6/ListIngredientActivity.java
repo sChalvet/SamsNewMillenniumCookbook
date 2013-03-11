@@ -69,15 +69,6 @@ public class ListIngredientActivity extends ListActivity {
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_PRODUCTS = "products";
 	private static final String TAG_INGREDIENTNAME = "ingredientName";
-	private static final String TAG_CALORIES = "calories";
-	private static final String TAG_PROTEIN = "protein";
-	private static final String TAG_FAT = "fat";
-	private static final String TAG_CARBS = "carbs";
-	private static final String TAG_NOTES = "notes";
-	private static final String TAG_ADDEDBY = "addedBy";
-	private static final String TAG_TYPE = "type";
-	private static final String TAG_DATECREATED = "dateCreated";
-	private static final String TAG_DATEUPDATED = "dateUpdated";
 	
 	private static final String TAG_LISTINGREDIENT = "listIngredient";
 	private static final String TAG_ADDINGREDIENT = "addIngredient";
@@ -177,9 +168,6 @@ public class ListIngredientActivity extends ListActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-
-				//view.setBackgroundColor(Color.CYAN);
-				//view.findViewById(R.id.tableRowIngredient).setBackgroundColor(Color.CYAN);
 						
 				// getting values from selected ListItem
 				String ingredientname = ((TextView) view.findViewById(R.id.ingredientName)).getText().toString();
@@ -275,7 +263,7 @@ public class ListIngredientActivity extends ListActivity {
 			List<NameValuePair> params = new ArrayList<NameValuePair>(); 	
 
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(urlGetAllIngredients, "GET", params);
+			JSONObject json = jParser.makeHttpRequest(urlGetAllIngredients, "POST", params);
 			
 			
 			//if the asyncTask has not been cancelled then continue

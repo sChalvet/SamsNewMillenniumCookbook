@@ -18,11 +18,11 @@ $db = new DB_CONNECT();
 $conn=$db->connect();
 
 // check for post data
-if (isset($_GET["list0"])) {
-    $array[0] = "'".$_GET["list0"]."'";
+if (isset($_REQUEST["list0"])) {
+    $array[0] = "'".$_REQUEST["list0"]."'";
 	$i=1;
-	while(isset($_GET["list".$i])){
-		$array[$i] = "'".$_GET["list".$i]."'";
+	while(isset($_REQUEST["list".$i])){
+		$array[$i] = "'".$_REQUEST["list".$i]."'";
 		$i++;
 	}
 	

@@ -173,7 +173,7 @@ public class EditCommentActivity extends Activity {
 			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
 
 			// getting JSON Object
-			JSONObject json = jsonParser.makeHttpRequest(urlupdateComment, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlupdateComment, "POST", params);
 			
 			//if asyncTask has not been cancelled then continue
 			if(!bCancelled) try {
@@ -252,7 +252,7 @@ public class EditCommentActivity extends Activity {
 			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
 			
 			// getting JSON string from URL
-			JSONObject json = jsonParser.makeHttpRequest(urlEditComment, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlEditComment, "POST", params);
 			
 			
 			//if AsyncTask was not cancelled then carry on

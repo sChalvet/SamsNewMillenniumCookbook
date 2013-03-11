@@ -17,11 +17,11 @@ $db = new DB_CONNECT();
 $conn=$db->connect();
 
 // check for post data
-if (isset($_GET["recipeName"])) {
-    $recipeName = $_GET['recipeName'];
+if (isset($_REQUEST["recipeName"])) {
+    $recipeName = $_REQUEST['recipeName'];
 
-    // get a product from products table
-   $result = mysqli_query($conn, "SELECT summery, prepTime, cookTime, servings, directions, type FROM recipe WHERE recipeName = '$recipeName'");
+   // get a product from products table
+   $result = mysqli_query($conn, "SELECT summery, prepTime, cookTime, servings, directions, type, hasImage FROM recipe WHERE recipeName = '$recipeName'");
 
     if (!empty($result)) {
         // check for empty result
@@ -29,12 +29,10 @@ if (isset($_GET["recipeName"])) {
 		
 			$rating=0;
 			$numRatings=0;
-			//$getPic = mysql_query("SELECT img FROM picture WHERE picId = 1") or die(mysql_error());
 			
 			$response["product"] = array();
 			
             $row = mysqli_fetch_array($result);
-			//$rowPic = mysql_fetch_array($getPic);
 	
 			$product = array();
 			
@@ -44,7 +42,16 @@ if (isset($_GET["recipeName"])) {
 			$product["servings"] = $row[3];
 			$product["cookingDirections"] = $row[4];
 			$product["type"] = $row[5];
-			$product["imageUrl"] = "http://3.bp.blogspot.com/-Hzcfxomkius/TgQ4Do1I5YI/AAAAAAAABkQ/IBIdX39Lq-4/s1600/Golden-Gun-29593.jpg";
+			$product["hasImage"] = $row[6];
+			
+			//if row[6] (hasImage) is true then its got a url
+			if(intval($row[6])){
+				//this makes "Test Recipe" into "Test_Recipe" important for searching for images
+				$imageName = str_replace(" ", "_", $recipeName);
+				$product["imageUrl"] = "recipeImages/".$imageName.".jpg";
+			}else{
+				$product["imageUrl"] = "no pic";
+			}
 		
 			//getting all of the ingredients for this recipe
 			$ingredientList = mysqli_query($conn, "SELECT ingredientName, amount, measurement, description, important FROM recipeingredients WHERE recipeName = '$recipeName'");

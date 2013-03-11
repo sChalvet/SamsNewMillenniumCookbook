@@ -41,6 +41,7 @@ public class RecipeViewActivity extends Activity {
 	
 
 	TextView txtRecipeName;
+	TextView txtServings;
 	TextView txtAuthor;
 	TextView txtNumReviews;
 	TextView txtIngredientList;
@@ -62,6 +63,7 @@ public class RecipeViewActivity extends Activity {
 	
 	String recipeName;
 	String author= "";
+	String servings= "";
 	String numRatings= "";
 	String ingredientList= "";
 	String cookingDirections= "";
@@ -71,15 +73,20 @@ public class RecipeViewActivity extends Activity {
 	String rawImage= "";
 	
 	Bitmap pic;
+	int hasImage=0;
 	
-    String image_url = "http://thinkprogress.org/wp-content/uploads/2012/07/Guns_1000.jpg";
+	// single ingredient url
+	String urlGetRecipeDetails;	
+	String urlRoot;				//stores the root url
+    String imageUrl = "";		//stores the file path
     
     // ImageLoader class instance
     Images_ImageLoader imgLoader;
 	
 	//used to see if user canceled the AsyncTask
-	Boolean bCancelled=false;
-	
+    Boolean bCancelled=false;
+    Boolean successful=false;
+	String message="";
 
 	// Progress Dialog
 	private ProgressDialog pDialog;
@@ -87,9 +94,6 @@ public class RecipeViewActivity extends Activity {
 	// JSON parser class
 	JSONParser jsonParser = new JSONParser();
 
-	// single ingredient url
-	//private static final String urlGetRecipeDetails = "http://10.0.2.2/recipeApp/getRecipeDetails.php";
-	String urlGetRecipeDetails;
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
@@ -105,7 +109,9 @@ public class RecipeViewActivity extends Activity {
 	private static final String TAG_RATINGS = "rating";
 	private static final String TAG_COOKTIME = "cookTime";
 	private static final String TAG_PREPTIME = "prepTime";
-	private static final String TAG_IMAGE = "image";
+	private static final String TAG_SERVINGS = "servings";
+	private static final String TAG_IMAGEURL = "imageUrl";
+	private static final String TAG_HASIMAGE = "hasImage";
 	
 	
 	@Override
@@ -122,6 +128,7 @@ public class RecipeViewActivity extends Activity {
 		
 		//getting url from resources
 		urlGetRecipeDetails = getResources().getString(R.string.urlGetRecipeDetails);
+		urlRoot = getResources().getString(R.string.urlRoot);
 		
 		// getting ingredient details from intent
 		Intent intent = getIntent();
@@ -136,6 +143,7 @@ public class RecipeViewActivity extends Activity {
 		btnEdit = (Button) findViewById(R.id.btnRecipeViewEdit);
 		
 		txtRecipeName = (TextView) findViewById(R.id.txtRecipeViewRecipeName);
+		txtServings = (TextView) findViewById(R.id.txtRecipeViewServings);
 		txtAuthor = (TextView) findViewById(R.id.txtRecipeViewAuthor);
 		txtNumReviews= (TextView) findViewById(R.id.txtRecipeViewNumReviews);
 		txtIngredientList= (TextView) findViewById(R.id.txtRecipeViewIngredientList);
@@ -147,9 +155,7 @@ public class RecipeViewActivity extends Activity {
 		rtbRating= (RatingBar) findViewById(R.id.recipeViewRatingBar);
 			
 		Log.d("ViewRecipe_just in", recipeName);
-		
-		imgLoader.DisplayImage(image_url, imgPicture);
-		
+
 		new GetRecipeDetails().execute();
 		
 		// See Reviews button click event
@@ -260,8 +266,10 @@ public class RecipeViewActivity extends Activity {
 		txtCookingDirections.setText(cookingDirections);
 		txtCookTime.setText(cookTime);
 		txtPrepTime.setText(prepTime);
-		//imgPicture.setImageBitmap(pic);
-		//rtbRating.setLabelFor(5);//.setText(rating);
+		txtServings.setText(servings);
+		if(hasImage==1)
+			imgLoader.DisplayImage(urlRoot+imageUrl, imgPicture);
+		rtbRating.setRating(Float.valueOf(rating));
 		
 	}
 	
@@ -307,17 +315,22 @@ public class RecipeViewActivity extends Activity {
 					if(!bCancelled) try {
 						// Building Parameters
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
-						params.add(new BasicNameValuePair("recipeName", recipeName));
+						params.add(new BasicNameValuePair(TAG_RECIPENAME, recipeName));
 
 						// getting Ingredient details by making HTTP request
-						JSONObject json = jsonParser.makeHttpRequest( urlGetRecipeDetails, "GET", params);
+						JSONObject json = jsonParser.makeHttpRequest( urlGetRecipeDetails, "POST", params);
 
 						// check your log for json response
 						Log.d("Single recipe Details", json.toString());
 						
+						//reset variable just in case
+						successful=false;
+						
 						// json success tag
 						success = json.getInt(TAG_SUCCESS);
 						if (success == 1) {
+							
+							successful=true;
 							// successfully received product details
 							JSONArray products = json.getJSONArray(TAG_PRODUCT); // JSON Array
 							
@@ -333,18 +346,20 @@ public class RecipeViewActivity extends Activity {
 							rating = product.getString(TAG_RATINGS);
 							prepTime += product.getString(TAG_PREPTIME);
 							cookTime += product.getString(TAG_COOKTIME);
-							//rawImage = product.getString(TAG_IMAGE);
+							imageUrl = product.getString(TAG_IMAGEURL);
+							servings = product.getString(TAG_SERVINGS);
+							hasImage = Integer.parseInt(product.getString(TAG_HASIMAGE));
 							
 
 						}else{	
-							// ingredient with that name not found
-							//Toast.makeText(getApplicationContext(), "Nothing found", Toast.LENGTH_SHORT).show();
+							// recipe with that name not found
+							message= json.getString(TAG_MESSAGE);
+							Log.d("Recipe View failed: ", message);
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
-			/*	}
-			});*/
+
 					
 					Log.d("RecipeView_DoinBackGround", "before return");
 			return null;

@@ -193,7 +193,7 @@
 			    android:ems="10"
 			    android:hint="@string/summeryHint"
 			    android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
-			    android:maxLength="75"
+			    android:maxLength="150"
 			    android:padding="20dp"
 			    android:textColor="#EEEEEEAA" />
 

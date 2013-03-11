@@ -663,7 +663,7 @@ private void dropFromList(List<String> list) {
 						
 			// getting JSON Object
 			// Note that create product url accepts POST method
-			JSONObject json = jsonParser.makeHttpRequest(urlCreateRecipe, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlCreateRecipe, "POST", params);
 
 	        //resetting variable just in case
 	        successfulRecipe=false;

@@ -2,7 +2,7 @@
 	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
-	    android:background="#00000000"
+    	android:background="@drawable/background"
 	    android:orientation="vertical" >
 
 		<TextView
@@ -11,7 +11,6 @@
 		    android:layout_height="wrap_content"
 		    android:layout_alignParentTop="true"
 		    android:layout_gravity="center"
-		    android:background="#FF005555"
 		    android:text="@string/recipeName"
 		    android:textAppearance="?android:attr/textAppearanceLarge"
 		    android:typeface="serif" />
@@ -28,15 +27,23 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="match_parent"
 		        android:orientation="vertical" >
+
+		        <RatingBar
+		            android:id="@+id/recipeViewRatingBar"
+		            style="@style/recipeRatingBar"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="right"
+		            android:isIndicator="true"
+		            android:numStars="5" />
 		        
 		<TableLayout
 		    android:layout_width="match_parent"
-		    android:layout_height="124dp"
-		    android:background="#FF005500" >
+		    android:layout_height="80dp" >
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
             
             <ImageView
                 android:id="@+id/recipeViewImage"
@@ -45,22 +52,13 @@
                 android:layout_gravity="fill"
                 android:layout_weight="10"
                 android:contentDescription="@string/banner_alt"
-                android:scaleType="centerCrop"
+                android:scaleType="centerInside"
                 android:src="@drawable/ic_launcher" />
             
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0" >
-
-                <RatingBar
-                    android:id="@+id/recipeViewRatingBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fitsSystemWindows="false"
-                    android:maxHeight="10dp"
-                    android:maxWidth="10dp"
-                    android:numStars="4" />
 
                 <TableRow
                     android:layout_width="fill_parent"
@@ -105,11 +103,35 @@
 				                      android:text="@string/recipeReviews" />
 				                    
 				                </TableRow>
+				                
+				                <TableRow
+				                    android:layout_width="match_parent"
+				                    android:layout_height="20dp"
+				                    android:layout_weight="1" >
+				                    
+				                 <TextView
+				                     android:id="@+id/txtRecipeViewServings"
+				                     android:layout_width="fill_parent"
+				                     android:layout_height="fill_parent"
+				                     android:layout_gravity="right"
+				                     android:layout_weight="0"
+				                     android:paddingTop="12dp"
+				                     android:text="@string/recipeReviewCount"
+				                     android:textStyle="bold" />
+				                     
+				                  <TextView
+				                      android:layout_width="fill_parent"
+				                      android:layout_height="fill_parent"
+				                      android:layout_marginLeft="10dp"
+				                      android:layout_weight="0"
+				                      android:paddingTop="12dp"
+				                      android:text="@string/recipeServings" />
+				                    
+				                </TableRow>
                 
                 
                 
             </TableLayout>
-                
 
         </TableRow>
 
@@ -194,8 +216,8 @@
 
     <SlidingDrawer
         android:id="@+id/recipeViewSlidingDrawer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:allowSingleTap="false"

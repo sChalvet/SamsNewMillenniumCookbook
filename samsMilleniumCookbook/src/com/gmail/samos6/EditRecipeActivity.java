@@ -95,6 +95,7 @@ public class EditRecipeActivity extends Activity {
 	String summery= "";
 	String type= "";
 	String servings= "";
+	String imageUrl="";
 	
 	Bitmap recipeImage=null;
 	boolean successfulRecipe = false;
@@ -120,6 +121,7 @@ public class EditRecipeActivity extends Activity {
 	List<String> arrayAmount= new ArrayList<String>();
 	List<String> arrayVital= new ArrayList<String>();
 
+	Images_ImageLoader imgLoader;
 	
 	//this stores the number of ingredients selected
 	int numIngredients=0;
@@ -137,6 +139,7 @@ public class EditRecipeActivity extends Activity {
 	String urlEditRecipe;
 	String urlUpdateRecipe; 
 	String urlUploadImage;
+	String urlRoot;
 	
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
@@ -161,6 +164,7 @@ public class EditRecipeActivity extends Activity {
 	private static final String TAG_DESCRIPTION = "description";
 	private static final String TAG_IMPORTANT = "important";
 	private static final String TAG_NUMINGREDIENTS = "numIngredients";
+	private static final String TAG_IMAGEURL = "imageUrl";
 	private static final String TAG_IMAGE = "image";
 	private static final String TAG_HASIMAGE = "hasImage";
 
@@ -172,6 +176,8 @@ public class EditRecipeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_recipe);
 		
+		imgLoader = new Images_ImageLoader(getApplicationContext());
+		
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
@@ -182,6 +188,7 @@ public class EditRecipeActivity extends Activity {
 		urlEditRecipe = getResources().getString(R.string.urlEditRecipe);
 		urlUpdateRecipe = getResources().getString(R.string.urlUpdateRecipe);
 		urlUploadImage = getResources().getString(R.string.urlUploadImage);
+		urlRoot = getResources().getString(R.string.urlRoot);
 		
 		//loading up strings to be used with spinners
 		recipeType = getResources().getStringArray(R.array.recipeType);
@@ -432,6 +439,8 @@ public class EditRecipeActivity extends Activity {
 		
 		spnrRecipeType.setSelection(typePosition);
 		spnrServings.setSelection(servingsPosition);
+		
+		imgLoader.DisplayImage(urlRoot+imageUrl, imgPicture);
 		
 	}
 	
@@ -715,7 +724,7 @@ private void dropFromList(List<String> list) {
 				if (!bCancelled) try {
 					
 					// check log cat for response
-					Log.d("Create Response", json2.toString());
+					Log.d("Create Response for pic", json2.toString());
 					
 					int success = json2.getInt(TAG_SUCCESS);
 	
@@ -744,7 +753,7 @@ private void dropFromList(List<String> list) {
 			
 			// getting JSON Object
 			// Note that create product url accepts POST method
-			JSONObject json = jsonParser.makeHttpRequest(urlUpdateRecipe, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlUpdateRecipe, "POST", params);
 
 			//if asyncTask has Not been cancelled then continue
 			if (!bCancelled) try {
@@ -824,7 +833,7 @@ private void dropFromList(List<String> list) {
 						params.add(new BasicNameValuePair("recipeName", oldRecipeName));
 
 						// getting Ingredient details by making HTTP request
-						JSONObject json = jsonParser.makeHttpRequest( urlEditRecipe, "GET", params);
+						JSONObject json = jsonParser.makeHttpRequest( urlEditRecipe, "POST", params);
 
 						// check your log for json response
 						Log.d("Single recipe Details", json.toString());
@@ -847,6 +856,9 @@ private void dropFromList(List<String> list) {
 							type = product.getString(TAG_TYPE);
 							servings = product.getString(TAG_SERVINGS);
 							numIngredients = Integer.parseInt(product.getString(TAG_NUMINGREDIENTS));
+							imageUrl = product.getString(TAG_IMAGEURL);
+							hasImage = Integer.parseInt(product.getString(TAG_HASIMAGE));
+							
 							
 							for(int i=0; i<numIngredients; i++){
 								

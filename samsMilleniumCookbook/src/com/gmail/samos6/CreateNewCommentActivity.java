@@ -149,7 +149,7 @@ public class CreateNewCommentActivity extends Activity {
 			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
 
 			// getting JSON Object
-			JSONObject json = jsonParser.makeHttpRequest(urlCreateCommnet, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlCreateCommnet, "POST", params);
 			
 			//if asyncTask has not been cancelled then continue
 			if(!bCancelled) try {

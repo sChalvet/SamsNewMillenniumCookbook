@@ -201,7 +201,7 @@ public class AccountCreationActivity extends Activity{
 			Log.d("CreateAccount params: ", params.toString());
 			
 			// getting JSON Object
-			JSONObject json = jsonParser.makeHttpRequest(urlCreateAccount, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlCreateAccount, "POST", params);
 
 			//if asyncTask has Not been cancelled then continue
 			if (!bCancelled) try {

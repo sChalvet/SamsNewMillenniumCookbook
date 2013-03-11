@@ -2,22 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:background="#FF005500"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@drawable/background">
 
     <RatingBar
         android:id="@+id/listRecipeCommentsRatingBar"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="match_parent"
+        style="@style/recipeRatingBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="right"
         android:layout_weight="0"
         android:fitsSystemWindows="true"
         android:isIndicator="true"
         android:maxHeight="10dp"
         android:maxWidth="10dp"
-        android:numStars="5"
-        android:rating="1"
-        android:stepSize="1" />
+        android:numStars="5" />
 
     <TextView
         android:id="@+id/txtListRecipeCommentsComment"

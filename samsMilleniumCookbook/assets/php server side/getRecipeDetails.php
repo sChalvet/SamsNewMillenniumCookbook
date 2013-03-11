@@ -17,11 +17,11 @@ $db = new DB_CONNECT();
 $conn=$db->connect();
 
 // check for post data
-if (isset($_GET["recipeName"])) {
-    $recipeName = $_GET['recipeName'];
+if (isset($_REQUEST["recipeName"])) {
+    $recipeName = $_REQUEST['recipeName'];
 
     // get a product from products table
-   $result = mysqli_query($conn, "SELECT userName, ingredientDiscription, directions, prepTime, cookTime, hasRecipe FROM recipe WHERE recipeName = '$recipeName'");
+   $result = mysqli_query($conn, "SELECT userName, ingredientDiscription, directions, prepTime, cookTime, hasImage, servings FROM recipe WHERE recipeName = '$recipeName'");
 
     if (!empty($result)) {
         // check for empty result
@@ -42,8 +42,14 @@ if (isset($_GET["recipeName"])) {
 			$product["cookingDirections"] = $row[2];
 			$product["prepTime"] = $row[3];
 			$product["cookTime"] = $row[4];
+			$product["hasImage"] = $row[5];
+			$product["servings"] = $row[6];
+			
+			//if row[5] (hasImage) is true then its got a url
 			if(intval($row[5])){
-				$product["imageUrl"] = $_SERVER['PATH_INFO']."/recipeImages/".$recipeName.".jpg";
+				//this makes "Test Recipe" into "Test_Recipe" important for searching for images
+				$imageName = str_replace(" ", "_", $recipeName);
+				$product["imageUrl"] = "recipeImages/".$imageName.".jpg";
 			}else{
 				$product["imageUrl"] = "no pic";
 			}
@@ -85,7 +91,7 @@ if (isset($_GET["recipeName"])) {
     } else {
         // no product found
         $response["success"] = 0;
-        $response["message"] = "No recipe found";
+        $response["message"] = "No recipe found, empty results";
 
         // echo no users JSON
         echo json_encode($response);

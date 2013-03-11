@@ -219,7 +219,7 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 			params.add(new BasicNameValuePair(TAG_RECIPENAME, recipeName));
 			
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(urlGetAllComments, "GET", params);
+			JSONObject json = jParser.makeHttpRequest(urlGetAllComments, "POST", params);
 			
 			
 			//if AsyncTask was not cancelled then carry on

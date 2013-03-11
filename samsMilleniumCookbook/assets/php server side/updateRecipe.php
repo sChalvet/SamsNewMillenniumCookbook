@@ -11,30 +11,30 @@ $response = array();
 date_default_timezone_set('America/New_York');
 
 // check for required fields
-if (isset($_GET["recipeName"])) {
+if (isset($_REQUEST["recipeName"])) {
     
 	$i=0;
 	//gets the whole list of ingredients
-	while(isset($_GET["ingredientName".$i])){
-		$arrayIngredientName[$i] = "'".$_GET["ingredientName".$i]."'";
-		$arrayAmount[$i] = "'".$_GET["amount".$i]."'";
-		$arrayMeasurement[$i] = "'".$_GET["measurement".$i]."'";
-		$arrayDiscription[$i] = "'".$_GET["discription".$i]."'";
-		$arrayImportant[$i] = "'".$_GET["important".$i]."'";
+	while(isset($_REQUEST["ingredientName".$i])){
+		$arrayIngredientName[$i] = "'".$_REQUEST["ingredientName".$i]."'";
+		$arrayAmount[$i] = "'".$_REQUEST["amount".$i]."'";
+		$arrayMeasurement[$i] = "'".$_REQUEST["measurement".$i]."'";
+		$arrayDiscription[$i] = "'".$_REQUEST["discription".$i]."'";
+		$arrayImportant[$i] = "'".$_REQUEST["important".$i]."'";
 		$i++;
 	}
 	
-	$recipeName = $_GET['recipeName'];
-	$oldRecipeName = $_GET['oldRecipeName'];	
-    $author = $_GET["author"];
-    $ingredientList = $_GET["ingredientList"];
-    $cookingDirections = $_GET["cookingDirections"];
-	$cookTime = $_GET["cookTime"];
-    $prepTime = $_GET["prepTime"];
-    $summery = $_GET["summery"];
-	$type = $_GET["type"];
-	$servings = $_GET["servings"];
-	$hasImage = $_GET["hasImage"];
+	$recipeName = $_REQUEST['recipeName'];
+	$oldRecipeName = $_REQUEST['oldRecipeName'];	
+    $author = $_REQUEST["author"];
+    $ingredientList = $_REQUEST["ingredientList"];
+    $cookingDirections = $_REQUEST["cookingDirections"];
+	$cookTime = $_REQUEST["cookTime"];
+    $prepTime = $_REQUEST["prepTime"];
+    $summery = $_REQUEST["summery"];
+	$type = $_REQUEST["type"];
+	$servings = $_REQUEST["servings"];
+	$hasImage = $_REQUEST["hasImage"];
 	$dateUpdated = date("Y-m-d H:i:s");
 
     // include db connect class
@@ -45,9 +45,13 @@ if (isset($_GET["recipeName"])) {
 	$conn=$db->connect();
 
 	//checking to see if this recipeName has been used
-    $result = mysqli_query($conn, "SELECT userName FROM recipe WHERE recipeName = '$oldRecipeName'");
+    $result = mysqli_query($conn, "SELECT userName, hasImage FROM recipe WHERE recipeName = '$oldRecipeName'");
 	$row = mysqli_fetch_array($result);
-	if ($row[0]!=$author) {
+	
+	//determines if user already had a picture
+	$hadImage = $row[1];
+	
+	if (strcasecmp($row[0], $author)) {
 	
 		// Not the author of recipe
         $response["success"] = 2;
@@ -56,8 +60,7 @@ if (isset($_GET["recipeName"])) {
         // echoing JSON response
         echo json_encode($response);
 	}else{
-		
-		
+			
 		// mysql inserting a new row
 		$result1 = mysqli_query($conn, "UPDATE recipe SET recipeName='$recipeName', ingredientDiscription='$ingredientList', directions='$cookingDirections', cookTime='$cookTime',"
 							." prepTime='$prepTime', summery='$summery', type='$type', servings='$servings', modifyDate='$dateUpdated', hasImage='$hasImage'"
@@ -72,19 +75,46 @@ if (isset($_GET["recipeName"])) {
 			$result2 = mysqli_query($conn, "INSERT INTO recipeingredients(recipeName, ingredientName, amount, measurement, description, important)"
 						."VALUES ('$recipeName', $arrayIngredientName[$i], $arrayAmount[$i], $arrayMeasurement[$i], $arrayDiscription[$i], $arrayImportant[$i])");
 		}
-		
+					
 		
 		// check if row inserted or not
 		if ($result1) {
-			// successfully inserted into database
-			$response["success"] = 1;
-			$response["message"] = "Recipe successfully updated.";
+			
+			//if Recipe already had an image we need to rename it
+			if($hadImage){
+				//this makes "Test Recipe" into "Test_Recipe" important for searching for images
+				$newImageName = str_replace(" ", "_", $recipeName);
+				$oldImageName = str_replace(" ", "_", $oldRecipeName);
+			
+				if(!rename("recipeImages/".$oldImageName.".jpg", "recipeImages/".$newImageName.".jpg")){
+					// successfully inserted into database
+					$response["success"] = 0;
+					$response["message"] = "Failed to rename Image.";
 
-			// echoing JSON response
-			echo json_encode($response);
+					// echoing JSON response
+					echo json_encode($response);
+				}else{
+				
+					// successfully inserted into database and renamed image
+					$response["success"] = 1;
+					$response["message"] = "Recipe successfully updated.";
+
+					// echoing JSON response
+					echo json_encode($response);
+				
+				}
+			}else{
+			
+				// successfully inserted into database
+				$response["success"] = 1;
+				$response["message"] = "Recipe successfully updated.";
+
+				// echoing JSON response
+				echo json_encode($response);
+			}
 		} else {
 			// failed to insert row
-			$error = mysqli_error();
+			$error = mysqli_error($conn);
 			$response["success"] = 3;
 			$response["message"] = $error;
 			

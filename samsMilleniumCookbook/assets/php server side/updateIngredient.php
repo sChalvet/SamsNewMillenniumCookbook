@@ -11,16 +11,16 @@ $response = array();
 date_default_timezone_set('America/New_York');
 
 // check for required fields
-if (isset($_GET['ingredientName'])) {
+if (isset($_REQUEST['ingredientName'])) {
     
-	$ingredientName = $_GET['ingredientName'];
-	$oldIngredientName = $_GET['oldIngredientName'];	
-    $calories = $_GET["calories"];
-    $protein = $_GET["protein"];
-    $fat = $_GET["fat"];
-	$carbs = $_GET["carbs"];
-    $type = $_GET["type"];
-    $notes = $_GET["notes"];
+	$ingredientName = $_REQUEST['ingredientName'];
+	$oldIngredientName = $_REQUEST['oldIngredientName'];	
+    $calories = $_REQUEST["calories"];
+    $protein = $_REQUEST["protein"];
+    $fat = $_REQUEST["fat"];
+	$carbs = $_REQUEST["carbs"];
+    $type = $_REQUEST["type"];
+    $notes = $_REQUEST["notes"];
 	$dateUpdated = date("Y-m-d H:i:s");
 	
 	//var_dump($dateUpdated);

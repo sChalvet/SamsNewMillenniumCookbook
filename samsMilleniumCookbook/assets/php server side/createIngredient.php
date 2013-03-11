@@ -9,17 +9,17 @@
 $response = array();
 
 // check for required fields
-if (isset($_GET["ingredientName"])) {
+if (isset($_REQUEST["ingredientName"])) {
     
 	
-	$ingredientName = $_GET['ingredientName'];		
-    $calories = $_GET["calories"];
-    $protein = $_GET["protein"];
-    $fat = $_GET["fat"];
-	$carbs = $_GET["carbs"];
-    $type = $_GET["type"];
-    $notes = $_GET["notes"];
-	$addedBy = $_GET["addedBy"];
+	$ingredientName = $_REQUEST['ingredientName'];		
+    $calories = $_REQUEST["calories"];
+    $protein = $_REQUEST["protein"];
+    $fat = $_REQUEST["fat"];
+	$carbs = $_REQUEST["carbs"];
+    $type = $_REQUEST["type"];
+    $notes = $_REQUEST["notes"];
+	$addedBy = $_REQUEST["addedBy"];
 
 
     // include db connect class

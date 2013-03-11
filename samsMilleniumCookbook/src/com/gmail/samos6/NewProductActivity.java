@@ -30,7 +30,6 @@ public class NewProductActivity extends Activity {
 	EditText inputDesc;
 
 	// url to create new product
-	//private static String url_create_product = "http://10.0.2.2/android_connect/create_product.php";
 	String url_create_product;
 	
 	// JSON Node names

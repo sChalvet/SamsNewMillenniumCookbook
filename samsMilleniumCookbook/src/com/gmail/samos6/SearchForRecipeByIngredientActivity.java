@@ -186,7 +186,7 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 			Log.d("All Favorite Recipes params: ", params.toString());
 			
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(urlGetAllRecipesByIngredient, "GET", params);
+			JSONObject json = jParser.makeHttpRequest(urlGetAllRecipesByIngredient, "POST", params);
 			
 			
 			//if the asyncTask has not been cancelled then continue

@@ -28,6 +28,7 @@
     <string name="urlUpdateComment">http://192.168.254.45/recipeApp/updateComment.php</string>
     <string name="urlGetAllRecipesByIngredient">http://192.168.254.45/recipeApp/getAllRecipesByIngredient.php</string>
     <string name="urlUploadImage">http://192.168.254.45/recipeApp/uploadImage.php</string>
+    <string name="urlRoot">http://192.168.254.45/recipeApp/</string>
     
     
     <string name="userName">Unknown</string>
@@ -86,6 +87,7 @@
     <string name="favoriteRecipe">Favorite Recipe</string>
     <string name="viewRatings">See Comments and Rate</string>
     <string name="editRecipe">Edit Recipe</string>
+    <string name="recipeServings">Servings</string>
     
     
     
@@ -244,6 +246,13 @@
     <item>11</item>
     <item>12</item>
     <item>13</item>
+    <item>14</item>
+    <item>15</item>
+    <item>16</item>
+    <item>17</item>
+    <item>18</item>
+    <item>19</item>
+    <item>20</item>
 	</string-array>
 	
 	<string-array name="spinnerServings"> 

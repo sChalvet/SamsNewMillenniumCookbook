@@ -9,30 +9,30 @@
 $response = array();
 
 // check for required fields
-if (isset($_GET["recipeName"])) {
+if (isset($_REQUEST["recipeName"])) {
 //if(true){
     
 	$i=0;
 	//gets the whole list of ingredients
-	while(isset($_GET["ingredientName".$i])){
-		$arrayIngredientName[$i] = "'".$_GET["ingredientName".$i]."'";
-		$arrayAmount[$i] = "'".$_GET["amount".$i]."'";
-		$arrayMeasurement[$i] = "'".$_GET["measurement".$i]."'";
-		$arrayDiscription[$i] = "'".$_GET["discription".$i]."'";
-		$arrayImportant[$i] = "'".$_GET["important".$i]."'";
+	while(isset($_REQUEST["ingredientName".$i])){
+		$arrayIngredientName[$i] = "'".$_REQUEST["ingredientName".$i]."'";
+		$arrayAmount[$i] = "'".$_REQUEST["amount".$i]."'";
+		$arrayMeasurement[$i] = "'".$_REQUEST["measurement".$i]."'";
+		$arrayDiscription[$i] = "'".$_REQUEST["discription".$i]."'";
+		$arrayImportant[$i] = "'".$_REQUEST["important".$i]."'";
 		$i++;
 	}
 	
-	$recipeName = $_GET['recipeName'];		
-    $author = $_GET["author"];
-    $ingredientList = $_GET["ingredientList"];
-    $cookingDirections = $_GET["cookingDirections"];
-	$cookTime = $_GET["cookTime"];
-    $prepTime = $_GET["prepTime"];
-    $summery = $_GET["summery"];
-	$type = $_GET["type"];
-	$servings = $_GET["servings"];
-	$hasImage = $_GET["hasImage"];
+	$recipeName = $_REQUEST['recipeName'];		
+    $author = $_REQUEST["author"];
+    $ingredientList = $_REQUEST["ingredientList"];
+    $cookingDirections = $_REQUEST["cookingDirections"];
+	$cookTime = $_REQUEST["cookTime"];
+    $prepTime = $_REQUEST["prepTime"];
+    $summery = $_REQUEST["summery"];
+	$type = $_REQUEST["type"];
+	$servings = $_REQUEST["servings"];
+	$hasImage = $_REQUEST["hasImage"];
 
     //var_dump( $error);
 
