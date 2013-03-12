@@ -19,16 +19,22 @@ $response = array();
 if (isset($_POST["ingredientName"])) {
     
 	
-	$ingredientName = mysqli_real_escape_string($_POST['ingredientName']);		
-    $calories = mysqli_real_escape_string($_POST["calories"]);
-    $protein = mysqli_real_escape_string($_POST["protein"]);
-    $fat = mysqli_real_escape_string($_POST["fat"]);
-	$carbs = mysqli_real_escape_string($_POST["carbs"]);
-    $type = mysqli_real_escape_string($_POST["type"]);
-    $notes =mysqli_real_escape_string( $_POST["notes"]);
-	$addedBy = mysqli_real_escape_string($_POST["addedBy"]);
+	$ingredientName = mysqli_real_escape_string($conn, $_POST['ingredientName']);		
+    $calories = mysqli_real_escape_string($conn, $_POST["calories"]);
+    $protein = mysqli_real_escape_string($conn, $_POST["protein"]);
+    $fat = mysqli_real_escape_string($conn, $_POST["fat"]);
+	$carbs = mysqli_real_escape_string($conn, $_POST["carbs"]);
+    $type = mysqli_real_escape_string($conn, $_POST["type"]);
+    $notes =mysqli_real_escape_string($conn, $_POST["notes"]);
+	$gramAmount =mysqli_real_escape_string($conn, $_POST["gramAmount"]);
+	$addedBy = mysqli_real_escape_string($conn, $_POST["addedBy"]);
 
 
+	//making it out of 100
+	$calories = round(($calories/$gramAmount)*100, 1);
+    $protein = round(($protein/$gramAmount)*100, 1);
+    $fat = round(($fat/$gramAmount)*100, 1);
+	$carbs = round(($carbs/$gramAmount)*100, 1);
 
     // mysql inserting a new row
     $result = mysqli_query($conn, "INSERT INTO ingredientlist(ingredientName, calories, protein, fat, carbs, notes, addedBy, type)"

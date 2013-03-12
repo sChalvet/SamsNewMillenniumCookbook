@@ -29,13 +29,13 @@ if (isset($_POST["recipeName"])) {
 		$i++;
 	}
 	
-	$recipeName = mysqli_real_escape_string($_POST['recipeName']);		
-    $author = mysqli_real_escape_string($_POST["author"]);
+	$recipeName = mysqli_real_escape_string($conn, $_POST['recipeName']);		
+    $author = mysqli_real_escape_string($conn, $_POST["author"]);
     $ingredientList = $_POST["ingredientList"];
-    $cookingDirections = mysqli_real_escape_string($_POST["cookingDirections"]);
+    $cookingDirections = mysqli_real_escape_string($conn, $_POST["cookingDirections"]);
 	$cookTime = $_POST["cookTime"];
     $prepTime = $_POST["prepTime"];
-    $summery = mysqli_real_escape_string($_POST["summery"]);
+    $summery = mysqli_real_escape_string($conn, $_POST["summery"]);
 	$type = $_POST["type"];
 	$servings = $_POST["servings"];
 	$hasImage = $_POST["hasImage"];

@@ -247,8 +247,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" >
 
-
-	<TableRow >
+	<TableRow android:paddingTop="3dp" >
 	    
 	    <Button
 	        android:id="@+id/btnGetIngredientDone"

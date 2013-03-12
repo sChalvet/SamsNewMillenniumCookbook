@@ -23,6 +23,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -161,6 +164,14 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 
 	}
 
+	// Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    
 	// Response from Edit Comment Activity
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -298,5 +309,22 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 		
 
 	}
+	
+	 @Override
+	    public boolean onOptionsItemSelected(MenuItem item){
+	 
+	        switch (item.getItemId()){
+	 
+	        case R.id.menuHome:
+	        	Intent i = new Intent(getApplicationContext(), MainScreenActivity.class);
+				// Closing all previous activities
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
+	            return true;
+	 
+	        default:
+	            return super.onOptionsItemSelected(item);
+	        }
+	    }
 
 }

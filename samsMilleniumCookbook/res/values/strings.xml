@@ -47,6 +47,7 @@
     <string name="logout">Logout</string>  
     
     
+    <!-- part of Pantry and Ingredient Activity  -->
     <string name="saveToPantry">Save to Pantry</string>
     <string name="searchRecipes">Search Recipes</string>
     <string name="editPantry">Edit Pantry</string>
@@ -57,6 +58,7 @@
     <string name="addComment">Add a Comment</string>
     <string name="dropFromList">Drop From List</string>
     <string name="done">Done</string>
+    <string name="selectAll">Select All</string>
     
     <!-- part of CreateRecipe Activity -->
     <string name="cookingHint">Do this first: ... \nThen do this: ... \nFinaly do this: ...</string>
@@ -113,7 +115,8 @@
 	<string name="addedBy">Added By:</string>
 	<string name="type">Type</string>
 	<string name="dateCreated">Date Created</string>
-	<string name="perGram">Per 100 grams:</string>
+	<string name="per">Per</string>
+	<string name="gram">grams:</string>
 	<string name="publishIngredient">Publish Ingredient</string>
 	<string name="defaultDiscription">No discription</string>
 	<string name="saveChanges">Save Changes</string>
@@ -145,6 +148,9 @@
 	<string name="prefDefaultUserName">Guest</string>
 	<string name="prefTestQuestion">Enter a test question:</string>
 	<string name="prefTestAnswer">Enter your answer to the question:</string>
+	
+	<!-- part of menu xml  -->
+	<string name="home">Home</string>
 	
 	<!-- values used throughout  -->
 	<string name="yes">Yes</string>

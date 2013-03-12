@@ -20,20 +20,23 @@ date_default_timezone_set('America/New_York');
 // check for required fields
 if (isset($_POST['ingredientName'])) {
     
-	$ingredientName = mysqli_real_escape_string($_POST['ingredientName']);
-	$oldIngredientName = mysqli_real_escape_string($_POST['oldIngredientName']);	
-    $calories = mysqli_real_escape_string($_POST["calories"]);
-    $protein = mysqli_real_escape_string($_POST["protein"]);
-    $fat = mysqli_real_escape_string($_POST["fat"]);
-	$carbs = mysqli_real_escape_string($_POST["carbs"]);
-    $type = mysqli_real_escape_string($_POST["type"]);
-    $notes = mysqli_real_escape_string($_POST["notes"]);
+	$ingredientName = mysqli_real_escape_string($conn, $_POST['ingredientName']);
+	$oldIngredientName = mysqli_real_escape_string($conn, $_POST['oldIngredientName']);	
+    $calories = mysqli_real_escape_string($conn, $_POST["calories"]);
+    $protein = mysqli_real_escape_string($conn, $_POST["protein"]);
+    $fat = mysqli_real_escape_string($conn, $_POST["fat"]);
+	$carbs = mysqli_real_escape_string($conn, $_POST["carbs"]);
+    $type = mysqli_real_escape_string($conn, $_POST["type"]);
+    $notes = mysqli_real_escape_string($conn, $_POST["notes"]);
+	$gramAmount = mysqli_real_escape_string($conn, $_POST["gramAmount"]);
 	$dateUpdated = date("Y-m-d H:i:s");
+
+	//making it out of 100
+	$calories = round(($calories/$gramAmount)*100, 1);
+    $protein = round(($protein/$gramAmount)*100, 1);
+    $fat = round(($fat/$gramAmount)*100, 1);
+	$carbs = round(($carbs/$gramAmount)*100, 1);
 	
-	//var_dump($dateUpdated);
-
-
-
     // mysql update row with matched pid
     $result = mysqli_query($conn, "UPDATE ingredientlist SET ingredientName='$ingredientName', calories = '$calories', protein = '$protein', fat = '$fat', "
 			."carbs = '$carbs', type = '$type', notes = '$notes', dateUpdated = '$dateUpdated'  WHERE ingredientName = '$oldIngredientName'");

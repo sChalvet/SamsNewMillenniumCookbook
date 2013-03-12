@@ -26,7 +26,7 @@ if (isset($_POST["nickName"])) {
 	$password = mysqli_real_escape_string($conn, $password);
 
 	//checking to see if this nickname matches the password
-    $result = mysqli_query($conn, "SELECT userName, password, firstName, lastName, email, testAnswer FROM user WHERE userName = '$nickName' LIMIT 1"); //limit 1?
+    $result = mysqli_query($conn, "SELECT userName, password, firstName, lastName, email, testAnswer FROM user WHERE userName = '$nickName' LIMIT 1");
 	if( $result){
 		if (mysqli_num_rows($result) > 0) {
 			$row = mysqli_fetch_array($result);

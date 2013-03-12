@@ -18,8 +18,8 @@ $conn=$db->connect();
 
 // check for post data
 if (isset($_POST["recipeName"])) {
-    $recipeName = mysqli_real_escape_string($_POST['recipeName']);
-	$author = mysqli_real_escape_string($_POST['author']);
+    $recipeName = mysqli_real_escape_string($conn, $_POST['recipeName']);
+	$author = mysqli_real_escape_string($conn, $_POST['author']);
 
     // get a product from products table
    $result = mysqli_query($conn, "SELECT comment, rating FROM recipecomments WHERE recipeName = '$recipeName' AND authorName= '$author'");

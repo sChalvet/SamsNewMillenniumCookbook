@@ -29,8 +29,8 @@ if (isset($_POST["list0"])) {
 	$ingredientName = implode(', ' , $array);
 	
 	
-	$query="SELECT recipe.recipeName, summery, userName, prepTime, cookTime, hasImage FROM recipe left join recipeingredients on recipe.recipeName= recipeingredients.recipeName "
-			."Where ingredientName IN ($ingredientName)";// and important=1";
+	$query="SELECT recipe.recipeName, summery, userName, prepTime, cookTime, hasImage FROM recipe join recipeingredients on recipe.recipeName = recipeingredients.recipeName "
+			."Where ingredientName IN ($ingredientName) and important=1";// and important=1";
 	
 	//SELECT recipe.recipeName from recipe left join recipeingredients on recipe.recipeName= recipeingredients.recipeName WHERE ingredientName='Almond' and important=1
 	
@@ -40,7 +40,6 @@ if (isset($_POST["list0"])) {
 	// get all products from products table
 	$result = mysqli_query($conn, $query);
 
-	//echo "</br>$query </br></br>";
 	
 	
 	if(!$result){

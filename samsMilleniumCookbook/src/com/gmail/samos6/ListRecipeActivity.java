@@ -22,6 +22,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -154,6 +157,14 @@ public class ListRecipeActivity  extends ListActivity{
 		new LoadAllRecipes().execute();
 	}
 
+	// Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    
 	// Response from Edit Product Activity
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -310,5 +321,22 @@ public class ListRecipeActivity  extends ListActivity{
 		
 
 	}
+	
+	 @Override
+	    public boolean onOptionsItemSelected(MenuItem item){
+	 
+	        switch (item.getItemId()){
+	 
+	        case R.id.menuHome:
+	        	Intent i = new Intent(getApplicationContext(), MainScreenActivity.class);
+				// Closing all previous activities
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
+	            return true;
+	 
+	        default:
+	            return super.onOptionsItemSelected(item);
+	        }
+	    } 
 
 }

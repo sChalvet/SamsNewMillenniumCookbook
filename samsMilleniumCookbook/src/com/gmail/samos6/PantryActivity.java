@@ -15,10 +15,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +38,7 @@ public class PantryActivity extends ListActivity {
 	Button btnEdit;
 	Button btnSearch;
 	Button btnDeleteIngredient;
+	Button btnSelectAll;
 	
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
@@ -68,7 +73,7 @@ public class PantryActivity extends ListActivity {
 		btnSearch = (Button) findViewById(R.id.btnSearch);
 		btnEdit = (Button) findViewById(R.id.btnEditPantry);
 		btnDeleteIngredient = (Button) findViewById(R.id.btnDeleteIngredients);
-			
+		btnSelectAll= (Button) findViewById(R.id.btnSelectAll);	
 		
 		// Search by ingredient on click Event
 		btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -82,11 +87,16 @@ public class PantryActivity extends ListActivity {
 				
 				Log.d("Pantry_Search onclick list=", ingredientList.toString());
 				
-				Intent intent = new Intent(getApplicationContext(), SearchForRecipeByIngredientActivity.class);
-				Bundle b = new Bundle();
-                b.putStringArrayList("IngredientList", (ArrayList<String>) ingredientList);
-                intent.putExtras(b);
-				startActivityForResult(intent,100);
+				if(ingredientList.isEmpty()){
+					Toast.makeText(getApplicationContext(), "Please select some ingredients", Toast.LENGTH_SHORT).show();
+				}else{
+					Intent intent = new Intent(getApplicationContext(), SearchForRecipeByIngredientActivity.class);
+					Bundle b = new Bundle();
+	                b.putStringArrayList("IngredientList", (ArrayList<String>) ingredientList);
+	                intent.putExtras(b);
+					startActivityForResult(intent,100);
+				}
+
 				
 
 			}
@@ -129,6 +139,35 @@ public class PantryActivity extends ListActivity {
 			}
 		});
 		
+		btnSelectAll.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				Log.d("Pantry_selectAll: ", "inside OnClick "+ adapter.getCount()+", select= "+adapter.numSelected());
+				
+				
+				
+				if(adapter.getCount()== adapter.numSelected()){ //deselects all
+					for(int index=0; index<adapter.getCount(); index++){
+						((CheckBox) lv.getChildAt(index).findViewById(R.id.ingredientCheckBox)).setChecked(false);		
+					}
+				}else{	//selects all
+					for(int index=0; index<adapter.getCount(); index++){
+						if(!((CheckBox) lv.getChildAt(index).findViewById(R.id.ingredientCheckBox)).isChecked())
+							((CheckBox) lv.getChildAt(index).findViewById(R.id.ingredientCheckBox)).setChecked(true);		
+					}
+				}
+				
+				adapter.selectAll();
+				
+				List<String> list = new ArrayList<String>();
+				
+				list= adapter.getChecked();
+				Log.d("Pantry_selectAll list= ", list.toString());
+
+			}
+		});
+		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -152,6 +191,14 @@ public class PantryActivity extends ListActivity {
 		});
 
 	}
+	
+	// Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
 
 	// Response from IngredientList Activity
 	@Override
@@ -281,5 +328,22 @@ public class PantryActivity extends ListActivity {
 		
 
 	}
+	
+	 @Override
+	    public boolean onOptionsItemSelected(MenuItem item){
+	 
+	        switch (item.getItemId()){
+	 
+	        case R.id.menuHome:
+	        	Intent i = new Intent(getApplicationContext(), MainScreenActivity.class);
+				// Closing all previous activities
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
+	            return true;
+	 
+	        default:
+	            return super.onOptionsItemSelected(item);
+	        }
+	    }    
 
 }

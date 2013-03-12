@@ -29,6 +29,9 @@ import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -47,6 +50,7 @@ public class EditIngredientActivity extends Activity {
 	EditText txtCarbs;
 	EditText txtNotes;
 	EditText txtIngredientName;
+	EditText txtGramAmount;
 	TextView txtAddedBy;
 	Spinner spnrType;
 	
@@ -97,6 +101,7 @@ public class EditIngredientActivity extends Activity {
 	private static final String TAG_CARBS = "carbs";
 	private static final String TAG_NOTES = "notes";
 	private static final String TAG_ADDEDBY = "addedBy";
+	private static final String TAG_GRAMAMOUNT = "gramAmount";
 	private static final String TAG_TYPE = "type";
 	//private static final String TAG_DATECREATED = "dateCreated";
 	//private static final String TAG_DATEUPDATED = "dateUpdated";
@@ -118,6 +123,7 @@ public class EditIngredientActivity extends Activity {
 	String addedBy = "";
 	String ingredientName;
 	String oldIngredientName="";
+	String gramAmount="";
 	String [] foodType;//will be set in onCreate
 	Boolean canEdit=false;
 	String origin= "";
@@ -165,6 +171,7 @@ public class EditIngredientActivity extends Activity {
 		txtFat= (EditText) findViewById(R.id.inputFat);
 		txtCarbs= (EditText) findViewById(R.id.inputCarbs);
 		txtIngredientName= (EditText) findViewById(R.id.txtviewIngredientName);
+		txtGramAmount= (EditText) findViewById(R.id.inputGrams);
 		
 		txtAddedBy= (TextView) findViewById(R.id.txtviewAddedBy);
 
@@ -267,6 +274,14 @@ public class EditIngredientActivity extends Activity {
 
 	}
 	
+	// Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    
 	/**
 	 * This method is called when an ingredient is stale (the name doesn't match in the MySQL DB)
 	 * the user can choose to add it or it gets removed from his SQLite DB
@@ -529,7 +544,8 @@ public class EditIngredientActivity extends Activity {
 			carbs = txtCarbs.getText().toString();
 			type = spnrType.getSelectedItem().toString();
 			notes = txtNotes.getText().toString();
-			ingredientName = txtIngredientName.getText().toString();		
+			ingredientName = txtIngredientName.getText().toString();
+			gramAmount = txtGramAmount.getText().toString();
 			
 			//reseting it
 			successful=false;
@@ -546,6 +562,7 @@ public class EditIngredientActivity extends Activity {
 			params.add(new BasicNameValuePair("carbs", carbs));
 			params.add(new BasicNameValuePair("type", type));
 			params.add(new BasicNameValuePair("notes", notes));
+			params.add(new BasicNameValuePair("gramAmount", gramAmount));
 
 			// sending modified data through http request
 			JSONObject json = jsonParser.makeHttpRequest(urlUpdateIngredient, "POST", params);
@@ -716,7 +733,8 @@ public class EditIngredientActivity extends Activity {
 			String type = spnrType.getSelectedItem().toString();
 			String notes = txtNotes.getText().toString();
 			String addedBy = txtAddedBy.getText().toString();
-			String ingredientName = txtIngredientName.getText().toString();		
+			String ingredientName = txtIngredientName.getText().toString();	
+			String gramAmount = txtGramAmount.getText().toString();	
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -728,6 +746,7 @@ public class EditIngredientActivity extends Activity {
 			params.add(new BasicNameValuePair("type", type));
 			params.add(new BasicNameValuePair("notes", notes));
 			params.add(new BasicNameValuePair("addedBy", addedBy));
+			params.add(new BasicNameValuePair("gramAmount", gramAmount));
 
 			// getting JSON Object
 			// Note that create product url accepts POST method
@@ -782,4 +801,21 @@ public class EditIngredientActivity extends Activity {
 		}
 
 	}
+	
+	 @Override
+	    public boolean onOptionsItemSelected(MenuItem item){
+	 
+	        switch (item.getItemId()){
+	 
+	        case R.id.menuHome:
+	        	Intent i = new Intent(getApplicationContext(), MainScreenActivity.class);
+				// Closing all previous activities
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
+	            return true;
+	 
+	        default:
+	            return super.onOptionsItemSelected(item);
+	        }
+	    } 
 }

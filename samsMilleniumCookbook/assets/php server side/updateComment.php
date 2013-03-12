@@ -10,10 +10,10 @@ $response = array();
 // check for required fields
 if (isset($_POST["recipeName"])) {
 
-	$recipeName = mysqli_real_escape_string($_POST['recipeName']);		
-    $comment = mysqli_real_escape_string($_POST["comment"]);
+	$recipeName = mysqli_real_escape_string($conn, $_POST['recipeName']);		
+    $comment = mysqli_real_escape_string($conn, $_POST["comment"]);
     $rating = $_POST["rating"];
-    $authorName = mysqli_real_escape_string($_POST["author"]);
+    $authorName = mysqli_real_escape_string($conn, $_POST["author"]);
 
 
     // include db connect class

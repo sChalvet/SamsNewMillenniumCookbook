@@ -14,33 +14,47 @@
         android:layout_weight="4.69" />
 
    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="1" 
+       android:background="@drawable/table_background">
 
+		<TableRow
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:paddingTop="3dp" >
 
-		<TableRow >
-           <Button
-               android:id="@+id/btnEditPantry"
-               android:layout_width="0dip"
-               android:layout_height="wrap_content"
-               android:layout_weight="1"
-               android:text="@string/editPantry" />
+			<Button
+			    android:id="@+id/btnSelectAll"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"
+			    android:text="@string/selectAll"
+			    android:textSize="12sp" />
+
+			<Button
+			    android:id="@+id/btnDeleteIngredients"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"
+			    android:text="@string/remove"
+			    android:textSize="12sp" />
 
            <Button
                android:id="@+id/btnSearch"
-               android:layout_width="0dip"
+               android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_weight="1"
                android:text="@string/searchRecipes"
                android:textSize="12sp" />
 
            <Button
-               android:id="@+id/btnDeleteIngredients"
-               android:layout_width="0dip"
+               android:id="@+id/btnEditPantry"
+               android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_weight="1"
-               android:text="@string/remove" />
+               android:text="@string/editPantry"
+               android:textSize="12sp" />
            
 		</TableRow>
 

@@ -20,6 +20,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -44,7 +47,7 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 	// Creating JSON Parser object
 	JSONParser jParser = new JSONParser();
 
-	ListFavoriteAdapter adapter;
+	RecipeLazyAdapter adapter;
 
 	ArrayList<HashMap<String, String>> productsList;
 	List<String> ingredientList = new ArrayList<String>();
@@ -56,6 +59,7 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
 	String urlGetAllRecipesByIngredient;
+	String urlRoot;
 	
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -68,6 +72,7 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 	private static final String TAG_COOKTIME = "cookTime";
 	private static final String TAG_AUTHOR = "author";
 	private static final String TAG_TOTALTIME = "totalTime";
+	private static final String TAG_IMAGEURL = "imageUrl";
 	
 
 	// products JSONArray
@@ -80,12 +85,10 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 	
 		//getting url from resources
 		urlGetAllRecipesByIngredient = getResources().getString(R.string.urlGetAllRecipesByIngredient);
+		urlRoot = getResources().getString(R.string.urlRoot);
 		
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
-
-		// Loading products in Background Thread
-		new LoadAllRecipes().execute();
 
 		// Get listview
 		final ListView lv = getListView();  //added final
@@ -95,9 +98,13 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 			Bundle extras= getIntent().getExtras();
 			ingredientList = extras.getStringArrayList("IngredientList");
 			Log.d("SearchForRecipeByIngredient list: ", ingredientList.toString());
+			
+			// Loading products in Background Thread
+			new LoadAllRecipes().execute();
 		}
 
-		
+
+
 
 		//on selecting single recipe launching recipe Screen
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -121,6 +128,14 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 		});
 
 	}
+	
+	// Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
 
 	// Response from Edit Product Activity
 	@Override
@@ -211,7 +226,8 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 						String numRatings = c.getString(TAG_NUMRATINGS);
 						String prepTime = c.getString(TAG_PREPTIME);
 						String cookTime = c.getString(TAG_COOKTIME);
-						String author = c.getString(TAG_AUTHOR);	
+						String author = c.getString(TAG_AUTHOR);
+						String imageUrl = urlRoot+c.getString(TAG_IMAGEURL); //adding urlRoot to the image url
 						
 						int cookT = Integer.parseInt(cookTime);
 						int prepT = Integer.parseInt(prepTime);
@@ -227,6 +243,7 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 						map.put(TAG_NUMRATINGS, numRatings);
 						map.put(TAG_AUTHOR, author);
 						map.put(TAG_TOTALTIME, totalTime);
+						map.put(TAG_IMAGEURL, imageUrl);
 						
 
 
@@ -260,7 +277,7 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 					 * */
 					
 					
-					adapter = new ListFavoriteAdapter(SearchForRecipeByIngredientActivity.this, productsList);
+					adapter = new RecipeLazyAdapter(SearchForRecipeByIngredientActivity.this, productsList);
 					
 					// updating listview
 					setListAdapter(adapter);
@@ -271,5 +288,22 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 		
 
 	}
+	
+	 @Override
+	    public boolean onOptionsItemSelected(MenuItem item){
+	 
+	        switch (item.getItemId()){
+	 
+	        case R.id.menuHome:
+	        	Intent i = new Intent(getApplicationContext(), MainScreenActivity.class);
+				// Closing all previous activities
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
+	            return true;
+	 
+	        default:
+	            return super.onOptionsItemSelected(item);
+	        }
+	    } 
 
 }

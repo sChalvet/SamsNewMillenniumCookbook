@@ -19,7 +19,7 @@ $response = array();
 if (isset($_POST['image'])) {
     
 	$base=$_POST['image'];
-	$recipeName= mysqli_real_escape_string($_POST['recipeName']);
+	$recipeName= mysqli_real_escape_string($conn, $_POST['recipeName']);
 
 
 	

@@ -123,6 +123,56 @@ public boolean toogleSelection(int index, View view) {
 	return true;
 }
 
+/**
+ * Selects all unselected views.
+ * if every view is already selected
+ * then it deselects all 
+ * 
+ */
+public void selectAll() {
+	
+	Log.d("SamsAdapter_selectAll", "inside");
+	
+	if(data.size()== numSelected()){ //deselects all
+		for(int index=0; index<data.size(); index++){
+			data.get(index).put("reminder", "False");		
+		}
+	}else{	//selects all
+		for(int index=0; index<data.size(); index++){
+			if(data.get(index).get("reminder") != "True")
+				data.get(index).put("reminder", "True");		
+		}
+	}
+		
+}
+
+/**
+ * gets the number of selected views
+ * @return int numSelected
+ */
+public int numSelected(){
+	
+	int numSelected=0;
+	
+	if(origin.equalsIgnoreCase("IngredientList") || origin.equalsIgnoreCase("getIngredient")){	
+		for(int index=0; index<data.size(); index++){
+			if(data.get(index).get("reminder") == "True" || pantry.contains(data.get(index).get("ingredientName")))
+				numSelected++;
+			
+		}
+	}
+	else{
+		for(int index=0; index<data.size(); index++){
+			if(data.get(index).get("reminder") == "True")
+				numSelected++;
+			
+		}
+		
+	}
+	
+	return numSelected;
+}
+
 public View getView(final int position, View convertView, ViewGroup parent) {
 	
 
