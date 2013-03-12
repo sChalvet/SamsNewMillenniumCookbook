@@ -8,11 +8,11 @@
 $response = array();
 
 // check for required fields
-if (isset($_REQUEST["nickName"])) {
+if (isset($_POST["nickName"])) {
     
 	
-	$nickName = $_REQUEST['nickName'];		
-    $password = $_REQUEST["password"];
+	$nickName = strip_tags(substr($_POST['nickName'],0,20));		
+	$password = strip_tags(substr($_POST['password'],0,30));
 
 
     // include db connect class
@@ -21,16 +21,23 @@ if (isset($_REQUEST["nickName"])) {
     // connecting to db
     $db = new DB_CONNECT();
 	$conn=$db->connect();
+	
+	$nickName = mysqli_real_escape_string($conn, $nickName);
+	$password = mysqli_real_escape_string($conn, $password);
 
 	//checking to see if this nickname matches the password
-    $result = mysqli_query($conn, "SELECT userName, password, firstName, lastName, email FROM user WHERE userName = '$nickName'");
+    $result = mysqli_query($conn, "SELECT userName, password, firstName, lastName, email, testAnswer FROM user WHERE userName = '$nickName' LIMIT 1"); //limit 1?
 	if( $result){
 		if (mysqli_num_rows($result) > 0) {
 			$row = mysqli_fetch_array($result);
 			
 			$response["product"] = array();
 			
-			if($password==$row[1]){	
+			$encryptedAnswer=$row[5];
+			
+			$encryptedPass = mysqli_real_escape_string($conn, crypt(md5($password), md5($encryptedAnswer)));
+			
+			if($encryptedPass==$row[1]){	
 				
 				$product = array();
 				$product["firstName"] = $row[2];

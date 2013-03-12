@@ -18,7 +18,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+        	android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="A" />
 	    <Button
@@ -26,7 +26,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="B" />
 	    <Button
@@ -34,7 +34,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="C" />
 	    <Button
@@ -42,7 +42,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="D" />
 	    <Button
@@ -50,7 +50,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="E" />
 	    <Button
@@ -58,7 +58,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="F" />		   
 	    <Button
@@ -66,7 +66,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="G" />
 	    <Button
@@ -74,7 +74,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="H" />
 	    <Button
@@ -82,7 +82,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="I" />
 	    <Button
@@ -90,7 +90,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="J" />
 	    <Button
@@ -98,7 +98,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="K" />
 	    <Button
@@ -106,7 +106,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="L" />	   
 
@@ -115,7 +115,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="M" />
 	        </TableRow>
@@ -127,7 +127,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="N" />
 	    <Button
@@ -135,7 +135,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="O" />
 	    <Button
@@ -143,7 +143,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="P" />
 	    <Button
@@ -151,7 +151,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="Q" />
 	    <Button
@@ -159,7 +159,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="R" />		   
 	    <Button
@@ -167,7 +167,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="S" />
 	    <Button
@@ -175,7 +175,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="T" />
 	    <Button
@@ -183,7 +183,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="U" />
 	    <Button
@@ -191,7 +191,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="V" />
 	    <Button
@@ -199,7 +199,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="W" />	
 	    <Button
@@ -207,7 +207,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="X" />
 	    <Button
@@ -215,7 +215,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:text="Y" />	
 
@@ -225,7 +225,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="top"
 	        android:layout_weight="1"
-	        android:background="@drawable/list_ingredient_gradient"
+	        android:background="@drawable/list_ingredient_gradient_selector"
 	        android:onClick="letterClicked"
 	        android:paddingBottom="3dp"
 	        android:text="Z" />
@@ -240,8 +240,7 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="430dp"
-        android:layout_weight="4.69" 
-        android:listSelector="@drawable/list_ingredient_gradient_selector"/>
+        android:layout_weight="4.69" />
 
     <TableLayout
         android:layout_width="match_parent"

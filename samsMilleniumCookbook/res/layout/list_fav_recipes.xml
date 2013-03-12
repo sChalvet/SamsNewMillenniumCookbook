@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:measureWithLargestChild="false"
     android:orientation="vertical" 
-    android:background="@drawable/list_ingredient_gradient">
+	android:background="@drawable/list_ingredient_gradient_selector">
 
     <TextView
       android:id="@+id/txtListFavRecipeRecipeName"
@@ -63,6 +63,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             
+        <LinearLayout
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:padding="2dip"
+        	android:background="@drawable/image_border">
+        
             <ImageView
                 android:id="@+id/listFavRecipeImage"
                 android:layout_width="match_parent"
@@ -72,6 +78,7 @@
                 android:contentDescription="@string/banner_alt"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_launcher" />
+            </LinearLayout>
             
             <TableLayout
                 android:layout_width="match_parent"

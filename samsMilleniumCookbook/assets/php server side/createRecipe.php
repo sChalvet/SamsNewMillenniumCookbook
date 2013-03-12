@@ -8,40 +8,41 @@
 // array for JSON response
 $response = array();
 
-// check for required fields
-if (isset($_REQUEST["recipeName"])) {
-//if(true){
-    
-	$i=0;
-	//gets the whole list of ingredients
-	while(isset($_REQUEST["ingredientName".$i])){
-		$arrayIngredientName[$i] = "'".$_REQUEST["ingredientName".$i]."'";
-		$arrayAmount[$i] = "'".$_REQUEST["amount".$i]."'";
-		$arrayMeasurement[$i] = "'".$_REQUEST["measurement".$i]."'";
-		$arrayDiscription[$i] = "'".$_REQUEST["discription".$i]."'";
-		$arrayImportant[$i] = "'".$_REQUEST["important".$i]."'";
-		$i++;
-	}
-	
-	$recipeName = $_REQUEST['recipeName'];		
-    $author = $_REQUEST["author"];
-    $ingredientList = $_REQUEST["ingredientList"];
-    $cookingDirections = $_REQUEST["cookingDirections"];
-	$cookTime = $_REQUEST["cookTime"];
-    $prepTime = $_REQUEST["prepTime"];
-    $summery = $_REQUEST["summery"];
-	$type = $_REQUEST["type"];
-	$servings = $_REQUEST["servings"];
-	$hasImage = $_REQUEST["hasImage"];
-
-    //var_dump( $error);
-
     // include db connect class
     require_once __DIR__ . '/db_connect.php';
 
     // connecting to db
     $db = new DB_CONNECT();
 	$conn=$db->connect();
+
+// check for required fields
+if (isset($_POST["recipeName"])) {
+    
+	$i=0;
+	//gets the whole list of ingredients
+	while(isset($_POST["ingredientName".$i])){
+		$arrayIngredientName[$i] = "'".mysqli_real_escape_string($conn, $_POST["ingredientName".$i])."'";
+		$arrayAmount[$i] = "'".$_POST["amount".$i]."'";
+		$arrayMeasurement[$i] = "'".$_POST["measurement".$i]."'";
+		$arrayDiscription[$i] = "'".mysqli_real_escape_string($conn, $_POST["discription".$i])."'";
+		$arrayImportant[$i] = "'".$_POST["important".$i]."'";
+		$i++;
+	}
+	
+	$recipeName = mysqli_real_escape_string($_POST['recipeName']);		
+    $author = mysqli_real_escape_string($_POST["author"]);
+    $ingredientList = $_POST["ingredientList"];
+    $cookingDirections = mysqli_real_escape_string($_POST["cookingDirections"]);
+	$cookTime = $_POST["cookTime"];
+    $prepTime = $_POST["prepTime"];
+    $summery = mysqli_real_escape_string($_POST["summery"]);
+	$type = $_POST["type"];
+	$servings = $_POST["servings"];
+	$hasImage = $_POST["hasImage"];
+
+    //$recipeName = mysqli_real_escape_string($conn, $recipeName);
+
+
 
 	//checking to see if this recipeName has been used
     $result = mysqli_query($conn, "SELECT userName FROM recipe WHERE recipeName = '$recipeName'");

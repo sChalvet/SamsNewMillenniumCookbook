@@ -8,12 +8,12 @@
 $response = array();
 
 // check for required fields
-if (isset($_REQUEST["recipeName"])) {
+if (isset($_POST["recipeName"])) {
 
-	$recipeName = $_REQUEST['recipeName'];		
-    $comment = $_REQUEST["comment"];
-    $rating = $_REQUEST["rating"];
-    $authorName = $_REQUEST["author"];
+	$recipeName = mysqli_real_escape_string($_POST['recipeName']);		
+    $comment = mysqli_real_escape_string($_POST["comment"]);
+    $rating = $_POST["rating"];
+    $authorName = mysqli_real_escape_string($_POST["author"]);
 
 
     // include db connect class

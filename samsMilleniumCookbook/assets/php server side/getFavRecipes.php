@@ -5,11 +5,11 @@
  * match the contents of an array
  */
 
-if (isset($_REQUEST["list0"])) {
-    $array[0] = "'".$_REQUEST["list0"]."'";
+if (isset($_POST["list0"])) {
+    $array[0] = "'".$_POST["list0"]."'";
 	$i=1;
-	while(isset($_REQUEST["list".$i])){
-		$array[$i] = "'".$_REQUEST["list".$i]."'";
+	while(isset($_POST["list".$i])){
+		$array[$i] = "'".$_POST["list".$i]."'";
 		$i++;
 	}
 	
@@ -35,7 +35,6 @@ if (isset($_REQUEST["list0"])) {
 		// looping through all results
 		// products node
 		$response["products"] = array();
-		//$getPic = mysql_query("SELECT img FROM recipe WHERE picId = '1'") or die(mysql_error());
 		
 		while ($row = mysqli_fetch_array($result)) {
 			
@@ -73,7 +72,7 @@ if (isset($_REQUEST["list0"])) {
 				if($CountRow[0]>0)
 					$rating=$ratingRow[0]/$CountRow[0];
 			}	
-			$product["rating"] = $rating;
+			$product["rating"] = round($rating);
 			$response["message"] .= ", found total rating of $rating";
 
 			// push single recipe into final response array

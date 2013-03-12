@@ -60,6 +60,10 @@ $ingredientName='Almond';
                     android:numStars="2"
                     android:stepSize="0.1" />
 					
+					android:listSelector="@drawable/list_ingredient_gradient_selector"
+					
+					
+					
 			
 			$product["ingredientName"] = $row[0];
 			$product["calories"] = $row[1];

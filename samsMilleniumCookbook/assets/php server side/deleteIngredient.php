@@ -8,8 +8,8 @@
 $response = array();
 
 // check for required fields
-if (isset($_REQUEST['ingredientName'])) {
-    $ingredientName = $_REQUEST['ingredientName'];
+if (isset($_POST['ingredientName'])) {
+    $ingredientName = $_POST['ingredientName'];
 
     // include db connect class
     require_once __DIR__ . '/db_connect.php';

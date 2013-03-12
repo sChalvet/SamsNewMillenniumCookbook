@@ -18,18 +18,18 @@ $db = new DB_CONNECT();
 $conn=$db->connect();
 
 // check for post data
-if (isset($_REQUEST["list0"])) {
-    $array[0] = "'".$_REQUEST["list0"]."'";
+if (isset($_POST["list0"])) {
+    $array[0] = "'".$_POST["list0"]."'";
 	$i=1;
-	while(isset($_REQUEST["list".$i])){
-		$array[$i] = "'".$_REQUEST["list".$i]."'";
+	while(isset($_POST["list".$i])){
+		$array[$i] = "'".$_POST["list".$i]."'";
 		$i++;
 	}
 	
 	$ingredientName = implode(', ' , $array);
 	
 	
-	$query="SELECT recipe.recipeName, summery, userName, prepTime, cookTime FROM recipe left join recipeingredients on recipe.recipeName= recipeingredients.recipeName "
+	$query="SELECT recipe.recipeName, summery, userName, prepTime, cookTime, hasImage FROM recipe left join recipeingredients on recipe.recipeName= recipeingredients.recipeName "
 			."Where ingredientName IN ($ingredientName)";// and important=1";
 	
 	//SELECT recipe.recipeName from recipe left join recipeingredients on recipe.recipeName= recipeingredients.recipeName WHERE ingredientName='Almond' and important=1
@@ -72,9 +72,14 @@ if (isset($_REQUEST["list0"])) {
 			$product["author"] = $row[2];
 			$product["prepTime"] = $row[3];
 			$product["cookTime"] = $row[4];
-			$product["imageUrl"] = "http://3.bp.blogspot.com/-Hzcfxomkius/TgQ4Do1I5YI/AAAAAAAABkQ/IBIdX39Lq-4/s1600/Golden-Gun-29593.jpg";
-			
-			//echo "recipe name= $row[0]</br>";
+			//if row[5] (hasImage) is true then its got a url
+			if(intval($row[5])){
+				//this makes "Test Recipe" into "Test_Recipe" important for searching for images
+				$imageName = str_replace(" ", "_", $row[0]);
+				$product["imageUrl"] = "recipeImages/".$imageName.".jpg";
+			}else{
+				$product["imageUrl"] = "no pic";
+			}
 			
 			$countResult = mysqli_query($conn, "SELECT count(*) FROM recipecomments where recipename = '$row[0]'");
 			if(mysqli_num_rows($countResult) > 0){
@@ -91,7 +96,7 @@ if (isset($_REQUEST["list0"])) {
 				if($CountRow[0]>0)
 					$rating=$ratingRow[0]/$CountRow[0];
 			}	
-			$product["rating"] = $rating;
+			$product["rating"] = round($rating);
 			$response["message"] .= ", found total rating of $rating";
 
 			// push single recipe into final response array

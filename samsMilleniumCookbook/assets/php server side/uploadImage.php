@@ -8,19 +8,20 @@
 // array for JSON response
 $response = array();
 
-
-// check for required fields
-if (isset($_REQUEST['image'])) {
-    
-	$base=$_REQUEST['image'];
-	$recipeName=$_REQUEST['recipeName'];
-
     // include db connect class
     require_once __DIR__ . '/db_connect.php';
 
     // connecting to db
     $db = new DB_CONNECT();
 	$conn=$db->connect();
+
+// check for required fields
+if (isset($_POST['image'])) {
+    
+	$base=$_POST['image'];
+	$recipeName= mysqli_real_escape_string($_POST['recipeName']);
+
+
 	
 	$binary=base64_decode($base);
 	header('Content-Type: image/jpg; charset=utf-8');

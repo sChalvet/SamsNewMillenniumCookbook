@@ -7,21 +7,23 @@
 // array for JSON response
 $response = array();
 
-// check for required fields
-if (isset($_REQUEST["recipeName"])) {
-
-	$recipeName = $_REQUEST['recipeName'];		
-    $comment = $_REQUEST["comment"];
-    $rating = $_REQUEST["rating"];
-    $authorName = $_REQUEST["author"];
-
-
     // include db connect class
     require_once __DIR__ . '/db_connect.php';
 
     // connecting to db
     $db = new DB_CONNECT();
 	$conn=$db->connect();
+	
+// check for required fields
+if (isset($_POST["recipeName"])) {
+
+	$recipeName = mysqli_real_escape_string($_POST['recipeName']);		
+    $comment = mysqli_real_escape_string($_POST["comment"]);
+    $rating = mysqli_real_escape_string($_POST["rating"]);
+    $authorName = mysqli_real_escape_string($_POST["author"]);
+
+
+
 	
     // mysql inserting a new row
     $result = mysqli_query($conn, "INSERT INTO recipecomments(recipeName, comment, rating, authorName)"

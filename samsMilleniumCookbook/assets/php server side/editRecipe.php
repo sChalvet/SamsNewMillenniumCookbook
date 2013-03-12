@@ -17,8 +17,8 @@ $db = new DB_CONNECT();
 $conn=$db->connect();
 
 // check for post data
-if (isset($_REQUEST["recipeName"])) {
-    $recipeName = $_REQUEST['recipeName'];
+if (isset($_POST["recipeName"])) {
+    $recipeName = $_POST['recipeName'];
 
    // get a product from products table
    $result = mysqli_query($conn, "SELECT summery, prepTime, cookTime, servings, directions, type, hasImage FROM recipe WHERE recipeName = '$recipeName'");

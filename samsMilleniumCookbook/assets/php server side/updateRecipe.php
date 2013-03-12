@@ -10,39 +10,43 @@ $response = array();
 
 date_default_timezone_set('America/New_York');
 
-// check for required fields
-if (isset($_REQUEST["recipeName"])) {
-    
-	$i=0;
-	//gets the whole list of ingredients
-	while(isset($_REQUEST["ingredientName".$i])){
-		$arrayIngredientName[$i] = "'".$_REQUEST["ingredientName".$i]."'";
-		$arrayAmount[$i] = "'".$_REQUEST["amount".$i]."'";
-		$arrayMeasurement[$i] = "'".$_REQUEST["measurement".$i]."'";
-		$arrayDiscription[$i] = "'".$_REQUEST["discription".$i]."'";
-		$arrayImportant[$i] = "'".$_REQUEST["important".$i]."'";
-		$i++;
-	}
-	
-	$recipeName = $_REQUEST['recipeName'];
-	$oldRecipeName = $_REQUEST['oldRecipeName'];	
-    $author = $_REQUEST["author"];
-    $ingredientList = $_REQUEST["ingredientList"];
-    $cookingDirections = $_REQUEST["cookingDirections"];
-	$cookTime = $_REQUEST["cookTime"];
-    $prepTime = $_REQUEST["prepTime"];
-    $summery = $_REQUEST["summery"];
-	$type = $_REQUEST["type"];
-	$servings = $_REQUEST["servings"];
-	$hasImage = $_REQUEST["hasImage"];
-	$dateUpdated = date("Y-m-d H:i:s");
-
-    // include db connect class
+	    // include db connect class
     require_once __DIR__ . '/db_connect.php';
 
     // connecting to db
     $db = new DB_CONNECT();
 	$conn=$db->connect();
+
+// check for required fields
+if (isset($_POST["recipeName"])) {
+    
+	$i=0;
+	//gets the whole list of ingredients
+	while(isset($_POST["ingredientName".$i])){
+		$arrayIngredientName[$i] = "'".$_POST["ingredientName".$i]."'";
+		$arrayAmount[$i] = "'".$_POST["amount".$i]."'";
+		$arrayMeasurement[$i] = "'".$_POST["measurement".$i]."'";
+		$arrayDiscription[$i] = "'".mysqli_real_escape_string($conn, $_POST["discription".$i])."'";
+		$arrayImportant[$i] = "'".$_POST["important".$i]."'";
+		$i++;
+	}
+	
+	$recipeName = mysqli_real_escape_string($conn, $_POST['recipeName']);
+	$oldRecipeName = mysqli_real_escape_string($conn, $_POST['oldRecipeName']);	
+    $author = mysqli_real_escape_string($conn, $_POST["author"]);
+    $ingredientList = mysqli_real_escape_string($conn, $_POST["ingredientList"]);
+    $cookingDirections = mysqli_real_escape_string($conn, $_POST["cookingDirections"]);
+	$cookTime = mysqli_real_escape_string($conn, $_POST["cookTime"]);
+    $prepTime = mysqli_real_escape_string($conn, $_POST["prepTime"]);
+    $summery = mysqli_real_escape_string($conn, $_POST["summery"]);
+	$type = mysqli_real_escape_string($conn, $_POST["type"]);
+	$servings = mysqli_real_escape_string($conn, $_POST["servings"]);
+	$hasImage = mysqli_real_escape_string($conn, $_POST["hasImage"]);
+	$dateUpdated = date("Y-m-d H:i:s");
+	
+	//$recipeName = mysqli_real_escape_string($conn, $recipeName);
+
+
 
 	//checking to see if this recipeName has been used
     $result = mysqli_query($conn, "SELECT userName, hasImage FROM recipe WHERE recipeName = '$oldRecipeName'");

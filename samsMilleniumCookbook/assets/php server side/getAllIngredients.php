@@ -16,7 +16,7 @@ $db = new DB_CONNECT();
 $conn=$db->connect();
 	
 // get all products from products table
-$result = mysqli_query($conn, "SELECT ingredientName FROM ingredientlist") or die(mysql_error());
+$result = mysqli_query($conn, "SELECT ingredientName FROM ingredientlist");
 
 // check for empty result
 if (mysqli_num_rows($result) > 0) {

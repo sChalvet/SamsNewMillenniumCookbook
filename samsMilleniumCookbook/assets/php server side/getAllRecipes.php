@@ -18,12 +18,12 @@ $db = new DB_CONNECT();
 $conn=$db->connect();
 
 // check for post data
-if (isset($_REQUEST["foodName"])) {
-    $foodName = $_REQUEST['foodName'];
-	$author = $_REQUEST['author'];
-	$recipeType = $_REQUEST['recipeType'];
-	$keyWord = $_REQUEST['keyWord'];
-	$cookTime = $_REQUEST['cookTime'];
+if (isset($_POST["foodName"])) {
+    $foodName = $_POST['foodName'];
+	$author = $_POST['author'];
+	$recipeType = $_POST['recipeType'];
+	$keyWord = $_POST['keyWord'];
+	$cookTime = $_POST['cookTime'];
 	
 	//used to store the query
 	$cookTimeQuery="";
@@ -181,7 +181,7 @@ if (isset($_REQUEST["foodName"])) {
 				if($CountRow[0]>0)
 					$rating=$ratingRow[0]/$CountRow[0];
 			}	
-			$product["rating"] = $rating;
+			$product["rating"] = round($rating);
 			$response["message"] .= ", found total rating of $rating";
 
 			// push single recipe into final response array

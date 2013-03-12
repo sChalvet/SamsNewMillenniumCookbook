@@ -17,8 +17,8 @@ $db = new DB_CONNECT();
 $conn=$db->connect();
 
 // check for post data
-if (isset($_REQUEST["recipeName"])) {
-    $recipeName = $_REQUEST['recipeName'];
+if (isset($_POST["recipeName"])) {
+    $recipeName = mysqli_real_escape_string($_POST['recipeName']);
 
     // get comments from recipecomments table
 	$result = mysqli_query($conn, "SELECT authorName, postTime, comment, rating FROM recipecomments WHERE recipeName ='$recipeName' ORDER BY postTime DESC");
