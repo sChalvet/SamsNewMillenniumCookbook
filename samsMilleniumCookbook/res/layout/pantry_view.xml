@@ -30,7 +30,7 @@
 			    android:layout_height="wrap_content"
 			    android:layout_weight="1"
 			    android:text="@string/selectAll"
-			    android:textSize="12sp" />
+			    android:textSize="11sp" />
 
 			<Button
 			    android:id="@+id/btnDeleteIngredients"
@@ -38,7 +38,7 @@
 			    android:layout_height="wrap_content"
 			    android:layout_weight="1"
 			    android:text="@string/remove"
-			    android:textSize="12sp" />
+			    android:textSize="11sp" />
 
            <Button
                android:id="@+id/btnSearch"
@@ -46,7 +46,7 @@
                android:layout_height="wrap_content"
                android:layout_weight="1"
                android:text="@string/searchRecipes"
-               android:textSize="12sp" />
+               android:textSize="11sp" />
 
            <Button
                android:id="@+id/btnEditPantry"
@@ -54,7 +54,7 @@
                android:layout_height="wrap_content"
                android:layout_weight="1"
                android:text="@string/editPantry"
-               android:textSize="12sp" />
+               android:textSize="11sp" />
            
 		</TableRow>
 

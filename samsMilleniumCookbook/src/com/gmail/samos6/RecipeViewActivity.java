@@ -238,7 +238,7 @@ public class RecipeViewActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu, menu);
+        menuInflater.inflate(R.menu.recipe_view_menu, menu);
         return true;
     }
 	
@@ -400,6 +400,19 @@ public class RecipeViewActivity extends Activity {
 				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(i);
 	            return true;
+	            
+	        case R.id.share:
+	            String message = userName+" "+getString(R.string.likes)+" "+recipeName+" from "+getString(R.string.app_name);
+        		Intent share = new Intent(Intent.ACTION_SEND);
+        		share.setType("text/plain");
+        		share.putExtra(Intent.EXTRA_TEXT, message);
+        		//share.putExtra(Intent.EXTRA_SUBJECT, message);
+
+        		startActivity(Intent.createChooser(share, getString(R.string.howShare)));
+	            return true;
+	            
+	            
+
 	 
 	        default:
 	            return super.onOptionsItemSelected(item);

@@ -2,6 +2,8 @@ package com.gmail.samos6;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -80,6 +82,7 @@ public class AccountCreationActivity extends Activity{
 	private static final String TAG_TESTANSWER = "testAnswer";
 	
 	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -123,8 +126,8 @@ public class AccountCreationActivity extends Activity{
 				if(nickName.matches("")){
 					msg = "You need a nick name.";
 					incomplete=true;
-				}else if(email.matches("")){
-					msg = "Please enter your email address.";
+				}else if(!isValidEmailAddress(email)){
+					msg = "Please enter a valid email address.";
 					incomplete=true;
 				}else if(firstName.matches("")){
 					msg = "Please enter your first name.";
@@ -271,6 +274,22 @@ public class AccountCreationActivity extends Activity{
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}
+
+	}
+	
+	/**
+	 * Checks to see if the email address provided is valid
+	 * 
+	 * @param email
+	 * @return true if valid email
+	 */
+	public static boolean isValidEmailAddress(String email) {
+		
+		Pattern emailPattern = Pattern.compile("[a-zA-Z0-9[!#$%&'()*+,/-_.\"]]+@[a-zA-Z0-9[!#$%&'()*+,/-_\"]]+.[a-zA-Z0-9[!#$%&'()*+,/-_\".]]+");
+
+		Matcher m = emailPattern.matcher(email); 
+		
+		return m.matches();
 
 	}
 	

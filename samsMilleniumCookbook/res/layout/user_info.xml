@@ -171,12 +171,12 @@
 	    android:layout_height="wrap_content"
 	    android:layout_below="@id/pref8"
 	    android:hint="@string/testAnswer"
-	    android:paddingBottom="10dp"
 	    android:inputType="text" >
 	    
 	</EditText>
 	
     	<Button
+    	    android:paddingTop="25dp"
     	    android:id="@+id/btnPreferenceSave"
     	    android:layout_width="match_parent"
     	    android:layout_height="wrap_content"

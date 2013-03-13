@@ -143,6 +143,7 @@ public final class R {
         public static final int recipeViewRatingBar=0x7f090080;
         public static final int recipeViewSlidingDrawer=0x7f090089;
         public static final int scrollView1=0x7f090038;
+        public static final int share=0x7f09008f;
         public static final int spnrCooktime=0x7f09006c;
         public static final int spnrCreateRecipeServings=0x7f09000e;
         public static final int spnrCreateRecipeType=0x7f09000d;
@@ -207,6 +208,7 @@ public final class R {
     }
     public static final class menu {
         public static final int menu=0x7f080000;
+        public static final int recipe_view_menu=0x7f080001;
     }
     public static final class string {
         public static final int addComment=0x7f050027;
@@ -250,12 +252,14 @@ public final class R {
         /**  part of menu xml  
          */
         public static final int home=0x7f050071;
+        public static final int howShare=0x7f050074;
         public static final int ingredientHint=0x7f05002c;
         public static final int ingredientList=0x7f050038;
         /**  part of editIngredientActivity 
          */
         public static final int ingredientName=0x7f05004b;
         public static final int lastName=0x7f050063;
+        public static final int likes=0x7f050073;
         public static final int login=0x7f05001e;
         public static final int logout=0x7f05001f;
         public static final int mainAddRecipe=0x7f05001a;
@@ -268,7 +272,7 @@ public final class R {
         /**  part of preferences  
          */
         public static final int nickName=0x7f050060;
-        public static final int no=0x7f050073;
+        public static final int no=0x7f050076;
         public static final int notes=0x7f050050;
         public static final int password=0x7f050064;
         public static final int per=0x7f050054;
@@ -315,6 +319,7 @@ public final class R {
         public static final int searchRecipes=0x7f050021;
         public static final int selectAll=0x7f05002a;
         public static final int servings=0x7f050032;
+        public static final int shareWithFriends=0x7f050072;
         public static final int summery=0x7f050049;
         public static final int summeryHint=0x7f05002d;
         public static final int takeApic=0x7f050030;
@@ -353,7 +358,7 @@ public final class R {
         public static final int viewRatings=0x7f05003f;
         /**  values used throughout  
          */
-        public static final int yes=0x7f050072;
+        public static final int yes=0x7f050075;
         public static final int yourRating=0x7f050036;
     }
     public static final class style {
