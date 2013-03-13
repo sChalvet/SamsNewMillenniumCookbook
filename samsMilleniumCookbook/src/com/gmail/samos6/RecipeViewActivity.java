@@ -62,6 +62,7 @@ public class RecipeViewActivity extends Activity {
 	//preference access
 	SharedPreferences prefs;
 	String userName="";
+	String firstName="";
 	String password="";
 	
 	String recipeName;
@@ -127,6 +128,7 @@ public class RecipeViewActivity extends Activity {
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
+		firstName =prefs.getString("firstName", "guest");
 		password =prefs.getString("password", "");
 		
 		//getting url from resources
@@ -401,8 +403,8 @@ public class RecipeViewActivity extends Activity {
 				startActivity(i);
 	            return true;
 	            
-	        case R.id.share:
-	            String message = userName+" "+getString(R.string.likes)+" "+recipeName+" from "+getString(R.string.app_name);
+	        case R.id.share: 	            //					market://details?id=com.example.android.jetboy
+	            String message = firstName+" "+getString(R.string.likes)+" "+recipeName+" from "+getString(R.string.app_name);
         		Intent share = new Intent(Intent.ACTION_SEND);
         		share.setType("text/plain");
         		share.putExtra(Intent.EXTRA_TEXT, message);

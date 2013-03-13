@@ -49,6 +49,7 @@ public class MainScreenActivity extends Activity{
 	EditText txtPassword;
 	Button btnAlertLogin;
 	Button btnAlertCreateAccount;
+	Button btnForgotPassword;
 	
 	String nickName;
 	String firstName;
@@ -233,6 +234,7 @@ public class MainScreenActivity extends Activity{
 			txtPassword= (EditText) textEntryView.findViewById(R.id.MainPassword);	
 			btnAlertLogin= (Button) textEntryView.findViewById(R.id.btnMainAlertLogin);
 			btnAlertCreateAccount= (Button) textEntryView.findViewById(R.id.btnMainAlertCreateAccount);
+			btnForgotPassword= (Button) textEntryView.findViewById(R.id.btnMainAlertForgotPass);
 	        		
 			
 			alert = new AlertDialog.Builder(MainScreenActivity.this).create();
@@ -276,6 +278,39 @@ public class MainScreenActivity extends Activity{
 					alert.cancel();
 					Intent i = new Intent(getApplicationContext(), AccountCreationActivity.class);
 					startActivity(i);
+					
+				}
+			});
+			
+			
+			btnForgotPassword.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View view) {
+					// Launching AccountCreationActivity
+					
+					String nickName=  txtNickName.getText().toString();
+					
+					String msg = "";
+					boolean incomplete=false;
+					
+					Log.d("MainScreen alert", "in onclick");
+					
+					if(nickName.matches("")){
+						msg = "Please enter your user name\nto find your password.";
+						incomplete=true;
+					}else{
+						
+						alert.cancel();
+						Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
+						intent.putExtra("userName", nickName);	
+						startActivityForResult(intent, 100);
+						
+					}
+					
+					if(incomplete){
+						Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+				    }
 					
 				}
 			});

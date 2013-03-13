@@ -31,7 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-    <TableRow >
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
     <Button
         android:id="@+id/btnMainAlertLogin"
@@ -39,7 +41,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:text="@string/login" />
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:text="@string/login"
+        android:textSize="12sp" />
     
         <Button
             android:id="@+id/btnMainAlertCreateAccount"
@@ -47,7 +52,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@string/createAccount" />
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:text="@string/createAccount"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnMainAlertForgotPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:text="@string/forgotPassword"
+            android:textSize="12sp" />
 
     </TableRow>
     </TableLayout>

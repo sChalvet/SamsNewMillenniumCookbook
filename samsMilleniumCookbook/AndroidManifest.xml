@@ -34,6 +34,18 @@
         </activity>
         
         <activity
+            android:name=".ForgotPasswordActivity"
+            android:screenOrientation= "portrait"
+            android:label="Forgot your password?" >
+        </activity>
+        
+        <activity
+            android:name=".EditUserInfoActivity"
+            android:screenOrientation= "portrait"
+            android:label="Edit your info" >
+        </activity>
+        
+        <activity
             android:name=".editCommentActivity"
             android:screenOrientation= "portrait"
             android:label="Editting Comment" >

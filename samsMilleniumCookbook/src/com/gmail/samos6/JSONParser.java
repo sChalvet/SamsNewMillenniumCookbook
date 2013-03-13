@@ -46,7 +46,7 @@ public class JSONParser {
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				HttpPost httpPost = new HttpPost(url);
 				httpPost.setEntity(new UrlEncodedFormEntity(params));
-				Log.d("JSOMParser POST params=", params.toString());
+				Log.d("JSONParser POST params=", params.toString());
 				HttpResponse httpResponse = httpClient.execute(httpPost);
 				HttpEntity httpEntity = httpResponse.getEntity();
 				inputStream = httpEntity.getContent();
@@ -55,7 +55,7 @@ public class JSONParser {
 				// request method is GET
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				String paramString = URLEncodedUtils.format(params, "utf-8");
-				Log.d("JSOMParser GET params=", paramString);
+				Log.d("JSONParser GET params=", paramString);
 				url += "?" + paramString;
 				HttpGet httpGet = new HttpGet(url);
 
@@ -89,7 +89,7 @@ public class JSONParser {
 			
 			jsonString = stringBuilder.toString();
 			
-			Log.d("JSOMParser jsonString=", jsonString);
+			Log.d("JSONParser jsonString=", jsonString);
 			
 		} catch (Exception e) {
 			Log.e("OMG Buffer Error", "Error converting result " + e.toString());

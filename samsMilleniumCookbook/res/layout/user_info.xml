@@ -176,12 +176,11 @@
 	</EditText>
 	
     	<Button
-    	    android:paddingTop="25dp"
     	    android:id="@+id/btnPreferenceSave"
     	    android:layout_width="match_parent"
     	    android:layout_height="wrap_content"
+    	    android:layout_alignParentBottom="false"
     	    android:layout_below="@id/userTestQuestionAnswer"
-    	    android:layout_alignParentBottom="true"
     	    android:text="@string/saveInfo" />
 
 </RelativeLayout>

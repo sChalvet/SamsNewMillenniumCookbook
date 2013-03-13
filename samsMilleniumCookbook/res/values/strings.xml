@@ -28,7 +28,11 @@
     <string name="urlUpdateComment">http://joe.cs.unca.edu/~chalvesa/app/updateComment.php</string>
     <string name="urlGetAllRecipesByIngredient">http://joe.cs.unca.edu/~chalvesa/app/getAllRecipesByIngredient.php</string>
     <string name="urlUploadImage">http://joe.cs.unca.edu/~chalvesa/app/uploadImage.php</string>
-    <string name="urlRoot">http://joe.cs.unca.edu/~chalvesa/app/recipeApp/</string>
+    <string name="urlResetPassword">http://joe.cs.unca.edu/~chalvesa/app/resetPassword.php</string>
+    <string name="urlGetTestQuestion">http://joe.cs.unca.edu/~chalvesa/app/getTestQuestion.php</string>
+    <string name="urlUpdateAccount">http://joe.cs.unca.edu/~chalvesa/app/updateAccount.php</string>
+    <string name="urlGetUserInfo">http://joe.cs.unca.edu/~chalvesa/app/getUserInfo.php</string>
+    <string name="urlRoot">http://joe.cs.unca.edu/~chalvesa/app/</string>
     
     
     <string name="userName">Unknown</string>
@@ -42,7 +46,7 @@
     <string name="mainAddRecipe">Create a Recipe</string>
     <string name="mainFavoriteRecipes">Your Favorite Recipes</string>
     <string name="mainSavedRecipes">Your Saved Recipes</string>
-    <string name="createAccount">Create an account</string>
+    <string name="createAccount">Create an\naccount</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>  
     
@@ -77,7 +81,16 @@
     <string name="commentHint">New Comment Here</string>
     <string name="postComment">Post</string>
     <string name="yourRating">Your Rating: </string>
-        
+    
+     <!-- part of forgot password Activity -->
+    <string name="yourTestQuestion">This is your test question:</string>
+    <string name="enterAnswer">Please enter the answer</string>
+    <string name="resetPassword">Reset Password</string>
+    <string name="forgotPassword">Forgot\nPassword</string>
+    <string name="resetPasswordMessage">You will receive an email shortly with your new password.\nRemeber to check you spam box if you do not see it.</string>
+    <string name="resetPasswordAnswerDoesNotMatch">Your answer does not match the one we have.\nPlease remember that it is case sensitive.</string>
+    <string name="hintAnswer">Answer</string>
+    
     <!-- part of RecipeView Activity -->
     <string name="cookingDirections">Cooking Directions:</string>
     <string name="ingredientList">Ingredient List:</string>
@@ -149,6 +162,18 @@
 	<string name="prefTestQuestion">Enter a test question:</string>
 	<string name="prefTestAnswer">Enter your answer to the question:</string>
 	
+	<!-- part of edit preferences  -->
+	<string name="updateInfo">Update Account</string>
+	<string name="hintTestAnswer">Re-enter your test answer please</string>
+	<string name="prefEditNickName">Your nick name:</string>
+	<string name="prefEditEmail">Your email address:</string>
+	<string name="prefEditFirstName">Your first name:</string>
+	<string name="prefEditLastName">Your last name:</string>
+	<string name="prefOldPassword">Enter your password</string>
+	<string name="prefNewPassword">Enter a new password</string>
+	<string name="hintOldPassword">Password needed to save changes</string>
+	<string name="hintNewPassword">Leave blank to not change</string>
+	
 	<!-- part of menu xml  -->
 	<string name="home">Home</string>
 	<string name="shareWithFriends">Share with friends</string>
@@ -158,6 +183,8 @@
 	<!-- values used throughout  -->
 	<string name="yes">Yes</string>
 	<string name="no">No</string>
+	<string name="ok">Ok</string>
+	<string name="Attention">Attention!</string>
 	
 	<string-array name="foodType"> 
     <item>Other</item>
