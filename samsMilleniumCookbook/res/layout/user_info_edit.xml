@@ -23,7 +23,7 @@
 	    android:paddingLeft="5dp"
 	    android:paddingRight="5dp" >
             
-            <TextView
+    <TextView
          android:id="@+id/pref1"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
@@ -114,55 +114,12 @@
 	</EditText>
 	
 	<TextView
-	    android:id="@+id/pref6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:layout_below="@id/editUserLastName"
-        android:text="@string/prefOldPassword" >
-	    
-	</TextView>
-
-	<EditText
-	    android:id="@+id/editUserOldPassword" 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:hint="@string/hintOldPassword"
-	    android:layout_below="@id/pref6"
-	    android:inputType="textVisiblePassword"
-	    android:maxLength="30" >
-	    
-	</EditText>
-	
-	
-		<TextView
-	    android:id="@+id/pref6bis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:layout_below="@id/editUserOldPassword"
-        android:text="@string/prefNewPassword" >
-	    
-	</TextView>
-
-	<EditText
-	    android:id="@+id/editUserNewPassword" 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:hint="@string/hintNewPassword"
-	    android:layout_below="@id/pref6bis"
-	    android:inputType="textVisiblePassword"
-	    android:maxLength="30" >
-	    
-	</EditText>
-	
-	<TextView
 	    android:id="@+id/pref7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:layout_below="@id/editUserNewPassword"
-        android:text="@string/prefTestQuestion" >
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/editUserLastName"
+	    android:paddingTop="10dp"
+	    android:text="@string/prefEditTestQuestion" >
 	    
 	</TextView>
 
@@ -171,7 +128,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@id/pref7"
-	    android:hint="@string/testQuestion"
+	    android:hint="@string/hintNewPassword"
 	    android:inputType="textCapSentences|textAutoCorrect|textAutoComplete"
 	    android:maxLength="80" >
 	    
@@ -192,18 +149,127 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@id/pref8"
-	    android:hint="@string/hintTestAnswer"
+	    android:hint="@string/hintNewPassword"
 	    android:inputType="text" >
 	    
 	</EditText>
 	
+			<TextView
+	    android:id="@+id/pref6bis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/editUserTestQuestionAnswer"
+        android:text="@string/prefNewPassword" >
+	    
+	</TextView>
+
+	<EditText
+	    android:id="@+id/editUserNewPassword" 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="@string/hintNewPassword"
+	    android:layout_below="@id/pref6bis"
+	    android:inputType="textVisiblePassword"
+	    android:maxLength="30" >
+	    
+	</EditText>
+	
+	    <View
+	        android:id="@+id/line1"
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:layout_below="@+id/editUserNewPassword"
+	        android:layout_marginTop="20dp"
+	        android:background="#4554ff" />
+	
+	    
+	  <TextView
+	    android:id="@+id/pref10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/pref9"
+        android:text="@string/prefOldPassword" >
+	    
+	</TextView>
+
+	<EditText
+	    android:id="@+id/editUserOldPassword" 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="@string/hintOldPassword"
+	    android:layout_below="@id/pref10"
+	    android:inputType="textVisiblePassword"
+	    android:maxLength="30" >
+	    
+	</EditText>
+	    
+	    
+	<TextView
+	    android:id="@+id/pref11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/editUserOldPassword"
+        android:text="@string/answerQuestion" >
+	    
+	</TextView>
+	
+	<TextView
+	    android:id="@+id/editUserOldTestQuestion"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/pref11"
+	    android:paddingBottom="20dp"
+	    android:paddingLeft="15dp"
+	    android:paddingRight="15dp"
+	    android:paddingTop="20dp"
+	    android:text="Question"
+	    android:textSize="16sp"
+	    android:textStyle="italic"
+	    android:typeface="serif" >
+	    
+	</TextView>
+
+	<EditText
+	    android:id="@+id/editUserOldTestAnswer"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/editUserOldTestQuestion"
+	    android:hint="@string/answerQuestion"
+	    android:inputType="textVisiblePassword"
+	    android:maxLength="30" >
+	    
+	</EditText>
+	    
+	    
+	    <View
+	        android:id="@+id/line2"
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:layout_marginTop="20dp"
+	        android:layout_marginBottom="5dp"
+	        android:layout_below="@+id/editUserOldTestAnswer"
+	        android:background="#4554ff" />
+
     	<Button
     	    android:id="@+id/btnPreferenceUpdate"
     	    android:layout_width="match_parent"
     	    android:layout_height="wrap_content"
-    	    android:layout_alignParentBottom="false"
-    	    android:layout_below="@id/editUserTestQuestionAnswer"
-    	    android:text="@string/saveInfo" />
+    	    android:layout_below="@+id/line2"
+    	    android:text="@string/updateInfo" />
+
+    	<TextView
+    	    android:id="@+id/pref9"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/editUserNewPassword"
+    	    android:layout_centerHorizontal="true"
+    	    android:layout_marginTop="30dp"
+    	    android:paddingTop="10dp"
+    	    android:text="@string/verification"
+    	    android:textSize="17sp" />
 
 </RelativeLayout>
 </LinearLayout>

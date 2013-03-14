@@ -164,7 +164,8 @@
 	
 	<!-- part of edit preferences  -->
 	<string name="updateInfo">Update Account</string>
-	<string name="hintTestAnswer">Re-enter your test answer please</string>
+	<string name="hintTestAnswer">Enter your test answer please</string>
+	<string name="prefEditTestQuestion">New test question?</string>
 	<string name="prefEditNickName">Your nick name:</string>
 	<string name="prefEditEmail">Your email address:</string>
 	<string name="prefEditFirstName">Your first name:</string>
@@ -173,6 +174,8 @@
 	<string name="prefNewPassword">Enter a new password</string>
 	<string name="hintOldPassword">Password needed to save changes</string>
 	<string name="hintNewPassword">Leave blank to not change</string>
+	<string name="answerQuestion">Answer your test question</string>
+	<string name="verification">Verification</string>
 	
 	<!-- part of menu xml  -->
 	<string name="home">Home</string>

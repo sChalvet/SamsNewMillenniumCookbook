@@ -4,7 +4,8 @@
  * Following code will create a new User Account
  */
 date_default_timezone_set('America/New_York');
- 
+
+$webMasterEmail = "sams.cookbook@gmail.com";
  
 // array for JSON response
 $response = array();
@@ -59,6 +60,9 @@ if (isset($_POST["nickName"])) {
 		
 		// check if row inserted or not
 		if ($result) {
+		
+			sendEmail($email, $firstName, $webMasterEmail);
+			
 			// successfully inserted into database
 			$response["success"] = 1;
 			$response["message"] = "Account successfully created.";
@@ -67,7 +71,7 @@ if (isset($_POST["nickName"])) {
 			echo json_encode($response);
 		} else {
 			// failed to insert row
-			$error = mysqli_error();
+			$error = mysqli_error($conn);
 			$response["success"] = 0;
 			$response["message"] = $error;
 			
@@ -82,5 +86,38 @@ if (isset($_POST["nickName"])) {
 
     // echoing JSON response
     echo json_encode($response);
+}
+
+
+function sendEmail($email, $firstName, $webMasterEmail){
+	
+	$to      = $email;
+	$subject = 'Sam\'s New Millennium Cookbook';
+	$message = '
+				<html>
+				<head>
+				</head>
+				<body>
+					<center>
+					<h1>Greetings from Sam\'s New Millennium Cookbook!!</h1><br/>
+					<p>'.$firstName.', we are glad to see you joining us!</p>
+					<p>We hope you will enjoy the app and add many recipes.</p><br/><br/><br/>
+					</center>
+				</body>
+				<footer>
+					<p><font size=1>If you did create an account on Sam\'s New Mellinnium Cookbook then send "Not me" to '.$webMasterEmail.'</font></p>
+				</footer>
+				</html>
+				';
+
+	// To send HTML mail, the Content-type header must be set
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+	// Additional headers
+	$headers .= 'From: Sams Cookbook <'.$webMasterEmail .'>' . "\r\n";
+
+	mail($to, $subject, $message, $headers);
+
 }
 ?>

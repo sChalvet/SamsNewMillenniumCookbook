@@ -42,8 +42,10 @@ public class EditUserInfoActivity extends Activity{
 	EditText txtLastName;
 	EditText txtOldPassword;
 	EditText txtNewPassword;
-	EditText txtTestQuestion;
-	EditText txtTestAnswer;
+	EditText txtNewTestQuestion;
+	EditText txtNewTestAnswer;
+	TextView txtOldTestQuestion;
+	EditText txtOldTestAnswer;
 	
 	// Progress Dialog
 	private ProgressDialog pDialog;
@@ -66,8 +68,10 @@ public class EditUserInfoActivity extends Activity{
 	String lastName;
 	String oldPassword;
 	String newPassword;
-	String testQuestion;
-	String testAnswer;
+	String testOldQuestion;
+	String testOldAnswer;
+	String testNewQuestion="";
+	String testNewAnswer="";
 	
 	//Creating the variable that will hold the url when it is pulled from resources
 	String urlUpdateAccount;
@@ -115,8 +119,10 @@ public class EditUserInfoActivity extends Activity{
 		txtLastName = (EditText) findViewById(R.id.editUserLastName);
 		txtOldPassword = (EditText) findViewById(R.id.editUserOldPassword);
 		txtNewPassword = (EditText) findViewById(R.id.editUserNewPassword);
-		txtTestQuestion = (EditText) findViewById(R.id.editUserTestQuestion);
-		txtTestAnswer = (EditText) findViewById(R.id.editUserTestQuestionAnswer);
+		txtNewTestQuestion = (EditText) findViewById(R.id.editUserTestQuestion);
+		txtNewTestAnswer = (EditText) findViewById(R.id.editUserTestQuestionAnswer);
+		txtOldTestQuestion = (TextView) findViewById(R.id.editUserOldTestQuestion);
+		txtOldTestAnswer = (EditText) findViewById(R.id.editUserOldTestAnswer);
 		
 		// Create Account click event
 		btnUpdateAccount.setOnClickListener(new View.OnClickListener() {
@@ -133,8 +139,10 @@ public class EditUserInfoActivity extends Activity{
 				lastName = txtLastName.getText().toString();
 				newPassword = txtNewPassword.getText().toString();
 				oldPassword = txtOldPassword.getText().toString();
-				testQuestion = txtTestQuestion.getText().toString();
-				testAnswer = txtTestAnswer.getText().toString();
+				testNewQuestion = txtNewTestQuestion.getText().toString();
+				testNewAnswer = txtNewTestAnswer.getText().toString();
+				testOldAnswer = txtOldTestAnswer.getText().toString();
+				
 				String msg = "";
 				boolean incomplete=false;
 				
@@ -151,13 +159,15 @@ public class EditUserInfoActivity extends Activity{
 					msg = "Please enter your last name.";
 					incomplete=true;
 				}else if(oldPassword.matches("")){
-					msg = "Please enter a password.";
+					msg = "Enter your password to confirm changes.";
 					incomplete=true;
-				}else if(testQuestion.matches("")){
-					msg = "Please enter your test question.";
-					incomplete=true;
-				}else if(testAnswer.matches("")){
-					msg = "Please enter your test question answer.";
+				}else if(!testNewQuestion.matches("")){
+						if(testNewAnswer.matches("")){	
+							msg = "Please enter an answer to your new test question.";
+							incomplete=true;
+						}
+				}else if(testOldAnswer.matches("")){
+					msg = "Enter your test question answer to confirm changes.";
 					incomplete=true;
 				}else{
 					new UpdateAccount().execute();
@@ -217,10 +227,7 @@ public class EditUserInfoActivity extends Activity{
 		txtEmail.setText(email);
 		txtFirstName.setText(firstName);
 		txtLastName.setText(lastName);
-		txtOldPassword.setText(oldPassword);
-		txtTestQuestion.setText(testQuestion);
-
-		
+		txtOldTestQuestion.setText(testOldQuestion);
 	}
 	
 	
@@ -251,19 +258,21 @@ public class EditUserInfoActivity extends Activity{
 			
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 
-			Log.d("Create Account=", "do in background");
+			Log.d("update Account=", "do in background");
 
 			// Building Parameters
+			params.add(new BasicNameValuePair(TAG_USERID, userId));
 			params.add(new BasicNameValuePair(TAG_NICKNAME, nickName));
 			params.add(new BasicNameValuePair(TAG_EMAIL, email));
 			params.add(new BasicNameValuePair(TAG_FIRSTNAME, firstName));
 			params.add(new BasicNameValuePair(TAG_LASTNAME, lastName));
 			params.add(new BasicNameValuePair(TAG_OLDPASSWORD, oldPassword));
 			params.add(new BasicNameValuePair(TAG_NEWPASSWORD, newPassword));
-			params.add(new BasicNameValuePair(TAG_TESTQUESTION, testQuestion));
-			params.add(new BasicNameValuePair(TAG_TESTANSWER, testAnswer));
+			params.add(new BasicNameValuePair("testOldAnswer", testOldAnswer));
+			params.add(new BasicNameValuePair("testNewQuestion", testNewQuestion));
+			params.add(new BasicNameValuePair("testNewAnswer", testNewAnswer));
 
-			Log.d("CreateAccount params: ", params.toString());
+			Log.d("UpdateAccount params: ", params.toString());
 			
 			// getting JSON Object
 			JSONObject json = jsonParser.makeHttpRequest(urlUpdateAccount, "POST", params);
@@ -272,7 +281,7 @@ public class EditUserInfoActivity extends Activity{
 			if (!bCancelled) try {
 				
 				// check log cat for response
-				Log.d("Create account Response", json.toString());
+				Log.d("update account Response", json.toString());
 				
 				int success = json.getInt(TAG_SUCCESS);
 
@@ -280,13 +289,13 @@ public class EditUserInfoActivity extends Activity{
 					
 					successful=true;
 					// successfully created Account
-					Log.d("CreateAccount_Background", "Success! account Created");
+					Log.d("UpdateAccount_Background", "Success! account updated");
 					// closing this screen
 					finish();
 				} else {
 					// failed to create Account
 					 message = json.getString(TAG_MESSAGE);
-					Log.d("CreateAccount_Background", "oops! Failed to create Account "+message);
+					Log.d("UpdateAccount_Background", "oops! Failed to update Account "+message);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -303,7 +312,7 @@ public class EditUserInfoActivity extends Activity{
 			pDialog.dismiss();
 			if(successful){
 				setPreferences();
-				Toast.makeText(getApplicationContext(), "Account Created", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "Account updated", Toast.LENGTH_LONG).show();
 			}
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
@@ -384,8 +393,7 @@ public class EditUserInfoActivity extends Activity{
 						email= product.getString(TAG_EMAIL);
 						firstName= product.getString(TAG_FIRSTNAME);
 						lastName= product.getString(TAG_LASTNAME);
-						oldPassword= product.getString(TAG_OLDPASSWORD);
-						testQuestion= product.getString(TAG_TESTQUESTION);
+						testOldQuestion= product.getString(TAG_TESTQUESTION);
 
 
 					} else {

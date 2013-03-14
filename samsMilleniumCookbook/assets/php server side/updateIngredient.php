@@ -37,7 +37,7 @@ if (isset($_POST['ingredientName'])) {
     $fat = round(($fat/$gramAmount)*100, 1);
 	$carbs = round(($carbs/$gramAmount)*100, 1);
 	
-    // mysql update row with matched pid
+    // mysql update row with matched ingredeint Name
     $result = mysqli_query($conn, "UPDATE ingredientlist SET ingredientName='$ingredientName', calories = '$calories', protein = '$protein', fat = '$fat', "
 			."carbs = '$carbs', type = '$type', notes = '$notes', dateUpdated = '$dateUpdated'  WHERE ingredientName = '$oldIngredientName'");
 
