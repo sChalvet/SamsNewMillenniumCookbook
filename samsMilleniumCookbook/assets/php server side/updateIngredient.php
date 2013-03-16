@@ -7,6 +7,7 @@
 
 // array for JSON response
 $response = array();
+$salt="0476089252";
 
 date_default_timezone_set('America/New_York');
 
@@ -29,8 +30,23 @@ if (isset($_POST['ingredientName'])) {
     $type = mysqli_real_escape_string($conn, $_POST["type"]);
     $notes = mysqli_real_escape_string($conn, $_POST["notes"]);
 	$gramAmount = mysqli_real_escape_string($conn, $_POST["gramAmount"]);
+	$userName = mysqli_real_escape_string($conn, $_POST["userName"]);
 	$dateUpdated = date("Y-m-d H:i:s");
+	$token = $_POST["token"];
 
+	$result = mysqli_query($conn, "SELECT joinDate from user where userName= '$userName'");
+	$row = mysqli_fetch_array($result);
+	
+	if($token!== mysqli_real_escape_string($conn, crypt(md5($salt), md5($row[0])))){
+		// successfully inserted into database
+        $response["success"] = 0;
+        $response["message"] = "Your are not correctly loged in.\nTry loging in again.";
+
+        // echoing JSON response
+        echo json_encode($response);
+		die();
+	}
+	
 	//making it out of 100
 	$calories = round(($calories/$gramAmount)*100, 1);
     $protein = round(($protein/$gramAmount)*100, 1);

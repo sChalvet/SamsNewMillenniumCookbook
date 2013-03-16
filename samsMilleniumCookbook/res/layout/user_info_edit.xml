@@ -195,13 +195,14 @@
 	</TextView>
 
 	<EditText
-	    android:id="@+id/editUserOldPassword" 
+	    android:id="@+id/editUserOldPassword"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:hint="@string/hintOldPassword"
 	    android:layout_below="@id/pref10"
-	    android:inputType="textVisiblePassword"
-	    android:maxLength="30" >
+	    android:hint="@string/hintOldPassword"
+	    android:inputType="textWebPassword"
+	    android:maxLength="30"
+	    android:textSize="13sp" >
 	    
 	</EditText>
 	    

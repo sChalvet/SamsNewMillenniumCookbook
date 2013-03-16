@@ -48,7 +48,7 @@ public class EditCommentActivity extends Activity {
 	//preference access
 	SharedPreferences prefs;
 	String userName="";
-	String password="";
+	String token="";
 	
 	String rating;
 	String comment;
@@ -73,6 +73,7 @@ public class EditCommentActivity extends Activity {
 	private static final String TAG_COMMENT = "comment";
 	private static final String TAG_RATING = "rating";
 	private static final String TAG_AUTHOR = "author";
+	private static final String TAG_TOKEN = "token";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class EditCommentActivity extends Activity {
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
-		password =prefs.getString("password", "");
+		token =prefs.getString("token", "");
 		
 		//getting url from resources
 		urlupdateComment = getResources().getString(R.string.urlUpdateComment);
@@ -181,6 +182,7 @@ public class EditCommentActivity extends Activity {
 			params.add(new BasicNameValuePair(TAG_COMMENT, comment));
 			params.add(new BasicNameValuePair(TAG_RATING, rating));
 			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
+			params.add(new BasicNameValuePair(TAG_TOKEN, token));
 
 			// getting JSON Object
 			JSONObject json = jsonParser.makeHttpRequest(urlupdateComment, "POST", params);
@@ -260,6 +262,7 @@ public class EditCommentActivity extends Activity {
 			//including recipeName for the query
 			params.add(new BasicNameValuePair(TAG_RECIPENAME, recipeName));
 			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
+			params.add(new BasicNameValuePair(TAG_TOKEN, token));
 			
 			// getting JSON string from URL
 			JSONObject json = jsonParser.makeHttpRequest(urlEditComment, "POST", params);

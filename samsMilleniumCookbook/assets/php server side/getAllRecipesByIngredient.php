@@ -26,16 +26,31 @@ if (isset($_POST["list0"])) {
 		$i++;
 	}
 	
+	$typeOfSearch= $_POST["searchType"];
+	
 	$ingredientName = implode(', ' , $array);
 	
-	
-	$query="SELECT recipe.recipeName, summery, userName, prepTime, cookTime, hasImage FROM recipe join recipeingredients on recipe.recipeName = recipeingredients.recipeName "
-			."Where ingredientName IN ($ingredientName) and important=1";// and important=1";
-	
-	//SELECT recipe.recipeName from recipe left join recipeingredients on recipe.recipeName= recipeingredients.recipeName WHERE ingredientName='Almond' and important=1
-	
-	
-	
+	if($typeOfSearch==0){
+		
+		$query="SELECT a.recipeName, r.summery, r.userName, r.prepTime, r.cookTime, r.hasImage,  sum(a.important) AS importantTotal
+				FROM recipeingredients AS a JOIN recipe AS r
+                ON a.recipeName = r.recipeName
+				GROUP BY a.recipeName
+				HAVING importantTotal = (
+				SELECT count(b.important) as importantFound
+				FROM recipeingredients AS b
+				WHERE b.ingredientName IN ($ingredientName)
+				AND b.recipeName = a.recipeName
+				AND important = 1
+				HAVING importantFound > 0)";
+	}else{
+		$query="SELECT a.recipeName, r.summery, r.userName, r.prepTime, r.cookTime, r.hasImage, count(a.recipeName) AS count
+				FROM recipeingredients AS a JOIN recipe AS r
+				ON a.recipeName = r.recipeName
+				WHERE a.ingredientName IN ($ingredientName)
+				GROUP BY a.recipeName
+				HAVING count = ".count($array)."";
+	}
 	
 	// get all products from products table
 	$result = mysqli_query($conn, $query);

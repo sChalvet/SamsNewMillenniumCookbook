@@ -89,7 +89,7 @@ public class EditRecipeActivity extends Activity {
 	//preference access
 	SharedPreferences prefs;
 	String userName="";
-	String password="";
+	String token="";
 	
 	String cookingDirections= "";
 	String cookTime= "";
@@ -102,7 +102,7 @@ public class EditRecipeActivity extends Activity {
 	
 	Bitmap recipeImage=null;
 	boolean successfulRecipe = false;
-	boolean successfulPicture = false;
+	boolean successfulPicture = true;
 	String message = "";
 	
 	//will contain the image id from db
@@ -170,6 +170,8 @@ public class EditRecipeActivity extends Activity {
 	private static final String TAG_IMAGEURL = "imageUrl";
 	private static final String TAG_IMAGE = "image";
 	private static final String TAG_HASIMAGE = "hasImage";
+	private static final String TAG_TOKEN = "token";
+	private static final String TAG_USERNAME = "userName";
 
 	
 	
@@ -184,7 +186,7 @@ public class EditRecipeActivity extends Activity {
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
-		password =prefs.getString("password", "");
+		token =prefs.getString("token", "");
 		
 		
 		//getting url from resources
@@ -710,6 +712,7 @@ private void dropFromList(List<String> list) {
 			params.add(new BasicNameValuePair(TAG_TYPE, recipeType));
 			params.add(new BasicNameValuePair(TAG_SERVINGS, servings));
 			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
+			params.add(new BasicNameValuePair(TAG_TOKEN, token));
 
 			Log.d("EditRecipe params: ", params.toString());
 			
@@ -765,7 +768,10 @@ private void dropFromList(List<String> list) {
 			// getting JSON Object
 			// Note that create product url accepts POST method
 			JSONObject json = jsonParser.makeHttpRequest(urlUpdateRecipe, "POST", params);
-
+			
+			//reseting variable
+			successfulRecipe=false;
+			
 			//if asyncTask has Not been cancelled then continue
 			if (!bCancelled) try {
 				
@@ -842,12 +848,17 @@ private void dropFromList(List<String> list) {
 						// Building Parameters
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
 						params.add(new BasicNameValuePair("recipeName", oldRecipeName));
+						params.add(new BasicNameValuePair(TAG_USERNAME, userName));
+						params.add(new BasicNameValuePair(TAG_TOKEN, token));
 
 						// getting Ingredient details by making HTTP request
 						JSONObject json = jsonParser.makeHttpRequest( urlEditRecipe, "POST", params);
 
 						// check your log for json response
 						Log.d("Single recipe Details", json.toString());
+						
+						//reseting variable
+						successfulRecipe=false;
 						
 						// json success tag
 						success = json.getInt(TAG_SUCCESS);
@@ -858,6 +869,8 @@ private void dropFromList(List<String> list) {
 							// get first ingredient object from JSON Array
 							JSONObject product = products.getJSONObject(0);
 
+							successfulRecipe=true;
+							
 							//Getting details from the query
 							Log.d("RecipeView_DoinBackGround", "setting all of the details");
 							summery = product.getString(TAG_SUMMERY);
@@ -882,7 +895,7 @@ private void dropFromList(List<String> list) {
 							}
 
 						}else{	
-							// recipe with that name not found
+							message = json.getString(TAG_MESSAGE);
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
@@ -898,10 +911,16 @@ private void dropFromList(List<String> list) {
 		 * **/
 		protected void onPostExecute(String file_url) {
 			Log.d("EditRecipe_PostExecute", "in post execute");
-			//is called to add all of the details to the fields
-			addDetails();
 			// dismiss the dialog once got all details
 			pDialog.dismiss();
+			if(successfulRecipe){
+				//is called to add all of the details to the fields
+				addDetails();
+			}else{
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+				finish();
+			}
+
 		}
 	}
 	

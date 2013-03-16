@@ -52,7 +52,6 @@ public class ListIngredientActivity extends ListActivity {
 	//preference access
 	SharedPreferences prefs;
 	String userName="";
-	String password="";
 
 	// Creating JSON Parser object
 	JSONParser jParser = new JSONParser();
@@ -91,7 +90,6 @@ public class ListIngredientActivity extends ListActivity {
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
-		password =prefs.getString("password", "");
 		
 		//getting url from resources
 		urlGetAllIngredients = getResources().getString(R.string.urlGetAllIngredients);

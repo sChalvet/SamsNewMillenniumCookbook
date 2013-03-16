@@ -19,11 +19,12 @@ $conn=$db->connect();
 
 // check for post data
 if (isset($_POST["foodName"])) {
-    $foodName = $_POST['foodName'];
-	$author = $_POST['author'];
-	$recipeType = $_POST['recipeType'];
-	$keyWord = $_POST['keyWord'];
-	$cookTime = $_POST['cookTime'];
+	
+	$foodName = mysqli_real_escape_string($conn, $_POST['foodName']);
+	$author = mysqli_real_escape_string($conn, $_POST['author']);
+	$recipeType = mysqli_real_escape_string($conn, $_POST['recipeType']);
+	$keyWord = mysqli_real_escape_string($conn, $_POST['keyWord']);
+	$cookTime = mysqli_real_escape_string($conn, $_POST['cookTime']);
 	
 	//used to store the query
 	$cookTimeQuery="";
@@ -39,8 +40,7 @@ if (isset($_POST["foodName"])) {
 	$isauthor=false;
 	$iskeyWord=false;
 	
-	$query="SELECT recipeName, summery, userName, prepTime, cookTime, hasImage FROM recipe";
-	//$query="SELECT recipe.recipeName, summery, userName, prepTime, cookTime FROM recipe left join recipeingredients on recipe.recipeName= recipeingredients.recipeName ";
+	$query="SELECT r.recipeName, r.summery, r.userName, r.prepTime, r.cookTime, r.hasImage FROM recipe AS r";
 	
 	if($recipeType !== "Any"){
 		$recipeTypeQuery=" WHERE type = '$recipeType'";
@@ -80,31 +80,54 @@ if (isset($_POST["foodName"])) {
         break;
 }
 		//echo "inside case </br>";
-		$cookTimeQuery=" cookTime+prepTime $num";
+		$cookTimeQuery=" r.cookTime+r.prepTime $num";
 		$iscookTime=true;
 	}
 	
+	
 	if($author !== ""){
 		//echo "inside author if</br>";
-		$authorQuery=" userName = '$author'";
+		$authorQuery=" r.userName LIKE '%$author%'";
 		$isauthor=true;
 	}
 	
 	if($keyWord !== ""){
 		//echo "inside keyWord if</br>";
-		$keyWordQuery=" recipeName = 'this' AND CONTAINS '$foodName'";
+		
+		$keyWordArray= explode(" ", $keyWord);
+		$keyWordSearch = "";
+		
+		for($i=0; $i<count($keyWordArray); $i++){
+			$keyWordSearch .=  ($i > 0 )? " OR ":"";
+			
+			$keyWordSearch .= "r.recipeName LIKE '%$keyWordArray[$i]%' "
+								."OR i.ingredientName LIKE '%$keyWordArray[$i]%' "
+								."OR r.summery LIKE '%$keyWordArray[$i]%' "
+								."OR l.type LIKE '%$keyWordArray[$i]%' "
+								."OR r.directions LIKE '%$keyWordArray[$i]%' "
+								."OR r.type LIKE '%$keyWordArray[$i]%' ";
+		}
+		
+		$keyWordQuery=" r.recipeName IN (SELECT r.recipeName "
+							."FROM recipe AS r "
+							."JOIN recipeingredients AS i ON r.recipeName = i.recipeName "
+							."JOIN ingredientlist AS l ON i.ingredientName = l.ingredientName "
+							."WHERE $keyWordSearch "
+							."GROUP BY r.recipeName)";
 		$iskeyWord=true;
 	}
 	
-	//SELECT recipe.recipeName from recipe left join recipeingredients on recipe.recipeName= recipeingredients.recipeName WHERE ingredientName='Almond' and important=1
-	
 	if($foodName !== "Any"){
-		//$foodNameQuery=" ingredientName='$foodName' and important=1";
-		//$isfoodName=true;
+	
+		$foodNameQuery=" r.recipeName IN (SELECT r.recipeName, r.summery, r.userName, r.prepTime, r.cookTime, r.hasImage "
+							."FROM recipe AS r "
+							."JOIN recipeingredients AS i ON r.recipeName = i.recipeName "
+							."JOIN ingredientlist AS l ON i.ingredientName = l.ingredientName "
+							."WHERE l.type  = '$foodName' "
+							."AND i.important = 1 "
+							."GROUP BY r.recipeName)";
+		$isfoodName=true;
 	}
-	
-	$temp=$query.$recipeTypeQuery.$cookTimeQuery.$authorQuery.$keyWordQuery.$foodNameQuery;
-	
 	
 	//adding AND if any of the previous query's are not empty	
 	if( $isrecipeType && $iscookTime )
@@ -130,10 +153,11 @@ if (isset($_POST["foodName"])) {
 	
 		// no recipes found
 		$response["success"] = 0;
-		$response["message"] = "No recipes found";
+		$response["message"] = "No recipes found, query= $temp";
 
 		// echo no users JSON
 		echo json_encode($response);
+		die();
 	
 	}
 	
@@ -173,7 +197,6 @@ if (isset($_POST["foodName"])) {
 			}
 			
 			$product["numRatings"] = $numRatings;
-			$response["message"] = "Found $numRatings ratings";
 			
 			$ratingResult = mysqli_query($conn, "SELECT sum(rating) FROM recipecomments where recipename = '$row[0]'");
 			if(mysqli_num_rows($ratingResult) > 0){
@@ -182,13 +205,12 @@ if (isset($_POST["foodName"])) {
 					$rating=$ratingRow[0]/$CountRow[0];
 			}	
 			$product["rating"] = round($rating);
-			$response["message"] .= ", found total rating of $rating";
 
 			// push single recipe into final response array
 			array_push($response["products"], $product);
 		}
 		// success
-		//$response["message"] .= ", Query= $temp";
+		$response["message"] = ", Query= $temp";
 		$response["success"] = 1;
 
 		// echoing JSON response
@@ -196,7 +218,7 @@ if (isset($_POST["foodName"])) {
 	} else {
 		// no products found
 		$response["success"] = 0;
-		$response["message"] = "No recipes found";
+		$response["message"] = "No recipes found, Query= $temp";
 
 		// echo no users JSON
 		echo json_encode($response);

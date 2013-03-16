@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.gmail.samos6.MainScreenActivity.LoginClass;
 
+
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -15,15 +18,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +46,8 @@ public class PantryActivity extends ListActivity {
 	Button btnSearch;
 	Button btnDeleteIngredient;
 	Button btnSelectAll;
+	RadioGroup searchType;
+
 	
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
@@ -46,6 +55,8 @@ public class PantryActivity extends ListActivity {
 	Boolean isEmpty=false;
 
 	ArrayList<HashMap<String, String>> productsList;
+
+	private AlertDialog alert;
 	
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
@@ -90,11 +101,10 @@ public class PantryActivity extends ListActivity {
 				if(ingredientList.isEmpty()){
 					Toast.makeText(getApplicationContext(), "Please select some ingredients", Toast.LENGTH_SHORT).show();
 				}else{
-					Intent intent = new Intent(getApplicationContext(), SearchForRecipeByIngredientActivity.class);
-					Bundle b = new Bundle();
-	                b.putStringArrayList("IngredientList", (ArrayList<String>) ingredientList);
-	                intent.putExtras(b);
-					startActivityForResult(intent,100);
+					
+					//launches dialog for user so the search type
+					loginAlertDialog(ingredientList);
+					
 				}
 
 				
@@ -328,6 +338,44 @@ public class PantryActivity extends ListActivity {
 		
 
 	}
+	
+	/**
+	 * Spawns a login dialog box
+	 */
+	private void loginAlertDialog(final List<String> ingredientList){
+	  
+	      LayoutInflater factory = LayoutInflater.from(PantryActivity.this);            
+	        final View textEntryView = factory.inflate(R.layout.search_type, null);
+	        
+	        
+	    	searchType= (RadioGroup) textEntryView.findViewById(R.id.radioGroup);
+
+			alert = new AlertDialog.Builder(PantryActivity.this).create();
+			alert.setTitle(R.string.chooseSearchType);
+			
+			alert.setView(textEntryView);
+
+			textEntryView.findViewById(R.id.dialogPantrySearch).setOnClickListener(new OnClickListener() {
+			    @Override
+              public void onClick(View v) {
+			    
+			    	int index = searchType.indexOfChild(searchType.findViewById(searchType.getCheckedRadioButtonId()));
+					
+					Log.d("inside pantry dialog", "index= "+Integer.toString(index) );
+					
+					Intent intent = new Intent(getApplicationContext(), SearchForRecipeByIngredientActivity.class);
+					Bundle b = new Bundle();
+	                b.putStringArrayList("IngredientList", (ArrayList<String>) ingredientList);
+	                intent.putExtras(b);
+	                intent.putExtra("index", Integer.toString(index));
+					startActivityForResult(intent,100);
+			    }
+          }); 
+			
+			
+			alert.show();
+		
+	};
 	
 	 @Override
 	    public boolean onOptionsItemSelected(MenuItem item){

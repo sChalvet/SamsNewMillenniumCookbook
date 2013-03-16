@@ -7,7 +7,7 @@
 
 // array for JSON response
 $response = array();
-
+$salt="0476089252";
 
 // include db connect class
 require_once __DIR__ . '/db_connect.php';
@@ -20,6 +20,21 @@ $conn=$db->connect();
 if (isset($_POST["recipeName"])) {
     $recipeName = mysqli_real_escape_string($conn, $_POST['recipeName']);
 	$author = mysqli_real_escape_string($conn, $_POST['author']);
+	$token = $_POST["token"];
+
+	$result = mysqli_query($conn, "SELECT joinDate from user where userName= '$author'");
+	$row = mysqli_fetch_array($result);
+	
+	if($token!== mysqli_real_escape_string($conn, crypt(md5($salt), md5($row[0])))){
+		// successfully inserted into database
+        $response["success"] = 0;
+        $response["message"] = "Your are not correctly loged in.\nTry loging in again.";
+
+        // echoing JSON response
+        echo json_encode($response);
+		die();
+	}
+	
 
     // get a product from products table
    $result = mysqli_query($conn, "SELECT comment, rating FROM recipecomments WHERE recipeName = '$recipeName' AND authorName= '$author'");

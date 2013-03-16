@@ -65,7 +65,7 @@
 	    android:layout_below="@id/pref2"
 	    android:layout_gravity="top"
 	    android:hint="@string/email"
-	    android:inputType="textWebEmailAddress"
+	    android:inputType="textEmailAddress"
 	    android:maxLength="30" >
 	    
 	</EditText>

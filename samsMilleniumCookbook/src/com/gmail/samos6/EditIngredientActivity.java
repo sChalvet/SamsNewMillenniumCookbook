@@ -62,7 +62,7 @@ public class EditIngredientActivity extends Activity {
 	//preference access
 	SharedPreferences prefs;
 	String userName="";
-	String password="";
+	String token="";
 
 
 	// Progress Dialog
@@ -103,8 +103,8 @@ public class EditIngredientActivity extends Activity {
 	private static final String TAG_ADDEDBY = "addedBy";
 	private static final String TAG_GRAMAMOUNT = "gramAmount";
 	private static final String TAG_TYPE = "type";
-	//private static final String TAG_DATECREATED = "dateCreated";
-	//private static final String TAG_DATEUPDATED = "dateUpdated";
+	private static final String TAG_TOKEN = "token";
+	private static final String TAG_USERNAME = "userName";
 	
 	private static final String TAG_LISTINGREDIENT = "listIngredient";
 	private static final String TAG_PANTRY = "pantry";
@@ -139,7 +139,7 @@ public class EditIngredientActivity extends Activity {
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
-		password =prefs.getString("password", "");
+		token =prefs.getString("token", "");
 		
 		//getting URL's from resources
 		urlGetIngredientDetails= getResources().getString(R.string.urlGetIngredientDetails);
@@ -563,6 +563,8 @@ public class EditIngredientActivity extends Activity {
 			params.add(new BasicNameValuePair("type", type));
 			params.add(new BasicNameValuePair("notes", notes));
 			params.add(new BasicNameValuePair("gramAmount", gramAmount));
+			params.add(new BasicNameValuePair(TAG_TOKEN, token));
+			params.add(new BasicNameValuePair(TAG_USERNAME, userName));
 
 			// sending modified data through http request
 			JSONObject json = jsonParser.makeHttpRequest(urlUpdateIngredient, "POST", params);
@@ -649,6 +651,8 @@ public class EditIngredientActivity extends Activity {
 				// Building Parameters
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("ingredientName", ingredientName));
+				params.add(new BasicNameValuePair(TAG_TOKEN, token));
+				params.add(new BasicNameValuePair(TAG_USERNAME, userName));
 
 				// getting product details by making HTTP request
 				JSONObject json = jsonParser.makeHttpRequest(urlDeleteIngredient, "POST", params);
@@ -732,7 +736,6 @@ public class EditIngredientActivity extends Activity {
 			String carbs = txtCarbs.getText().toString();
 			String type = spnrType.getSelectedItem().toString();
 			String notes = txtNotes.getText().toString();
-			String addedBy = txtAddedBy.getText().toString();
 			String ingredientName = txtIngredientName.getText().toString();	
 			String gramAmount = txtGramAmount.getText().toString();	
 
@@ -745,8 +748,9 @@ public class EditIngredientActivity extends Activity {
 			params.add(new BasicNameValuePair("carbs", carbs));
 			params.add(new BasicNameValuePair("type", type));
 			params.add(new BasicNameValuePair("notes", notes));
-			params.add(new BasicNameValuePair("addedBy", addedBy));
+			params.add(new BasicNameValuePair("addedBy", userName));
 			params.add(new BasicNameValuePair("gramAmount", gramAmount));
+			params.add(new BasicNameValuePair(TAG_TOKEN, token));
 
 			// getting JSON Object
 			// Note that create product url accepts POST method

@@ -118,10 +118,9 @@
         android:id="@+id/txtAuthorName"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:inputType="textPersonName" >
-
-        <requestFocus />
-    </EditText>
+        android:hint="@string/hintAuthor"
+        android:inputType="textPersonName"
+        android:maxLength="20" />
     
     </TableRow>
 		</TableLayout>

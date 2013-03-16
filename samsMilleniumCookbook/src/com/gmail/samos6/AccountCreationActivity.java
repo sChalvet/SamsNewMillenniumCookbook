@@ -59,6 +59,7 @@ public class AccountCreationActivity extends Activity{
 	String password;
 	String testQuestion;
 	String testAnswer;
+	String token;
 	
 	//Creating the variable that will hold the url when it is pulled from resources
 	String urlCreateAccount;
@@ -80,6 +81,7 @@ public class AccountCreationActivity extends Activity{
 	private static final String TAG_PASSWORD = "password";
 	private static final String TAG_TESTQUESTION = "testQuestion";
 	private static final String TAG_TESTANSWER = "testAnswer";
+	private static final String TAG_TOKEN = "token";
 	
 	
 	
@@ -187,8 +189,11 @@ public class AccountCreationActivity extends Activity{
 		editor.putString("email", email);
 		editor.putString("firstName", firstName);
 		editor.putString("lastName", lastName);
-		editor.putString("password", password);
+		editor.putString("token", token);
 		editor.commit();
+		
+		// closing this screen
+		finish();
 		
 	};
 	/**
@@ -247,8 +252,9 @@ public class AccountCreationActivity extends Activity{
 					successful=true;
 					// successfully created Account
 					Log.d("CreateAccount_Background", "Success! account Created");
-					// closing this screen
-					finish();
+					
+					token = json.getString(TAG_TOKEN);
+					
 				} else {
 					// failed to create Account
 					 message = json.getString(TAG_MESSAGE);

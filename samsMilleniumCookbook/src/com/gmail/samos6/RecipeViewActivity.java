@@ -63,7 +63,7 @@ public class RecipeViewActivity extends Activity {
 	SharedPreferences prefs;
 	String userName="";
 	String firstName="";
-	String password="";
+	String token="";
 	
 	String recipeName;
 	String author= "";
@@ -129,7 +129,7 @@ public class RecipeViewActivity extends Activity {
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
 		firstName =prefs.getString("firstName", "guest");
-		password =prefs.getString("password", "");
+		token =prefs.getString("token", "");
 		
 		//getting url from resources
 		urlGetRecipeDetails = getResources().getString(R.string.urlGetRecipeDetails);

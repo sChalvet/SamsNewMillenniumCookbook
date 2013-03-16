@@ -62,7 +62,7 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 	//preference access
 	SharedPreferences prefs;
 	String userName="";
-	String password="";
+	String token="";
 	
 	String urlGetAllComments;
 	// JSON Node names
@@ -92,7 +92,7 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
-		password =prefs.getString("password", "");
+		token =prefs.getString("token", "");
 		
 		urlGetAllComments = getResources().getString(R.string.urlGetAllComments);
 		// Hashmap for ListView

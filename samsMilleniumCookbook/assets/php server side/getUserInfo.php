@@ -5,12 +5,25 @@
  */
 // array for JSON response
 $response = array();
+$salt="0476089252";
 
 // check for required fields
 if (isset($_POST["nickName"])) {
-    
+	$nickName = strip_tags(substr($_POST['nickName'],0,20));
+	$token = $_POST["token"];
+
+	$result = mysqli_query($conn, "SELECT joinDate from user where userName= '$nickName'");
+	$row = mysqli_fetch_array($result);
 	
-	$nickName = strip_tags(substr($_POST['nickName'],0,20));		
+	if($token!== mysqli_real_escape_string($conn, crypt(md5($salt), md5($row[0])))){
+		// successfully inserted into database
+        $response["success"] = 0;
+        $response["message"] = "Your are not correctly loged in.\nTry loging in again.";
+
+        // echoing JSON response
+        echo json_encode($response);
+		die();
+	}	
 
 	// include db connect class
     require_once __DIR__ . '/db_connect.php';

@@ -59,7 +59,7 @@ public class EditUserInfoActivity extends Activity{
 	//preference access
 	SharedPreferences prefs;
 	String userName="";
-	String password="";
+	String token="";
 	
 	String userId;
 	String nickName;
@@ -72,6 +72,7 @@ public class EditUserInfoActivity extends Activity{
 	String testOldAnswer;
 	String testNewQuestion="";
 	String testNewAnswer="";
+	
 	
 	//Creating the variable that will hold the url when it is pulled from resources
 	String urlUpdateAccount;
@@ -94,6 +95,7 @@ public class EditUserInfoActivity extends Activity{
 	private static final String TAG_TESTQUESTION = "testQuestion";
 	private static final String TAG_TESTANSWER = "testAnswer";
 	private static final String TAG_USERID = "userId";
+	private static final String TAG_TOKEN = "token";
 	
 	
 	
@@ -105,7 +107,7 @@ public class EditUserInfoActivity extends Activity{
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
-		password =prefs.getString("password", "");
+		token =prefs.getString("token", "");
 		
 		//getting url from resources
 		urlUpdateAccount = getResources().getString(R.string.urlUpdateAccount);
@@ -123,6 +125,9 @@ public class EditUserInfoActivity extends Activity{
 		txtNewTestAnswer = (EditText) findViewById(R.id.editUserTestQuestionAnswer);
 		txtOldTestQuestion = (TextView) findViewById(R.id.editUserOldTestQuestion);
 		txtOldTestAnswer = (EditText) findViewById(R.id.editUserOldTestAnswer);
+		
+		//getting user info from db
+		new LoadUserInfo().execute();
 		
 		// Create Account click event
 		btnUpdateAccount.setOnClickListener(new View.OnClickListener() {
@@ -161,11 +166,9 @@ public class EditUserInfoActivity extends Activity{
 				}else if(oldPassword.matches("")){
 					msg = "Enter your password to confirm changes.";
 					incomplete=true;
-				}else if(!testNewQuestion.matches("")){
-						if(testNewAnswer.matches("")){	
-							msg = "Please enter an answer to your new test question.";
-							incomplete=true;
-						}
+				}else if(!testNewQuestion.matches("") && testNewAnswer.matches("")){
+					msg = "Please enter an answer to your new test question.";
+					incomplete=true;
 				}else if(testOldAnswer.matches("")){
 					msg = "Enter your test question answer to confirm changes.";
 					incomplete=true;
@@ -212,18 +215,17 @@ public class EditUserInfoActivity extends Activity{
 		editor.putString("email", email);
 		editor.putString("firstName", firstName);
 		editor.putString("lastName", lastName);
-		if(newPassword.matches(""))
-			editor.putString("password", newPassword);
-		else
-			editor.putString("password", oldPassword);
+		editor.putString("token", token);
 		editor.commit();
+		
+		finish();
 		
 	};
 	
 	
 	private void addDetails(){
 		
-		txtNickName.setText(nickName);
+		txtNickName.setText(userName);
 		txtEmail.setText(email);
 		txtFirstName.setText(firstName);
 		txtLastName.setText(lastName);
@@ -261,6 +263,7 @@ public class EditUserInfoActivity extends Activity{
 			Log.d("update Account=", "do in background");
 
 			// Building Parameters
+			params.add(new BasicNameValuePair(TAG_TOKEN, token));
 			params.add(new BasicNameValuePair(TAG_USERID, userId));
 			params.add(new BasicNameValuePair(TAG_NICKNAME, nickName));
 			params.add(new BasicNameValuePair(TAG_EMAIL, email));
@@ -277,6 +280,9 @@ public class EditUserInfoActivity extends Activity{
 			// getting JSON Object
 			JSONObject json = jsonParser.makeHttpRequest(urlUpdateAccount, "POST", params);
 
+			//reseting variable
+			successful = false;
+			
 			//if asyncTask has Not been cancelled then continue
 			if (!bCancelled) try {
 				
@@ -290,8 +296,14 @@ public class EditUserInfoActivity extends Activity{
 					successful=true;
 					// successfully created Account
 					Log.d("UpdateAccount_Background", "Success! account updated");
-					// closing this screen
-					finish();
+					// Getting Array of Products
+					JSONArray products = json.getJSONArray(TAG_PRODUCT);				
+					
+					// get first ingredient object from JSON Array
+					JSONObject product = products.getJSONObject(0);
+					
+					token= product.getString(TAG_TOKEN);
+					
 				} else {
 					// failed to create Account
 					 message = json.getString(TAG_MESSAGE);
@@ -364,6 +376,7 @@ public class EditUserInfoActivity extends Activity{
 				
 				//including recipeName for the query
 				params.add(new BasicNameValuePair(TAG_NICKNAME, userName));
+				params.add(new BasicNameValuePair(TAG_TOKEN, token));
 				
 				
 				// getting JSON string from URL
@@ -389,7 +402,6 @@ public class EditUserInfoActivity extends Activity{
 
 						// Storing each json item in variable
 						userId= product.getString(TAG_USERID);
-						nickName= product.getString(TAG_NICKNAME);
 						email= product.getString(TAG_EMAIL);
 						firstName= product.getString(TAG_FIRSTNAME);
 						lastName= product.getString(TAG_LASTNAME);

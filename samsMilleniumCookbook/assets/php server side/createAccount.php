@@ -6,7 +6,7 @@
 date_default_timezone_set('America/New_York');
 
 $webMasterEmail = "sams.cookbook@gmail.com";
- 
+$salt = "0476089252";
 // array for JSON response
 $response = array();
 
@@ -41,7 +41,6 @@ if (isset($_POST["nickName"])) {
 	//checking to see if this nickname has been used
     $result = mysqli_query($conn, "SELECT userName FROM user WHERE userName = '$nickName'");
 	if (mysqli_num_rows($result) > 0) {
-		$row = mysqli_fetch_array($result);
 		// NickName is taken
         $response["success"] = 2;
         $response["message"] = "Sorry, this Nickname has already been taken";
@@ -64,6 +63,7 @@ if (isset($_POST["nickName"])) {
 			sendEmail($email, $firstName, $webMasterEmail);
 			
 			// successfully inserted into database
+			$response["token"] = mysqli_real_escape_string($conn, crypt(md5($salt), md5($dateUpdated)));
 			$response["success"] = 1;
 			$response["message"] = "Account successfully created.";
 

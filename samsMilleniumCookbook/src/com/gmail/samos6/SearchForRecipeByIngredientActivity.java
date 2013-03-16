@@ -55,6 +55,8 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
 	
+	String index="0";
+	
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
@@ -98,6 +100,7 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 			Bundle extras= getIntent().getExtras();
 			ingredientList = extras.getStringArrayList("IngredientList");
 			Log.d("SearchForRecipeByIngredient list: ", ingredientList.toString());
+			index = getIntent().getStringExtra("index");
 			
 			// Loading products in Background Thread
 			new LoadAllRecipes().execute();
@@ -197,6 +200,8 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 			for(int i=0; i<ingredientList.size(); i++){
 				params.add(new BasicNameValuePair("list"+Integer.toString(i), ingredientList.get(i).toString()));
 			}
+			
+			params.add(new BasicNameValuePair("searchType", index));
 			
 			Log.d("All Favorite Recipes params: ", params.toString());
 			

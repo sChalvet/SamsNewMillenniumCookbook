@@ -6,6 +6,7 @@
 
 // array for JSON response
 $response = array();
+$salt="0476089252";
 
     // include db connect class
     require_once __DIR__ . '/db_connect.php';
@@ -21,13 +22,35 @@ if (isset($_POST["recipeName"])) {
     $comment = mysqli_real_escape_string($conn, $_POST["comment"]);
     $rating = mysqli_real_escape_string($conn, $_POST["rating"]);
     $authorName = mysqli_real_escape_string($conn, $_POST["author"]);
+	$token = $_POST["token"];
 
+	$result = mysqli_query($conn, "SELECT joinDate from user where userName= '$authorName'");
+	$row = mysqli_fetch_array($result);
+	
+	if($token!== mysqli_real_escape_string($conn, crypt(md5($salt), md5($row[0])))){
+		// successfully inserted into database
+        $response["success"] = 0;
+        $response["message"] = "Your are not correctly loged in.\nTry loging in again.";
 
-
+        // echoing JSON response
+        echo json_encode($response);
+		die();
+	}
+	
+	//geting id from recipe
+	$resultId = mysqli_query($conn, "SELECT recipeId FROM recipe WHERE recipeName = '$recipeName'");
+	$row = mysqli_fetch_array($resultId);
+	$recipeId = $row[0];
+	
+	//geting id from user
+	$resultUserId = mysqli_query($conn, "SELECT userId FROM user WHERE userName = '$authorName'");
+	$row = mysqli_fetch_array($resultUserId);
+	$userId = $row[0];
+		
 	
     // mysql inserting a new row
-    $result = mysqli_query($conn, "INSERT INTO recipecomments(recipeName, comment, rating, authorName)"
-					."VALUES('$recipeName', '$comment', '$rating', '$authorName')");
+    $result = mysqli_query($conn, "INSERT INTO recipecomments(recipeId, recipeName, comment, rating, authorName, authorId)"
+					."VALUES('$recipeId', '$recipeName', '$comment', '$rating', '$authorName', '$userId')");
 
 	
     // check if row inserted or not

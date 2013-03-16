@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.gmail.samos6.EditRecipeActivity.CreateNewRecipe;
+import com.gmail.samos6.ListRecipeActivity.LoadAllRecipes;
 
 
 import android.app.Activity;
@@ -56,6 +57,7 @@ public class MainScreenActivity extends Activity{
 	String lastName;
 	String email;
 	String password;
+	String token;
 	String urlLogin;
 	
 	String userName="";
@@ -85,6 +87,7 @@ public class MainScreenActivity extends Activity{
 	private static final String TAG_EMAIL = "email";
 	private static final String TAG_FIRSTNAME = "firstName";
 	private static final String TAG_LASTNAME = "lastName";
+	private static final String TAG_TOKEN = "token";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -97,11 +100,13 @@ public class MainScreenActivity extends Activity{
 	if(prefs.getString("nickName", null)==null){
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putString("nickName", "Guest");
+		editor.putString("token", "");
 		editor.commit();
 	}
 	
 	//getting user name
 	userName =prefs.getString("nickName", "guest");
+	token =prefs.getString("token", "");
 	
 	//getting url from resources
 	urlLogin = getResources().getString(R.string.urlLogin);
@@ -139,7 +144,8 @@ public class MainScreenActivity extends Activity{
 			@Override
 			public void onClick(View view) {
 				String name =prefs.getString("nickName", null);
-				Toast.makeText(getApplicationContext(), "You are "+name, Toast.LENGTH_LONG).show();
+				String t =prefs.getString("token", null);
+				Toast.makeText(getApplicationContext(), "You are "+name+" token is: "+t, Toast.LENGTH_LONG).show();
 				
 			}
 		});
@@ -213,11 +219,21 @@ public class MainScreenActivity extends Activity{
 		
 	}
 	
+	@Override
+	protected void onRestart() {
+	    super.onRestart();
+	    
+	    Log.d("Main Screen", "on restart");
+
+		//getting user name
+		userName =prefs.getString("nickName", "guest");	    
+	}
+	
 	// Initiating Menu XML file (menu.xml)
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu, menu);
+        menuInflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 	
@@ -331,7 +347,7 @@ public class MainScreenActivity extends Activity{
 		editor.putString("email", email);
 		editor.putString("firstName", firstName);
 		editor.putString("lastName", lastName);
-		editor.putString("password", password);
+		editor.putString("token", token);
 		editor.commit();
 		
 		//close alert dialogue once logged in
@@ -345,14 +361,13 @@ public class MainScreenActivity extends Activity{
 	private void logOut(){
 	  
 		userName="Guest";
-		password="";
 		SharedPreferences.Editor editor = prefs.edit();
 		
 		editor.putString("nickName", "guest");
 		editor.putString("email", "");
 		editor.putString("firstName", "");
 		editor.putString("lastName", "");
-		editor.putString("password", "");
+		editor.putString("token", "");
 		editor.commit();
 		
 	};
@@ -426,9 +441,11 @@ public class MainScreenActivity extends Activity{
 
 					//Getting details from the query
 					Log.d("Login_DoinBackGround", "getting user information");
+					nickName= product.getString(TAG_NICKNAME);
 					email = product.getString(TAG_EMAIL);
 					firstName = product.getString(TAG_FIRSTNAME);
 					lastName = product.getString(TAG_LASTNAME);
+					token = product.getString(TAG_TOKEN);
 
 					
 					Log.d("Login_DoinBackGround", "Success! User Loged In");
@@ -467,12 +484,23 @@ public class MainScreenActivity extends Activity{
 	 
 	        switch (item.getItemId()){
 	 
-	        case R.id.menuHome:
-	        	Intent i = new Intent(getApplicationContext(), MainScreenActivity.class);
-				// Closing all previous activities
-				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(i);
-	            return true;
+	            
+	        case R.id.editAccount:
+	        	
+	        	if(userName.equalsIgnoreCase("guest")){
+	        		
+					Toast.makeText(getApplicationContext(), "Log in to edit account", Toast.LENGTH_LONG).show();
+					loginAlertDialog();
+	        		
+	        	}else{
+	        		Intent i = new Intent(getApplicationContext(), EditUserInfoActivity.class);
+	        		// Closing all previous activities
+	        		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        		startActivity(i);
+	        		return true;
+	        	}
+	        	
+				
 	 
 	        default:
 	            return super.onOptionsItemSelected(item);

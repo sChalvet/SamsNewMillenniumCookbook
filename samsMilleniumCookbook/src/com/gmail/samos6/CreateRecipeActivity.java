@@ -85,14 +85,14 @@ public class CreateRecipeActivity extends Activity {
 	//preference access
 	SharedPreferences prefs;
 	String userName="";
-	String password="";
+	String token="";
 	
 	//used to fill the spinners
 	String[] recipeType;
 	String[] recipeServings;
 	
 	boolean successfulRecipe = false;
-	boolean successfulPicture = false;
+	boolean successfulPicture = true;
 	String message = "";
 	
 	//will contain the image id from db
@@ -123,7 +123,6 @@ public class CreateRecipeActivity extends Activity {
 
 	//Creating the variable that will hold the url when it is pulled from resources
 	String urlCreateRecipe;
-	String urlUpdateRecipe; 
 	String urlUploadImage; 
 	
 	//Instantiating the SQLite database
@@ -143,6 +142,7 @@ public class CreateRecipeActivity extends Activity {
 	private static final String TAG_SERVINGS = "servings";
 	private static final String TAG_IMAGE = "image";
 	private static final String TAG_HASIMAGE = "hasImage";
+	private static final String TAG_TOKEN = "token";
 	
 	
 	@Override
@@ -153,11 +153,10 @@ public class CreateRecipeActivity extends Activity {
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
-		password =prefs.getString("password", "");
+		token =prefs.getString("token", "");
 		
 		//getting url from resources
 		urlCreateRecipe = getResources().getString(R.string.urlCreateRecipe);
-		urlUpdateRecipe = getResources().getString(R.string.urlUpdateRecipe);
 		urlUploadImage = getResources().getString(R.string.urlUploadImage);
 		
 		recipeType = getResources().getStringArray(R.array.recipeType);
@@ -621,6 +620,7 @@ private void dropFromList(List<String> list) {
 			params.add(new BasicNameValuePair(TAG_TYPE, recipeType));
 			params.add(new BasicNameValuePair(TAG_SERVINGS, servings));
 			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
+			params.add(new BasicNameValuePair(TAG_TOKEN, token));
 
 			Log.d("CreateRecipes params: ", params.toString());
 			
@@ -693,8 +693,6 @@ private void dropFromList(List<String> list) {
 					successfulRecipe=true;
 					// successfully created Recipe
 					Log.d("CreateRecipe_Background", "Success! Recipe Created");
-					// closing this screen
-					finish();
 				} else {
 					// failed to create Recipe
 					 message += json.getString(TAG_MESSAGE);
@@ -713,8 +711,11 @@ private void dropFromList(List<String> list) {
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog once done
 			pDialog.dismiss();
-			if(successfulRecipe && successfulPicture)
+			if(successfulRecipe && successfulPicture){
 				Toast.makeText(getApplicationContext(), "Recipe Created", Toast.LENGTH_LONG).show();
+				// closing this screen
+				finish();
+			}
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}

@@ -37,14 +37,15 @@ if (isset($_POST["userName"])) {
 		
 		if($row[0]===$encryptedAnswer){
 		
-			$encryptedPass = mysqli_real_escape_string($conn,crypt(md5($date), md5($encryptedAnswer)));
+			$newPass= substr(crypt($date),4,11);
+			$encryptedPass = mysqli_real_escape_string($conn,crypt(md5($newPass), md5($encryptedAnswer)));
 			
 			//update password
 			$result = mysqli_query($conn, "UPDATE user SET password='$encryptedPass' WHERE userName = '$nickName'");
 			
 			if($result){
 				
-				sendEmail($row[2], $row[1], $webMasterEmail, $encryptedPass);
+				sendEmail($row[2], $row[1], $webMasterEmail, $newPass);
 				
 			}else{
 			
@@ -97,7 +98,7 @@ function sendEmail($email, $firstName, $webMasterEmail, $newPass){
 				<body>
 					<center>
 					<h1>Your Password has been reset</h1><br/>
-					<p>'.$firstName.', your new password for Sam\'s New Millennium Cookbook has been reset to: "'.$newPass.'"</p>
+					<p>'.$firstName.', your new password for Sam\'s New Millennium Cookbook has been reset to: '.$newPass.'</p>
 					<p>Please change it to something you like better as soon as you can. Thanks.</p><br/><br/><br/>
 					</center>
 				</body>

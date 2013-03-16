@@ -6,6 +6,7 @@
 
 // array for JSON response
 $response = array();
+$salt = "0476089252";
 
 // check for required fields
 if (isset($_POST["nickName"])) {
@@ -26,7 +27,7 @@ if (isset($_POST["nickName"])) {
 	$password = mysqli_real_escape_string($conn, $password);
 
 	//checking to see if this nickname matches the password
-    $result = mysqli_query($conn, "SELECT userName, password, firstName, lastName, email, testAnswer FROM user WHERE userName = '$nickName' LIMIT 1");
+    $result = mysqli_query($conn, "SELECT userName, password, firstName, lastName, email, testAnswer, joinDate FROM user WHERE userName = '$nickName' LIMIT 1");
 	if( $result){
 		if (mysqli_num_rows($result) > 0) {
 			$row = mysqli_fetch_array($result);
@@ -40,9 +41,11 @@ if (isset($_POST["nickName"])) {
 			if($encryptedPass==$row[1]){	
 				
 				$product = array();
+				$product["nickName"] = $row[0];
 				$product["firstName"] = $row[2];
 				$product["lastName"] = $row[3];
 				$product["email"] = $row[4];
+				$product["token"] = mysqli_real_escape_string($conn, crypt(md5($salt), md5($row[6])));
 
 				// push single product into final response array
 				array_push($response["product"], $product);

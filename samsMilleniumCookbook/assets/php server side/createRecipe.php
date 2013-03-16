@@ -7,6 +7,7 @@
 
 // array for JSON response
 $response = array();
+$salt="0476089252";
 
     // include db connect class
     require_once __DIR__ . '/db_connect.php';
@@ -39,8 +40,20 @@ if (isset($_POST["recipeName"])) {
 	$type = $_POST["type"];
 	$servings = $_POST["servings"];
 	$hasImage = $_POST["hasImage"];
+	$token = $_POST["token"];
 
-    //$recipeName = mysqli_real_escape_string($conn, $recipeName);
+	$result = mysqli_query($conn, "SELECT joinDate from user where userName= '$author'");
+	$row = mysqli_fetch_array($result);
+	
+	if($token!== mysqli_real_escape_string($conn, crypt(md5($salt), md5($row[0])))){
+		// successfully inserted into database
+        $response["success"] = 0;
+        $response["message"] = "Your are not correctly loged in.\nTry loging in again.";
+
+        // echoing JSON response
+        echo json_encode($response);
+		die();
+	}
 
 
 
@@ -61,22 +74,32 @@ if (isset($_POST["recipeName"])) {
 		$result1 = mysqli_query($conn, "INSERT INTO recipe(recipeName, userName, ingredientDiscription, directions, cookTime, prepTime, summery, type, servings, hasImage)"
 						."VALUES('$recipeName', '$author', '$ingredientList', '$cookingDirections', '$cookTime', '$prepTime', '$summery', '$type', '$servings', '$hasImage')");
 
+		$recipeId = mysqli_insert_id($conn);
 		//empties the table for that recipeName in case there have been changes made or ingredients removed
 		$result = mysqli_query($conn, "DELETE FROM recipeingredients WHERE recipeName = '$recipeName'");
 		
 		for($i=0; $i< sizeof($arrayIngredientName); $i++){
 		
 			// mysql inserting a new row for each ingredient
-			$result2 = mysqli_query($conn, "INSERT INTO recipeingredients(recipeName, ingredientName, amount, measurement, description, important)"
-						."VALUES ('$recipeName', $arrayIngredientName[$i], $arrayAmount[$i], $arrayMeasurement[$i], $arrayDiscription[$i], $arrayImportant[$i])");
+			$result2 = mysqli_query($conn, "INSERT INTO recipeingredients(recipeId, recipeName, ingredientName, amount, measurement, description, important)"
+						."VALUES ($recipeId, '$recipeName', $arrayIngredientName[$i], $arrayAmount[$i], $arrayMeasurement[$i], $arrayDiscription[$i], $arrayImportant[$i])");
 		}
 		
+		// check if row inserted or not
+		if (!$result2) {
+			// successfully inserted into database
+			$response["success"] = 0;
+			$response["message"] = "Failed, "+mysqli_error($conn);
+
+			// echoing JSON response
+			echo json_encode($response);
+		} 
 		
 		// check if row inserted or not
 		if ($result1) {
 			// successfully inserted into database
 			$response["success"] = 1;
-			$response["message"] = "Recipe successfully created.";
+			$response["message"] = "Recipe successfully created."+$recipeId;
 
 			// echoing JSON response
 			echo json_encode($response);

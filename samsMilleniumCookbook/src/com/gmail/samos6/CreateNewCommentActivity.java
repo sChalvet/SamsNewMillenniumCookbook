@@ -46,7 +46,7 @@ public class CreateNewCommentActivity extends Activity {
 	//preference access
 	SharedPreferences prefs;
 	String userName="";
-	String password="";
+	String token="";
 	
 	//these 2 variables are used to test the results and errors from the server
 	Boolean successful =false;
@@ -66,6 +66,7 @@ public class CreateNewCommentActivity extends Activity {
 	private static final String TAG_AUTHOR = "author";
 	private static final String TAG_COMMENT = "comment";
 	private static final String TAG_RATING = "rating";
+	private static final String TAG_TOKEN = "token";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class CreateNewCommentActivity extends Activity {
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		userName =prefs.getString("nickName", "guest");
-		password =prefs.getString("password", "");
+		token =prefs.getString("token", "");
 		
 		//getting url from resources
 		urlCreateCommnet = getResources().getString(R.string.urlCreateComment);
@@ -158,6 +159,7 @@ public class CreateNewCommentActivity extends Activity {
 			params.add(new BasicNameValuePair(TAG_COMMENT, comment));
 			params.add(new BasicNameValuePair(TAG_RATING, rating));
 			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
+			params.add(new BasicNameValuePair(TAG_TOKEN, token));
 
 			// getting JSON Object
 			JSONObject json = jsonParser.makeHttpRequest(urlCreateCommnet, "POST", params);

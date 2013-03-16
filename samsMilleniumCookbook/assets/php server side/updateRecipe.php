@@ -7,6 +7,8 @@
 
 // array for JSON response
 $response = array();
+$salt="0476089252";
+
 
 date_default_timezone_set('America/New_York');
 
@@ -43,8 +45,20 @@ if (isset($_POST["recipeName"])) {
 	$servings = mysqli_real_escape_string($conn, $_POST["servings"]);
 	$hasImage = mysqli_real_escape_string($conn, $_POST["hasImage"]);
 	$dateUpdated = date("Y-m-d H:i:s");
+	$token = $_POST["token"];
+
+	$result = mysqli_query($conn, "SELECT joinDate from user where userName= '$author'");
+	$row = mysqli_fetch_array($result);
 	
-	//$recipeName = mysqli_real_escape_string($conn, $recipeName);
+	if($token!== mysqli_real_escape_string($conn, crypt(md5($salt), md5($row[0])))){
+		// successfully inserted into database
+        $response["success"] = 0;
+        $response["message"] = "Your are not correctly loged in.\nTry loging in again.";
+
+        // echoing JSON response
+        echo json_encode($response);
+		die();
+	}
 
 
 
@@ -64,23 +78,38 @@ if (isset($_POST["recipeName"])) {
         // echoing JSON response
         echo json_encode($response);
 	}else{
-			
+		
+		
 		// mysql inserting a new row
 		$result1 = mysqli_query($conn, "UPDATE recipe SET recipeName='$recipeName', ingredientDiscription='$ingredientList', directions='$cookingDirections', cookTime='$cookTime',"
 							." prepTime='$prepTime', summery='$summery', type='$type', servings='$servings', modifyDate='$dateUpdated', hasImage='$hasImage'"
 						." WHERE recipeName = '$oldRecipeName'");
-
+				
+		//geting id from updated row
+		$resultId = mysqli_query($conn, "SELECT recipeId FROM recipe WHERE recipeName = '$recipeName'");
+		$row = mysqli_fetch_array($resultId);
+		$recipeId = $row[0];
+		
 		//empties the table for that recipeName in case there have been changes made or ingredients removed
 		$result = mysqli_query($conn, "DELETE FROM recipeingredients WHERE recipeName = '$oldRecipeName'");
 		
 		for($i=0; $i< sizeof($arrayIngredientName); $i++){
 		
 			// mysql inserting a new row for each ingredient
-			$result2 = mysqli_query($conn, "INSERT INTO recipeingredients(recipeName, ingredientName, amount, measurement, description, important)"
-						."VALUES ('$recipeName', $arrayIngredientName[$i], $arrayAmount[$i], $arrayMeasurement[$i], $arrayDiscription[$i], $arrayImportant[$i])");
+			$result2 = mysqli_query($conn, "INSERT INTO recipeingredients(recipeId, recipeName, ingredientName, amount, measurement, description, important)"
+						."VALUES ('$recipeId', '$recipeName', $arrayIngredientName[$i], $arrayAmount[$i], $arrayMeasurement[$i], $arrayDiscription[$i], $arrayImportant[$i])");
 		}
 					
+		if(!$result2){
 		
+			// successfully inserted into database
+			$response["success"] = 0;
+			$response["message"] = "Failed to update recipe ingredients.";
+
+			// echoing JSON response
+			echo json_encode($response);
+			die();	
+		}
 		// check if row inserted or not
 		if ($result1) {
 			
