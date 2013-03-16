@@ -75,8 +75,9 @@ public class RecipeViewActivity extends Activity {
 	String cookTime= "Cook time: ";
 	String prepTime= "Prep time: ";
 	String rawImage= "";
+	String recipeId= "";
 	
-	Bitmap pic;
+	//Bitmap pic;
 	int hasImage=0;
 	
 	// single ingredient url
@@ -106,6 +107,7 @@ public class RecipeViewActivity extends Activity {
 	private static final String TAG_MESSAGE = "message";
 	private static final String TAG_PRODUCT = "product";
 	private static final String TAG_RECIPENAME = "recipeName";
+	private static final String TAG_RECIPEID = "recipeId";
 	private static final String TAG_AUTHOR = "author";
 	private static final String TAG_NUMRATINGS = "numRatings";
 	private static final String TAG_INGREDIENTLIST = "ingredientList";
@@ -179,7 +181,7 @@ public class RecipeViewActivity extends Activity {
 					// starting new activity and expecting some response back
 					startActivity(intent);
 				}else{
-					Toast.makeText(getApplicationContext(), "I'm sorry you must first login", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.pLoginInFirst), Toast.LENGTH_LONG).show();
 				}
 
 			}
@@ -192,8 +194,8 @@ public class RecipeViewActivity extends Activity {
 			public void onClick(View arg0) {
 				
 				Log.d("ViewRecipe_btnSave onclick", "inside");
-				db.addSavedRecipe(recipeName);
-				Toast.makeText(getApplicationContext(), recipeName+" has been saved for later", Toast.LENGTH_LONG).show();
+				db.addSavedRecipe(recipeId);
+				Toast.makeText(getApplicationContext(), recipeName+" "+getString(R.string.hasBeenSaved), Toast.LENGTH_LONG).show();
 
 			}
 		});
@@ -205,8 +207,8 @@ public class RecipeViewActivity extends Activity {
 			public void onClick(View arg0) {
 				
 				Log.d("ViewRecipe_btnFavorite onclick", "inside");
-				db.addFavoriteRecipe(recipeName);
-				Toast.makeText(getApplicationContext(), recipeName+" has been added to your Favorite Recipes", Toast.LENGTH_LONG).show();
+				db.addFavoriteRecipe(recipeId);
+				Toast.makeText(getApplicationContext(), recipeName+" "+getString(R.string.hasBeenFav), Toast.LENGTH_LONG).show();
 
 			}
 		});
@@ -229,7 +231,7 @@ public class RecipeViewActivity extends Activity {
 					// starting new activity and expecting some response back
 					startActivityForResult(intent, 100);
 				}else{
-					Toast.makeText(getApplicationContext(), "Sorry "+userName+" only "+author+" can edit this recipe.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.sorry)+" "+userName+" "+getString(R.string.only)+" "+author+" "+getString(R.string.canEditThis), Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -310,7 +312,7 @@ public class RecipeViewActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(RecipeViewActivity.this);
-			pDialog.setMessage("Loading Recipe details. Please wait...");
+			pDialog.setMessage(getString(R.string.loadingRecipeDetails));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -361,6 +363,7 @@ public class RecipeViewActivity extends Activity {
 							cookTime += product.getString(TAG_COOKTIME);
 							imageUrl = product.getString(TAG_IMAGEURL);
 							servings = product.getString(TAG_SERVINGS);
+							recipeId = product.getString(TAG_RECIPEID);
 							hasImage = Integer.parseInt(product.getString(TAG_HASIMAGE));
 							
 
@@ -404,7 +407,7 @@ public class RecipeViewActivity extends Activity {
 	            return true;
 	            
 	        case R.id.share: 	            //					market://details?id=com.example.android.jetboy
-	            String message = firstName+" "+getString(R.string.likes)+" "+recipeName+" from "+getString(R.string.app_name);
+	            String message = firstName+" "+getString(R.string.likes)+" "+recipeName+getString(R.string.from)+" "+getString(R.string.app_name);
         		Intent share = new Intent(Intent.ACTION_SEND);
         		share.setType("text/plain");
         		share.putExtra(Intent.EXTRA_TEXT, message);

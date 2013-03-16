@@ -8,32 +8,34 @@
     <!-- <string name="urlGetIngredientDetails">http://joe.cs.unca.edu/~chalvesa/app/getIngredientDetails.php</string> -->
     
     <!-- Url's are pulled into the app from here -->
-	<string name="urlGetIngredientDetails">http://192.168.254.45/recipeApp/getIngredientDetails.php</string>
-    <string name="urlUpdateIngredient">http://192.168.254.45/recipeApp/updateIngredient.php</string>
-    <string name="urlDeleteIngredient">http://192.168.254.45/recipeApp/deleteIngredient.php</string>
-    <string name="urlCreateNewIngredient">http://192.168.254.45/recipeApp/createIngredient.php</string>
-    <string name="urlGetAllComments">http://192.168.254.45/recipeApp/getAllComments.php</string>
-    <string name="url_create_product">http://192.168.254.45/recipeApp/create_product.php</string>
-    <string name="urlCreateRecipe">http://192.168.254.45/recipeApp/createRecipe.php</string>
-    <string name="urlUpdateRecipe">http://192.168.254.45/recipeApp/updateRecipe.php</string>
-    <string name="urlCreateComment">http://192.168.254.45/recipeApp/createComment.php</string>
-    <string name="urlGetAllRecipes">http://192.168.254.45/recipeApp/getAllRecipes.php</string>
-    <string name="urlGetAllIngredients">http://192.168.254.45/recipeApp/getAllIngredients.php</string>
-    <string name="urlGetFavRecipes">http://192.168.254.45/recipeApp/getFavRecipes.php</string>
-    <string name="urlGetRecipeDetails">http://192.168.254.45/recipeApp/getRecipeDetails.php</string>
-    <string name="urlEditRecipe">http://192.168.254.45/recipeApp/editRecipe.php</string>
-    <string name="urlCreateAccount">http://192.168.254.45/recipeApp/createAccount.php</string>
-    <string name="urlLogin">http://192.168.254.45/recipeApp/logIn.php</string>
-    <string name="urlEditComment">http://192.168.254.45/recipeApp/editComment.php</string>
-    <string name="urlUpdateComment">http://192.168.254.45/recipeApp/updateComment.php</string>
-    <string name="urlGetAllRecipesByIngredient">http://192.168.254.45/recipeApp/getAllRecipesByIngredient.php</string>
-    <string name="urlUploadImage">http://192.168.254.45/recipeApp/uploadImage.php</string>
-    <string name="urlResetPassword">http://192.168.254.45/recipeApp/resetPassword.php</string>
-    <string name="urlGetTestQuestion">http://192.168.254.45/recipeApp/getTestQuestion.php</string>
-    <string name="urlUpdateAccount">http://192.168.254.45/recipeApp/updateAccount.php</string>
-    <string name="urlGetUserInfo">http://192.168.254.45/recipeApp/getUserInfo.php</string>
-    <string name="urlRoot">http://192.168.254.45/recipeApp/</string>		
+	<string name="urlGetIngredientDetails">http://joe.cs.unca.edu/~chalvesa/app/getIngredientDetails.php</string>
+    <string name="urlUpdateIngredient">http://joe.cs.unca.edu/~chalvesa/app/updateIngredient.php</string>
+    <string name="urlDeleteIngredient">http://joe.cs.unca.edu/~chalvesa/app/deleteIngredient.php</string>
+    <string name="urlCreateNewIngredient">http://joe.cs.unca.edu/~chalvesa/app/createIngredient.php</string>
+    <string name="urlGetAllComments">http://joe.cs.unca.edu/~chalvesa/app/getAllComments.php</string>
+    <string name="url_create_product">http://joe.cs.unca.edu/~chalvesa/app/create_product.php</string>
+    <string name="urlCreateRecipe">http://joe.cs.unca.edu/~chalvesa/app/createRecipe.php</string>
+    <string name="urlUpdateRecipe">http://joe.cs.unca.edu/~chalvesa/app/updateRecipe.php</string>
+    <string name="urlCreateComment">http://joe.cs.unca.edu/~chalvesa/app/createComment.php</string>
+    <string name="urlGetAllRecipes">http://joe.cs.unca.edu/~chalvesa/app/getAllRecipes.php</string>
+    <string name="urlGetAllIngredients">http://joe.cs.unca.edu/~chalvesa/app/getAllIngredients.php</string>
+    <string name="urlGetFavRecipes">http://joe.cs.unca.edu/~chalvesa/app/getFavRecipes.php</string>
+    <string name="urlGetRecipeDetails">http://joe.cs.unca.edu/~chalvesa/app/getRecipeDetails.php</string>
+    <string name="urlEditRecipe">http://joe.cs.unca.edu/~chalvesa/app/editRecipe.php</string>
+    <string name="urlCreateAccount">http://joe.cs.unca.edu/~chalvesa/app/createAccount.php</string>
+    <string name="urlLogin">http://joe.cs.unca.edu/~chalvesa/app/logIn.php</string>
+    <string name="urlEditComment">http://joe.cs.unca.edu/~chalvesa/app/editComment.php</string>
+    <string name="urlUpdateComment">http://joe.cs.unca.edu/~chalvesa/app/updateComment.php</string>
+    <string name="urlGetAllRecipesByIngredient">http://joe.cs.unca.edu/~chalvesa/app/getAllRecipesByIngredient.php</string>
+    <string name="urlUploadImage">http://joe.cs.unca.edu/~chalvesa/app/uploadImage.php</string>
+    <string name="urlResetPassword">http://joe.cs.unca.edu/~chalvesa/app/resetPassword.php</string>
+    <string name="urlGetTestQuestion">http://joe.cs.unca.edu/~chalvesa/app/getTestQuestion.php</string>
+    <string name="urlUpdateAccount">http://joe.cs.unca.edu/~chalvesa/app/updateAccount.php</string>
+    <string name="urlGetUserInfo">http://joe.cs.unca.edu/~chalvesa/app/getUserInfo.php</string>
+    <string name="urlRoot">http://joe.cs.unca.edu/~chalvesa/app/</string>		
     
+    
+    <!-- getString(R.string.pEnterTestQ) -->
     
     <string name="userName">Unknown</string>
     
@@ -48,7 +50,55 @@
     <string name="mainSavedRecipes">Your Saved Recipes</string>
     <string name="createAccount">Create an\naccount</string>
     <string name="login">Login</string>
-    <string name="logout">Logout</string>  
+    <string name="logout">Logout</string>
+    <string name="loginToCreate">Log in to create recipes</string>
+    <string name="loginToEditAcc">Log in to edit account</string>
+    <string name="youLoggedOut">You have Logged out!</string>
+    <string name="isNowLogedIn">is now loged in.</string>
+      
+   	<!-- part of data checks  -->
+    <string name="pEnterUser">Please enter your username.</string>
+    <string name="pEnterPass">Please enter your password.</string>
+    <string name="pEnterNameForPass">Please enter your user name\nto find your password.</string>
+    <string name="pLoginInFirst">I\'m sorry you must first login.</string>
+    <string name="pEnterTestQAns">Please enter your test question answer.</string>
+    <string name="pEnterTestQ">Please enter a test question.</string>
+    
+    <string name="needNickName">You need a nick name.</string>
+    <string name="pEnterValidEmail">Please enter a valid email address.</string>
+    <string name="pEnterYourFname">Please enter your first name.</string>
+    <string name="pEnterYourLname">Please enter your last name.</string>
+    <string name="pEnterAPass">Please enter a password.</string>
+    <string name="pEnterYourPassToConfirm">Enter your password to confirm changes.</string>
+    <string name="pEnterTestQAnsToConfirm">Enter your test question answer to confirm changes.</string>
+    <string name="pEnterRecipeName">Please enter a recipe name.</string>
+    <string name="pEnterCookingDir">Please add some cooking directions.</string>
+    <string name="pEnterCookTime">Please enter a time for cook time and prep time or 0.</string>
+    <string name="pEnterSumery">Please enter a short summery.</string>
+    <string name="pEnterIngredient">Please add at least one ingredient.</string>
+    <string name="pEnterIngredientName">Please enter an ingredient name.</string>
+
+    
+    <!-- part of progress dialogs  -->
+    <string name="logingIn">Loging in...</string>
+    <string name="loadingRecipes">Loading Recipes. Please wait...</string>
+    <string name="loadingRecipeDetails">Loading Recipe details. Please wait...</string>
+    <string name="loadingIngredients">Loading Ingredients. Please wait...</string>
+    <string name="loadingIngredientDetails">Loading Ingredient details. Please wait...</string>
+    <string name="loadingComments">Loading Comments. Please wait...</string>
+    <string name="resetingPass">Reseting Password...</string>
+    <string name="loadingTestQ">Loading Test Question...</string>
+    <string name="updatingAcc">Updating Account...</string>
+    <string name="loadingUserInfo">Loading User Info...</string>
+    <string name="updatingRecipe">Updating Recipe...</string>
+    <string name="creatingRecipe">Creating Recipe...</string>
+    <string name="savingIngredientChanges">Saving ingredient Changes...</string>
+    <string name="deletingIngredient">Deleting ingredient...</string>
+    <string name="CreatingIngredient">Creating Ingredient...</string>
+    <string name="updatingComment">Updating Comment...</string>
+    <string name="loadingComment">Loading Comment...</string>
+    <string name="poastingComment">Posting Comment...</string>
+    <string name="creatingAcc">Creating Account...</string>
     
     
     <!-- part of Pantry and Ingredient Activity  -->
@@ -66,6 +116,8 @@
     <string name="searchForAny">Find recipes that contain all of the selected ingredients.</string>
     <string name="searchForAll">Find recipes for which you have all of the necessary ingredients.</string>
     <string name="chooseSearchType">Choose your search type.</string>
+    <string name="selectIngredients">Please select some ingredients.</string>
+    <string name="yourPantryEmpty">Your Pantry is empty.\nPick some ingredients from our database.</string>
     
     
     <!-- part of CreateRecipe Activity -->
@@ -77,14 +129,25 @@
     <string name="takeApic">Take a Picture</string>
     <string name="addIngredients">Add/Remove ingredients</string>
     <string name="servings">Servings:</string>
+    <string name="ingredientVital">Is this ingredient essential?</string>
+    <string name="dicedChoped">diced, chopped, etc...</string>
+    <string name="recipeUpdated">Recipe Updated</string>
+    <string name="recipeCreated">Recipe Created</string>
+    <string name="chooseIngredients">First pick all the ingredients that you will be using</string>
     
     <!-- part of ListRecipeComments Activity -->
     <string name="postedBy">Posted by:</string>
+    <string name="editYourCom">Editing your previous comment.</string>
+    <string name="editYourOwnCom">You can only edit your own comment.</string>
     
     <!-- part of CreateNewComment Activity -->
     <string name="commentHint">New Comment Here</string>
     <string name="postComment">Post</string>
     <string name="yourRating">Your Rating: </string>
+    <string name="commentUpdated">Comment Updated</string>
+    <string name="commentPosted">Comment Posted</string>
+    
+    <!-- getString(R.string.creatingAcc) -->
     
      <!-- part of forgot password Activity -->
     <string name="yourTestQuestion">This is your test question:</string>
@@ -107,6 +170,12 @@
     <string name="viewRatings">See Comments and Rate</string>
     <string name="editRecipe">Edit Recipe</string>
     <string name="recipeServings">Servings</string>
+    <string name="hasBeenSaved">has been saved for later.</string>
+    <string name="hasBeenFav">has been added to your Favorite Recipes.</string>
+    <string name="sorry">Sorry</string>
+    <string name="only">only</string>
+    <string name="canEditThis">can edit this recipe.</string>
+    <string name="from">from</string>
     
     
     
@@ -137,6 +206,19 @@
 	<string name="publishIngredient">Publish Ingredient</string>
 	<string name="defaultDiscription">No discription</string>
 	<string name="saveChanges">Save Changes</string>
+	<string name="pAddIng">Can\'t find what you need?\nThen please add it.</string>
+	<string name="pantrySaved">Your Pantry has been Saved.</string>
+	<string name="pLoginToCreatIngr">Please Log in first to create ingredients.</string>
+	<string name="noIngreWithLetter">No Ingredient starting with the letter</string>
+	<string name="movingToLetter">Moving to the letter</string>
+	<string name="newIngredient">New Ingredient</string>
+	<string name="addIngredient">Add Ingredient</string>
+	<string name="ingredientDeleted">Ingredient Deleted</string>
+	<string name="ingredientCreated">Ingredient Created</string>
+	<string name="ingredientUpdated">Ingredient Updated</string>
+	<string name="ingredientLost">Sorry, this Ingredient was either renamed or deleted from the database.\nWould you like to add it again?</string>
+	
+	<!-- getString(R.string.accountCreated) -->
 	
 	<!-- part of Search For Recipe  -->
 	<string name="search">Search</string>
@@ -181,6 +263,8 @@
 	<string name="hintNewPassword">Leave blank to not change</string>
 	<string name="answerQuestion">Answer your test question:</string>
 	<string name="verification">Verification</string>
+	<string name="accountUpdated">Account Updated</string>
+	<string name="accountCreated">Account Created</string>
 	
 	<!-- part of menu xml  -->
 	<string name="home">Home</string>

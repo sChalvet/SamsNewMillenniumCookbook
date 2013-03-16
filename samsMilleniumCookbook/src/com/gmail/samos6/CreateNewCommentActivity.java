@@ -138,7 +138,7 @@ public class CreateNewCommentActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(CreateNewCommentActivity.this);
-			pDialog.setMessage("Posting Comment...");
+			pDialog.setMessage(getString(R.string.poastingComment));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -203,7 +203,7 @@ public class CreateNewCommentActivity extends Activity {
 			pDialog.dismiss();
 			
 			if(successful)
-				Toast.makeText(getApplicationContext(), "Comment Posted", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.commentPosted), Toast.LENGTH_LONG).show();
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}

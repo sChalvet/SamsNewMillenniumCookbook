@@ -126,7 +126,7 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 					startActivityForResult(intent, 100);
 				}
 				else{
-					Toast.makeText(getApplicationContext(), "Editing your previous comment.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.editYourCom), Toast.LENGTH_LONG).show();
 					// Starting new intent
 					Intent intent = new Intent(getApplicationContext(), EditCommentActivity.class);				
 					// sending recipeName to next activity
@@ -153,7 +153,7 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 					// starting new activity and expecting some response back
 					startActivityForResult(intent, 100);
 				}else{
-					Toast.makeText(getApplicationContext(), "You can only edit your own comment.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.editYourOwnCom), Toast.LENGTH_LONG).show();
 					//Toast.setView(Gravity.CENTER);
 				}
 				
@@ -212,7 +212,7 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(ListRecipeCommentsActivity.this);
-			pDialog.setMessage("Loading Comments. Please wait...");
+			pDialog.setMessage(getString(R.string.loadingComments));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);

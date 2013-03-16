@@ -205,7 +205,7 @@ public class ListRecipeActivity  extends ListActivity{
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(ListRecipeActivity.this);
-			pDialog.setMessage("Loading Recipes. Please wait...");
+			pDialog.setMessage(getString(R.string.loadingRecipes));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);

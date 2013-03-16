@@ -110,7 +110,7 @@ Log.d(" inside create account=", "inside onclick");
 				boolean incomplete=false;
 				
 				if(testAnswer.matches("")){
-					msg = "Please enter your test question answer.";
+					msg = getString(R.string.pEnterTestQAns);
 					incomplete=true;
 				}else{
 					new ResetPassword().execute();
@@ -160,7 +160,7 @@ Log.d(" inside create account=", "inside onclick");
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(ForgotPasswordActivity.this);
-			pDialog.setMessage("Reseting Password...");
+			pDialog.setMessage(getString(R.string.resetingPass));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -236,7 +236,7 @@ Log.d(" inside create account=", "inside onclick");
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(ForgotPasswordActivity.this);
-			pDialog.setMessage("Loading Test Question...");
+			pDialog.setMessage(getString(R.string.loadingTestQ));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);

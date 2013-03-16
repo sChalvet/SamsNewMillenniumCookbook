@@ -29,6 +29,7 @@ public class ListFavoriteAdapter extends BaseAdapter {
 	private static final String TAG_TOTALTIME = "totalTime";
 	private static final String TAG_AUTHOR = "author";
 	private static final String TAG_IMAGEURL = "imageUrl";
+	private static final String TAG_RECIPEID = "recipeId";
 	
 	
 	private LayoutInflater mInflater;
@@ -83,11 +84,8 @@ public List<String> getChecked() {
 
 	for(int index=0; index<data.size(); index++){
 		if(data.get(index).get("reminder") == "True" )
-			list.add(data.get(index).get("recipeName"));		
-		}
-
-		
-		
+			list.add(data.get(index).get(TAG_RECIPEID));		
+		}		
 		
 	Log.d("FavoriteAdapter_getChecked= ", list.toString() );
     return list;
@@ -128,9 +126,11 @@ public View getView(final int position, View convertView, ViewGroup parent) {
     String totalTime = data.get(position).get(TAG_TOTALTIME);
     String rating = data.get(position).get(TAG_RATING);
     String imageUrl = data.get(position).get(TAG_IMAGEURL);
+    String recipeId = data.get(position).get(TAG_RECIPEID);
      Log.d("Adapter loading recipe: ", recipeName+" at pos:"+Integer.toString(position));
     
  
+     viewHolder.recipeId= recipeId;
      viewHolder.recipeName.setText(recipeName);
      viewHolder.author.setText(author);
      viewHolder.numRatings.setText(numRatings);
@@ -178,6 +178,7 @@ static class ViewHolder {
 	TextView numRatings;
 	TextView author;
 	TextView totalTime;
+	String recipeId;
 	}
 }
 

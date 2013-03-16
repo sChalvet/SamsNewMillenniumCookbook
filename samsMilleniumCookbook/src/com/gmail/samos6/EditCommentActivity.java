@@ -160,7 +160,7 @@ public class EditCommentActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(EditCommentActivity.this);
-			pDialog.setMessage("Updating Comment...");
+			pDialog.setMessage(getString(R.string.updatingComment));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -226,7 +226,7 @@ public class EditCommentActivity extends Activity {
 			pDialog.dismiss();
 			
 			if(successful)
-				Toast.makeText(getApplicationContext(), "Comment Updated", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.commentUpdated), Toast.LENGTH_LONG).show();
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}
@@ -245,7 +245,7 @@ public class EditCommentActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(EditCommentActivity.this);
-			pDialog.setMessage("Loading Comment...");
+			pDialog.setMessage(getString(R.string.loadingComment));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);

@@ -152,25 +152,25 @@ public class EditUserInfoActivity extends Activity{
 				boolean incomplete=false;
 				
 				if(nickName.matches("")){
-					msg = "You need a nick name.";
+					msg = getString(R.string.needNickName);
 					incomplete=true;
 				}else if(!isValidEmailAddress(email)){
-					msg = "Please enter a valid email address.";
+					msg = getString(R.string.pEnterValidEmail);
 					incomplete=true;
 				}else if(firstName.matches("")){
-					msg = "Please enter your first name.";
+					msg = getString(R.string.pEnterYourFname);
 					incomplete=true;
 				}else if(lastName.matches("")){
-					msg = "Please enter your last name.";
+					msg = getString(R.string.pEnterYourLname);
 					incomplete=true;
 				}else if(oldPassword.matches("")){
-					msg = "Enter your password to confirm changes.";
+					msg = getString(R.string.pEnterYourPassToConfirm);
 					incomplete=true;
 				}else if(!testNewQuestion.matches("") && testNewAnswer.matches("")){
-					msg = "Please enter an answer to your new test question.";
+					msg = getString(R.string.pEnterTestQAns);
 					incomplete=true;
 				}else if(testOldAnswer.matches("")){
-					msg = "Enter your test question answer to confirm changes.";
+					msg = getString(R.string.pEnterTestQAnsToConfirm);
 					incomplete=true;
 				}else{
 					new UpdateAccount().execute();
@@ -245,7 +245,7 @@ public class EditUserInfoActivity extends Activity{
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(EditUserInfoActivity.this);
-			pDialog.setMessage("Updating Account..");
+			pDialog.setMessage(getString(R.string.updatingAcc));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -324,7 +324,7 @@ public class EditUserInfoActivity extends Activity{
 			pDialog.dismiss();
 			if(successful){
 				setPreferences();
-				Toast.makeText(getApplicationContext(), "Account updated", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.accountUpdated), Toast.LENGTH_LONG).show();
 			}
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
@@ -360,7 +360,7 @@ public class EditUserInfoActivity extends Activity{
 			protected void onPreExecute() {
 				super.onPreExecute();
 				pDialog = new ProgressDialog(EditUserInfoActivity.this);
-				pDialog.setMessage("Loading User Info...");
+				pDialog.setMessage(getString(R.string.loadingUserInfo));
 				pDialog.setIndeterminate(false);
 				pDialog.setCancelable(true);
 				pDialog.setOnCancelListener(cancelListener);

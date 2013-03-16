@@ -99,7 +99,7 @@ public class PantryActivity extends ListActivity {
 				Log.d("Pantry_Search onclick list=", ingredientList.toString());
 				
 				if(ingredientList.isEmpty()){
-					Toast.makeText(getApplicationContext(), "Please select some ingredients", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.selectIngredients), Toast.LENGTH_SHORT).show();
 				}else{
 					
 					//launches dialog for user so the search type
@@ -250,7 +250,7 @@ public class PantryActivity extends ListActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(PantryActivity.this);
-			pDialog.setMessage("Loading Ingredients. Please wait...");
+			pDialog.setMessage(getString(R.string.loadingIngredients));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -308,7 +308,7 @@ public class PantryActivity extends ListActivity {
 			pDialog.dismiss();
 			
 			if(isEmpty){
-				Toast toast = Toast.makeText(getApplicationContext(), "Your Pantry is empty.\nPick some ingredients from our database.", Toast.LENGTH_LONG);
+				Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.yourPantryEmpty), Toast.LENGTH_LONG);
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
 				

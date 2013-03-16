@@ -155,8 +155,8 @@ function updateAcc($userId, $nickName, $email, $firstName, $lastName, $oldPasswo
 	
 	$product = array();
 	$product["token"] = mysqli_real_escape_string($conn, crypt(md5($salt), md5($joinDate )));
-	$product["test"] = $sqlTestQandA;
-	$product["pass"] = $sqlNewPass;
+	//$product["test"] = $sqlTestQandA;
+	//$product["pass"] = $sqlNewPass;
 
 	sendEmail($email, $firstName, $webMasterEmail);
 	

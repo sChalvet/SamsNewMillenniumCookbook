@@ -132,7 +132,7 @@ public class MainScreenActivity extends Activity{
 				Intent i = new Intent(getApplicationContext(), CreateRecipeActivity.class);
 				startActivity(i);
 				}else{
-					Toast.makeText(getApplicationContext(), "Log in to create recipes", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.loginToCreate), Toast.LENGTH_LONG).show();
 					loginAlertDialog();
 				}
 				
@@ -156,7 +156,7 @@ public class MainScreenActivity extends Activity{
 			public void onClick(View view) {
 				// calling logout();
 				logOut();
-				Toast.makeText(getApplicationContext(), "You have Logged out!", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.youLoggedOut), Toast.LENGTH_LONG).show();
 				
 			}
 		});
@@ -271,10 +271,10 @@ public class MainScreenActivity extends Activity{
 					Log.d("MainScreen alert", "in onclick");
 					
 					if(nickName.matches("")){
-						msg = "Please enter your username.";
+						msg = getString(R.string.pEnterUser);
 						incomplete=true;
 					}else if(password.matches("")){
-						msg = "Please enter your password.";
+						msg = getString(R.string.pEnterPass);
 						incomplete=true;
 					}else{
 						new LoginClass().execute();
@@ -313,7 +313,7 @@ public class MainScreenActivity extends Activity{
 					Log.d("MainScreen alert", "in onclick");
 					
 					if(nickName.matches("")){
-						msg = "Please enter your user name\nto find your password.";
+						msg = getString(R.string.pEnterNameForPass);
 						incomplete=true;
 					}else{
 						
@@ -397,7 +397,7 @@ public class MainScreenActivity extends Activity{
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(MainScreenActivity.this);
-			pDialog.setMessage("Loging in...");
+			pDialog.setMessage(getString(R.string.logingIn));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -471,7 +471,7 @@ public class MainScreenActivity extends Activity{
 			pDialog.dismiss();
 			if(successful){
 				logIn();
-				Toast.makeText(getApplicationContext(), nickName+" is now loged in.", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), nickName+getString(R.string.isNowLogedIn), Toast.LENGTH_LONG).show();
 			}else{
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 			}
@@ -489,7 +489,7 @@ public class MainScreenActivity extends Activity{
 	        	
 	        	if(userName.equalsIgnoreCase("guest")){
 	        		
-					Toast.makeText(getApplicationContext(), "Log in to edit account", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.loginToEditAcc), Toast.LENGTH_LONG).show();
 					loginAlertDialog();
 	        		
 	        	}else{

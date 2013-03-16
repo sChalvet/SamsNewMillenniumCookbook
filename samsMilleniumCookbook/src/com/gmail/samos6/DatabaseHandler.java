@@ -14,7 +14,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
  
     // Database Name
     private static final String DATABASE_NAME = "NewMillenniumDB";
@@ -29,7 +29,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     
     // favoriteRecipes and savedRecipes Table column name
-    private static final String KEY_RECIPENAME = "recipeName";
+    private static final String KEY_RECIPEId = "recipeId";
 
  
     public DatabaseHandler(Context context) {
@@ -43,10 +43,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_INGREDIENTNAME + " TEXT PRIMARY KEY)";
     	
     	String CREATE_FAVORITERECIPES_TABLE = "CREATE TABLE " + TABLE_FAVORITERECIPES + " ("
-                + KEY_RECIPENAME + " TEXT PRIMARY KEY)";
+                + KEY_RECIPEId + " TEXT PRIMARY KEY)";
     	
     	String CREATE_SAVEDRECIPES_TABLE = "CREATE TABLE " + TABLE_SAVEDRECIPES + " ("
-                + KEY_RECIPENAME + " TEXT PRIMARY KEY)";
+                + KEY_RECIPEId + " TEXT PRIMARY KEY)";
         
         
         Log.d("DB_onCreate db string=", CREATE_SAVEDRECIPES_TABLE);
@@ -243,7 +243,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     	SQLiteDatabase db = this.getWritableDatabase();
     	 
         ContentValues values = new ContentValues();
-        values.put(KEY_RECIPENAME, recipeName); 
+        values.put(KEY_RECIPEId, recipeName); 
      
         // Inserting Row
         db.insert(TABLE_FAVORITERECIPES, null, values);
@@ -287,7 +287,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     	SQLiteDatabase db = this.getReadableDatabase();
 
     	for(int index=0; index<recipeName.size(); index++){
-    		db.delete(TABLE_FAVORITERECIPES, KEY_RECIPENAME+" = '"+recipeName.get(index).toString()+"'", null);
+    		db.delete(TABLE_FAVORITERECIPES, KEY_RECIPEId+" = '"+recipeName.get(index).toString()+"'", null);
     	}
                 	
          db.close(); // Closing database connection
@@ -317,12 +317,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * <br/><b>purpose</b>: adds a new Recipe to Saved recipes
      * <br/><b>returns</b>: void
      */
-    public void addSavedRecipe(String recipeName) {
+    public void addSavedRecipe(String recipeId) {
     	
     	SQLiteDatabase db = this.getWritableDatabase();
     	 
         ContentValues values = new ContentValues();
-        values.put(KEY_RECIPENAME, recipeName); 
+        values.put(KEY_RECIPEId, recipeId); 
      
         // Inserting Row
         db.insert(TABLE_SAVEDRECIPES, null, values);
@@ -366,7 +366,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     	SQLiteDatabase db = this.getReadableDatabase();
 
     	for(int index=0; index<recipeName.size(); index++){
-    		db.delete(TABLE_SAVEDRECIPES, KEY_RECIPENAME+" = '"+recipeName.get(index).toString()+"'", null);
+    		db.delete(TABLE_SAVEDRECIPES, KEY_RECIPEId+" = '"+recipeName.get(index).toString()+"'", null);
     	}
                 	
          db.close(); // Closing database connection

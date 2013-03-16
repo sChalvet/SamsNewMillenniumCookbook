@@ -21,7 +21,7 @@ if (isset($_POST["recipeName"])) {
     $recipeName = $_POST['recipeName'];
 
     // get a product from products table
-   $result = mysqli_query($conn, "SELECT userName, ingredientDiscription, directions, prepTime, cookTime, hasImage, servings FROM recipe WHERE recipeName = '$recipeName'");
+   $result = mysqli_query($conn, "SELECT userName, ingredientDiscription, directions, prepTime, cookTime, hasImage, servings, recipeId FROM recipe WHERE recipeName = '$recipeName'");
 
     if (!empty($result)) {
         // check for empty result
@@ -44,6 +44,7 @@ if (isset($_POST["recipeName"])) {
 			$product["cookTime"] = $row[4];
 			$product["hasImage"] = $row[5];
 			$product["servings"] = $row[6];
+			$product["recipeId"] = $row[7];
 			
 			//if row[5] (hasImage) is true then its got a url
 			if(intval($row[5])){

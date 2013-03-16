@@ -107,7 +107,7 @@ public class ListIngredientActivity extends ListActivity {
 		btnSave = (Button) findViewById(R.id.btnSaveIngredients);
 		btnAdd = (Button) findViewById(R.id.btnAddIngredient);
 		
-		Toast.makeText(getApplicationContext(), "Can't find what you need?\nThen please add it.", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), getString(R.string.pAddIng), Toast.LENGTH_SHORT).show();
 		
 		// save selected ingredients click event
 				btnSave.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +126,7 @@ public class ListIngredientActivity extends ListActivity {
 								db.addListIngredient(list);
 					
 								
-								Toast.makeText(getApplicationContext(), "Your Pantry has been Saved", Toast.LENGTH_SHORT).show();
+								Toast.makeText(getApplicationContext(), getString(R.string.pantrySaved), Toast.LENGTH_SHORT).show();
 								
 								// ingredients successfully saved
 								// notify previous activity by sending code 100
@@ -157,7 +157,7 @@ public class ListIngredientActivity extends ListActivity {
 									intent.putExtra(TAG_ORIGIN, TAG_ADDINGREDIENT);	
 									startActivityForResult(intent, 100);
 								}else{
-									Toast.makeText(getApplicationContext(), "Please Log in to create ingredients", Toast.LENGTH_LONG).show();
+									Toast.makeText(getApplicationContext(), getString(R.string.pLoginToCreatIngr), Toast.LENGTH_LONG).show();
 								}
 							}
 						});	
@@ -207,10 +207,10 @@ public class ListIngredientActivity extends ListActivity {
 		int position = adapter.getPositionOf(letter);
 		
 		if (position==-1){
-			Toast.makeText(getApplicationContext(), "No Ingredient starting with the letter "+letter, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.noIngreWithLetter)+" "+letter, Toast.LENGTH_SHORT).show();
 		}else{
 			lv.setSelectionFromTop(position, 0);
-			Toast.makeText(getApplicationContext(), "Moving to the letter "+letter, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.movingToLetter)+" "+letter, Toast.LENGTH_SHORT).show();
 		}
 
 		
@@ -255,7 +255,7 @@ public class ListIngredientActivity extends ListActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(ListIngredientActivity.this);
-			pDialog.setMessage("Loading Ingredients. Please wait...");
+			pDialog.setMessage(getString(R.string.loadingIngredients));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);

@@ -119,7 +119,7 @@ if (isset($_POST["foodName"])) {
 	
 	if($foodName !== "Any"){
 	
-		$foodNameQuery=" r.recipeName IN (SELECT r.recipeName, r.summery, r.userName, r.prepTime, r.cookTime, r.hasImage "
+		$foodNameQuery=" r.recipeName IN (SELECT r.recipeName "
 							."FROM recipe AS r "
 							."JOIN recipeingredients AS i ON r.recipeName = i.recipeName "
 							."JOIN ingredientlist AS l ON i.ingredientName = l.ingredientName "

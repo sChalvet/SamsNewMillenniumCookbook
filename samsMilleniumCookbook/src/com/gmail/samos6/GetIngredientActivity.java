@@ -150,7 +150,7 @@ public class GetIngredientActivity extends ListActivity {
 						Log.d("GetIngredient: ", "in Add onClick");
 						
 						// getting values from selected ListItem
-						String ingredientname = "new ingredient";
+						String ingredientname = getString(R.string.newIngredient);
 								
 						// Starting new intent
 						Intent intent = new Intent(getApplicationContext(), EditIngredientActivity.class);
@@ -202,10 +202,10 @@ public class GetIngredientActivity extends ListActivity {
 		int position = adapter.getPositionOf(letter);
 		
 		if (position==-1){
-			Toast.makeText(getApplicationContext(), "No Ingredient starting with the letter "+letter, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.noIngreWithLetter)+" "+letter, Toast.LENGTH_SHORT).show();
 		}else{
 			lv.setSelectionFromTop(position, 0);
-			Toast.makeText(getApplicationContext(), "Moving to the letter "+letter, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.movingToLetter)+" "+letter, Toast.LENGTH_SHORT).show();
 		}			
 	}
 	
@@ -247,7 +247,7 @@ public class GetIngredientActivity extends ListActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(GetIngredientActivity.this);
-			pDialog.setMessage("Loading Ingredients. Please wait...");
+			pDialog.setMessage(getString(R.string.loadingIngredients));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);

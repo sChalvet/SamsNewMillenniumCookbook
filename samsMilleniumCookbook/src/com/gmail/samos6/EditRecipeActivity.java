@@ -257,22 +257,19 @@ public class EditRecipeActivity extends Activity {
 				Log.d("CreateRecipe_btnPublish recipename=", recipeName);
 				
 				if(recipeName.matches("")){
-					msg = "You need a recipe name.";
+					msg = getString(R.string.pEnterRecipeName);
 					incomplete=true;
 				}else if(cookingDirections.matches("")){
-					msg = "Please add some cooking directions.";
-					incomplete=true;
-				}else if(cookingDirections.matches("")){
-					msg = "Please add some cooking directions.";
+					msg = getString(R.string.pEnterCookingDir);
 					incomplete=true;
 				}else if(cookTime.matches("") || prepTime.matches("")){
-					msg = "Please enter a time for cook time and prep time or 0.";
+					msg = getString(R.string.pEnterCookTime);
 					incomplete=true;
 				}else if(summery.matches("")){
-					msg = "Please enter a short summery.";
+					msg = getString(R.string.pEnterSumery);
 					incomplete=true;
 				}else if(numIngredients==0){
-					msg = "Please add at least one ingredient.";
+					msg = getString(R.string.pEnterIngredient);
 					incomplete=true;
 				}else{
 					new CreateNewRecipe().execute();
@@ -504,7 +501,7 @@ private TableLayout ingredientRow1(int index) {
 	
 	TextView txtVital = new TextView(this);
 	txtVital.setTextSize(13f);
-	txtVital.setText("Is this ingredient vital?");
+	txtVital.setText(getString(R.string.ingredientVital));
 	txtVital.setPadding(30, 0, 0, 22);
 	txtVital.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 20f));
 	txtVital.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
@@ -571,7 +568,7 @@ private TableLayout ingredientRow2(int index) {
 	InputFilter[] FilterArray = new InputFilter[1];
 	FilterArray[0] = new InputFilter.LengthFilter(maxLength);
 	txtDiscription.setFilters(FilterArray);
-	txtDiscription.setHint("diced, chopped, etc..");
+	txtDiscription.setHint(getString(R.string.dicedChoped));
 	txtDiscription.setTextSize(13f);
 	txtDiscription.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f));
 	listDescription.add(txtDiscription);
@@ -642,7 +639,7 @@ private void dropFromList(List<String> list) {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(EditRecipeActivity.this);
-			pDialog.setMessage("Updating Recipe..");
+			pDialog.setMessage(getString(R.string.updatingRecipe));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -809,7 +806,7 @@ private void dropFromList(List<String> list) {
 			// dismiss the dialog once done
 			pDialog.dismiss();
 			if(successfulRecipe && successfulPicture)
-				Toast.makeText(getApplicationContext(), "Recipe Updated", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.recipeUpdated), Toast.LENGTH_LONG).show();
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}
@@ -829,7 +826,7 @@ private void dropFromList(List<String> list) {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(EditRecipeActivity.this);
-			pDialog.setMessage("Loading Recipe details. Please wait...");
+			pDialog.setMessage(getString(R.string.loadingRecipeDetails));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);

@@ -192,7 +192,7 @@ public class CreateRecipeActivity extends Activity {
 		Log.d("CreateRecipe_just in", "Inside");
 	
 		//send user to pick ingredients first
-		Toast.makeText(getApplicationContext(), "First pick all the ingredients that you will be using", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), getString(R.string.chooseIngredients), Toast.LENGTH_LONG).show();
 		Intent intent = new Intent(getApplicationContext(), GetIngredientActivity.class);
 		startActivityForResult(intent,100);
 		
@@ -214,22 +214,19 @@ public class CreateRecipeActivity extends Activity {
 				Log.d("CreateRecipe_btnPublish recipename=", recipeName);
 				
 				if(recipeName.matches("")){
-					msg = "You need a recipe name.";
+					msg = getString(R.string.pEnterRecipeName);
 					incomplete=true;
 				}else if(cookingDirections.matches("")){
-					msg = "Please add some cooking directions.";
-					incomplete=true;
-				}else if(cookingDirections.matches("")){
-					msg = "Please add some cooking directions.";
+					msg = getString(R.string.pEnterCookingDir);
 					incomplete=true;
 				}else if(cookTime.matches("") || prepTime.matches("")){
-					msg = "Please enter a time for cook time and prep time or 0.";
+					msg = getString(R.string.pEnterCookTime);
 					incomplete=true;
 				}else if(summery.matches("")){
-					msg = "Please enter a short summery.";
+					msg = getString(R.string.pEnterSumery);
 					incomplete=true;
 				}else if(numIngredients==0){
-					msg = "Please add at least one ingredient.";
+					msg = getString(R.string.pEnterIngredient);
 					incomplete=true;
 				}else{
 					new CreateNewRecipe().execute();
@@ -305,10 +302,7 @@ public class CreateRecipeActivity extends Activity {
 		if(requestCode == 0){
 			Log.d("inside ActivityResults", "pic result");	
 			recipeImage = (Bitmap) data.getExtras().get("data");
-			imgPicture.setImageBitmap(recipeImage);
-			
-			//Toast.makeText(getApplicationContext(), "Sorry. Uploading pictures to database \nhas not yet been implemented.", Toast.LENGTH_LONG).show();
-			
+			imgPicture.setImageBitmap(recipeImage);	
 		}
 		
 		// if result code 100, coming from GetIngredientActivity
@@ -404,7 +398,7 @@ private TableLayout ingredientRow1(int index) {
 	
 	TextView txtVital = new TextView(this);
 	txtVital.setTextSize(13f);
-	txtVital.setText("Is this ingredient vital?");
+	txtVital.setText(getString(R.string.ingredientVital));
 	txtVital.setPadding(30, 0, 0, 22);
 	txtVital.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 20f));
 	txtVital.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
@@ -474,7 +468,7 @@ private TableLayout ingredientRow2(int index) {
 	InputFilter[] FilterArray = new InputFilter[1];
 	FilterArray[0] = new InputFilter.LengthFilter(maxLength);
 	txtDiscription.setFilters(FilterArray);
-	txtDiscription.setHint("diced, chopped, etc..");
+	txtDiscription.setHint(getString(R.string.dicedChoped));
 	txtDiscription.setTextSize(13f);
 	txtDiscription.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f));
 	listDescription.add(txtDiscription);
@@ -548,7 +542,7 @@ private void dropFromList(List<String> list) {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(CreateRecipeActivity.this);
-			pDialog.setMessage("Creating Recipe..");
+			pDialog.setMessage(getString(R.string.creatingRecipe));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -712,7 +706,7 @@ private void dropFromList(List<String> list) {
 			// dismiss the dialog once done
 			pDialog.dismiss();
 			if(successfulRecipe && successfulPicture){
-				Toast.makeText(getApplicationContext(), "Recipe Created", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.recipeCreated), Toast.LENGTH_LONG).show();
 				// closing this screen
 				finish();
 			}

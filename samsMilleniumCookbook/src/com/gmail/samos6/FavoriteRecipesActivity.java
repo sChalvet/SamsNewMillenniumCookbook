@@ -67,6 +67,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_PRODUCTS = "products";
 	private static final String TAG_RECIPENAME = "recipeName";
+	private static final String TAG_RECIPEID = "recipeId";
 	private static final String TAG_SUMMERY = "summery";
 	private static final String TAG_RATING = "rating";
 	private static final String TAG_NUMRATINGS = "numRatings";
@@ -196,7 +197,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(FavoriteRecipesActivity.this);
-			pDialog.setMessage("Loading Recipes. Please wait...");
+			pDialog.setMessage(getString(R.string.loadingRecipes));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -247,6 +248,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 						String prepTime = c.getString(TAG_PREPTIME);
 						String cookTime = c.getString(TAG_COOKTIME);
 						String author = c.getString(TAG_AUTHOR);
+						String recipeId = c.getString(TAG_RECIPEID);
 						String imageUrl = urlRoot+c.getString(TAG_IMAGEURL); //adding urlRoot to the image url
 						
 						
@@ -265,6 +267,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 						map.put(TAG_AUTHOR, author);
 						map.put(TAG_TOTALTIME, totalTime);
 						map.put(TAG_IMAGEURL, imageUrl);
+						map.put(TAG_RECIPEID, recipeId);
 						
 
 
@@ -293,11 +296,10 @@ public class FavoriteRecipesActivity  extends ListActivity{
 			// updating UI from Background Thread
 			runOnUiThread(new Runnable() {
 				public void run() {
+					
 					/**
 					 * Updating parsed JSON data into ListView
-					 * */
-					
-					
+					 * */		
 					adapter = new ListFavoriteAdapter(FavoriteRecipesActivity.this, productsList);
 					
 					// updating listview

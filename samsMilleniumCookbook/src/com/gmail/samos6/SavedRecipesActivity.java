@@ -67,6 +67,7 @@ public class SavedRecipesActivity  extends ListActivity{
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_PRODUCTS = "products";
 	private static final String TAG_RECIPENAME = "recipeName";
+	private static final String TAG_RECIPEID = "recipeId";
 	private static final String TAG_SUMMERY = "summery";
 	private static final String TAG_RATING = "rating";
 	private static final String TAG_NUMRATINGS = "numRatings";
@@ -195,7 +196,7 @@ public class SavedRecipesActivity  extends ListActivity{
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(SavedRecipesActivity.this);
-			pDialog.setMessage("Loading Recipes. Please wait...");
+			pDialog.setMessage(getString(R.string.loadingRecipes));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -248,6 +249,7 @@ public class SavedRecipesActivity  extends ListActivity{
 						String cookTime = c.getString(TAG_COOKTIME);
 						String author = c.getString(TAG_AUTHOR);
 						String imageUrl = urlRoot+c.getString(TAG_IMAGEURL); //adding urlRoot to the image url
+						String recipeId = c.getString(TAG_RECIPEID);
 						
 						int cookT = Integer.parseInt(cookTime);
 						int prepT = Integer.parseInt(prepTime);
@@ -264,6 +266,7 @@ public class SavedRecipesActivity  extends ListActivity{
 						map.put(TAG_AUTHOR, author);
 						map.put(TAG_TOTALTIME, totalTime);
 						map.put(TAG_IMAGEURL, imageUrl);
+						map.put(TAG_RECIPEID, recipeId);
 						
 
 

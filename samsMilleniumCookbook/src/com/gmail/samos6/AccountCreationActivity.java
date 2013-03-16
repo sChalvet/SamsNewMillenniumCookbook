@@ -126,25 +126,25 @@ public class AccountCreationActivity extends Activity{
 				boolean incomplete=false;
 				
 				if(nickName.matches("")){
-					msg = "You need a nick name.";
+					msg = getString(R.string.needNickName);
 					incomplete=true;
 				}else if(!isValidEmailAddress(email)){
-					msg = "Please enter a valid email address.";
+					msg = getString(R.string.pEnterValidEmail);
 					incomplete=true;
 				}else if(firstName.matches("")){
-					msg = "Please enter your first name.";
+					msg = getString(R.string.pEnterYourFname);
 					incomplete=true;
 				}else if(lastName.matches("")){
-					msg = "Please enter your last name.";
+					msg = getString(R.string.pEnterYourLname);
 					incomplete=true;
 				}else if(password.matches("")){
-					msg = "Please enter a password.";
+					msg = getString(R.string.pEnterAPass);
 					incomplete=true;
 				}else if(testQuestion.matches("")){
-					msg = "Please enter your test question.";
+					msg = getString(R.string.pEnterTestQ);
 					incomplete=true;
 				}else if(testAnswer.matches("")){
-					msg = "Please enter your test question answer.";
+					msg = getString(R.string.pEnterTestQAns);
 					incomplete=true;
 				}else{
 					new CreateNewAccount().execute();
@@ -208,7 +208,7 @@ public class AccountCreationActivity extends Activity{
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(AccountCreationActivity.this);
-			pDialog.setMessage("Creating Account..");
+			pDialog.setMessage(getString(R.string.creatingAcc));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -275,7 +275,7 @@ public class AccountCreationActivity extends Activity{
 			pDialog.dismiss();
 			if(successful){
 				setPreferences();
-				Toast.makeText(getApplicationContext(), "Account Created", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.accountCreated), Toast.LENGTH_LONG).show();
 			}
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();

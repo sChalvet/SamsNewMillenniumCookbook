@@ -14,7 +14,7 @@ if (isset($_POST["list0"])) {
 	}
 	
 	//thearray is packed with recipenames this puts them all in a string with a , seperating them
-	$recipeName = implode(', ' , $array);
+	$recipeId = implode(', ' , $array);
 	
 	// array for JSON response
 	$response = array();
@@ -27,7 +27,7 @@ if (isset($_POST["list0"])) {
 	$conn=$db->connect();
 	
 	// get all products from products table
-	$result = mysqli_query($conn, "SELECT recipeName, summery, userName, prepTime, cookTime, hasImage FROM recipe WHERE recipeName IN ($recipeName)");
+	$result = mysqli_query($conn, "SELECT recipeName, summery, userName, prepTime, cookTime, hasImage, recipeID FROM recipe WHERE recipeId IN ($recipeId)");
 
 
 	// check for empty result
@@ -47,6 +47,7 @@ if (isset($_POST["list0"])) {
 			$product["author"] = $row[2];
 			$product["prepTime"] = $row[3];
 			$product["cookTime"] = $row[4];
+			$product["recipeId"] = $row[6];
 			
 			//if row[5] (hasImage) is true then its got a url
 			if(intval($row[5])){

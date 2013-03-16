@@ -223,7 +223,7 @@ public class EditIngredientActivity extends Activity {
 				
 				
 				if(ingredientName.matches("")){
-					msg = "You need an ingredient name.";
+					msg = getString(R.string.pEnterIngredientName);
 					incomplete=true;
 				}else{
 					new SaveIngredientDetails().execute();
@@ -249,7 +249,7 @@ public class EditIngredientActivity extends Activity {
 				
 				
 				if(ingredientName.matches("")){
-					msg = "You need an ingredient name.";
+					msg = getString(R.string.pEnterIngredientName);
 					incomplete=true;
 				}else{
 					new CreateNewIngredient().execute();
@@ -289,9 +289,8 @@ public class EditIngredientActivity extends Activity {
 	private void addIngredient(){
 		
 		alert = new AlertDialog.Builder(EditIngredientActivity.this);
-		alert.setTitle("Add Ingredient");
-		alert.setMessage("Sorry, this Ingredient was either renamed or deleted from the database.\n" +
-							"Would you like to add it again?");
+		alert.setTitle(getString(R.string.addIngredient));
+		alert.setMessage(getString(R.string.ingredientLost));
 
 		alert
 		.setCancelable(false)
@@ -430,7 +429,7 @@ public class EditIngredientActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(EditIngredientActivity.this);
-			pDialog.setMessage("Loading Ingredient details. Please wait...");
+			pDialog.setMessage(getString(R.string.loadingIngredientDetails));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -526,7 +525,7 @@ public class EditIngredientActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(EditIngredientActivity.this);
-			pDialog.setMessage("Saving ingredient Changes...");
+			pDialog.setMessage(getString(R.string.savingIngredientChanges));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -610,7 +609,7 @@ public class EditIngredientActivity extends Activity {
 					db.deleteIngredient(oldIngredientName);
 					db.addIngredient(ingredientName);					
 				}
-				Toast.makeText(getApplicationContext(), "Ingredient Updated", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.ingredientUpdated), Toast.LENGTH_LONG).show();
 			}else{
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 			}
@@ -630,7 +629,7 @@ public class EditIngredientActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(EditIngredientActivity.this);
-			pDialog.setMessage("Deleting ingredient...");
+			pDialog.setMessage(getString(R.string.deletingIngredient));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -671,18 +670,6 @@ public class EditIngredientActivity extends Activity {
 					// send result code 100 to notify about product update
 					setResult(100, i);
 					finish();
-					
-					/*Intent i = new Intent();
-					
-					if(origin.equalsIgnoreCase(TAG_LISTINGREDIENT)){  
-						 i = new Intent(getApplicationContext(), ListIngredientActivity.class);
-					}
-					else{
-						 i = new Intent(getApplicationContext(), PantryActivity.class);
-					}
-					
-					
-					startActivity(i);*/
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -698,7 +685,7 @@ public class EditIngredientActivity extends Activity {
 		 * **/
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog once product deleted
-			Toast.makeText(getApplicationContext(), "Ingredient Deleted", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.ingredientDeleted), Toast.LENGTH_LONG).show();
 			pDialog.dismiss();
 
 		}
@@ -718,7 +705,7 @@ public class EditIngredientActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(EditIngredientActivity.this);
-			pDialog.setMessage("Creating Ingredient..");
+			pDialog.setMessage(getString(R.string.CreatingIngredient));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -799,7 +786,7 @@ public class EditIngredientActivity extends Activity {
 			// dismiss the dialog once done
 			pDialog.dismiss();
 			if(successful)
-				Toast.makeText(getApplicationContext(), "Ingredient Created", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.ingredientCreated), Toast.LENGTH_LONG).show();
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}
