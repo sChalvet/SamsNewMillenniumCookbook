@@ -6,5 +6,8 @@
     
     <item android:id="@+id/share"
           android:title="@string/shareWithFriends" />
+    
+    <item android:id="@+id/nutritionInfo"
+          android:title="@string/nutritionFacts" />
 
 </menu>

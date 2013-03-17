@@ -248,6 +248,13 @@
         android:layout_weight="1" >
 
 	<TableRow android:paddingTop="3dp" >
+
+		<Button
+		    android:id="@+id/btnSaveIngredients"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:text="@string/saveToPantry" />
 	    
 	    <Button
 	        android:id="@+id/btnAddIngredient"
@@ -255,13 +262,6 @@
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
 	        android:text="@string/addOne" />
-
-	    <Button
-		        android:id="@+id/btnSaveIngredients"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_weight="1"
-		        android:text="@string/saveToPantry" />
 		   
 		   
 		   

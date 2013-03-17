@@ -43,7 +43,7 @@ public final class R {
         public static final int CreateRecipeRatingSpinner=0x7f090006;
         public static final int MainNickName=0x7f09005f;
         public static final int MainPassword=0x7f090060;
-        public static final int btnAddIngredient=0x7f090033;
+        public static final int btnAddIngredient=0x7f090034;
         public static final int btnCreateCommentPost=0x7f090007;
         public static final int btnCreateProduct=0x7f090003;
         public static final int btnCreateRecipeAddIngredient=0x7f090016;
@@ -93,33 +93,33 @@ public final class R {
         public static final int btnMainPantry=0x7f090067;
         public static final int btnMainSavedRecipe=0x7f09006b;
         public static final int btnMainToRecipeSearch=0x7f090068;
-        public static final int btnPreferenceSave=0x7f090086;
-        public static final int btnPreferenceUpdate=0x7f090097;
+        public static final int btnPreferenceSave=0x7f090092;
+        public static final int btnPreferenceUpdate=0x7f0900a3;
         public static final int btnPublishIngredient=0x7f090041;
-        public static final int btnRecipeViewEdit=0x7f0900a6;
-        public static final int btnRecipeViewFavoriteRecipe=0x7f0900a4;
-        public static final int btnRecipeViewSaveRecipe=0x7f0900a3;
-        public static final int btnRecipeViewViewRatings=0x7f0900a5;
+        public static final int btnRecipeViewEdit=0x7f0900b2;
+        public static final int btnRecipeViewFavoriteRecipe=0x7f0900b0;
+        public static final int btnRecipeViewSaveRecipe=0x7f0900af;
+        public static final int btnRecipeViewViewRatings=0x7f0900b1;
         public static final int btnResetPassword=0x7f090048;
         public static final int btnSaveEditIngredient=0x7f090042;
-        public static final int btnSaveIngredients=0x7f090034;
+        public static final int btnSaveIngredients=0x7f090033;
         public static final int btnSearch=0x7f09006e;
-        public static final int btnSearchRecipes=0x7f090075;
+        public static final int btnSearchRecipes=0x7f090081;
         public static final int btnSelectAll=0x7f09006c;
         public static final int chkboxListFavRecipeCheckBox=0x7f09004b;
         public static final int content=0x7f090013;
-        public static final int dialogPantrySearch=0x7f090079;
-        public static final int editAccount=0x7f0900a7;
-        public static final int editUserEmail=0x7f090088;
-        public static final int editUserFirstName=0x7f090089;
-        public static final int editUserLastName=0x7f09008a;
-        public static final int editUserNewPassword=0x7f09008e;
-        public static final int editUserNickName=0x7f090087;
-        public static final int editUserOldPassword=0x7f090092;
-        public static final int editUserOldTestAnswer=0x7f090095;
-        public static final int editUserOldTestQuestion=0x7f090094;
-        public static final int editUserTestQuestion=0x7f09008b;
-        public static final int editUserTestQuestionAnswer=0x7f09008c;
+        public static final int dialogPantrySearch=0x7f090085;
+        public static final int editAccount=0x7f0900b3;
+        public static final int editUserEmail=0x7f090094;
+        public static final int editUserFirstName=0x7f090095;
+        public static final int editUserLastName=0x7f090096;
+        public static final int editUserNewPassword=0x7f09009a;
+        public static final int editUserNickName=0x7f090093;
+        public static final int editUserOldPassword=0x7f09009e;
+        public static final int editUserOldTestAnswer=0x7f0900a1;
+        public static final int editUserOldTestQuestion=0x7f0900a0;
+        public static final int editUserTestQuestion=0x7f090097;
+        public static final int editUserTestQuestionAnswer=0x7f090098;
         public static final int handle=0x7f090014;
         public static final int ingredientCheckBox=0x7f090052;
         public static final int ingredientName=0x7f090053;
@@ -139,44 +139,52 @@ public final class R {
         public static final int inputRecipeCreatePreptime=0x7f09000b;
         public static final int inputRecipeCreateSummery=0x7f09000f;
         public static final int inputType=0x7f09003e;
-        public static final int line1=0x7f09008f;
-        public static final int line2=0x7f090096;
+        public static final int line1=0x7f09009b;
+        public static final int line2=0x7f0900a2;
         public static final int listFavRecipeImage=0x7f09004c;
         public static final int listFavRecipesRatingBar=0x7f09004a;
         public static final int listRecipeCommentsRatingBar=0x7f090054;
-        public static final int menuHome=0x7f0900a8;
+        public static final int menuHome=0x7f0900b4;
+        public static final int nutritionInfo=0x7f0900b6;
         public static final int pref1=0x7f090044;
-        public static final int pref10=0x7f090090;
-        public static final int pref11=0x7f090093;
+        public static final int pref10=0x7f09009c;
+        public static final int pref11=0x7f09009f;
         public static final int pref2=0x7f090046;
-        public static final int pref3=0x7f09007c;
-        public static final int pref4=0x7f09007e;
-        public static final int pref6=0x7f090080;
-        public static final int pref6bis=0x7f09008d;
-        public static final int pref7=0x7f090082;
-        public static final int pref8=0x7f090084;
-        public static final int pref9=0x7f090091;
-        public static final int radioFindAll=0x7f090077;
-        public static final int radioFindAny=0x7f090078;
-        public static final int radioGroup=0x7f090076;
+        public static final int pref3=0x7f090088;
+        public static final int pref4=0x7f09008a;
+        public static final int pref6=0x7f09008c;
+        public static final int pref6bis=0x7f090099;
+        public static final int pref7=0x7f09008e;
+        public static final int pref8=0x7f090090;
+        public static final int pref9=0x7f09009d;
+        public static final int radioFindAll=0x7f090083;
+        public static final int radioFindAny=0x7f090084;
+        public static final int radioGroup=0x7f090082;
         public static final int ratingBarListRecipe=0x7f090059;
         public static final int recipeCreateImage=0x7f090009;
         public static final int recipeCreateSlidingDrawer=0x7f090012;
         public static final int recipeImage=0x7f09005a;
-        public static final int recipeViewImage=0x7f09009a;
-        public static final int recipeViewRatingBar=0x7f090099;
-        public static final int recipeViewSlidingDrawer=0x7f0900a2;
+        public static final int recipeViewImage=0x7f0900a6;
+        public static final int recipeViewRatingBar=0x7f0900a5;
+        public static final int recipeViewSlidingDrawer=0x7f0900ae;
         public static final int resetPassTestAnswer=0x7f090047;
         public static final int resetPassTestQuestion=0x7f090045;
         public static final int scrollView1=0x7f090038;
-        public static final int share=0x7f0900a9;
-        public static final int spnrCooktime=0x7f090072;
+        public static final int seekBarServings=0x7f09007a;
+        public static final int share=0x7f0900b5;
+        public static final int spnrCooktime=0x7f09007e;
         public static final int spnrCreateRecipeServings=0x7f09000e;
         public static final int spnrCreateRecipeType=0x7f09000d;
-        public static final int spnrFoodType=0x7f090070;
-        public static final int spnrRecipeType=0x7f090071;
+        public static final int spnrFoodType=0x7f09007c;
+        public static final int spnrRecipeType=0x7f09007d;
         public static final int tableRowIngredient=0x7f090051;
-        public static final int txtAuthorName=0x7f090073;
+        public static final int textView1=0x7f090071;
+        public static final int textView2=0x7f090070;
+        public static final int textView3=0x7f090073;
+        public static final int textView4=0x7f090075;
+        public static final int textView5=0x7f090077;
+        public static final int textView6=0x7f090079;
+        public static final int txtAuthorName=0x7f09007f;
         public static final int txtCreateCommentComment=0x7f090005;
         public static final int txtCreateCommentRecipeName=0x7f090004;
         public static final int txtListFavRecipeAuthor=0x7f09004e;
@@ -192,24 +200,29 @@ public final class R {
         public static final int txtListRecipeRecipeName=0x7f090058;
         public static final int txtListRecipeSummery=0x7f09005e;
         public static final int txtListRecipeTotalCookTime=0x7f09005d;
-        public static final int txtRecipeViewAuthor=0x7f09009b;
-        public static final int txtRecipeViewCooktime=0x7f09009f;
-        public static final int txtRecipeViewDirections=0x7f0900a1;
-        public static final int txtRecipeViewIngredientList=0x7f0900a0;
-        public static final int txtRecipeViewNumReviews=0x7f09009c;
-        public static final int txtRecipeViewPreptime=0x7f09009e;
-        public static final int txtRecipeViewRecipeName=0x7f090098;
-        public static final int txtRecipeViewServings=0x7f09009d;
-        public static final int txtSearchKeyWords=0x7f090074;
+        public static final int txtNutritionCalories=0x7f090072;
+        public static final int txtNutritionCarbs=0x7f090078;
+        public static final int txtNutritionFat=0x7f090076;
+        public static final int txtNutritionProtein=0x7f090074;
+        public static final int txtNutritionServings=0x7f09007b;
+        public static final int txtRecipeViewAuthor=0x7f0900a7;
+        public static final int txtRecipeViewCooktime=0x7f0900ab;
+        public static final int txtRecipeViewDirections=0x7f0900ad;
+        public static final int txtRecipeViewIngredientList=0x7f0900ac;
+        public static final int txtRecipeViewNumReviews=0x7f0900a8;
+        public static final int txtRecipeViewPreptime=0x7f0900aa;
+        public static final int txtRecipeViewRecipeName=0x7f0900a4;
+        public static final int txtRecipeViewServings=0x7f0900a9;
+        public static final int txtSearchKeyWords=0x7f090080;
         public static final int txtviewAddedBy=0x7f090040;
         public static final int txtviewIngredientName=0x7f090037;
-        public static final int userEmail=0x7f09007b;
-        public static final int userFirstName=0x7f09007d;
-        public static final int userLastName=0x7f09007f;
-        public static final int userNickName=0x7f09007a;
-        public static final int userPassword=0x7f090081;
-        public static final int userTestQuestion=0x7f090083;
-        public static final int userTestQuestionAnswer=0x7f090085;
+        public static final int userEmail=0x7f090087;
+        public static final int userFirstName=0x7f090089;
+        public static final int userLastName=0x7f09008b;
+        public static final int userNickName=0x7f090086;
+        public static final int userPassword=0x7f09008d;
+        public static final int userTestQuestion=0x7f09008f;
+        public static final int userTestQuestionAnswer=0x7f090091;
     }
     public static final class layout {
         public static final int add_product=0x7f030000;
@@ -229,11 +242,12 @@ public final class R {
         public static final int login_form=0x7f03000e;
         public static final int main_screen=0x7f03000f;
         public static final int pantry_view=0x7f030010;
-        public static final int search_for_recipe=0x7f030011;
-        public static final int search_type=0x7f030012;
-        public static final int user_info=0x7f030013;
-        public static final int user_info_edit=0x7f030014;
-        public static final int view_recipe=0x7f030015;
+        public static final int recipe_nutrition=0x7f030011;
+        public static final int search_for_recipe=0x7f030012;
+        public static final int search_type=0x7f030013;
+        public static final int user_info=0x7f030014;
+        public static final int user_info_edit=0x7f030015;
+        public static final int view_recipe=0x7f030016;
     }
     public static final class menu {
         public static final int main_menu=0x7f080000;
@@ -258,20 +272,27 @@ public final class R {
         public static final int byFoodType=0x7f0500ae;
         public static final int byRecipeType=0x7f0500af;
         public static final int calories=0x7f050095;
+        /**  part of nutrition information  
+         */
+        public static final int caloriesPerServing=0x7f0500df;
         public static final int canEditThis=0x7f050089;
         public static final int carbs=0x7f050096;
+        public static final int carbsPerServing=0x7f0500e2;
         public static final int chooseIngredients=0x7f05006a;
         public static final int chooseSearchType=0x7f05005b;
         /**  part of CreateNewComment Activity 
+ part of CreateNewComment Activity 
          */
         public static final int commentHint=0x7f05006e;
         public static final int commentPosted=0x7f050072;
         public static final int commentUpdated=0x7f050071;
         public static final int cookTime=0x7f05007f;
         /**  part of RecipeView Activity 
+ part of RecipeView Activity 
          */
         public static final int cookingDirections=0x7f05007a;
         /**  part of CreateRecipe Activity 
+ part of CreateRecipe Activity 
          */
         public static final int cookingHint=0x7f05005e;
         public static final int createAccount=0x7f050021;
@@ -293,6 +314,7 @@ public final class R {
         public static final int email=0x7f0500b6;
         public static final int enterAnswer=0x7f050074;
         public static final int fat=0x7f050098;
+        public static final int fatPerServing=0x7f0500e1;
         public static final int favoriteRecipe=0x7f050081;
         public static final int firstName=0x7f0500b7;
         public static final int forgotPassword=0x7f050076;
@@ -309,6 +331,7 @@ public final class R {
         public static final int hintSearch=0x7f0500b4;
         public static final int hintTestAnswer=0x7f0500c7;
         /**  part of menu xml  
+ part of menu xml  
          */
         public static final int home=0x7f0500d5;
         public static final int howShare=0x7f0500d8;
@@ -318,6 +341,7 @@ public final class R {
         public static final int ingredientList=0x7f05007b;
         public static final int ingredientLost=0x7f0500ac;
         /**  part of editIngredientActivity 
+ part of editIngredientActivity 
          */
         public static final int ingredientName=0x7f050094;
         public static final int ingredientUpdated=0x7f0500ab;
@@ -337,6 +361,7 @@ public final class R {
         public static final int loginToCreate=0x7f050024;
         public static final int loginToEditAcc=0x7f050025;
         /**  part of progress dialogs  
+ part of progress dialogs  
          */
         public static final int logingIn=0x7f05003b;
         public static final int logout=0x7f050023;
@@ -345,17 +370,20 @@ public final class R {
         public static final int mainSavedRecipes=0x7f050020;
         public static final int mainSearchForRecipe=0x7f05001d;
         /**  part of Main Activity  
+ part of Main Activity  
          */
         public static final int mainSeePantry=0x7f05001c;
         public static final int movingToLetter=0x7f0500a6;
         public static final int needNickName=0x7f05002e;
         public static final int newIngredient=0x7f0500a7;
         /**  part of preferences  
+ part of preferences  
          */
         public static final int nickName=0x7f0500b5;
         public static final int no=0x7f0500db;
         public static final int noIngreWithLetter=0x7f0500a5;
         public static final int notes=0x7f050099;
+        public static final int nutritionFacts=0x7f0500e3;
         public static final int ok=0x7f0500dc;
         public static final int only=0x7f050088;
         public static final int pAddIng=0x7f0500a2;
@@ -372,6 +400,7 @@ public final class R {
         public static final int pEnterTestQAns=0x7f05002c;
         public static final int pEnterTestQAnsToConfirm=0x7f050034;
         /**  part of data checks  
+ part of data checks  
          */
         public static final int pEnterUser=0x7f050028;
         public static final int pEnterValidEmail=0x7f05002f;
@@ -387,6 +416,7 @@ public final class R {
         public static final int poastingComment=0x7f05004c;
         public static final int postComment=0x7f05006f;
         /**  part of ListRecipeComments Activity 
+ part of ListRecipeComments Activity 
          */
         public static final int postedBy=0x7f05006b;
         public static final int prefDefaultUserName=0x7f0500c3;
@@ -407,6 +437,7 @@ public final class R {
         public static final int prefTestQuestion=0x7f0500c4;
         public static final int prepTime=0x7f05007e;
         public static final int protein=0x7f050097;
+        public static final int proteinPerServing=0x7f0500e0;
         public static final int publishIngredient=0x7f05009f;
         public static final int publishRecipe=0x7f050062;
         public static final int recipeAuthor=0x7f050090;
@@ -419,6 +450,7 @@ public final class R {
         public static final int recipeServings=0x7f050084;
         public static final int recipeSummery=0x7f05008c;
         /**  part of the ListRecipe Activity 
+ part of the ListRecipe Activity 
          */
         public static final int recipeTitle=0x7f05008b;
         public static final int recipeType=0x7f050061;
@@ -432,10 +464,13 @@ public final class R {
         public static final int saveInfo=0x7f0500c2;
         public static final int saveRecipe=0x7f050080;
         /**  part of Pantry and Ingredient Activity  
+ part of Pantry and Ingredient Activity  
          */
         public static final int saveToPantry=0x7f05004e;
         public static final int savingIngredientChanges=0x7f050047;
         /**  getString(R.string.accountCreated) 
+ part of Search For Recipe  
+ getString(R.string.accountCreated) 
  part of Search For Recipe  
          */
         public static final int search=0x7f0500ad;
@@ -455,6 +490,7 @@ public final class R {
         public static final int totalPrepTime=0x7f050093;
         public static final int type=0x7f05009b;
         /**  part of edit preferences  
+ part of edit preferences  
          */
         public static final int updateInfo=0x7f0500c6;
         public static final int updatingAcc=0x7f050043;
@@ -477,6 +513,11 @@ public final class R {
  <string name="urlGetIngredientDetails">http://192.168.254.45/recipeApp/getIngredientDetails.php</string> 
  <string name="urlGetIngredientDetails">http://joe.cs.unca.edu/~chalvesa/app/getIngredientDetails.php</string> 
  Url's are pulled into the app from here 
+ urlGetAllComments = getResources().getString(R.string.urlGetAllComments); 
+ <string name="urlGetIngredientDetails">http://10.0.2.2/recipeApp/getIngredientDetails.php</string> 
+ <string name="urlGetIngredientDetails">http://192.168.254.45/recipeApp/getIngredientDetails.php</string> 
+ <string name="urlGetIngredientDetails">http://joe.cs.unca.edu/~chalvesa/app/getIngredientDetails.php</string> 
+ Url's are pulled into the app from here 
          */
         public static final int urlGetIngredientDetails=0x7f050000;
         public static final int urlGetRecipeDetails=0x7f05000c;
@@ -492,17 +533,21 @@ public final class R {
         public static final int urlUploadImage=0x7f050013;
         public static final int url_create_product=0x7f050005;
         /**  getString(R.string.pEnterTestQ) 
+ getString(R.string.pEnterTestQ) 
          */
         public static final int userName=0x7f050019;
         public static final int verification=0x7f0500d2;
         public static final int viewRatings=0x7f050082;
         /**  values used throughout  
+ values used throughout  
          */
         public static final int yes=0x7f0500da;
         public static final int youLoggedOut=0x7f050026;
         public static final int yourPantryEmpty=0x7f05005d;
         public static final int yourRating=0x7f050070;
         /**  getString(R.string.creatingAcc) 
+ part of forgot password Activity 
+ getString(R.string.creatingAcc) 
  part of forgot password Activity 
          */
         public static final int yourTestQuestion=0x7f050073;
@@ -512,5 +557,7 @@ public final class R {
     }
     public static final class xml {
         public static final int preferences=0x7f040000;
+        public static final int progress_bar=0x7f040001;
+        public static final int thumb=0x7f040002;
     }
 }

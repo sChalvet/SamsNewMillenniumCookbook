@@ -123,18 +123,26 @@ public View getView(final int position, View convertView, ViewGroup parent) {
     String author = data.get(position).get(TAG_AUTHOR);
     String summery = data.get(position).get(TAG_SUMMERY);
     String numRatings = data.get(position).get(TAG_NUMRATINGS);
-    String totalTime = data.get(position).get(TAG_TOTALTIME);
     String rating = data.get(position).get(TAG_RATING);
     String imageUrl = data.get(position).get(TAG_IMAGEURL);
     String recipeId = data.get(position).get(TAG_RECIPEID);
      Log.d("Adapter loading recipe: ", recipeName+" at pos:"+Integer.toString(position));
     
+     //calculating minutes and hours
+     int t=Integer.parseInt(data.get(position).get(TAG_TOTALTIME));
+     int hours = t / 60; 
+     int minutes = t % 60;
+     String time="";
+     	if(hours==0)
+     		time= minutes+" min";
+     	else
+     		time= hours+" h, "+minutes+" min";
  
      viewHolder.recipeId= recipeId;
      viewHolder.recipeName.setText(recipeName);
      viewHolder.author.setText(author);
      viewHolder.numRatings.setText(numRatings);
-     viewHolder.totalTime.setText(totalTime);
+     viewHolder.totalTime.setText(time);
      viewHolder.summery.setText(summery);
      viewHolder.recipeImage =(ImageView)convertView.findViewById(R.id.listFavRecipeImage);
      viewHolder.rtbRating.setRating(Float.valueOf(rating)/2);

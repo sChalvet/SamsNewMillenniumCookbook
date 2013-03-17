@@ -61,6 +61,7 @@ public class ListRecipeActivity  extends ListActivity{
 	String searchRecipeType;
 	String searchKeyWord;
 	String searchCookTime;
+	int position;
 
 	ArrayList<HashMap<String, String>> productsList;
 	
@@ -70,6 +71,8 @@ public class ListRecipeActivity  extends ListActivity{
 	String urlGetAllRecipes;
 	String urlRoot;
 
+	ListView lv;
+	
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_PRODUCTS = "products";
@@ -118,13 +121,10 @@ public class ListRecipeActivity  extends ListActivity{
 		new LoadAllRecipes().execute();
 
 		// Get listview
-		final ListView lv = getListView();  //added final
-		
-		
+		lv = getListView();
 				
-		// on seleting single recipe
+		// on selecting single recipe
 		// launching recipe Screen
-		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -153,8 +153,11 @@ public class ListRecipeActivity  extends ListActivity{
 	    super.onRestart();
 	    
 	    Log.d("list recipe inside", "on restart");
-		adapter.clear();
-		new LoadAllRecipes().execute();
+	    position= lv.getFirstVisiblePosition();
+		//adapter.clear();
+		//new LoadAllRecipes().execute();
+		//lv.setSelectionFromTop(position, 0);
+		Log.d("list recipe inside", "visible pos="+Integer.toString(position));
 	}
 
 	// Initiating Menu XML file (menu.xml)
@@ -303,15 +306,6 @@ public class ListRecipeActivity  extends ListActivity{
 					
 					
 					adapter = new RecipeLazyAdapter(ListRecipeActivity.this, productsList);
-					
-					/*ListAdapter adapter = new SimpleAdapter(ListRecipeActivity.this, productsList,
-							R.layout.list_recipes, new String[] { TAG_RECIPENAME, TAG_SUMMERY, TAG_NUMRATINGS, 
-																	TAG_AUTHOR, TAG_TOTALTIME},
-							new int[] { R.id.txtListRecipeRecipeName, R.id.txtListRecipeSummery, 
-										R.id.txtListRecipeNumReviews, R.id.txtListRecipeAuthor, R.id.txtListRecipeTotalCookTime});
-					*/
-					// updating listview
-					//Log.d("allproducts: ", "setListAdapter(adapter)");
 					
 					setListAdapter(adapter);
 				}

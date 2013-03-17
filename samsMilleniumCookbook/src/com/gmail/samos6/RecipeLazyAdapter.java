@@ -67,13 +67,24 @@ public class RecipeLazyAdapter extends BaseAdapter {
         TextView txtTotalCookTime = (TextView)vi.findViewById(R.id.txtListRecipeTotalCookTime);
         ImageView recipeImage=(ImageView)vi.findViewById(R.id.recipeImage);
         
+        //calculating minutes and hours
+        int t=Integer.parseInt(data.get(position).get(TAG_TOTALTIME));
+        int hours = t / 60; 
+        int minutes = t % 60;
+        String time="";
+        	if(hours==0)
+        		time= minutes+" min";
+        	else
+        		time= hours+" h, "+minutes+" min";
+        
+        
         
         // Setting all values in listview
         txtRecipeName.setText(data.get(position).get(TAG_RECIPENAME));
         txtSummery.setText(data.get(position).get(TAG_SUMMERY));
         txtNumReviews.setText(data.get(position).get(TAG_NUMRATINGS));
         txtAuthor.setText(data.get(position).get(TAG_AUTHOR));
-        txtTotalCookTime.setText(data.get(position).get(TAG_TOTALTIME));
+        txtTotalCookTime.setText(time);
         rtbRating.setRating(Float.valueOf(data.get(position).get(TAG_RATING))/2);
         imageLoader.DisplayImage(data.get(position).get(TAG_IMAGEURL), recipeImage);
         

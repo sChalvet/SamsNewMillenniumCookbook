@@ -272,6 +272,8 @@ public class RecipeViewActivity extends Activity {
 	 ****************************************************************************************************/
 	public void addDetails(){
 		
+		String time="";
+		
 		//pic = BitmapFactory.decodeFile(rawImage);
 		Log.d("RecipeView_addDetails image=", rawImage);
 		txtRecipeName.setText(recipeName);
@@ -286,6 +288,25 @@ public class RecipeViewActivity extends Activity {
 			imgLoader.DisplayImage(urlRoot+imageUrl, imgPicture);
 		rtbRating.setRating(Float.valueOf(rating)/2);
 		
+	}
+	
+	/**
+	 * Turns a String into <hours> h, <minutes> min
+	 * @param time string (in minutes)
+	 * @return <hours> h, <minutes> min
+	 */
+	public String getTimeInMH(String st){
+		
+		int t = Integer.parseInt(st);
+	     //calculating minutes and hours
+	     int hours = t / 60; 
+	     int minutes = t % 60;
+	     String time="";
+	     	if(hours==0)
+	     		time= minutes+" min";
+	     	else
+	     		time= hours+" h, "+minutes+" min";
+		return time;
 	}
 	
 	/**
@@ -359,8 +380,8 @@ public class RecipeViewActivity extends Activity {
 							ingredientList = product.getString(TAG_INGREDIENTLIST);
 							cookingDirections = product.getString(TAG_COOKINGDIRECTIONS);
 							rating = product.getString(TAG_RATINGS);
-							prepTime += product.getString(TAG_PREPTIME);
-							cookTime += product.getString(TAG_COOKTIME);
+							prepTime += getTimeInMH(product.getString(TAG_PREPTIME));
+							cookTime += getTimeInMH(product.getString(TAG_COOKTIME));
 							imageUrl = product.getString(TAG_IMAGEURL);
 							servings = product.getString(TAG_SERVINGS);
 							recipeId = product.getString(TAG_RECIPEID);
@@ -394,6 +415,7 @@ public class RecipeViewActivity extends Activity {
 		}
 	}
 	
+
 	 @Override
 	    public boolean onOptionsItemSelected(MenuItem item){
 	 
@@ -416,8 +438,16 @@ public class RecipeViewActivity extends Activity {
         		startActivity(Intent.createChooser(share, getString(R.string.howShare)));
 	            return true;
 	            
-	            
-
+	        case R.id.nutritionInfo:
+	        	
+	        	Intent intent = new Intent(getApplicationContext(), NutritionInfoActivity.class);
+	    		intent.putExtra("calories", "10");
+	    		intent.putExtra("fat", "12");
+	    		intent.putExtra("protein", "15");
+	    		intent.putExtra("servings", servings);
+	    		intent.putExtra("carbs", "18");
+				startActivity(intent);
+	            return true;
 	 
 	        default:
 	            return super.onOptionsItemSelected(item);

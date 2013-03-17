@@ -40,6 +40,12 @@
         </activity>
         
         <activity
+            android:name=".NutritionInfoActivity"
+            android:screenOrientation= "portrait"
+            android:label="Nutrition Info" >
+        </activity>
+        
+        <activity
             android:name=".EditUserInfoActivity"
             android:screenOrientation= "portrait"
             android:label="Edit your info" >
