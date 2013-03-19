@@ -181,8 +181,21 @@
 		        </TableRow>
 
     </TableLayout>
-    
-				
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/servingsModifier"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <SeekBar
+        android:id="@+id/seekBarRecipeView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:progressDrawable="@xml/progress_bar"
+        android:thumb="@drawable/chicken_full" />
 
 		        <TextView
 		            android:layout_width="match_parent"
@@ -200,7 +213,6 @@
 			    android:ems="10"
 			    android:padding="20dp"
 			    android:textColor="#EEEEEEAA" />
-
 
 			<TextView
 			    android:layout_width="wrap_content"

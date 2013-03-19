@@ -47,6 +47,7 @@
         
         <activity
             android:name=".EditUserInfoActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation= "portrait"
             android:label="Edit your info" >
         </activity>
@@ -59,6 +60,7 @@
         
          <activity
             android:name=".AccountCreationActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation= "portrait"
             android:label="Your Info" >
         </activity>
@@ -70,6 +72,7 @@
         <activity
             
             android:name=".EditRecipeActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation= "portrait"
             android:label="Editing Recipe" >
         </activity>
@@ -112,6 +115,7 @@
         
         <activity
             android:name=".CreateRecipeActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation= "portrait"
             android:label="Edit Recipe" >
         </activity>
@@ -150,6 +154,7 @@
         <!-- Edit ingredient Activity -->
         <activity
             android:name=".EditIngredientActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation= "portrait"
             android:label="Ingredient Data" >
         </activity>
@@ -157,6 +162,7 @@
                 <!-- Edit ingredient Activity -->
         <activity
             android:name=".SearchForRecipeActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation= "portrait"
             android:label="SearchForRecipeActivity" >
         </activity>

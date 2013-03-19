@@ -1,7 +1,9 @@
 package com.gmail.samos6;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -29,18 +31,22 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.SeekBar;
 import android.widget.SlidingDrawer;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 @SuppressWarnings("deprecation")
-public class RecipeViewActivity extends Activity {
+public class RecipeViewActivity extends Activity implements OnSeekBarChangeListener {
 	
 
 	TextView txtRecipeName;
@@ -53,6 +59,7 @@ public class RecipeViewActivity extends Activity {
 	TextView txtPrepTime;
 	RatingBar rtbRating;
 	ImageView imgPicture;
+	SeekBar seekBar;
 	SlidingDrawer slidingDrawer;
 	Button btnReviews;
 	Button btnSave;
@@ -77,7 +84,11 @@ public class RecipeViewActivity extends Activity {
 	String rawImage= "";
 	String recipeId= "";
 	
-	//Bitmap pic;
+	int ingredientNum;
+	String[][] ingredientArray;
+	String [][] tempArray;
+	
+	//check to see if pic exist
 	int hasImage=0;
 	
 	// single ingredient url
@@ -87,6 +98,7 @@ public class RecipeViewActivity extends Activity {
     
     // ImageLoader class instance
     Images_ImageLoader imgLoader;
+    NutritionDecripter nutrition;
 	
 	//used to see if user canceled the AsyncTask
     Boolean bCancelled=false;
@@ -112,13 +124,29 @@ public class RecipeViewActivity extends Activity {
 	private static final String TAG_NUMRATINGS = "numRatings";
 	private static final String TAG_INGREDIENTLIST = "ingredientList";
 	private static final String TAG_COOKINGDIRECTIONS = "cookingDirections";
-	private static final String TAG_RATINGS = "rating";
+	private static final String TAG_RATING = "rating";
 	private static final String TAG_COOKTIME = "cookTime";
 	private static final String TAG_PREPTIME = "prepTime";
 	private static final String TAG_SERVINGS = "servings";
 	private static final String TAG_IMAGEURL = "imageUrl";
 	private static final String TAG_HASIMAGE = "hasImage";
+	private static final String TAG_PROTEIN = "protein";
+	private static final String TAG_CALORIES = "calories";
+	private static final String TAG_CARBS = "carbs";
+	private static final String TAG_FAT = "fat";
+	private static final String TAG_TYPE = "type";
+	private static final String TAG_DESCRIPTION = "description";
 	
+	private static final int INGREDIENTNAME = 0;
+	private static final int INGREDIENTID = 1;
+	private static final int AMOUNT = 2;
+	private static final int MEASUREMENT = 3;
+	private static final int CALORIES = 4;
+	private static final int PROTEIN = 5;
+	private static final int FAT = 6;
+	private static final int CARBS = 7;
+	private static final int TYPE = 8;
+	private static final int DESCRIPTION = 9;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -126,6 +154,7 @@ public class RecipeViewActivity extends Activity {
 		setContentView(R.layout.view_recipe);
 		
 		imgLoader = new Images_ImageLoader(getApplicationContext());
+		nutrition = new NutritionDecripter();
 		
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -160,10 +189,13 @@ public class RecipeViewActivity extends Activity {
 		imgPicture= (ImageView) findViewById(R.id.recipeViewImage);	
 		slidingDrawer= (SlidingDrawer) findViewById(R.id.recipeViewSlidingDrawer);
 		rtbRating= (RatingBar) findViewById(R.id.recipeViewRatingBar);
+		seekBar= (SeekBar) findViewById(R.id.seekBarRecipeView);
 			
 		Log.d("ViewRecipe_just in", recipeName);
 
 		new GetRecipeDetails().execute();
+		
+		seekBar.setOnSeekBarChangeListener(this);
 		
 		// See Reviews button click event
 		btnReviews.setOnClickListener(new View.OnClickListener() {
@@ -271,15 +303,15 @@ public class RecipeViewActivity extends Activity {
 	 * 
 	 ****************************************************************************************************/
 	public void addDetails(){
+
+		seekBar.setMax((Integer.parseInt(servings)*4)-1);
+		seekBar.setProgress(Integer.parseInt(servings)-1);
 		
-		String time="";
-		
-		//pic = BitmapFactory.decodeFile(rawImage);
 		Log.d("RecipeView_addDetails image=", rawImage);
 		txtRecipeName.setText(recipeName);
 		txtAuthor.setText(author);
 		txtNumReviews.setText(numRatings);
-		txtIngredientList.setText(ingredientList);
+		txtIngredientList.setText(getIngredientList(ingredientArray));
 		txtCookingDirections.setText(cookingDirections);
 		txtCookTime.setText(cookTime);
 		txtPrepTime.setText(prepTime);
@@ -288,6 +320,32 @@ public class RecipeViewActivity extends Activity {
 			imgLoader.DisplayImage(urlRoot+imageUrl, imgPicture);
 		rtbRating.setRating(Float.valueOf(rating)/2);
 		
+	}
+	
+	private String getIngredientList(String[][] array){
+		String ingredientList="";
+		
+		String measurement="";
+
+		for(int i=0; i<array.length; i++){
+			
+			measurement = array[i][MEASUREMENT];
+			//adds the plural's' to the end of measurement
+			if(nutrition.amountToFloat(array[i][AMOUNT])>1)
+				measurement+="s";
+			
+			//screens the possibility that no unit is needed
+			if(measurement.equalsIgnoreCase("no unit")||measurement.equalsIgnoreCase("no units"))
+				measurement="";
+			else
+				measurement+=" of";
+			
+			
+			ingredientList +="> "+array[i][AMOUNT]+" "+measurement+" "
+							+array[i][DESCRIPTION]+" "+array[i][INGREDIENTNAME]+"\n";
+		}	
+		
+		return ingredientList;
 	}
 	
 	/**
@@ -377,9 +435,9 @@ public class RecipeViewActivity extends Activity {
 							Log.d("RecipeView_DoinBackGround", "setting all of the details");
 							author = product.getString(TAG_AUTHOR);
 							numRatings = product.getString(TAG_NUMRATINGS);
-							ingredientList = product.getString(TAG_INGREDIENTLIST);
+							//ingredientList = product.getString(TAG_INGREDIENTLIST);
 							cookingDirections = product.getString(TAG_COOKINGDIRECTIONS);
-							rating = product.getString(TAG_RATINGS);
+							rating = product.getString(TAG_RATING);
 							prepTime += getTimeInMH(product.getString(TAG_PREPTIME));
 							cookTime += getTimeInMH(product.getString(TAG_COOKTIME));
 							imageUrl = product.getString(TAG_IMAGEURL);
@@ -387,6 +445,27 @@ public class RecipeViewActivity extends Activity {
 							recipeId = product.getString(TAG_RECIPEID);
 							hasImage = Integer.parseInt(product.getString(TAG_HASIMAGE));
 							
+							ingredientNum = Integer.parseInt(product.getString("numIngredients"));
+							
+							ingredientArray = new String [ingredientNum][10];
+							
+							//getting nutrition info from db
+							for(int i=0; i<ingredientNum; i++){
+								
+								ingredientArray[i][INGREDIENTNAME] = product.getString("ingredientName"+i);
+								ingredientArray[i][INGREDIENTID] = product.getString("ingredientId"+i);
+								ingredientArray[i][AMOUNT] = product.getString("amount"+i);
+								ingredientArray[i][MEASUREMENT] = product.getString("measurement"+i);
+								ingredientArray[i][CALORIES] = product.getString(TAG_CALORIES+i);
+								ingredientArray[i][FAT] = product.getString(TAG_FAT+i);
+								ingredientArray[i][PROTEIN] = product.getString(TAG_PROTEIN+i);
+								ingredientArray[i][CARBS] = product.getString(TAG_CARBS+i);
+								ingredientArray[i][TYPE] = product.getString(TAG_TYPE+i);
+								ingredientArray[i][DESCRIPTION] = product.getString(TAG_DESCRIPTION+i);
+								
+							}
+
+							Log.d("recipeView ingredientNum:", Integer.toString(ingredientNum));
 
 						}else{	
 							// recipe with that name not found
@@ -415,6 +494,62 @@ public class RecipeViewActivity extends Activity {
 		}
 	}
 	
+	
+	@Override
+	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {		
+		tempArray= stringCopy(ingredientArray, ingredientNum);
+		
+		
+		//inc progress b/c we dont want it to be 0
+		progress++;
+		
+		if(progress>0){
+			
+			txtServings.setText(Integer.toString(progress));
+			for(int i=0; i<tempArray.length;i++){
+				float am = nutrition.amountToFloat(tempArray[i][AMOUNT]);
+				float serv= (float) progress/Float.valueOf(servings);
+				//Log.d("seekbar in for", "am= "+am+", serv="+serv);
+				tempArray[i][AMOUNT]=nutrition.amountToString( (float) am *serv );	
+			}
+			
+			txtIngredientList.setText(getIngredientList(tempArray));
+		}
+		
+	}
+	
+	private String[][] stringCopy(String[][] array, int size){
+		
+		String [][] newArray= new String[size][10];
+		
+		for(int i=0; i<array.length;i++){
+			newArray[i][INGREDIENTNAME] = array[i][INGREDIENTNAME];
+			newArray[i][INGREDIENTID] = array[i][INGREDIENTID];
+			newArray[i][AMOUNT] = array[i][AMOUNT];
+			newArray[i][MEASUREMENT] = array[i][MEASUREMENT];
+			newArray[i][CALORIES] = array[i][CALORIES];
+			newArray[i][PROTEIN] = array[i][PROTEIN];
+			newArray[i][FAT] = array[i][FAT];
+			newArray[i][CARBS] = array[i][CARBS];
+			newArray[i][TYPE] = array[i][TYPE];
+			newArray[i][DESCRIPTION] = array[i][DESCRIPTION];
+		}
+		
+		return newArray;
+	}
+
+	@Override
+	public void onStartTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStopTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 	 @Override
 	    public boolean onOptionsItemSelected(MenuItem item){
@@ -440,12 +575,33 @@ public class RecipeViewActivity extends Activity {
 	            
 	        case R.id.nutritionInfo:
 	        	
+	        	Map<String, Float> info = new HashMap<String, Float>(); 
+				
+	        	float sumProtein= 0.0f;
+	        	float sumFat= 0.0f;
+	        	float sumCalorie= 0.0f;
+	        	float sumCarbs= 0.0f;
+	        	for(int n=0; n<tempArray.length; n++){
+	        		info = nutrition.getIngredientFacts(tempArray[n][MEASUREMENT], tempArray[n][TYPE], 
+	        				tempArray[n][AMOUNT], tempArray[n][CALORIES], 
+	        				tempArray[n][FAT], tempArray[n][CARBS], tempArray[n][PROTEIN]);
+	        		
+	        		
+	        		sumCalorie += info.get(TAG_CALORIES);
+	        		sumFat += info.get(TAG_FAT);
+	        		sumProtein += info.get(TAG_PROTEIN);
+	        		sumCarbs += info.get(TAG_CARBS);
+	        		Log.d("recipeView, getNut", "sumCalorie:"+sumCalorie+", sumFat:"+sumFat+", sumProtein:"+sumProtein+", sumCarbs:"+sumCarbs);
+	        	}
+	        	
+	        	String serv = txtServings.getText().toString();
+	        	
 	        	Intent intent = new Intent(getApplicationContext(), NutritionInfoActivity.class);
-	    		intent.putExtra("calories", "10");
-	    		intent.putExtra("fat", "12");
-	    		intent.putExtra("protein", "15");
-	    		intent.putExtra("servings", servings);
-	    		intent.putExtra("carbs", "18");
+	    		intent.putExtra("calories", sumCalorie);
+	    		intent.putExtra("fat", sumFat);
+	    		intent.putExtra("protein", sumProtein);
+	    		intent.putExtra("servings", serv);
+	    		intent.putExtra("carbs", sumCarbs);
 				startActivity(intent);
 	            return true;
 	 

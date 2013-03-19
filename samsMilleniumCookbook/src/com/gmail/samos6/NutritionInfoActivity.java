@@ -30,10 +30,10 @@ public class NutritionInfoActivity extends Activity implements OnSeekBarChangeLi
 	TextView txtServings;
 	SeekBar sbrServings;
 	
-	String calories;
-	String protein;
-	String fat;
-	String carbs;
+	float calories;
+	float protein;
+	float fat;
+	float carbs;
 	String servings;
 	
 	private static final String TAG_CALORIES = "calories";
@@ -51,12 +51,13 @@ public class NutritionInfoActivity extends Activity implements OnSeekBarChangeLi
 		Intent intent = getIntent();
 		
 		// getting data past from intent
-		calories = intent.getStringExtra(TAG_CALORIES);
-		protein = intent.getStringExtra(TAG_FAT);
-		fat = intent.getStringExtra(TAG_PROTEIN);
+		calories = intent.getFloatExtra(TAG_CALORIES, 0.0f);
+		protein = intent.getFloatExtra(TAG_FAT, 0.0f);
+		fat = intent.getFloatExtra(TAG_PROTEIN, 0.0f);
 		servings = intent.getStringExtra(TAG_SERVINGS);
-		carbs = intent.getStringExtra(TAG_CARBS);
+		carbs = intent.getFloatExtra(TAG_CARBS, 0.0f);
 		
+		Log.d("inside nutrition facts", "cal: "+calories+"prot: "+protein+"fat: "+fat+"carb: "+carbs+"serving: "+servings);
 		//setting the btn and txt
 		txtCalories = (TextView) findViewById(R.id.txtNutritionCalories);
 		txtProtein = (TextView) findViewById(R.id.txtNutritionProtein);
@@ -65,23 +66,45 @@ public class NutritionInfoActivity extends Activity implements OnSeekBarChangeLi
 		txtServings = (TextView) findViewById(R.id.txtNutritionServings);
 		sbrServings = (SeekBar) findViewById(R.id.seekBarServings);
 		
-		//set max of seek bar to twice the serving amount
-		sbrServings.setMax(Integer.parseInt(servings)*2);
-		sbrServings.setProgress(Integer.parseInt(servings));
+		//set max of seek bar to twice the serving amount, 
+		//adding -1 because the min needs to be 1 it is then added later
+		sbrServings.setMax((Integer.parseInt(servings)*2)-1);
+		sbrServings.setProgress(Integer.parseInt(servings)-1);
 		
 		setNutritionText(calories, protein, fat, carbs, servings);
 		
 		sbrServings.setOnSeekBarChangeListener(this);
 	}
 	
-	private void setNutritionText(String cal, String pro, String fat, String carb, String serv){
+	private void setNutritionText(float fCalorie, float fProtein, float fFat, float fCarb, String serv){
 		
-		txtCalories.setText(cal);
-		txtProtein.setText(pro);
-		txtFat.setText(fat);
-		txtCarbs.setText(carb);
+		int fServing = Integer.parseInt(serv);
+		
+		
+		txtCalories.setText(Float.toString(Math.round(fCalorie/fServing * 10) / 10.0f));
+		txtProtein.setText(Float.toString(Math.round(fProtein/fServing * 10) / 10.0f));
+		txtFat.setText(Float.toString(Math.round(fFat/fServing * 10) / 10.0f));
+		txtCarbs.setText(Float.toString(Math.round(fCarb/fServing * 10) / 10.0f));
 		txtServings.setText(serv);		
 	}
+
+	@Override
+	public void onProgressChanged(SeekBar v, int progress, boolean isUser) {
+		setNutritionText(calories, protein, fat, carbs, Integer.toString(progress+1));	
+		
+	}
+
+	@Override
+	public void onStartTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStopTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
+	} 
 	
 	// Initiating Menu XML file (menu.xml)
     @Override
@@ -107,22 +130,4 @@ public class NutritionInfoActivity extends Activity implements OnSeekBarChangeLi
 	            return super.onOptionsItemSelected(item);
 	        }
 	    }
-
-	@Override
-	public void onProgressChanged(SeekBar v, int progress, boolean isUser) {
-		txtServings.setText(Integer.toString(progress));	
-		
-	}
-
-	@Override
-	public void onStartTrackingTouch(SeekBar seekBar) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStopTrackingTouch(SeekBar seekBar) {
-		// TODO Auto-generated method stub
-		
-	} 
 }

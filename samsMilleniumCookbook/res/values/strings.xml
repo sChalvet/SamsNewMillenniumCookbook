@@ -32,7 +32,7 @@
     <string name="urlGetTestQuestion">http://joe.cs.unca.edu/~chalvesa/app/getTestQuestion.php</string>
     <string name="urlUpdateAccount">http://joe.cs.unca.edu/~chalvesa/app/updateAccount.php</string>
     <string name="urlGetUserInfo">http://joe.cs.unca.edu/~chalvesa/app/getUserInfo.php</string>
-    <string name="urlRoot">http://joe.cs.unca.edu/~chalvesa/app/</string>		
+    <string name="urlRoot">http://joe.cs.unca.edu/~chalvesa/app/</string>			
     
     
     <!-- getString(R.string.pEnterTestQ) -->
@@ -176,6 +176,7 @@
     <string name="only">only</string>
     <string name="canEditThis">can edit this recipe.</string>
     <string name="from">from</string>
+    <string name="servingsModifier">Servings modifier:</string>
     
     
     
