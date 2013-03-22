@@ -1,139 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:measureWithLargestChild="false"
-    android:orientation="vertical" 
-	android:background="@drawable/list_ingredient_gradient_selector">
+    android:background="@drawable/list_ingredient_gradient_selector"
+    android:orientation="vertical" >
 
-    <TextView
-      android:id="@+id/txtListRecipeRecipeName"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:text="@string/recipeTitle"
-      android:textSize="22sp"
-      android:textStyle="bold" />
-
-    <RatingBar
-        android:id="@+id/ratingBarListRecipe"
-        style="@style/recipeRatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:isIndicator="true"
-        android:numStars="5" />
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            
-        <LinearLayout
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:padding="2dip"
-        	android:background="@drawable/image_border">
-        	
-            <ImageView
-                android:id="@+id/recipeImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="fill"
-                android:layout_weight="10"
-                android:contentDescription="@string/banner_alt"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_launcher" />
-            </LinearLayout>
-            
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" >
-	                    
-				                <TableRow
-				                    android:layout_width="match_parent"
-				                    android:layout_height="33dp"
-				                    android:layout_weight="1" >
-				                    
-				                 <TextView
-				                     android:id="@+id/txtListRecipeNumReviews"
-				                     android:layout_width="wrap_content"
-				                     android:layout_height="match_parent"
-				                     android:layout_gravity="right"
-				                     android:layout_weight="0"
-				                     android:text="@string/recipeReviewCount"
-				                     android:textStyle="bold" />
-				                     
-				                  <TextView
-				                      android:layout_width="wrap_content"
-				                      android:layout_height="match_parent"
-				                      android:layout_marginLeft="10dp"
-				                      android:layout_weight="0"
-				                      android:text="@string/recipeReviews" />
-				                    
-				                </TableRow>
-				                
-				                <TableRow
-				                    android:layout_width="fill_parent"
-				                    android:layout_height="33dp"
-				                    android:layout_weight="1" >
-				                    
-				                   <TextView
-				                       android:layout_width="wrap_content"
-				                       android:layout_height="match_parent"
-				                       android:text="@string/recipePostedBy" />
-				                     
-				                  <TextView
-				                      android:id="@+id/txtListRecipeAuthor"
-				                      android:layout_width="wrap_content"
-				                      android:layout_height="match_parent"
-				                      android:layout_marginLeft="10dp"
-				                      android:text="@string/recipeAuthor"
-				                      android:textStyle="bold" />
-				                    
-				                </TableRow>
-				                
-				                <TableRow
-				                    android:layout_width="fill_parent"
-				                    android:layout_height="33dp"
-				                    android:layout_weight="1" >
-				                    
-				                   <TextView
-				                       android:layout_width="wrap_content"
-				                       android:layout_height="match_parent"
-				                       android:text="@string/totalPrepTime" />
-				                     
-				                  <TextView
-				                      android:id="@+id/txtListRecipeTotalCookTime"
-				                      android:layout_width="wrap_content"
-				                      android:layout_height="match_parent"
-				                      android:layout_marginLeft="10dp"
-				                      android:text="#"
-				                      android:textStyle="bold" />
-				                    
-				                </TableRow>
-                
-                
-                
-            </TableLayout>
-                
-
-        </TableRow>
+		 <RatingBar
+		     android:id="@+id/ratingBarListRecipe"
+		     style="@style/recipeRatingBar"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignBottom="@+id/txtListRecipeRecipeName"
+		     android:layout_alignParentRight="true"
+		     android:layout_marginRight="10dp"
+		     android:layout_marginTop="3dp"
+		     android:isIndicator="true"
+		     android:numStars="5" />
 
 		 <TextView
 		     android:id="@+id/txtListRecipeSummery"
 		     android:layout_width="wrap_content"
-		     android:layout_height="match_parent"
-		     android:textSize="10sp"
-		     android:text="@string/summery" />
+		     android:layout_height="wrap_content"
+		     android:layout_alignParentLeft="true"
+		     android:layout_below="@+id/recipeImage"
+		     android:layout_marginLeft="10dp"
+		     android:text="@string/summery"
+		     android:textSize="12sp" />
 
-    </TableLayout>
+		 <TextView
+		     android:id="@+id/txtListRecipeRecipeName"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignParentLeft="true"
+		     android:layout_alignParentTop="true"
+		     android:layout_marginLeft="10dp"
+		     android:layout_marginTop="3dp"
+		     android:text="@string/recipeTitle"
+		     android:textSize="18sp"
+		     android:textStyle="bold" />
 
+		 <TextView
+		     android:id="@+id/txtListRecipeNumReviews"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignTop="@+id/recipeImage"
+		     android:layout_marginRight="10dp"
+		     android:layout_marginTop="16dp"
+		     android:layout_toLeftOf="@+id/tv1"
+		     android:text="@string/recipeReviewCount"
+		     android:textStyle="bold" />
 
+		 <TextView
+		     android:id="@+id/txtListRecipeTotalCookTime"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignBaseline="@+id/tv3"
+		     android:layout_alignBottom="@+id/tv3"
+		     android:layout_alignLeft="@+id/txtListRecipeAuthor"
+		     android:text="#"
+		     android:textStyle="bold" />
 
-</LinearLayout>
+		 <TextView
+		     android:id="@+id/tv3"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_below="@+id/tv2"
+		     android:layout_marginRight="10dp"
+		     android:layout_toLeftOf="@+id/txtListRecipeTotalCookTime"
+		     android:text="@string/totalPrepTime" />
+
+		 <TextView
+		     android:id="@+id/tv2"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignLeft="@+id/tv3"
+		     android:layout_below="@+id/txtListRecipeNumReviews"
+		     android:layout_marginRight="10dp"
+		     android:text="@string/recipePostedBy" />
+
+		 <ImageView
+		     android:id="@+id/recipeImage"
+		     android:layout_width="100dp"
+		     android:layout_height="80dp"
+		     android:layout_alignLeft="@+id/txtListRecipeSummery"
+		     android:layout_below="@+id/txtListRecipeRecipeName"
+		     android:background="#5555AA"
+		     android:contentDescription="@string/banner_alt"
+		     android:padding="1dp"
+		     android:scaleType="fitXY"
+		     android:src="@drawable/default_pic" />
+
+		 <TextView
+		     android:id="@+id/tv1"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignBaseline="@+id/txtListRecipeNumReviews"
+		     android:layout_alignBottom="@+id/txtListRecipeNumReviews"
+		     android:layout_alignLeft="@+id/ratingBarListRecipe"
+		     android:layout_marginLeft="14dp"
+		     android:text="@string/recipeReviews" />
+
+		 <TextView
+		     android:id="@+id/txtListRecipeAuthor"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignBaseline="@+id/tv2"
+		     android:layout_alignBottom="@+id/tv2"
+		     android:layout_alignLeft="@+id/tv1"
+		     android:text="@string/recipeAuthor"
+		     android:textStyle="bold" />
+
+		<View
+		    android:id="@+id/view1"
+		    android:layout_width="match_parent"
+		    android:layout_height="1dp"
+		    android:layout_below="@id/txtListRecipeSummery"
+		    android:layout_marginTop="5dp"
+		    android:background="#474747" />
+
+		<View
+		    android:id="@+id/view2"
+		    android:layout_width="match_parent"
+		    android:layout_height="1dp"
+		    android:layout_above="@id/txtListRecipeRecipeName"
+		    android:layout_marginBottom="5dp"
+		    android:background="#474747" />
+
+</RelativeLayout>

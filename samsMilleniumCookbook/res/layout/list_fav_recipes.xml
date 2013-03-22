@@ -1,169 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:measureWithLargestChild="false"
-    android:orientation="vertical"
-android:background="@drawable/list_ingredient_gradient_selector">
+    android:background="@drawable/list_ingredient_gradient_selector"
+    android:orientation="vertical" >
 
-    <TextView
-      android:id="@+id/txtListFavRecipeRecipeName"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:text="@string/recipeTitle"
-      android:textSize="22sp"
-      android:textStyle="bold" />
+		 <RatingBar
+		     android:id="@+id/listFavRecipesRatingBar"
+		     style="@style/recipeRatingBar"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignBottom="@+id/txtListFavRecipeRecipeName"
+		     android:layout_alignParentRight="true"
+		     android:layout_marginRight="10dp"
+		     android:layout_marginTop="3dp"
+		     android:isIndicator="true"
+		     android:numStars="5" />
 
-    <RatingBar
-        android:id="@+id/listFavRecipesRatingBar"
-        style="@style/recipeRatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:isIndicator="true"
-        android:numStars="5" />
+		 <TextView
+		     android:id="@+id/txtListFavRecipeSummery"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignParentLeft="true"
+		     android:layout_below="@+id/listFavRecipeImage"
+		     android:layout_marginLeft="10dp"
+		     android:text="@string/summery"
+		     android:textSize="12sp" />
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
+		 <TextView
+		     android:id="@+id/txtListFavRecipeRecipeName"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignParentLeft="true"
+		     android:layout_alignParentTop="true"
+		     android:layout_marginLeft="10dp"
+		     android:layout_marginTop="3dp"
+		     android:text="@string/recipeTitle"
+		     android:textSize="18sp"
+		     android:textStyle="bold" />
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+		 <TextView
+		     android:id="@+id/txtListFavRecipeNumReviews"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignTop="@+id/listFavRecipeImage"
+		     android:layout_marginRight="10dp"
+		     android:layout_marginTop="16dp"
+		     android:layout_toLeftOf="@+id/tv1"
+		     android:text="@string/recipeReviewCount"
+		     android:textStyle="bold" />
 
-            <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0" >
+		 <TextView
+		     android:id="@+id/txtListFavRecipeTotalCookTime"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignBaseline="@+id/tv3"
+		     android:layout_alignBottom="@+id/tv3"
+		     android:layout_alignLeft="@+id/txtListFavRecipeAuthor"
+		     android:text="#"
+		     android:textStyle="bold" />
 
-                <CheckBox
-                    android:id="@+id/chkboxListFavRecipeCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0"
-                    android:focusable="false" />
+		 <TextView
+		     android:id="@+id/tv3"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_below="@+id/tv2"
+		     android:layout_marginRight="10dp"
+		     android:layout_toLeftOf="@+id/txtListFavRecipeTotalCookTime"
+		     android:text="@string/totalPrepTime" />
 
-            </TableLayout>
+		 <TextView
+		     android:id="@+id/tv2"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_alignLeft="@+id/tv3"
+		     android:layout_below="@+id/txtListFavRecipeNumReviews"
+		     android:layout_marginRight="10dp"
+		     android:text="@string/recipePostedBy" />
+<!-- 		 android:text="@string/recipeAuthor" -->
 
-            <TableLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" >
+		<View
+		    android:id="@+id/view1"
+		    android:layout_width="match_parent"
+		    android:layout_height="1dp"
+		    android:layout_below="@+id/txtListFavRecipeSummery"
+		    android:layout_marginTop="5dp"
+		    android:background="#474747" />
 
-                 <TableLayout
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_weight="1" >
+		<View
+		    android:id="@+id/view2"
+		    android:layout_width="match_parent"
+		    android:layout_height="1dp"
+		    android:layout_above="@+id/txtListFavRecipeRecipeName"
+		    android:layout_marginBottom="5dp"
+		    android:background="#474747" />
+		
+		<CheckBox
+		    android:id="@+id/chkboxListFavRecipeCheckBox"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_centerVertical="true"
+		    android:focusable="false"
+		    android:gravity="center_vertical" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_weight="1" >
+		<ImageView
+		    android:id="@+id/listFavRecipeImage"
+		    android:layout_width="100dp"
+		    android:layout_height="80dp"
+		    android:layout_below="@+id/txtListFavRecipeRecipeName"
+		    android:layout_toRightOf="@+id/chkboxListFavRecipeCheckBox"
+		    android:background="#5555AA"
+		    android:contentDescription="@string/banner_alt"
+		    android:padding="1dp"
+		    android:scaleType="fitXY"
+		    android:src="@drawable/default_pic" />
 
-            <ImageView
-                android:id="@+id/listFavRecipeImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="9"
-                android:contentDescription="@string/banner_alt"
-                android:fadingEdge="horizontal|vertical"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_launcher" />
-            
-            <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_weight="1" >
+		<TextView
+		    android:id="@+id/tv1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_above="@+id/tv2"
+		    android:layout_alignRight="@+id/listFavRecipesRatingBar"
+		    android:text="@string/recipeReviews" />
 
-<TableRow
-    android:layout_width="wrap_content"
-    android:layout_height="33dp"
-    android:layout_weight="1" >
+		<TextView
+		    android:id="@+id/txtListFavRecipeAuthor"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignBaseline="@+id/tv2"
+		    android:layout_alignBottom="@+id/tv2"
+		    android:layout_alignLeft="@+id/txtListFavRecipeNumReviews"
+		    android:text="Van Keizer"
+		    android:textStyle="bold" />
 
-<TextView
-    android:id="@+id/txtListFavRecipeNumReviews"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="right"
-    android:layout_weight="0"
-    android:text="@string/recipeReviewCount"
-    android:textStyle="bold" />
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_weight="0"
-    android:text="@string/recipeReviews" />
-
-</TableRow>
-
-<TableRow
-    android:layout_width="wrap_content"
-    android:layout_height="33dp"
-    android:layout_weight="1" >
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingLeft="5dp"
-    android:text="@string/recipePostedBy" />
-
-<TextView
-    android:id="@+id/txtListFavRecipeAuthor"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:text="@string/recipeAuthor"
-    android:textStyle="bold" />
-
-</TableRow>
-
-<TableRow
-    android:layout_width="wrap_content"
-    android:layout_height="33dp"
-    android:layout_weight="1" >
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingLeft="5dp"
-    android:text="@string/totalPrepTime" />
-
-<TextView
-    android:id="@+id/txtListFavRecipeTotalCookTime"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:text="#"
-    android:textStyle="bold" />
-
-</TableRow>
-                
-                
-                
-            </TableLayout>
-                
-
-        </TableRow>
-
-    </TableLayout>
-            </TableLayout>
-        </TableRow>
-
-        <TextView
-            android:id="@+id/txtListFavRecipeSummery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/summery"
-            android:textSize="10sp" />
-
-    </TableLayout>
-
-</LinearLayout>
+</RelativeLayout>

@@ -33,7 +33,7 @@ public class Images_ImageLoader {
         executorService=Executors.newFixedThreadPool(5);
     }
  
-    int defaultImage = R.drawable.ic_launcher;
+    int defaultImage = R.drawable.default_pic;
 /**
  * DisplayImage, take the url, the default image you choose
  * and the imageView. Use DisplayImage(url, imageView) if 

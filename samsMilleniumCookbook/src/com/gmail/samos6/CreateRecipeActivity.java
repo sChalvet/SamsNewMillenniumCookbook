@@ -360,12 +360,12 @@ private void createIngredientListView(List<String> list){
 	for(int index=0; index<list.size(); index++){
 		
 		TableLayout tableLayout = new TableLayout(this);
-		tableLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.create_recipe_ingredient_list));
+		tableLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.list_ingredient_gradient));
 		
 		TextView txtIngredientName = new TextView(this);
 		txtIngredientName.setTextSize(21f);
 		txtIngredientName.setText(list.get(index));
-		txtIngredientName.setPadding(0, 30, 0, 0);
+		txtIngredientName.setPadding(0, 15, 0, 0);
 		txtIngredientName.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		listIngredientName.add(txtIngredientName);
 		
