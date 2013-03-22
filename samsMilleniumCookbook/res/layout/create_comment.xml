@@ -25,7 +25,7 @@
         android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
         android:maxLength="200"
         android:paddingBottom="15dp"
-        android:textColor="#EEEEEEAA" >
+        android:textColor="#222222" >
 
         <requestFocus />
         

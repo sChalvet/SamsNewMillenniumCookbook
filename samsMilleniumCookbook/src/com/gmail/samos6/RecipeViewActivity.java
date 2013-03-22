@@ -17,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -65,6 +66,7 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 	Button btnSave;
 	Button btnFavorite;
 	Button btnEdit;
+	Button btnTimer;
 	
 	//preference access
 	SharedPreferences prefs;
@@ -177,6 +179,7 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 		btnSave = (Button) findViewById(R.id.btnRecipeViewSaveRecipe);
 		btnFavorite = (Button) findViewById(R.id.btnRecipeViewFavoriteRecipe);
 		btnEdit = (Button) findViewById(R.id.btnRecipeViewEdit);
+		btnTimer = (Button) findViewById(R.id.btnRecipeViewGetTimer);
 		
 		txtRecipeName = (TextView) findViewById(R.id.txtRecipeViewRecipeName);
 		txtServings = (TextView) findViewById(R.id.txtRecipeViewServings);
@@ -241,6 +244,20 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 				Log.d("ViewRecipe_btnFavorite onclick", "inside");
 				db.addFavoriteRecipe(recipeId);
 				Toast.makeText(getApplicationContext(), recipeName+" "+getString(R.string.hasBeenFav), Toast.LENGTH_LONG).show();
+
+			}
+		});
+		
+		// Favorite Recipe button click event
+		btnTimer.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+						
+				Log.d("CreateRecipe_btnTakePhoto onclick", "inside");
+				PackageManager pm = getPackageManager();
+				Intent intent = pm.getLaunchIntentForPackage("com.google.android.deskclock");
+				startActivity(intent);
 
 			}
 		});

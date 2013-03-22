@@ -567,7 +567,7 @@ public class EditIngredientActivity extends Activity {
 
 			// sending modified data through http request
 			JSONObject json = jsonParser.makeHttpRequest(urlUpdateIngredient, "POST", params);
-
+			
 			//if asyncTask has not been cancelled then continue
 			if (!bCancelled) try {
 				int success = json.getInt(TAG_SUCCESS);
@@ -659,17 +659,21 @@ public class EditIngredientActivity extends Activity {
 				// check your log for json response
 				Log.d("Delete Ingredient", json.toString());
 				
+				successful=false;
+				
 				// json success tag
 				success = json.getInt(TAG_SUCCESS);
 				if (success == 1) {
 					
-					
+					successful=true;
 					db.deleteIngredient(ingredientName);
 					
 					Intent i = getIntent();
 					// send result code 100 to notify about product update
 					setResult(100, i);
 					finish();
+				}else{
+					message= json.getString(TAG_MESSAGE);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -685,8 +689,11 @@ public class EditIngredientActivity extends Activity {
 		 * **/
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog once product deleted
-			Toast.makeText(getApplicationContext(), getString(R.string.ingredientDeleted), Toast.LENGTH_LONG).show();
 			pDialog.dismiss();
+			if(successful)
+				Toast.makeText(getApplicationContext(), getString(R.string.ingredientDeleted), Toast.LENGTH_LONG).show();
+			else
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
 		}
 
@@ -749,9 +756,11 @@ public class EditIngredientActivity extends Activity {
 				// check log cat for response
 				Log.d("EditIngredient_create Response", json.toString());
 				
+				//reseting variable
+				successful=false;
 				int success = json.getInt(TAG_SUCCESS);
 				message = json.getString(TAG_MESSAGE);
-
+				
 				if (success == 1) {
 					
 					// successfully created ingredient

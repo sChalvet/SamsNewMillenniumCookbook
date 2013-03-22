@@ -15,11 +15,17 @@ import com.gmail.samos6.ListRecipeActivity.LoadAllRecipes;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -121,7 +127,9 @@ public class MainScreenActivity extends Activity{
 		btnLogout = (Button) findViewById(R.id.btnMainLogout);
 		btnMe = (Button) findViewById(R.id.btnMainMe);
 		
-
+		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnToRecipeSearch.setTypeface(face);
+	
 		btnAddRecipe.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -146,6 +154,41 @@ public class MainScreenActivity extends Activity{
 				String name =prefs.getString("nickName", null);
 				String t =prefs.getString("token", null);
 				Toast.makeText(getApplicationContext(), "You are "+name+" token is: "+t, Toast.LENGTH_LONG).show();
+				
+				/*PackageManager pm = getPackageManager();
+				Intent alarmClockIntent = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
+				// Verify clock implementation
+				String clockImpls[][] = {
+				        {"HTC Alarm Clock", "com.htc.android.worldclock", "com.htc.android.worldclock.WorldClockTabControl" },
+				        {"Standar Alarm Clock", "com.android.deskclock", "com.android.deskclock.AlarmClock"},
+				        {"Froyo Nexus Alarm Clock", "com.google.android.deskclock", "com.android.deskclock.DeskClock"},
+				        {"Moto Blur Alarm Clock", "com.motorola.blur.alarmclock",  "com.motorola.blur.alarmclock.AlarmClock"},
+				        {"Samsung Galaxy Clock", "com.sec.android.app.clockpackage","com.sec.android.app.clockpackage.ClockPackage"}
+				};
+
+				boolean foundClockImpl = false;
+
+				for(int i=0; i<clockImpls.length; i++) {
+				    String vendor = clockImpls[i][0];
+				    String packageName = clockImpls[i][1];
+				    String className = clockImpls[i][2];
+				    try {
+				        ComponentName cn = new ComponentName(packageName, className);
+				        ActivityInfo aInfo = pm.getActivityInfo(cn, PackageManager.GET_META_DATA);
+				        alarmClockIntent.setComponent(cn);
+				        Log.d("uyu","Found " + vendor + " --> " + packageName + "/" + className);
+				        foundClockImpl = true;
+				    } catch (NameNotFoundException e) {
+				    	Log.d("hghjg", vendor + " does not exists");
+				    }
+				}
+
+				if (foundClockImpl) {
+				    PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, alarmClockIntent, 0);
+				    startActivity(alarmClockIntent);   
+				}*/
+				
+				
 				
 			}
 		});

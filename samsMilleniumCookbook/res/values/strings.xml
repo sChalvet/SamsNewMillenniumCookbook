@@ -8,31 +8,31 @@
     <!-- <string name="urlGetIngredientDetails">http://joe.cs.unca.edu/~chalvesa/app/getIngredientDetails.php</string> -->
     
     <!-- Url's are pulled into the app from here -->
-	<string name="urlGetIngredientDetails">http://joe.cs.unca.edu/~chalvesa/app/getIngredientDetails.php</string>
-    <string name="urlUpdateIngredient">http://joe.cs.unca.edu/~chalvesa/app/updateIngredient.php</string>
-    <string name="urlDeleteIngredient">http://joe.cs.unca.edu/~chalvesa/app/deleteIngredient.php</string>
-    <string name="urlCreateNewIngredient">http://joe.cs.unca.edu/~chalvesa/app/createIngredient.php</string>
-    <string name="urlGetAllComments">http://joe.cs.unca.edu/~chalvesa/app/getAllComments.php</string>
-    <string name="url_create_product">http://joe.cs.unca.edu/~chalvesa/app/create_product.php</string>
-    <string name="urlCreateRecipe">http://joe.cs.unca.edu/~chalvesa/app/createRecipe.php</string>
-    <string name="urlUpdateRecipe">http://joe.cs.unca.edu/~chalvesa/app/updateRecipe.php</string>
-    <string name="urlCreateComment">http://joe.cs.unca.edu/~chalvesa/app/createComment.php</string>
-    <string name="urlGetAllRecipes">http://joe.cs.unca.edu/~chalvesa/app/getAllRecipes.php</string>
-    <string name="urlGetAllIngredients">http://joe.cs.unca.edu/~chalvesa/app/getAllIngredients.php</string>
-    <string name="urlGetFavRecipes">http://joe.cs.unca.edu/~chalvesa/app/getFavRecipes.php</string>
-    <string name="urlGetRecipeDetails">http://joe.cs.unca.edu/~chalvesa/app/getRecipeDetails.php</string>
-    <string name="urlEditRecipe">http://joe.cs.unca.edu/~chalvesa/app/editRecipe.php</string>
-    <string name="urlCreateAccount">http://joe.cs.unca.edu/~chalvesa/app/createAccount.php</string>
-    <string name="urlLogin">http://joe.cs.unca.edu/~chalvesa/app/logIn.php</string>
-    <string name="urlEditComment">http://joe.cs.unca.edu/~chalvesa/app/editComment.php</string>
-    <string name="urlUpdateComment">http://joe.cs.unca.edu/~chalvesa/app/updateComment.php</string>
-    <string name="urlGetAllRecipesByIngredient">http://joe.cs.unca.edu/~chalvesa/app/getAllRecipesByIngredient.php</string>
-    <string name="urlUploadImage">http://joe.cs.unca.edu/~chalvesa/app/uploadImage.php</string>
-    <string name="urlResetPassword">http://joe.cs.unca.edu/~chalvesa/app/resetPassword.php</string>
-    <string name="urlGetTestQuestion">http://joe.cs.unca.edu/~chalvesa/app/getTestQuestion.php</string>
-    <string name="urlUpdateAccount">http://joe.cs.unca.edu/~chalvesa/app/updateAccount.php</string>
-    <string name="urlGetUserInfo">http://joe.cs.unca.edu/~chalvesa/app/getUserInfo.php</string>
-    <string name="urlRoot">http://joe.cs.unca.edu/~chalvesa/app/</string>			
+	<string name="urlGetIngredientDetails">http://192.168.254.45/recipeApp/getIngredientDetails.php</string>
+    <string name="urlUpdateIngredient">http://192.168.254.45/recipeApp/updateIngredient.php</string>
+    <string name="urlDeleteIngredient">http://192.168.254.45/recipeApp/deleteIngredient.php</string>
+    <string name="urlCreateNewIngredient">http://192.168.254.45/recipeApp/createIngredient.php</string>
+    <string name="urlGetAllComments">http://192.168.254.45/recipeApp/getAllComments.php</string>
+    <string name="url_create_product">http://192.168.254.45/recipeApp/create_product.php</string>
+    <string name="urlCreateRecipe">http://192.168.254.45/recipeApp/createRecipe.php</string>
+    <string name="urlUpdateRecipe">http://192.168.254.45/recipeApp/updateRecipe.php</string>
+    <string name="urlCreateComment">http://192.168.254.45/recipeApp/createComment.php</string>
+    <string name="urlGetAllRecipes">http://192.168.254.45/recipeApp/getAllRecipes.php</string>
+    <string name="urlGetAllIngredients">http://192.168.254.45/recipeApp/getAllIngredients.php</string>
+    <string name="urlGetFavRecipes">http://192.168.254.45/recipeApp/getFavRecipes.php</string>
+    <string name="urlGetRecipeDetails">http://192.168.254.45/recipeApp/getRecipeDetails.php</string>
+    <string name="urlEditRecipe">http://192.168.254.45/recipeApp/editRecipe.php</string>
+    <string name="urlCreateAccount">http://192.168.254.45/recipeApp/createAccount.php</string>
+    <string name="urlLogin">http://192.168.254.45/recipeApp/logIn.php</string>
+    <string name="urlEditComment">http://192.168.254.45/recipeApp/editComment.php</string>
+    <string name="urlUpdateComment">http://192.168.254.45/recipeApp/updateComment.php</string>
+    <string name="urlGetAllRecipesByIngredient">http://192.168.254.45/recipeApp/getAllRecipesByIngredient.php</string>
+    <string name="urlUploadImage">http://192.168.254.45/recipeApp/uploadImage.php</string>
+    <string name="urlResetPassword">http://192.168.254.45/recipeApp/resetPassword.php</string>
+    <string name="urlGetTestQuestion">http://192.168.254.45/recipeApp/getTestQuestion.php</string>
+    <string name="urlUpdateAccount">http://192.168.254.45/recipeApp/updateAccount.php</string>
+    <string name="urlGetUserInfo">http://192.168.254.45/recipeApp/getUserInfo.php</string>
+    <string name="urlRoot">http://192.168.254.45/recipeApp/</string>			
     
     
     <!-- getString(R.string.pEnterTestQ) -->
@@ -223,10 +223,10 @@
 	
 	<!-- part of Search For Recipe  -->
 	<string name="search">Search</string>
-	<string name="byFoodType">By Food Type</string>
-	<string name="byRecipeType">By Recipe Type</string>
-	<string name="byCooktime">By Cooktime</string>
-	<string name="byAuthor">By Author</string>
+	<string name="byFoodType">By Food Type:</string>
+	<string name="byRecipeType">By Recipe Type:</string>
+	<string name="byCooktime">By Cooktime:</string>
+	<string name="byAuthor">By Author:</string>
 	<string name="hintAuthor">Authors Name</string>
 	<string name="pickYourPoison">Pick Your Poison</string>
 	<string name="hintSearch">Search Key Words</string>
@@ -288,6 +288,9 @@
 	<string name="carbsPerServing">carbs per serving:</string>
 	<string name="nutritionFacts">Nutrition Facts</string>
 
+	
+	
+	<string name="viewLine">#474747</string>
 	
 	<string-array name="foodType"> 
     <item>Other</item>

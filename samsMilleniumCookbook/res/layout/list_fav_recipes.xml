@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:measureWithLargestChild="false"
-    android:orientation="vertical" 
-	android:background="@drawable/list_ingredient_gradient_selector">
+    android:orientation="vertical"
+android:background="@drawable/list_ingredient_gradient_selector">
 
     <TextView
       android:id="@+id/txtListFavRecipeRecipeName"
@@ -35,7 +35,7 @@
 
             <TableLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0" >
 
@@ -55,98 +55,96 @@
                 android:layout_weight="1" >
 
                  <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1" >
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            
-        <LinearLayout
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:padding="2dip"
-        	android:background="@drawable/image_border">
-        
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1" >
+
             <ImageView
                 android:id="@+id/listFavRecipeImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="fill"
-                android:layout_weight="10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
                 android:contentDescription="@string/banner_alt"
+                android:fadingEdge="horizontal|vertical"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_launcher" />
-            </LinearLayout>
             
             <TableLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" >
-	                    
-				                <TableRow
-				                    android:layout_width="match_parent"
-				                    android:layout_height="33dp"
-				                    android:layout_weight="1" >
-				                    
-				                 <TextView
-				                     android:id="@+id/txtListFavRecipeNumReviews"
-				                     android:layout_width="wrap_content"
-				                     android:layout_height="match_parent"
-				                     android:layout_gravity="right"
-				                     android:layout_weight="0"
-				                     android:text="@string/recipeReviewCount"
-				                     android:textStyle="bold" />
-				                     
-				                  <TextView
-				                      android:layout_width="wrap_content"
-				                      android:layout_height="match_parent"
-				                      android:layout_marginLeft="10dp"
-				                      android:layout_weight="0"
-				                      android:text="@string/recipeReviews" />
-				                    
-				                </TableRow>
-				                
-				                <TableRow
-				                    android:layout_width="fill_parent"
-				                    android:layout_height="33dp"
-				                    android:layout_weight="1" >
-				                    
-				                   <TextView
-				                       android:layout_width="wrap_content"
-				                       android:layout_height="match_parent"
-				                       android:text="@string/recipePostedBy" />
-				                     
-				                  <TextView
-				                      android:id="@+id/txtListFavRecipeAuthor"
-				                      android:layout_width="wrap_content"
-				                      android:layout_height="match_parent"
-				                      android:layout_marginLeft="10dp"
-				                      android:text="@string/recipeAuthor"
-				                      android:textStyle="bold" />
-				                    
-				                </TableRow>
-				                
-				                <TableRow
-				                    android:layout_width="fill_parent"
-				                    android:layout_height="33dp"
-				                    android:layout_weight="1" >
-				                    
-				                   <TextView
-				                       android:layout_width="wrap_content"
-				                       android:layout_height="match_parent"
-				                       android:text="@string/totalPrepTime" />
-				                     
-				                  <TextView
-				                      android:id="@+id/txtListFavRecipeTotalCookTime"
-				                      android:layout_width="wrap_content"
-				                      android:layout_height="match_parent"
-				                      android:layout_marginLeft="10dp"
-				                      android:text="#"
-				                      android:textStyle="bold" />
-				                    
-				                </TableRow>
+                android:layout_gravity="right"
+                android:layout_weight="1" >
+
+<TableRow
+    android:layout_width="wrap_content"
+    android:layout_height="33dp"
+    android:layout_weight="1" >
+
+<TextView
+    android:id="@+id/txtListFavRecipeNumReviews"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="right"
+    android:layout_weight="0"
+    android:text="@string/recipeReviewCount"
+    android:textStyle="bold" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_weight="0"
+    android:text="@string/recipeReviews" />
+
+</TableRow>
+
+<TableRow
+    android:layout_width="wrap_content"
+    android:layout_height="33dp"
+    android:layout_weight="1" >
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+    android:text="@string/recipePostedBy" />
+
+<TextView
+    android:id="@+id/txtListFavRecipeAuthor"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:text="@string/recipeAuthor"
+    android:textStyle="bold" />
+
+</TableRow>
+
+<TableRow
+    android:layout_width="wrap_content"
+    android:layout_height="33dp"
+    android:layout_weight="1" >
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+    android:text="@string/totalPrepTime" />
+
+<TextView
+    android:id="@+id/txtListFavRecipeTotalCookTime"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:text="#"
+    android:textStyle="bold" />
+
+</TableRow>
                 
                 
                 
