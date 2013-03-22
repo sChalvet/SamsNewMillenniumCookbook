@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -58,6 +59,9 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 	
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
+	
+	//used to set font
+	Typeface typeFace;
 	
 	//preference access
 	SharedPreferences prefs;
@@ -110,6 +114,10 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 		
 		btnAddComment = (Button) findViewById(R.id.btnListRecipeCommentsAdd);
 		
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnAddComment.setTypeface(typeFace);
+		
 		btnAddComment.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -133,9 +141,7 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 					intent.putExtra(TAG_RECIPENAME, recipeName);			
 					// starting new activity and expecting some response back
 					startActivityForResult(intent, 100);
-				}
-				
-				
+				}	
 			}
 		});		
 		// on selecting single comment
@@ -156,9 +162,6 @@ public class ListRecipeCommentsActivity  extends ListActivity{
 					Toast.makeText(getApplicationContext(), getString(R.string.editYourOwnCom), Toast.LENGTH_LONG).show();
 					//Toast.setView(Gravity.CENTER);
 				}
-				
-					
-
 			}
 		});
 

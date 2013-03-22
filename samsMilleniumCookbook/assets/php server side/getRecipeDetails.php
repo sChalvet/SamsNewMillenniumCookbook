@@ -70,12 +70,33 @@ if (isset($_POST["recipeName"])) {
 				if($CountRow[0]>0)
 					$rating=$ratingRow[0]/$CountRow[0];
 			}
-			
 			$product["rating"] = round($rating);
-			$response["message"] .= ", found total rating of $rating";
-			//$product["image"] = imageCreateFromString($rowPic[0]);			
-	
-			//$im = imageCreateFromString($rowPic[0]);
+			
+			//getting all the nutrition facts
+			$nutritionInfo = mysqli_query($conn, "SELECT r.ingredientId, r.amount, r.measurement, i.calories, i.fat, i.carbs, i.protein, i.type, i.ingredientName, r.description "
+													."FROM ingredientlist AS i JOIN recipeingredients AS r ON r.ingredientId = i.ingredientId "
+													."WHERE i.ingredientId IN (Select ingredientId FROM recipeingredients WHERE recipeName = '$recipeName')");
+
+			$n=0;
+			while ($rowFacts = mysqli_fetch_array($nutritionInfo)) {
+			
+				$product["ingredientId$n"] = $rowFacts[0];
+				$product["amount$n"] = $rowFacts[1];
+				$product["measurement$n"] = $rowFacts[2];
+				$product["calories$n"] = $rowFacts[3];
+				$product["protein$n"] = $rowFacts[4];
+				$product["fat$n"] = $rowFacts[5];
+				$product["carbs$n"] = $rowFacts[6];
+				$product["type$n"] = $rowFacts[7];
+				$product["ingredientName$n"] = $rowFacts[8];
+				$product["description$n"] = $rowFacts[9];
+				
+				$n++;
+			
+			}
+				$product["numIngredients"] = $n;
+
+
             array_push($response["product"], $product);
 			
 			$response["success"] = 1;

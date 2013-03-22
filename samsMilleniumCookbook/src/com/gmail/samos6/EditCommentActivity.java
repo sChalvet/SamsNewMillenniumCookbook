@@ -17,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -52,6 +53,9 @@ public class EditCommentActivity extends Activity {
 	
 	String rating;
 	String comment;
+	
+	//used to set font
+	Typeface typeFace; 	
 	
 	//these 2 variables are used to test the results and errors from the server
 	Boolean successful =false;
@@ -93,6 +97,13 @@ public class EditCommentActivity extends Activity {
 		txtRecipeName = (TextView) findViewById(R.id.txtCreateCommentRecipeName);
 		txtComment = (EditText) findViewById(R.id.txtCreateCommentComment);
 		spnrRating = (Spinner) findViewById(R.id.CreateRecipeRatingSpinner);
+		btnPost = (Button) findViewById(R.id.btnCreateCommentPost);
+		
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		txtRecipeName.setTypeface(typeFace);
+		txtComment.setTypeface(typeFace);
+		btnPost.setTypeface(typeFace);
 		
 		// getting recipeName from intent
 		Intent intent = getIntent();
@@ -104,9 +115,6 @@ public class EditCommentActivity extends Activity {
 		
 		//loading the comment
 		new LoadComment().execute();
-		
-		// Create button
-		btnPost = (Button) findViewById(R.id.btnCreateCommentPost);
 
 		// button click event
 		btnPost.setOnClickListener(new View.OnClickListener() {

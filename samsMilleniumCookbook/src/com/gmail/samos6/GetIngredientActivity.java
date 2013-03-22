@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +54,9 @@ public class GetIngredientActivity extends ListActivity {
 	Button btnAdd;
     ListView lv;
 
+	//used to set font
+	Typeface typeFace;
+	
 	ArrayList<HashMap<String, String>> productsList;
 	List<String> list = new ArrayList<String>();
 	
@@ -115,7 +119,11 @@ public class GetIngredientActivity extends ListActivity {
 		btnDone = (Button) findViewById(R.id.btnGetIngredientDone);
 		btnAdd = (Button) findViewById(R.id.btnGetIngredientCreate);
 		
-				
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnDone.setTypeface(typeFace);
+		btnAdd.setTypeface(typeFace);
+		
 		// save selected ingredients click event
 		btnDone.setOnClickListener(new View.OnClickListener() {
 							

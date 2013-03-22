@@ -85,7 +85,7 @@
 		     android:layout_height="80dp"
 		     android:layout_alignLeft="@+id/txtListRecipeSummery"
 		     android:layout_below="@+id/txtListRecipeRecipeName"
-		     android:background="#5555AA"
+		     android:background="#EEEEEE"
 		     android:contentDescription="@string/banner_alt"
 		     android:padding="1dp"
 		     android:scaleType="fitXY"

@@ -75,6 +75,9 @@ public class EditRecipeActivity extends Activity {
 	Button btnAddIngredient;
 	Button btnTakePhoto;
 	
+	//used to set font
+	Typeface typeFace;
+	
 	//used to fill the spinners
 	String[] recipeType;
 	String[] recipeServings;
@@ -173,9 +176,6 @@ public class EditRecipeActivity extends Activity {
 	private static final String TAG_TOKEN = "token";
 	private static final String TAG_USERNAME = "userName";
 
-	
-	
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -227,6 +227,18 @@ public class EditRecipeActivity extends Activity {
 		btnPublish= (Button) findViewById(R.id.btnCreateRecipeSubmit);
 		btnTakePhoto= (Button) findViewById(R.id.btnCreateRecipeTakePhoto);
 		btnAddIngredient= (Button) findViewById(R.id.btnCreateRecipeAddIngredient);
+		
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		txtRecipeName.setTypeface(typeFace);
+		txtCookingDirections.setTypeface(typeFace);
+		txtCookTime.setTypeface(typeFace);
+		txtPrepTime.setTypeface(typeFace);
+		txtSummery.setTypeface(typeFace);
+		btnPublish.setTypeface(typeFace);
+		btnTakePhoto.setTypeface(typeFace);
+		btnAddIngredient.setTypeface(typeFace);
+
 			
 		Log.d("EditRecipe_just in", "Inside");
 		
@@ -469,6 +481,7 @@ private void createIngredientListView(List<String> list){
 		txtIngredientName.setTextSize(21f);
 		txtIngredientName.setText(list.get(index));
 		txtIngredientName.setPadding(0, 30, 0, 0);
+		txtIngredientName.setTypeface(typeFace);
 		txtIngredientName.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		listIngredientName.add(txtIngredientName);
 		
@@ -503,6 +516,7 @@ private TableLayout ingredientRow1(int index) {
 	txtVital.setTextSize(13f);
 	txtVital.setText(getString(R.string.ingredientVital));
 	txtVital.setPadding(30, 0, 0, 22);
+	txtVital.setTypeface(typeFace);
 	txtVital.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 20f));
 	txtVital.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
 	
@@ -512,7 +526,6 @@ private TableLayout ingredientRow1(int index) {
 	ckBox.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
 	ckBox.setSelected(true);
 	listVital.add(ckBox);
-	
 	
     //adding all of the created widgets into the tableRow
 	//then adding that tableRow into the tableLayout
@@ -570,6 +583,7 @@ private TableLayout ingredientRow2(int index) {
 	txtDiscription.setFilters(FilterArray);
 	txtDiscription.setHint(getString(R.string.dicedChoped));
 	txtDiscription.setTextSize(13f);
+	txtDiscription.setTypeface(typeFace);
 	txtDiscription.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f));
 	listDescription.add(txtDiscription);
 	

@@ -117,6 +117,13 @@ $ingredientName='Almond';
     <string name="urlUpdateAccount">http://192.168.254.45/recipeApp/updateAccount.php</string>
     <string name="urlGetUserInfo">http://192.168.254.45/recipeApp/getUserInfo.php</string>
     <string name="urlRoot">http://192.168.254.45/recipeApp/</string>	
+		
+	//used to set font
+	Typeface typeFace; 	
+		
+	//setting the font type from assets		
+	typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+	btnToRecipeSearch.setTypeface(typeFace);				
 					
 					
 					
@@ -124,11 +131,8 @@ $ingredientName='Almond';
 					
 					
 					
-					
-					
-					
-					
-					
+		Counter!!			
+		http://stackoverflow.com/questions/12082831/how-to-add-timer-to-app			
 					
 					
 					
@@ -201,3 +205,6 @@ $ingredientName='Almond';
     }
 
 ?>
+
+
+

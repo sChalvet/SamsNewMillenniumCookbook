@@ -19,6 +19,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -61,6 +62,9 @@ public class ListIngredientActivity extends ListActivity {
 	Button btnAdd;
     ListView lv;
 
+	//used to set font
+	Typeface typeFace; 
+	
 	ArrayList<HashMap<String, String>> productsList;
 	
 	//Instantiating the SQLite database
@@ -106,6 +110,11 @@ public class ListIngredientActivity extends ListActivity {
 		
 		btnSave = (Button) findViewById(R.id.btnSaveIngredients);
 		btnAdd = (Button) findViewById(R.id.btnAddIngredient);
+		
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnSave.setTypeface(typeFace);
+		btnAdd.setTypeface(typeFace);
 		
 		Toast.makeText(getApplicationContext(), getString(R.string.pAddIng), Toast.LENGTH_SHORT).show();
 		

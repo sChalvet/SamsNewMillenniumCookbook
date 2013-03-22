@@ -23,6 +23,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -65,6 +66,8 @@ public class ForgotPasswordActivity extends Activity {
 	String urlResetPassword;
 	String urlGetTestQuestion;
 	
+	//used to set font
+	Typeface typeFace; 
 	
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -83,6 +86,16 @@ public class ForgotPasswordActivity extends Activity {
 		// Edit Text
 		txtTestQuestion = (TextView) findViewById(R.id.resetPassTestQuestion);
 		txtTestAnswer = (EditText) findViewById(R.id.resetPassTestAnswer);
+		btnResetPassword = (Button) findViewById(R.id.btnResetPassword);
+		
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		txtTestQuestion.setTypeface(typeFace);
+		txtTestAnswer.setTypeface(typeFace);
+		btnResetPassword.setTypeface(typeFace);
+		
+		((TextView) findViewById(R.id.pref1)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref2)).setTypeface(typeFace);
 		
 		// getting userName from intent
 		Intent intent = getIntent();
@@ -93,9 +106,6 @@ public class ForgotPasswordActivity extends Activity {
 		//loading the test question
 		new LoadTestQuestion().execute();
 		
-		// reset button
-		btnResetPassword = (Button) findViewById(R.id.btnResetPassword);
-
 		// button click event
 		btnResetPassword.setOnClickListener(new View.OnClickListener() {
 

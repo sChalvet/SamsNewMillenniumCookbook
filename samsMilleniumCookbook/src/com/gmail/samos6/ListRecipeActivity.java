@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,6 +64,9 @@ public class ListRecipeActivity  extends ListActivity{
 	String searchCookTime;
 	int position;
 
+	//used to set font
+	Typeface typeFace; 
+	
 	ArrayList<HashMap<String, String>> productsList;
 	
 	//Instantiating the SQLite database
@@ -100,6 +104,8 @@ public class ListRecipeActivity  extends ListActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.display_recipes);
 	
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		
 		//getting url from resources
 		urlGetAllRecipes = getResources().getString(R.string.urlGetAllRecipes);
 		urlRoot = getResources().getString(R.string.urlRoot);
@@ -122,7 +128,7 @@ public class ListRecipeActivity  extends ListActivity{
 
 		// Get listview
 		lv = getListView();
-				
+		
 		// on selecting single recipe
 		// launching recipe Screen
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -305,7 +311,7 @@ public class ListRecipeActivity  extends ListActivity{
 					 * */
 					
 					
-					adapter = new RecipeLazyAdapter(ListRecipeActivity.this, productsList);
+					adapter = new RecipeLazyAdapter(ListRecipeActivity.this, productsList, typeFace);
 					
 					setListAdapter(adapter);
 				}

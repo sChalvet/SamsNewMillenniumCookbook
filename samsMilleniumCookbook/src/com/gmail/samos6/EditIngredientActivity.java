@@ -54,6 +54,8 @@ public class EditIngredientActivity extends Activity {
 	TextView txtAddedBy;
 	Spinner spnrType;
 	
+	//used to set font
+	Typeface typeFace;
 	
 	Button btnSave;
 	Button btnPublish;
@@ -175,6 +177,20 @@ public class EditIngredientActivity extends Activity {
 		
 		txtAddedBy= (TextView) findViewById(R.id.txtviewAddedBy);
 
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnSave.setTypeface(typeFace);
+		btnPublish.setTypeface(typeFace);
+		btnDelete.setTypeface(typeFace);
+		txtNotes.setTypeface(typeFace);
+		txtCalories.setTypeface(typeFace);
+		txtProtein.setTypeface(typeFace);
+		txtFat.setTypeface(typeFace);
+		txtCarbs.setTypeface(typeFace);
+		txtIngredientName.setTypeface(typeFace);
+		txtGramAmount.setTypeface(typeFace);
+		txtAddedBy.setTypeface(typeFace);
+		
 			
 		spnrType= (Spinner) findViewById(R.id.inputType);
 		spin_adapter = new ArrayAdapter<String>(EditIngredientActivity.this, android.R.layout.simple_spinner_item, foodType);

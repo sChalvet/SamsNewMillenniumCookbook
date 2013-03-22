@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,6 +64,9 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 	String urlGetAllRecipesByIngredient;
 	String urlRoot;
 	
+	//used to set font
+	Typeface typeFace; 
+	
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_PRODUCTS = "products";
@@ -92,6 +96,9 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
 
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		
 		// Get listview
 		final ListView lv = getListView();  //added final
 		
@@ -282,7 +289,7 @@ public class SearchForRecipeByIngredientActivity  extends ListActivity{
 					 * */
 					
 					
-					adapter = new RecipeLazyAdapter(SearchForRecipeByIngredientActivity.this, productsList);
+					adapter = new RecipeLazyAdapter(SearchForRecipeByIngredientActivity.this, productsList, typeFace);
 					
 					// updating listview
 					setListAdapter(adapter);

@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,6 +53,9 @@ public class FavoriteRecipesActivity  extends ListActivity{
 	ListFavoriteAdapter adapter;
 	Button btnDrop;
 
+	//used to set font
+	Typeface typeFace; 	
+	
 	ArrayList<HashMap<String, String>> productsList;
 	
 	//used to see if user canceled the AsyncTask
@@ -101,6 +105,11 @@ public class FavoriteRecipesActivity  extends ListActivity{
 		
 		
 		btnDrop = (Button) 	findViewById(R.id.btnFavDropFromList);
+		
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnDrop.setTypeface(typeFace);
+		
 		
 		// Drop button click event
 		btnDrop.setOnClickListener(new View.OnClickListener() {

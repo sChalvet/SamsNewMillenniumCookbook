@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,8 @@ public class PantryActivity extends ListActivity {
 	Button btnSelectAll;
 	RadioGroup searchType;
 
+	//used to set font
+	Typeface typeFace; 
 	
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
@@ -85,6 +89,13 @@ public class PantryActivity extends ListActivity {
 		btnEdit = (Button) findViewById(R.id.btnEditPantry);
 		btnDeleteIngredient = (Button) findViewById(R.id.btnDeleteIngredients);
 		btnSelectAll= (Button) findViewById(R.id.btnSelectAll);	
+		
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnSearch.setTypeface(typeFace);
+		btnEdit.setTypeface(typeFace);
+		btnDeleteIngredient.setTypeface(typeFace);
+		btnSelectAll.setTypeface(typeFace);
 		
 		// Search by ingredient on click Event
 		btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -350,6 +361,10 @@ public class PantryActivity extends ListActivity {
 	        
 	    	searchType= (RadioGroup) textEntryView.findViewById(R.id.radioGroup);
 
+	    	((Button) textEntryView.findViewById(R.id.dialogPantrySearch)).setTypeface(typeFace);
+	    	((RadioButton) textEntryView.findViewById(R.id.radioFindAll)).setTypeface(typeFace);
+	    	((RadioButton) textEntryView.findViewById(R.id.radioFindAny)).setTypeface(typeFace);
+	    	
 			alert = new AlertDialog.Builder(PantryActivity.this).create();
 			alert.setTitle(R.string.chooseSearchType);
 			

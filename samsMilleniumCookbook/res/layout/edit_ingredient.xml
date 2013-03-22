@@ -9,46 +9,49 @@
 
 	<TableLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="60dp" >
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp" >
 
-		<TableRow android:layout_gravity="center_horizontal" >
+		<TableRow
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_gravity="center_horizontal" >
 		    
 	<TextView
-        android:layout_width="fill_parent"
-        android:layout_height="46dp"
-        android:layout_gravity="center_horizontal"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:paddingTop="10dip"
-        android:text="@string/ingredientName"
-        android:textSize="17sp" />
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_vertical"
+	    android:text="@string/ingredientName"
+	    android:textSize="17sp" />
 		    
     <EditText
         android:id="@+id/txtviewIngredientName"
         android:layout_width="wrap_content"
-        android:layout_height="46dp"
-        android:layout_gravity="left"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:inputType="textCapWords"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:paddingTop="10dip"
         android:text="@string/ingredientName"
         android:textSize="20sp" />
 
     </TableRow>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="20dp"
-        android:background="@android:color/darker_gray" />
-
     </TableLayout>
+
+	<View
+	    android:layout_width="match_parent"
+	    android:layout_height="1dp"
+	    android:layout_marginBottom="20dp"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp"
+	    android:background="#474747" />
 
 	<ScrollView
 	    android:id="@+id/scrollView1"
 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" >
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp" >
 
 	    <LinearLayout
 	        android:layout_width="match_parent"
@@ -267,7 +270,7 @@
 		            android:layout_width="match_parent"
 		            android:layout_height="1dp"
 		            android:layout_marginBottom="10dp"
-		            android:background="@android:color/darker_gray" />
+		            android:background="#474747" />
 
 		<Button
 		    android:id="@+id/btnPublishIngredient"

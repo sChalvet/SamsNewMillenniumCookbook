@@ -76,6 +76,9 @@ public class CreateRecipeActivity extends Activity {
 	
 	LinearLayout listLayout;
 	
+	//used to set font
+	Typeface typeFace;
+	
 	Button btnPublish;
 	Button btnAddIngredient;
 	Button btnTakePhoto;
@@ -188,6 +191,17 @@ public class CreateRecipeActivity extends Activity {
 		btnPublish= (Button) findViewById(R.id.btnCreateRecipeSubmit);
 		btnTakePhoto= (Button) findViewById(R.id.btnCreateRecipeTakePhoto);
 		btnAddIngredient= (Button) findViewById(R.id.btnCreateRecipeAddIngredient);
+		
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		txtRecipeName.setTypeface(typeFace);
+		txtCookingDirections.setTypeface(typeFace);
+		txtCookTime.setTypeface(typeFace);
+		txtPrepTime.setTypeface(typeFace);
+		txtSummery.setTypeface(typeFace);
+		btnPublish.setTypeface(typeFace);		
+		btnTakePhoto.setTypeface(typeFace);
+		btnAddIngredient.setTypeface(typeFace);
 			
 		Log.d("CreateRecipe_just in", "Inside");
 	
@@ -366,6 +380,7 @@ private void createIngredientListView(List<String> list){
 		txtIngredientName.setTextSize(21f);
 		txtIngredientName.setText(list.get(index));
 		txtIngredientName.setPadding(0, 15, 0, 0);
+		txtIngredientName.setTypeface(typeFace);
 		txtIngredientName.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		listIngredientName.add(txtIngredientName);
 		
@@ -399,6 +414,7 @@ private TableLayout ingredientRow1(int index) {
 	TextView txtVital = new TextView(this);
 	txtVital.setTextSize(13f);
 	txtVital.setText(getString(R.string.ingredientVital));
+	txtVital.setTypeface(typeFace);
 	txtVital.setPadding(30, 0, 0, 22);
 	txtVital.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 20f));
 	txtVital.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
@@ -469,6 +485,7 @@ private TableLayout ingredientRow2(int index) {
 	FilterArray[0] = new InputFilter.LengthFilter(maxLength);
 	txtDiscription.setFilters(FilterArray);
 	txtDiscription.setHint(getString(R.string.dicedChoped));
+	txtDiscription.setTypeface(typeFace);
 	txtDiscription.setTextSize(13f);
 	txtDiscription.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f));
 	listDescription.add(txtDiscription);

@@ -93,6 +93,9 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 	//check to see if pic exist
 	int hasImage=0;
 	
+	//used to set font
+	Typeface typeFace; 
+	
 	// single ingredient url
 	String urlGetRecipeDetails;	
 	String urlRoot;				//stores the root url
@@ -194,6 +197,24 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 		rtbRating= (RatingBar) findViewById(R.id.recipeViewRatingBar);
 		seekBar= (SeekBar) findViewById(R.id.seekBarRecipeView);
 			
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnReviews.setTypeface(typeFace);
+		btnSave.setTypeface(typeFace);
+		btnFavorite.setTypeface(typeFace);
+		btnEdit.setTypeface(typeFace);
+		btnTimer.setTypeface(typeFace);
+		txtRecipeName.setTypeface(typeFace);
+		txtServings.setTypeface(typeFace);
+		txtAuthor.setTypeface(typeFace);
+		txtNumReviews.setTypeface(typeFace);
+		txtIngredientList.setTypeface(typeFace);
+		txtCookingDirections.setTypeface(typeFace);
+		txtCookTime.setTypeface(typeFace);
+		txtPrepTime.setTypeface(typeFace);
+
+		
+		
 		Log.d("ViewRecipe_just in", recipeName);
 
 		new GetRecipeDetails().execute();

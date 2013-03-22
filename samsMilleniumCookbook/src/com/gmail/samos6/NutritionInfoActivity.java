@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -36,6 +37,9 @@ public class NutritionInfoActivity extends Activity implements OnSeekBarChangeLi
 	float carbs;
 	String servings;
 	
+	//used to set font
+	Typeface typeFace;
+	
 	private static final String TAG_CALORIES = "calories";
 	private static final String TAG_FAT = "fat";
 	private static final String TAG_PROTEIN = "protein";
@@ -65,6 +69,14 @@ public class NutritionInfoActivity extends Activity implements OnSeekBarChangeLi
 		txtCarbs = (TextView) findViewById(R.id.txtNutritionCarbs);
 		txtServings = (TextView) findViewById(R.id.txtNutritionServings);
 		sbrServings = (SeekBar) findViewById(R.id.seekBarServings);
+		
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		txtCalories.setTypeface(typeFace);
+		txtProtein.setTypeface(typeFace);
+		txtFat.setTypeface(typeFace);
+		txtCarbs.setTypeface(typeFace);
+		txtServings.setTypeface(typeFace);
 		
 		//set max of seek bar to twice the serving amount, 
 		//adding -1 because the min needs to be 1 it is then added later

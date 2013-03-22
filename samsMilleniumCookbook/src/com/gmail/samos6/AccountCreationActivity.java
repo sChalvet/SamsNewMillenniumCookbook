@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -42,12 +43,15 @@ public class AccountCreationActivity extends Activity{
 	EditText txtPassword;
 	EditText txtTestQuestion;
 	EditText txtTestAnswer;
-	
+
 	// Progress Dialog
 	private ProgressDialog pDialog;
 	
 	boolean successful = false;
 	String message = "";
+	
+	//used to set font
+	Typeface typeFace;
 	
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
@@ -105,6 +109,25 @@ public class AccountCreationActivity extends Activity{
 		txtPassword = (EditText) findViewById(R.id.userPassword);
 		txtTestQuestion = (EditText) findViewById(R.id.userTestQuestion);
 		txtTestAnswer = (EditText) findViewById(R.id.userTestQuestionAnswer);
+	
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnCreateAccount.setTypeface(typeFace);
+		txtNickName.setTypeface(typeFace);
+		txtEmail.setTypeface(typeFace);
+		txtFirstName.setTypeface(typeFace);
+		txtLastName.setTypeface(typeFace);
+		txtPassword.setTypeface(typeFace);
+		txtTestQuestion.setTypeface(typeFace);
+		txtTestAnswer.setTypeface(typeFace);
+		
+		((TextView) findViewById(R.id.pref1)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref2)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref3)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref4)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref6)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref7)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref8)).setTypeface(typeFace);
 		
 		// Create Account click event
 		btnCreateAccount.setOnClickListener(new View.OnClickListener() {

@@ -8,6 +8,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,9 @@ public class SamsListAdapter extends BaseAdapter {
 	public ArrayList<HashMap<String, String>> data;
 	ViewHolder viewHolder;
 	public static HashMap<Integer,String> myList=new HashMap<Integer,String>();
+	
+	//used to set font
+	Typeface typeFace; 
 	
 	String origin;
 	

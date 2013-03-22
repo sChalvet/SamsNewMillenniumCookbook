@@ -17,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -73,6 +74,8 @@ public class EditUserInfoActivity extends Activity{
 	String testNewQuestion="";
 	String testNewAnswer="";
 	
+	//used to set font
+	Typeface typeFace; 
 	
 	//Creating the variable that will hold the url when it is pulled from resources
 	String urlUpdateAccount;
@@ -125,6 +128,21 @@ public class EditUserInfoActivity extends Activity{
 		txtNewTestAnswer = (EditText) findViewById(R.id.editUserTestQuestionAnswer);
 		txtOldTestQuestion = (TextView) findViewById(R.id.editUserOldTestQuestion);
 		txtOldTestAnswer = (EditText) findViewById(R.id.editUserOldTestAnswer);
+		
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnUpdateAccount.setTypeface(typeFace);
+		txtNickName.setTypeface(typeFace);
+		txtEmail.setTypeface(typeFace);
+		txtFirstName.setTypeface(typeFace);
+		txtLastName.setTypeface(typeFace);
+		txtOldPassword.setTypeface(typeFace);
+		txtNewPassword.setTypeface(typeFace);
+		txtNewTestQuestion.setTypeface(typeFace);
+		txtNewTestAnswer.setTypeface(typeFace);
+		txtOldTestQuestion.setTypeface(typeFace);
+		txtOldTestAnswer.setTypeface(typeFace);
+		
 		
 		//getting user info from db
 		new LoadUserInfo().execute();

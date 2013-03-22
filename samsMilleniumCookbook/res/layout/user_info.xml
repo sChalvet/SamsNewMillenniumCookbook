@@ -39,7 +39,7 @@
         android:id="@+id/userNickName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pref1"
+        android:layout_below="@+id/pref1"
         android:layout_gravity="top"
         android:hint="@string/prefHintNickName"
         android:inputType="text"

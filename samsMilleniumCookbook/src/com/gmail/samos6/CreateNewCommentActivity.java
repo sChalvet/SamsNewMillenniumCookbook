@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -43,6 +44,9 @@ public class CreateNewCommentActivity extends Activity {
 	
 	String recipeName;
 
+	//used to set font
+	Typeface typeFace; 
+	
 	//preference access
 	SharedPreferences prefs;
 	String userName="";
@@ -95,6 +99,12 @@ public class CreateNewCommentActivity extends Activity {
 		// Create button
 		btnPost = (Button) findViewById(R.id.btnCreateCommentPost);
 
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		txtRecipeName.setTypeface(typeFace);
+		txtComment.setTypeface(typeFace);
+		txtRecipeName.setTypeface(typeFace);
+		
 		// button click event
 		btnPost.setOnClickListener(new View.OnClickListener() {
 

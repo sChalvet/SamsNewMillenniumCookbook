@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -35,6 +36,9 @@ public class SearchForRecipeActivity extends Activity{
 	String[] foodType;
 	String[] recipeType;
 	String[] cookTime;
+	
+	//used to set font
+	Typeface typeFace;
 	
 	private static final String TAG_AUTHOR = "author";
 	private static final String TAG_FOODNAME = "foodName";
@@ -79,6 +83,17 @@ public class SearchForRecipeActivity extends Activity{
 		spnrCooktime = (Spinner) findViewById(R.id.spnrCooktime);
 		spin_adapter = new ArrayAdapter<String>(SearchForRecipeActivity.this, android.R.layout.simple_spinner_item, cookTime);
 		spnrCooktime.setAdapter(spin_adapter);
+		
+		//setting the font type from assets		
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnSearchRecipes.setTypeface(typeFace);		
+		txtAuthorName.setTypeface(typeFace);
+		txtSearchKeyWords.setTypeface(typeFace);
+		((TextView) findViewById(R.id.txt1)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.txt2)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.txt3)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.txt4)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.txt5)).setTypeface(typeFace);
 		
 		
 		// search for recipes click event

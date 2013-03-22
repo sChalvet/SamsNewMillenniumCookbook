@@ -117,7 +117,7 @@ if (isset($_POST["list0"])) {
 			array_push($response["products"], $product);
 		}
 		// success
-		//$response["message"] .= ", Query= $temp";
+		$response["message"] = "Success";
 		$response["success"] = 1;
 
 		// echoing JSON response

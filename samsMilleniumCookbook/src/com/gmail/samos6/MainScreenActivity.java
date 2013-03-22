@@ -71,6 +71,8 @@ public class MainScreenActivity extends Activity{
 	boolean successful = false;
 	String message = "";
 	
+	Typeface typeFace;
+	
 	// Progress Dialog
 	private AlertDialog alert;
 	private ProgressDialog pDialog;
@@ -126,10 +128,19 @@ public class MainScreenActivity extends Activity{
 		btnLogin = (Button) findViewById(R.id.btnMainLogin);
 		btnLogout = (Button) findViewById(R.id.btnMainLogout);
 		btnMe = (Button) findViewById(R.id.btnMainMe);
-		
-		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
-		btnToRecipeSearch.setTypeface(face);
 	
+		//setting the font type from assets
+		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
+		btnSaved.setTypeface(typeFace);
+		btnFavorites.setTypeface(typeFace);
+		btnPantry.setTypeface(typeFace);
+		btnToRecipeSearch.setTypeface(typeFace);
+		btnAddRecipe.setTypeface(typeFace);
+		btnLogin.setTypeface(typeFace);
+		btnLogout.setTypeface(typeFace);
+		btnMe.setTypeface(typeFace);
+		
+		
 		btnAddRecipe.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -294,7 +305,12 @@ public class MainScreenActivity extends Activity{
 			btnAlertLogin= (Button) textEntryView.findViewById(R.id.btnMainAlertLogin);
 			btnAlertCreateAccount= (Button) textEntryView.findViewById(R.id.btnMainAlertCreateAccount);
 			btnForgotPassword= (Button) textEntryView.findViewById(R.id.btnMainAlertForgotPass);
-	        		
+	        
+			txtNickName.setTypeface(typeFace);
+			txtPassword.setTypeface(typeFace);
+			btnAlertLogin.setTypeface(typeFace);
+			btnAlertCreateAccount.setTypeface(typeFace);
+			btnForgotPassword.setTypeface(typeFace);
 			
 			alert = new AlertDialog.Builder(MainScreenActivity.this).create();
 			alert.setTitle(R.string.login);

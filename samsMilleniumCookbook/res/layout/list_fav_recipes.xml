@@ -110,7 +110,7 @@
 		    android:layout_height="80dp"
 		    android:layout_below="@+id/txtListFavRecipeRecipeName"
 		    android:layout_toRightOf="@+id/chkboxListFavRecipeCheckBox"
-		    android:background="#5555AA"
+		    android:background="#EEEEEE"
 		    android:contentDescription="@string/banner_alt"
 		    android:padding="1dp"
 		    android:scaleType="fitXY"

@@ -1,13 +1,20 @@
 <?php
 
 /*
- * Following code will delete a ingredient from table
+ * Following code will delete an ingredient from table
  */
 
 // array for JSON response
 $response = array();
 $salt="0476089252";
 
+    // include db connect class
+    require_once __DIR__ . '/db_connect.php';
+
+    // connecting to db
+    $db = new DB_CONNECT();
+	$conn=$db->connect();
+	
 // check for required fields
 if (isset($_POST['ingredientName'])) {
     $ingredientName = $_POST['ingredientName'];
@@ -27,12 +34,7 @@ if (isset($_POST['ingredientName'])) {
 		die();
 	}
 
-    // include db connect class
-    require_once __DIR__ . '/db_connect.php';
 
-    // connecting to db
-    $db = new DB_CONNECT();
-	$conn=$db->connect();
 
     // mysql update row with matched pid
     $result = mysqli_query($conn, "DELETE FROM ingredientList WHERE ingredientName = '$ingredientName'");
