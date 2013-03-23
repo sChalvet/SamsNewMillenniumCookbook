@@ -78,7 +78,9 @@ public class RecipeLazyAdapter extends BaseAdapter {
         txtNumReviews.setTypeface(typeFace);
         txtAuthor.setTypeface(typeFace);
         txtTotalCookTime.setTypeface(typeFace);
-        
+        ((TextView)vi.findViewById(R.id.tv1)).setTypeface(typeFace);
+        ((TextView)vi.findViewById(R.id.tv2)).setTypeface(typeFace);
+        ((TextView)vi.findViewById(R.id.tv3)).setTypeface(typeFace);
     	
         //calculating minutes and hours
         int t=Integer.parseInt(data.get(position).get(TAG_TOTALTIME));

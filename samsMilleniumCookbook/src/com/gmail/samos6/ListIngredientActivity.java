@@ -345,7 +345,7 @@ public class ListIngredientActivity extends ListActivity {
 					
 					List<String> list = new ArrayList<String>();
 					list = db.getAllIngredients();
-					adapter = new SamsListAdapter(ListIngredientActivity.this, productsList, list, "IngredientList");
+					adapter = new SamsListAdapter(ListIngredientActivity.this, productsList, list, "IngredientList", typeFace);
 					
 					/*ListAdapter adapter = new SimpleAdapter(AllProductsActivity.this, productsList,
 							R.layout.list_item, new String[] { TAG_INGREDIENTNAME, "cbxingred" },

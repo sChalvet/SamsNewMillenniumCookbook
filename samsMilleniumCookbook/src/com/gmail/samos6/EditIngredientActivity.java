@@ -191,6 +191,17 @@ public class EditIngredientActivity extends Activity {
 		txtGramAmount.setTypeface(typeFace);
 		txtAddedBy.setTypeface(typeFace);
 		
+        ((TextView)findViewById(R.id.tv1)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv2)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv3)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv4)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv5)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv6)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv7)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv8)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv9)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv10)).setTypeface(typeFace);
+		
 			
 		spnrType= (Spinner) findViewById(R.id.inputType);
 		spin_adapter = new ArrayAdapter<String>(EditIngredientActivity.this, android.R.layout.simple_spinner_item, foodType);

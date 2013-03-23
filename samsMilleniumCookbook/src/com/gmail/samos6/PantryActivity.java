@@ -338,7 +338,7 @@ public class PantryActivity extends ListActivity {
 						List<String> list = new ArrayList<String>();
 						list = db.getAllIngredients();
 						Log.d("Pantry_callingAdapter with: ", list.toString());
-						adapter = new SamsListAdapter(PantryActivity.this, productsList, list, "Pantry");
+						adapter = new SamsListAdapter(PantryActivity.this, productsList, list, "Pantry", typeFace);
 						
 						setListAdapter(adapter);
 					}

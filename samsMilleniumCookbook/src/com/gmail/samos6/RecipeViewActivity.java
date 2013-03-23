@@ -213,6 +213,13 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 		txtCookTime.setTypeface(typeFace);
 		txtPrepTime.setTypeface(typeFace);
 
+        ((TextView)findViewById(R.id.handle)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv1)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv2)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv3)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv4)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv5)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv6)).setTypeface(typeFace);
 		
 		
 		Log.d("ViewRecipe_just in", recipeName);

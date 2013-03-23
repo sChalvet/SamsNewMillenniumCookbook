@@ -331,7 +331,7 @@ public class GetIngredientActivity extends ListActivity {
 					 * */
 					
 					//list = db.getAllIngredients();
-					adapter = new SamsListAdapter(GetIngredientActivity.this, productsList, list, "getIngredient");
+					adapter = new SamsListAdapter(GetIngredientActivity.this, productsList, list, "getIngredient", typeFace);
 					
 					
 					setListAdapter(adapter);

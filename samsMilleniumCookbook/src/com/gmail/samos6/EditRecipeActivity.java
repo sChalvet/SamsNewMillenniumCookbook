@@ -239,6 +239,14 @@ public class EditRecipeActivity extends Activity {
 		btnTakePhoto.setTypeface(typeFace);
 		btnAddIngredient.setTypeface(typeFace);
 
+        ((TextView)findViewById(R.id.handle)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv1)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv2)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv3)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv4)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv5)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv6)).setTypeface(typeFace);
+        ((TextView)findViewById(R.id.tv7)).setTypeface(typeFace);
 			
 		Log.d("EditRecipe_just in", "Inside");
 		

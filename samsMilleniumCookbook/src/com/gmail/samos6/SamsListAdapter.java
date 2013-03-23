@@ -41,7 +41,7 @@ public SamsListAdapter(Context context) {
  * List<String> pantry ---> holds a record of what is in the pantry, it is not really used if this class is called by the pantry it self
  * String origine      ---> holds the name of the originator of the call because the output is treated slightly differently
  */
-public SamsListAdapter(Activity activity, ArrayList<HashMap<String, String>> productsList, List<String> pantry, String origin) {
+public SamsListAdapter(Activity activity, ArrayList<HashMap<String, String>> productsList, List<String> pantry, String origin, Typeface t) {
     super();
     mInflater = activity.getLayoutInflater();
     //this.activity = activity;
@@ -49,6 +49,7 @@ public SamsListAdapter(Activity activity, ArrayList<HashMap<String, String>> pro
     this.pantry = pantry;
     this.origin = origin;
     Log.d("Adapter_pantry =", this.pantry.toString());
+    typeFace=t;
 }
 
 public void clear() {
@@ -188,6 +189,7 @@ public View getView(final int position, View convertView, ViewGroup parent) {
         viewHolder.ingredientName = (TextView) convertView.findViewById(R.id.ingredientName);
         viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.ingredientCheckBox);
         
+        viewHolder.ingredientName.setTypeface(typeFace);
         
 
         convertView.setTag(viewHolder);
