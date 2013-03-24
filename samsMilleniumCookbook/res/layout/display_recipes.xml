@@ -5,6 +5,78 @@
     android:orientation="vertical" 
     android:background="@drawable/background">
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp" >
+		
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="30dp" >
+            
+            <TableLayout
+                android:id="@+id/tblSortByAlpha"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:onClick="tableClicked" >
+
+			 	<TextView
+			 	    android:id="@+id/txtSortByAlpha"
+			 	    android:layout_width="wrap_content"
+			 	    android:layout_height="fill_parent"
+			 	    android:gravity="center"
+			 	    android:text="@string/sortByAlpha" />
+
+		 	</TableLayout>
+		 	
+            <View
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:background="#474747" />
+
+            <TableLayout
+                android:id="@+id/tblSortByReview"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="tableClicked" >
+
+			 	<TextView
+			 	    android:id="@+id/txtSortByReview"
+			 	    android:layout_width="wrap_content"
+			 	    android:layout_height="match_parent"
+			 	    android:gravity="center"
+			 	    android:text="@string/sortByReviewCount" />
+
+		 	</TableLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:background="#474747" />
+                        
+            <TableLayout
+                android:id="@+id/tblSortByRating"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="tableClicked" >
+
+			 	<TextView
+			 	    android:id="@+id/txtSortByRating"
+			 	    android:layout_width="wrap_content"
+			 	    android:layout_height="match_parent"
+			 	    android:gravity="center"
+			 	    android:text="@string/sortByRating" />
+
+		 	</TableLayout>   
+        </TableRow>
+        
+    </TableLayout>
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"

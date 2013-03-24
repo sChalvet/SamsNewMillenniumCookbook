@@ -99,6 +99,7 @@
          android:layout_height="wrap_content"
          android:ems="10"
          android:hint="@string/hintAuthor"
+         android:textColorHint="#878787"
          android:inputType="textPersonName"
          android:maxLength="20" >
 
@@ -129,6 +130,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_gravity="center_vertical"
 	    android:layout_weight="1"
+	    android:textColorHint="#878787"
 	    android:hint="@string/hintSearch" />
 
 	<Button

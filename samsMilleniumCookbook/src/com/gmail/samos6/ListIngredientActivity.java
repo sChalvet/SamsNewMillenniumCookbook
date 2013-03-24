@@ -221,9 +221,6 @@ public class ListIngredientActivity extends ListActivity {
 			lv.setSelectionFromTop(position, 0);
 			Toast.makeText(getApplicationContext(), getString(R.string.movingToLetter)+" "+letter, Toast.LENGTH_SHORT).show();
 		}
-
-		
-		
 	}
 	
 	/**

@@ -45,8 +45,8 @@
         
 			<ImageView
 			    android:id="@+id/recipeCreateImage"
-			    android:layout_width="100dp"
-			    android:layout_height="80dp"
+			    android:layout_width="174dp"
+			    android:layout_height="115dp"
 			    android:layout_gravity="center"
 			    android:layout_marginLeft="20dp"
 			    android:layout_weight="1"

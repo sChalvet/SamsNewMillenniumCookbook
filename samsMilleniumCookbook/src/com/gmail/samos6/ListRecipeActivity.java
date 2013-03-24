@@ -72,7 +72,10 @@ public class ListRecipeActivity  extends ListActivity{
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
-	String urlGetAllRecipes;
+	String urlGetAllRecipesByAlpha;
+	String urlGetAllRecipesByReview;
+	String urlGetAllRecipesByRating;
+	String urlSortFormat;
 	String urlRoot;
 
 	ListView lv;
@@ -107,7 +110,10 @@ public class ListRecipeActivity  extends ListActivity{
 		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
 		
 		//getting url from resources
-		urlGetAllRecipes = getResources().getString(R.string.urlGetAllRecipes);
+		urlGetAllRecipesByAlpha = getResources().getString(R.string.urlGetAllRecipesByAlpha);
+		urlGetAllRecipesByReview = getResources().getString(R.string.urlGetAllRecipesByReview);
+		urlGetAllRecipesByRating = getResources().getString(R.string.urlGetAllRecipesByRating);
+		urlSortFormat = urlGetAllRecipesByAlpha;
 		urlRoot = getResources().getString(R.string.urlRoot);
 		
 		// Hashmap for ListView
@@ -121,6 +127,13 @@ public class ListRecipeActivity  extends ListActivity{
 		searchRecipeType = intent.getStringExtra(TAG_RECIPETYPE);
 		searchKeyWord = intent.getStringExtra(TAG_KEYWORD);
 		searchCookTime = intent.getStringExtra(TAG_COOKTIME);
+		
+		//setting first tab (default) to cyan
+		findViewById(R.id.tblSortByAlpha).setBackgroundColor(Color.CYAN);
+		
+		((TextView)findViewById(R.id.txtSortByAlpha)).setTypeface(typeFace);
+		((TextView)findViewById(R.id.txtSortByRating)).setTypeface(typeFace);
+		((TextView)findViewById(R.id.txtSortByReview)).setTypeface(typeFace);
 		
 		
 		// Loading products in Background Thread
@@ -153,6 +166,39 @@ public class ListRecipeActivity  extends ListActivity{
 
 	}
 	
+	/**
+	 * used as tabs to define which sort will be used
+	 * @param view
+	 */
+	public void tableClicked(View view) {
+		
+		Log.d("tableClicked: ", "in onClick");
+		
+		findViewById(R.id.tblSortByReview).setBackgroundColor(0);
+		findViewById(R.id.tblSortByRating).setBackgroundColor(0);
+		findViewById(R.id.tblSortByAlpha).setBackgroundColor(0);
+		
+		String oldUrl=urlSortFormat;
+		
+		if(view.getId()==findViewById(R.id.tblSortByAlpha).getId()){
+			view.setBackgroundColor(Color.CYAN);
+			urlSortFormat = urlGetAllRecipesByAlpha;
+			
+		}else if (view.getId()==findViewById(R.id.tblSortByRating).getId()){
+			view.setBackgroundColor(Color.CYAN);
+			urlSortFormat = urlGetAllRecipesByRating;
+			
+		}else if (view.getId()==findViewById(R.id.tblSortByReview).getId()){
+			view.setBackgroundColor(Color.CYAN);
+			urlSortFormat = urlGetAllRecipesByReview;
+		}
+		
+		//check to see if user actually clicked a diff button
+		if(!oldUrl.equalsIgnoreCase(urlSortFormat)){
+			adapter.clear();
+			new LoadAllRecipes().execute();
+		}
+	}
 	
 	@Override
 	protected void onRestart() {
@@ -237,7 +283,7 @@ public class ListRecipeActivity  extends ListActivity{
 			Log.d("SearchRecipes params: ", params.toString());
 			
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(urlGetAllRecipes, "POST", params);
+			JSONObject json = jParser.makeHttpRequest(urlSortFormat, "POST", params);
 			
 			//if AsyncTask has Not been cancelled then continue
 			if (!bCancelled) try {

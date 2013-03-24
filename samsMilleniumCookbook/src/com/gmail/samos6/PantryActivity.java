@@ -114,7 +114,7 @@ public class PantryActivity extends ListActivity {
 				}else{
 					
 					//launches dialog for user so the search type
-					loginAlertDialog(ingredientList);
+					choseSearchAlertDialog(ingredientList);
 					
 				}
 
@@ -353,7 +353,7 @@ public class PantryActivity extends ListActivity {
 	/**
 	 * Spawns a login dialog box
 	 */
-	private void loginAlertDialog(final List<String> ingredientList){
+	private void choseSearchAlertDialog(final List<String> ingredientList){
 	  
 	      LayoutInflater factory = LayoutInflater.from(PantryActivity.this);            
 	        final View textEntryView = factory.inflate(R.layout.search_type, null);
