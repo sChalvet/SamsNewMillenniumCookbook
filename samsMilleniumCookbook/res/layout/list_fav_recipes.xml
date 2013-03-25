@@ -86,7 +86,7 @@
 		    android:layout_height="1dp"
 		    android:layout_below="@+id/txtListFavRecipeSummery"
 		    android:layout_marginTop="5dp"
-		    android:background="#474747" />
+		    android:background="@color/viewLine" />
 
 		<View
 		    android:id="@+id/view2"
@@ -94,7 +94,7 @@
 		    android:layout_height="1dp"
 		    android:layout_above="@+id/txtListFavRecipeRecipeName"
 		    android:layout_marginBottom="5dp"
-		    android:background="#474747" />
+		    android:background="@color/viewLine" />
 		
 		<CheckBox
 		    android:id="@+id/chkboxListFavRecipeCheckBox"

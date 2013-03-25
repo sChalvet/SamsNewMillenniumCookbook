@@ -181,7 +181,7 @@
 	        android:layout_height="1dp"
 	        android:layout_below="@+id/editUserNewPassword"
 	        android:layout_marginTop="20dp"
-	        android:background="#474747" />
+	        android:background="@color/viewLine" />
 	
 	    
 	  <TextView
@@ -252,7 +252,7 @@
 	        android:layout_marginTop="20dp"
 	        android:layout_marginBottom="5dp"
 	        android:layout_below="@+id/editUserOldTestAnswer"
-	        android:background="#474747" />
+	        android:background="@color/viewLine" />
 
     	<Button
     	    android:id="@+id/btnPreferenceUpdate"

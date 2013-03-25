@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     
+    <color name="viewLine">#474747</color>
+    <color name="progressBarLine">#575757</color>
+    
     <style name="recipeRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/chicken_rating_bar</item>
         <item name="android:minHeight">25dp</item>
@@ -26,7 +29,7 @@
 	
 	<style name="editTextStyle" parent="@android:style/Widget.EditText">
     	<item name="android:textColor">#222222</item>
-    	<item name="android:textColorHint">#444444</item>
+    	<item name="android:textColorHint">#878787</item>
 	</style>
 	
 	<style name="textViewStyle" parent="@android:style/Widget.TextView">

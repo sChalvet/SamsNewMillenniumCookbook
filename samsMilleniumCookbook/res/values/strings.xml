@@ -8,33 +8,33 @@
     <!-- <string name="urlGetIngredientDetails">http://joe.cs.unca.edu/~chalvesa/app/getIngredientDetails.php</string> -->
     
     <!-- Url's are pulled into the app from here -->
-	<string name="urlGetIngredientDetails">https://samscookbookcom.ipage.com/recipeapp/getIngredientDetails.php</string>
-    <string name="urlUpdateIngredient">https://samscookbookcom.ipage.com/recipeapp/updateIngredient.php</string>
-    <string name="urlDeleteIngredient">https://samscookbookcom.ipage.com/recipeapp/deleteIngredient.php</string>
-    <string name="urlCreateNewIngredient">https://samscookbookcom.ipage.com/recipeapp/createIngredient.php</string>
-    <string name="urlGetAllComments">https://samscookbookcom.ipage.com/recipeapp/getAllComments.php</string>
-    <string name="url_create_product">https://samscookbookcom.ipage.com/recipeapp/create_product.php</string>
-    <string name="urlCreateRecipe">https://samscookbookcom.ipage.com/recipeapp/createRecipe.php</string>
-    <string name="urlUpdateRecipe">https://samscookbookcom.ipage.com/recipeapp/updateRecipe.php</string>
-    <string name="urlCreateComment">https://samscookbookcom.ipage.com/recipeapp/createComment.php</string>
-    <string name="urlGetAllIngredients">https://samscookbookcom.ipage.com/recipeapp/getAllIngredients.php</string>
-    <string name="urlGetFavRecipes">https://samscookbookcom.ipage.com/recipeapp/getFavRecipes.php</string>
-    <string name="urlGetRecipeDetails">https://samscookbookcom.ipage.com/recipeapp/getRecipeDetails.php</string>
-    <string name="urlEditRecipe">https://samscookbookcom.ipage.com/recipeapp/editRecipe.php</string>
-    <string name="urlCreateAccount">https://samscookbookcom.ipage.com/recipeapp/createAccount.php</string>
-    <string name="urlLogin">https://samscookbookcom.ipage.com/recipeapp/logIn.php</string>
-    <string name="urlEditComment">https://samscookbookcom.ipage.com/recipeapp/editComment.php</string>
-    <string name="urlUpdateComment">https://samscookbookcom.ipage.com/recipeapp/updateComment.php</string>
-    <string name="urlGetAllRecipesByIngredient">https://samscookbookcom.ipage.com/recipeapp/getAllRecipesByIngredient.php</string>
-    <string name="urlUploadImage">https://samscookbookcom.ipage.com/recipeapp/uploadImage.php</string>
-    <string name="urlResetPassword">https://samscookbookcom.ipage.com/recipeapp/resetPassword.php</string>
-    <string name="urlGetTestQuestion">https://samscookbookcom.ipage.com/recipeapp/getTestQuestion.php</string>
-    <string name="urlUpdateAccount">https://samscookbookcom.ipage.com/recipeapp/updateAccount.php</string>
-    <string name="urlGetUserInfo">https://samscookbookcom.ipage.com/recipeapp/getUserInfo.php</string>
-    <string name="urlGetAllRecipesByAlpha">https://samscookbookcom.ipage.com/recipeapp/getAllRecipesByAlpha.php</string>
-    <string name="urlGetAllRecipesByReview">hhttps://samscookbookcom.ipage.com/recipeapp/getAllRecipesByReview.php</string>
-    <string name="urlGetAllRecipesByRating">https://samscookbookcom.ipage.com/recipeapp/getAllRecipesByRating.php</string>
-    <string name="urlRoot">https://samscookbookcom.ipage.com/recipeapp/</string>			
+	<string name="urlGetIngredientDetails">http://192.168.254.45/recipeApp/getIngredientDetails.php</string>
+    <string name="urlUpdateIngredient">http://192.168.254.45/recipeApp/updateIngredient.php</string>
+    <string name="urlDeleteIngredient">http://192.168.254.45/recipeApp/deleteIngredient.php</string>
+    <string name="urlCreateNewIngredient">http://192.168.254.45/recipeApp/createIngredient.php</string>
+    <string name="urlGetAllComments">http://192.168.254.45/recipeApp/getAllComments.php</string>
+    <string name="url_create_product">http://192.168.254.45/recipeApp/create_product.php</string>
+    <string name="urlCreateRecipe">http://192.168.254.45/recipeApp/createRecipe.php</string>
+    <string name="urlUpdateRecipe">http://192.168.254.45/recipeApp/updateRecipe.php</string>
+    <string name="urlCreateComment">http://192.168.254.45/recipeApp/createComment.php</string>
+    <string name="urlGetAllIngredients">http://192.168.254.45/recipeApp/getAllIngredients.php</string>
+    <string name="urlGetFavRecipes">http://192.168.254.45/recipeApp/getFavRecipes.php</string>
+    <string name="urlGetRecipeDetails">http://192.168.254.45/recipeApp/getRecipeDetails.php</string>
+    <string name="urlEditRecipe">http://192.168.254.45/recipeApp/editRecipe.php</string>
+    <string name="urlCreateAccount">http://192.168.254.45/recipeApp/createAccount.php</string>
+    <string name="urlLogin">http://192.168.254.45/recipeApp/logIn.php</string>
+    <string name="urlEditComment">http://192.168.254.45/recipeApp/editComment.php</string>
+    <string name="urlUpdateComment">http://192.168.254.45/recipeApp/updateComment.php</string>
+    <string name="urlGetAllRecipesByIngredient">http://192.168.254.45/recipeApp/getAllRecipesByIngredient.php</string>
+    <string name="urlUploadImage">http://192.168.254.45/recipeApp/uploadImage.php</string>
+    <string name="urlResetPassword">http://192.168.254.45/recipeApp/resetPassword.php</string>
+    <string name="urlGetTestQuestion">http://192.168.254.45/recipeApp/getTestQuestion.php</string>
+    <string name="urlUpdateAccount">http://192.168.254.45/recipeApp/updateAccount.php</string>
+    <string name="urlGetUserInfo">http://192.168.254.45/recipeApp/getUserInfo.php</string>
+    <string name="urlGetAllRecipesByAlpha">http://192.168.254.45/recipeApp/getAllRecipesByAlpha.php</string>
+    <string name="urlGetAllRecipesByReview">http://192.168.254.45/recipeApp/getAllRecipesByReview.php</string>
+    <string name="urlGetAllRecipesByRating">http://192.168.254.45/recipeApp/getAllRecipesByRating.php</string>
+    <string name="urlRoot">http://192.168.254.45/recipeApp/</string>			
     
     
     <!-- getString(R.string.pEnterTestQ) -->

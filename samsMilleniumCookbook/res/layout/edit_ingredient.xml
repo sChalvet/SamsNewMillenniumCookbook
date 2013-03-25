@@ -45,7 +45,7 @@
 	    android:layout_marginBottom="20dp"
 	    android:layout_marginLeft="10dp"
 	    android:layout_marginRight="10dp"
-	    android:background="#474747" />
+	    android:background="@color/viewLine" />
 
 	<ScrollView
 	    android:id="@+id/scrollView1"
@@ -280,7 +280,7 @@
 		            android:layout_width="match_parent"
 		            android:layout_height="1dp"
 		            android:layout_marginBottom="10dp"
-		            android:background="#474747" />
+		            android:background="@color/viewLine" />
 
 		<Button
 		    android:id="@+id/btnPublishIngredient"

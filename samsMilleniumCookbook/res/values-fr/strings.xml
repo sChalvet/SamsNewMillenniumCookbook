@@ -32,7 +32,7 @@
     <string name="urlUpdateAccount">https://samscookbookcom.ipage.com/recipeapp/updateAccount.php</string>
     <string name="urlGetUserInfo">https://samscookbookcom.ipage.com/recipeapp/getUserInfo.php</string>
     <string name="urlGetAllRecipesByAlpha">https://samscookbookcom.ipage.com/recipeapp/getAllRecipesByAlpha.php</string>
-    <string name="urlGetAllRecipesByReview">hhttps://samscookbookcom.ipage.com/recipeapp/getAllRecipesByReview.php</string>
+    <string name="urlGetAllRecipesByReview">https://samscookbookcom.ipage.com/recipeapp/getAllRecipesByReview.php</string>
     <string name="urlGetAllRecipesByRating">https://samscookbookcom.ipage.com/recipeapp/getAllRecipesByRating.php</string>
     <string name="urlRoot">https://samscookbookcom.ipage.com/recipeapp/</string>	
     

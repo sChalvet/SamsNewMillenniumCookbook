@@ -60,7 +60,7 @@
         android:layout_alignTop="@+id/textView1"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="#474747" />
+        android:background="@color/viewLine" />
 
     <TextView
         android:id="@+id/textView1"

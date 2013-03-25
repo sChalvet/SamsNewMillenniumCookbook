@@ -12,7 +12,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="2dp"
-        android:background="#474747" />
+        android:background="@color/viewLine" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -34,7 +34,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:background="#474747" />
+                android:background="@color/viewLine" />
     
         <RadioButton
             android:id="@+id/radioFindAny"
@@ -51,7 +51,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="2dp"
-            android:background="#474747" />
+            android:background="@color/viewLine" />
         
     <Button
         android:id="@+id/dialogPantrySearch"
