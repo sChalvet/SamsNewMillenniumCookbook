@@ -20,7 +20,37 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int bgEndColor=0x7f07000a;
+        public static final int bgMidColor=0x7f070009;
+        /**  used for overall background 
+         */
+        public static final int bgStartColor=0x7f070008;
+        public static final int bgTitleEndColor=0x7f07000d;
+        public static final int bgTitleMidColor=0x7f07000c;
+        /**  used for recipe title background 
+         */
+        public static final int bgTitleStartColor=0x7f07000b;
+        public static final int fontColor=0x7f070002;
+        public static final int fontColorHint=0x7f070003;
+        public static final int ingredientGradientEndColor=0x7f070010;
+        public static final int ingredientGradientMidColor=0x7f07000f;
+        public static final int ingredientGradientSelectEndColor=0x7f070013;
+        public static final int ingredientGradientSelectMidColor=0x7f070012;
+        /**  used for selected ingredient background 
+         */
+        public static final int ingredientGradientSelectStartColor=0x7f070011;
+        /**  used for unselected ingredient background 
+         */
+        public static final int ingredientGradientStartColor=0x7f07000e;
         public static final int progressBarLine=0x7f070001;
+        /**  used for recipe discription font 
+         */
+        public static final int recipeDiscriptionFontColor=0x7f070006;
+        public static final int recipeDiscriptionFontColorHint=0x7f070007;
+        /**  used for recipe title color  
+         */
+        public static final int titleFontColor=0x7f070004;
+        public static final int titleFontColorHint=0x7f070005;
         public static final int viewLine=0x7f070000;
     }
     public static final class drawable {

@@ -16,7 +16,7 @@
 	        android:text="@string/recipeName"
 	        android:textAppearance="?android:attr/textAppearanceLarge"
 	        android:typeface="serif"
-	        android:textColor="#87BB87"/>
+		    android:textColor="@color/titleFontColor"/>
 
 	    <ScrollView
 	        xmlns:android="http://schemas.android.com/apk/res/android"
@@ -110,7 +110,8 @@
 	                android:id="@+id/btnRecipeViewGetTimer"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
-	                android:text="Button" />
+	                android:text="Button"
+	                android:visibility="gone" />
 
 	            <TextView
 	                android:id="@+id/tv4"
@@ -147,7 +148,7 @@
 	                android:layout_weight="1"
 	                android:background="#07000000"
 	                android:ems="10"
-	                android:textColor="#EEEEEEAA" />
+			    	android:textColor="@color/recipeDiscriptionFontColor"/>
 
 	            <TextView
 	                android:id="@+id/tv6"
@@ -166,7 +167,7 @@
 	                android:layout_weight="1"
 	                android:background="#07000000"
 	                android:ems="10"
-	                android:textColor="#EEEEEEAA" />
+			    	android:textColor="@color/recipeDiscriptionFontColor" />
 	        </LinearLayout>
 	    </ScrollView>
 
