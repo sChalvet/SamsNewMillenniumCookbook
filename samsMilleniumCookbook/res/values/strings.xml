@@ -42,7 +42,7 @@
     <string name="userName">Unknown</string>
     
     <string name="hello">Hello World, Check this recipe app out!</string>
-    <string name="app_name">Sam\'s New Millennium Cookbook</string>
+    <string name="app_name">Sam\'s Cookbook</string>
     
     <!-- part of Main Activity  -->
     <string name="mainSeePantry">See Your Pantry</string>

@@ -8,53 +8,60 @@
 	
     <!--  Sample Dashboard screen with Two buttons -->
     	
-    	<Button android:id="@+id/btnMainLogin"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:layout_marginTop="10dip"/>
+    	<Button
+    	    android:id="@+id/btnMainLogin"
+    	    android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_marginTop="10dip"
+    	    android:text="@string/login" />
     	
-    	<Button android:id="@+id/btnMainMe"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Who am I?"
-        android:layout_marginTop="10dip"/>
+    	<Button
+    	    android:id="@+id/btnMainMe"
+    	    android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_marginTop="10dip"
+    	    android:text="Who am I?" />
     	    	
-    	<Button android:id="@+id/btnMainLogout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/logout"
-        android:layout_marginTop="10dip"/>
+    	<Button
+    	    android:id="@+id/btnMainLogout"
+    	    android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_marginTop="10dip"
+    	    android:text="@string/logout" />
 
-        <Button android:id="@+id/btnMainPantry"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mainSeePantry"
-        android:layout_marginTop="10dip"/>
+        <Button
+            android:id="@+id/btnMainPantry"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="@string/mainSeePantry" />
         
-        <Button android:id="@+id/btnMainToRecipeSearch"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mainSearchForRecipe"
-        android:layout_marginTop="10dip"/>
+        <Button
+            android:id="@+id/btnMainToRecipeSearch"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="@string/mainSearchForRecipe" />
         
-        <Button android:id="@+id/btnMainAddRecipe"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mainAddRecipe"
-        android:layout_marginTop="10dip"/>
+        <Button
+            android:id="@+id/btnMainAddRecipe"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="@string/mainAddRecipe" />
         
-        <Button android:id="@+id/btnMainFavRecipe"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mainFavoriteRecipes"
-        android:layout_marginTop="10dip"/>
+        <Button
+            android:id="@+id/btnMainFavRecipe"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="@string/mainFavoriteRecipes" />
                 
         <Button
-        android:id="@+id/btnMainSavedRecipe"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dip"
-        android:text="@string/mainSavedRecipes" />
+            android:id="@+id/btnMainSavedRecipe"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="@string/mainSavedRecipes" />
 
 </LinearLayout>

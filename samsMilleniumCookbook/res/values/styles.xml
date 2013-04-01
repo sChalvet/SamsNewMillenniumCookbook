@@ -69,10 +69,19 @@
 	
 	<style name="buttonStyle" parent="@android:style/Widget.Button">
     	<item name="android:textColor">@color/fontColor</item>
+    	<item name="android:background">@drawable/button_selector</item>
+<!--     	<item name="android:alpha">0.7</item> -->
 	</style>
 	
 	<style name="WindowTitleBackground">     
         <item name="android:background">@drawable/background</item>
         <item name="android:textColor">#aa55aa</item>                   
     </style>
+    
+	<style name="Theme.Splash" parent="android:Theme">
+    	<item name="android:windowBackground">@drawable/default_pic</item>
+    	<item name="android:windowNoTitle">true</item>
+  	</style>
+  
+	  
 </resources>

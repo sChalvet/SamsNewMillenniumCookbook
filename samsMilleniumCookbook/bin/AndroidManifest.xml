@@ -12,12 +12,12 @@
 
     <application
         android:configChanges="keyboardHidden|orientation"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/app_theme" >
 
         <activity
-            android:name=".MainScreenActivity"
+            android:name=".SplashActivity"
             android:screenOrientation= "portrait"
             android:label="@string/app_name" >
             
@@ -28,6 +28,12 @@
             </intent-filter>
         </activity>
 
+        
+        <activity
+            android:name=".MainScreenActivity"
+            android:screenOrientation= "portrait"
+            android:label="Main Screen" >
+        </activity>
         
         <activity
             android:name=".ListIngredientActivity"
@@ -169,13 +175,6 @@
             android:label="SearchForRecipeActivity" >
         </activity>
         
-        
-        
-        <!-- Edit ingredient Activity -->
-        <activity
-            android:name=".trialActivity"
-            android:label="trialActivity" >
-        </activity>
     </application>
 
     <!--  Internet Permissions -->

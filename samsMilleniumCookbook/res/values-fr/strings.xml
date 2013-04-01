@@ -42,7 +42,7 @@
     <string name="userName">Inconnu</string>
     
     <string name="hello">Salut tout le monde!  Essayez cette application de recettes de cuisine!</string>
-    <string name="app_name">Livre de cuisine de Sam du Nouveau Millenium</string>
+    <string name="app_name">Sam\'s Cookbook</string>
     
     <!-- part of Main Activity  -->
     <string name="mainSeePantry">Inventoriez les ingrédients disponibles dans votre garde-manger</string>
