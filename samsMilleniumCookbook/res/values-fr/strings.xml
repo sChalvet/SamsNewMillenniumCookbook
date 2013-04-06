@@ -56,7 +56,8 @@
     <string name="loginToCreate">Connectez-vous pour créer des recettes</string>
     <string name="loginToEditAcc">Connectez-vous pour modifier un compte</string>
     <string name="youLoggedOut">Vous êtes déconnecté</string>
-    <string name="isNowLogedIn">est maintenant connecté.</string>
+    <string name="isNowLogedIn">est connecté</string>
+    <string name="genRecipeSearch">Recherche mots clée</string>
       
    	<!-- part of data checks  -->
     <string name="pEnterUser">Rentrez, s\'il vous plait, votre identifiant.</string>

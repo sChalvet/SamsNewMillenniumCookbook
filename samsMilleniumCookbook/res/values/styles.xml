@@ -69,7 +69,7 @@
 	
 	<style name="buttonStyle" parent="@android:style/Widget.Button">
     	<item name="android:textColor">@color/fontColor</item>
-    	<item name="android:background">@drawable/button_selector</item>
+     	<item name="android:background">@drawable/button_selector</item>
 <!--     	<item name="android:alpha">0.7</item> -->
 	</style>
 	

@@ -38,6 +38,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -54,6 +55,8 @@ public class MainScreenActivity extends Activity{
 	
 	EditText txtNickName;
 	EditText txtPassword;
+	EditText txtSearchWords;
+	TextView txtLogInName;
 	Button btnAlertLogin;
 	Button btnAlertCreateAccount;
 	Button btnForgotPassword;
@@ -65,6 +68,7 @@ public class MainScreenActivity extends Activity{
 	String password;
 	String token;
 	String urlLogin;
+	String searchWords;
 	
 	String userName="";
 	
@@ -128,6 +132,8 @@ public class MainScreenActivity extends Activity{
 		btnLogin = (Button) findViewById(R.id.btnMainLogin);
 		btnLogout = (Button) findViewById(R.id.btnMainLogout);
 		btnMe = (Button) findViewById(R.id.btnMainMe);
+		txtSearchWords= (EditText) findViewById(R.id.autoCompleteTextView1);	
+		txtLogInName= (TextView) findViewById(R.id.textView1);	
 	
 		//setting the font type from assets
 		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
@@ -139,7 +145,10 @@ public class MainScreenActivity extends Activity{
 		btnLogin.setTypeface(typeFace);
 		btnLogout.setTypeface(typeFace);
 		btnMe.setTypeface(typeFace);
+		txtSearchWords.setTypeface(typeFace);
 		
+		//set login name or guest if none exist
+		txtLogInName.setText(userName+" "+getString(R.string.isNowLogedIn));
 		
 		btnAddRecipe.setOnClickListener(new View.OnClickListener() {
 			
@@ -538,6 +547,22 @@ public class MainScreenActivity extends Activity{
 
 	}
 	
+	/**
+	 * Gets the search words and launches a search.
+	 */
+	public void searchRecipe(View view){
+		
+		searchWords=txtSearchWords.getText().toString();
+		
+		Intent intent = new Intent(getApplicationContext(), ListRecipeActivity.class);
+		intent.putExtra("author", "");
+		intent.putExtra("foodName", "Any");	
+		intent.putExtra("recipeType", "Any");
+		intent.putExtra("cookTime", "Any");	
+		intent.putExtra("keyWord", searchWords);	
+		startActivity(intent);
+		
+	}
 	 @Override
 	    public boolean onOptionsItemSelected(MenuItem item){
 	 

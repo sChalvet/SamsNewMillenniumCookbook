@@ -41,6 +41,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.SlidingDrawer;
+import android.widget.SlidingDrawer.OnDrawerCloseListener;
+import android.widget.SlidingDrawer.OnDrawerOpenListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +69,7 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 	Button btnFavorite;
 	Button btnEdit;
 	Button btnTimer;
+	Button handle;
 	
 	//preference access
 	SharedPreferences prefs;
@@ -183,6 +186,7 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 		btnFavorite = (Button) findViewById(R.id.btnRecipeViewFavoriteRecipe);
 		btnEdit = (Button) findViewById(R.id.btnRecipeViewEdit);
 		btnTimer = (Button) findViewById(R.id.btnRecipeViewGetTimer);
+		handle = (Button) findViewById(R.id.handle);
 		
 		txtRecipeName = (TextView) findViewById(R.id.txtRecipeViewRecipeName);
 		txtServings = (TextView) findViewById(R.id.txtRecipeViewServings);
@@ -228,6 +232,21 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 		
 		seekBar.setOnSeekBarChangeListener(this);
 		
+        slidingDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
+            @Override
+            public void onDrawerOpened() {
+            	handle.setBackgroundResource(R.drawable.chicken_bone);
+            }
+        });
+ 
+        slidingDrawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
+            @Override
+            public void onDrawerClosed() {
+            	handle.setBackgroundResource(R.drawable.chev_up);
+            }
+        });
+        
+        
 		// See Reviews button click event
 		btnReviews.setOnClickListener(new View.OnClickListener() {
 
@@ -609,7 +628,7 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 	            return true;
 	            
 	        case R.id.share: 	            //					market://details?id=com.example.android.jetboy
-	            String message = firstName+" "+getString(R.string.likes)+" "+recipeName+getString(R.string.from)+" "+getString(R.string.app_name);
+	            String message = firstName+" "+getString(R.string.likes)+" "+recipeName+" "+getString(R.string.from)+" "+getString(R.string.app_name);
         		Intent share = new Intent(Intent.ACTION_SEND);
         		share.setType("text/plain");
         		share.putExtra(Intent.EXTRA_TEXT, message);

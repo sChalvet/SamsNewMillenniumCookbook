@@ -19,7 +19,6 @@
 		    android:textColor="@color/titleFontColor"/>
 
 	    <ScrollView
-	        xmlns:android="http://schemas.android.com/apk/res/android"
 	        android:id="@+id/scrollView1"
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
@@ -33,7 +32,6 @@
 	            android:orientation="vertical" >
 
 	            <RelativeLayout
-	                xmlns:android="http://schemas.android.com/apk/res/android"
 	                android:layout_width="match_parent"
 	                android:layout_height="123dp"
 	                android:measureWithLargestChild="false"
@@ -186,15 +184,14 @@
 	        <Button
 	            android:id="@+id/handle"
 	            android:layout_width="match_parent"
-	            android:layout_height="22dp"
-	            android:background="@drawable/drawer"
-	            android:text="@string/recipeHandle" />
+	            android:layout_height="37dp"
+	            android:background="@drawable/chev_up"/>
 
 	        <LinearLayout
 	            android:id="@+id/content"
 	            android:layout_width="match_parent"
-	            android:layout_height="22dp"
-	            android:background="#000000"
+	            android:layout_height="match_parent"
+	            android:background="#55555555"
 	            android:orientation="vertical"
 	            android:paddingLeft="10dp"
 	            android:paddingRight="10dp" >
@@ -203,6 +200,7 @@
 	                android:id="@+id/btnRecipeViewSaveRecipe"
 	                android:layout_width="match_parent"
 	                android:layout_height="35dp"
+	                android:layout_marginBottom="40dp"
 	                android:text="@string/saveRecipe" />
 
 	            <Button

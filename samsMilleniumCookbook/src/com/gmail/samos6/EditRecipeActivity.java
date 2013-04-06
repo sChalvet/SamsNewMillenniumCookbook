@@ -67,7 +67,6 @@ public class EditRecipeActivity extends Activity {
 	Spinner spnrRecipeType;
 	Spinner spnrServings;
 	ImageView imgPicture;
-	SlidingDrawer slidingDrawer;
 	
 	LinearLayout listLayout;
 	
@@ -219,7 +218,6 @@ public class EditRecipeActivity extends Activity {
 		txtPrepTime= (EditText) findViewById(R.id.inputRecipeCreatePreptime);
 		txtSummery= (EditText) findViewById(R.id.inputRecipeCreateSummery);
 		imgPicture= (ImageView) findViewById(R.id.recipeCreateImage);	
-		slidingDrawer= (SlidingDrawer) findViewById(R.id.recipeCreateSlidingDrawer);
 		
 		//used to put the ingredient intering data into
 		listLayout =  (LinearLayout) findViewById(R.id.inputRecipeCreateLinearLayout);

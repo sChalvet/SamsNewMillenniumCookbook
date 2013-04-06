@@ -23,7 +23,6 @@
 		    android:textColor="@color/titleFontColor" />
 
 				<ScrollView
-				    xmlns:android="http://schemas.android.com/apk/res/android"
 				    android:layout_width="match_parent"
 				    android:layout_height="match_parent"
 				    android:layout_alignParentBottom="false"
@@ -282,39 +281,8 @@
 			    android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
 			    android:textColor="@color/recipeDiscriptionFontColor"
 			    android:textColorHint="@color/recipeDiscriptionFontColorHint"/>
-
-		</LinearLayout>
-		</ScrollView>
-
-<SlidingDrawer
-    android:id="@+id/recipeCreateSlidingDrawer"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_gravity="bottom"
-    android:allowSingleTap="false"
-    android:animateOnClick="true"
-    android:content="@+id/content"
-    android:handle="@+id/handle"
-    android:topOffset="390dp" >
-		    
-        <Button
-            android:id="@+id/handle"
-            android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:background="#BBFF0000"
-            android:text="@string/recipeHandle" />
-
-        <LinearLayout
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#000000"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" >
 			
-            <Button
+			<Button
                 android:id="@+id/btnCreateRecipeSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
@@ -325,10 +293,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:text="@string/addIngredients" />
-                           
-        </LinearLayout>
-    </SlidingDrawer>
-    
-    
 
+		</LinearLayout>
+		</ScrollView>
+    
 </RelativeLayout>
