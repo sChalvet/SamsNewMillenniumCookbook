@@ -367,6 +367,7 @@ public class PantryActivity extends ListActivity {
 	    	
 			alert = new AlertDialog.Builder(PantryActivity.this).create();
 			alert.setTitle(R.string.chooseSearchType);
+			alert.setIcon(R.drawable.icon_37_by_37);
 			
 			alert.setView(textEntryView);
 

@@ -235,14 +235,14 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
         slidingDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
             @Override
             public void onDrawerOpened() {
-            	handle.setBackgroundResource(R.drawable.chicken_bone);
+            	handle.setBackgroundResource(R.drawable.chevron_down);
             }
         });
  
         slidingDrawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
             @Override
             public void onDrawerClosed() {
-            	handle.setBackgroundResource(R.drawable.chev_up);
+            	handle.setBackgroundResource(R.drawable.chevron);
             }
         });
         

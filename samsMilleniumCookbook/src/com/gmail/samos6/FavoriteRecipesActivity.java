@@ -23,6 +23,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -60,6 +61,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 	
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
+	Boolean successful=false;
 	
 	//Instantiating the SQLite database
 	final DatabaseHandler db = new DatabaseHandler(this);
@@ -240,11 +242,16 @@ public class FavoriteRecipesActivity  extends ListActivity{
 				// Checking for SUCCESS TAG
 				int success = json.getInt(TAG_SUCCESS);
 
+				//reseting variable
+				successful=false;
+				
 				if (success == 1) {
 					// Recipes found
 					// Getting Array of Recipes
 					products = json.getJSONArray(TAG_PRODUCTS);
 
+					successful=true;
+					
 					// looping through All Recipes
 					for (int i = 0; i < products.length(); i++) {
 						JSONObject c = products.getJSONObject(i);
@@ -301,6 +308,11 @@ public class FavoriteRecipesActivity  extends ListActivity{
 			// dismiss the dialog after getting all Recipes
 			pDialog.dismiss();
 			
+			if(!successful){
+				Toast toast= Toast.makeText(getApplicationContext(), getString(R.string.noFavoriteRecipes), Toast.LENGTH_LONG);  
+						toast.setGravity(Gravity.TOP, 0, 125);
+						toast.show();
+			}
 			
 			// updating UI from Background Thread
 			runOnUiThread(new Runnable() {

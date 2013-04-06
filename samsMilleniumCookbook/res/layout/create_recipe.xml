@@ -157,8 +157,8 @@
 
     	   <Spinner
     	       android:id="@+id/spnrCreateRecipeType"
-    	       android:layout_width="match_parent"
-    	       android:layout_height="match_parent"
+    	       android:layout_width="wrap_content"
+    	       android:layout_height="wrap_content"
     	       android:layout_gravity="center_vertical"
     	       android:spinnerMode="dropdown" />
     	   
@@ -182,8 +182,8 @@
 
     	   <Spinner
     	       android:id="@+id/spnrCreateRecipeServings"
-    	       android:layout_width="match_parent"
-    	       android:layout_height="match_parent"
+    	       android:layout_width="wrap_content"
+    	       android:layout_height="wrap_content"
     	       android:layout_gravity="center_vertical"
     	       android:spinnerMode="dropdown" />
     	   
@@ -281,18 +281,37 @@
 			    android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
 			    android:textColor="@color/recipeDiscriptionFontColor"
 			    android:textColorHint="@color/recipeDiscriptionFontColorHint"/>
-			
+
+			<View
+			    android:id="@+id/view5"
+			    android:layout_width="match_parent"
+			    android:layout_height="2dp"
+			    android:layout_marginBottom="10dp"
+			    android:layout_marginLeft="5dp"
+			    android:layout_marginRight="5dp"
+			    android:layout_marginTop="10dp"
+			    android:background="@color/viewLine" />
+				
+			<TableRow
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_margin="5dp" >
+
 			<Button
-                android:id="@+id/btnCreateRecipeSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:text="@string/publishRecipe" />
+			    android:id="@+id/btnCreateRecipeSubmit"
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:layout_weight="1"
+			    android:text="@string/publishRecipe" />
                     
             <Button
                 android:id="@+id/btnCreateRecipeAddIngredient"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:text="@string/addIngredients" />
+
+            </TableRow>
 
 		</LinearLayout>
 		</ScrollView>

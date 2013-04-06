@@ -275,6 +275,9 @@
 	<string name="likes">J\'aime</string>
 	<string name="howShare">De quelle manière voulez-vous partager?</string>
 	<string name="editAccount">Modifier le compte</string>
+	<string name="noRecipesFound">Aucune recette trouvée.</string>
+	<string name="noSavedRecipes">Vous n\'avez aucune recette sauvée.</string>
+	<string name="noFavoriteRecipes">Vous n\'avez aucune recette préférées.</string>
 	
 	<!-- values used throughout  -->
 	<string name="yes">Oui</string>

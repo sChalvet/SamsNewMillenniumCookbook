@@ -205,7 +205,6 @@ public class CreateRecipeActivity extends Activity {
 		btnTakePhoto.setTypeface(typeFace);
 		btnAddIngredient.setTypeface(typeFace);
 		
-        ((TextView)findViewById(R.id.handle)).setTypeface(typeFace);
         ((TextView)findViewById(R.id.tv1)).setTypeface(typeFace);
         ((TextView)findViewById(R.id.tv2)).setTypeface(typeFace);
         ((TextView)findViewById(R.id.tv3)).setTypeface(typeFace);
@@ -305,6 +304,7 @@ public class CreateRecipeActivity extends Activity {
 	    new AlertDialog.Builder(this)
         .setTitle(R.string.backPressed)
         .setMessage(R.string.leave)
+        .setIcon(R.drawable.icon_37_by_37)
         .setNegativeButton(R.string.no, null)
         .setPositiveButton(R.string.yes, new OnClickListener() {
 
@@ -492,7 +492,7 @@ private TableLayout ingredientRow2(int index) {
 	//setting the food type spinner
 	spin_adapter = new ArrayAdapter<String>(CreateRecipeActivity.this, android.R.layout.simple_spinner_item, Unitamount);
 	amount.setAdapter(spin_adapter);
-	amount.setPadding(3, 0, 0, 0);
+	//amount.setPadding(3, 0, 0, 0);
 	amount.setLayoutParams(new TableRow.LayoutParams(52, LayoutParams.MATCH_PARENT, 0.5f));
 	listSpnrAmount.add(amount);
    
@@ -502,7 +502,7 @@ private TableLayout ingredientRow2(int index) {
 	//setting the food type spinner
 	spin_adapter = new ArrayAdapter<String>(CreateRecipeActivity.this, android.R.layout.simple_spinner_item, measurement);
 	unit.setAdapter(spin_adapter);
-	unit.setPadding(5, 0, 40, 0);
+	//unit.setPadding(5, 0, 40, 0);
 	unit.setLayoutParams(new TableRow.LayoutParams(120, LayoutParams.MATCH_PARENT, 0.5f));
 	listSpnrMeasurement.add(unit);
 	
@@ -594,6 +594,7 @@ private void dropFromList(List<String> list) {
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
+			pDialog.setIcon(R.drawable.icon_37_by_37);
 			pDialog.show();
 			
 		}

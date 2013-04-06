@@ -161,11 +161,15 @@
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:layout_gravity="center_horizontal"
-	                android:layout_margin="20dp"
+	                android:layout_marginBottom="40dp"
+	                android:layout_marginLeft="20dp"
+	                android:layout_marginRight="20dp"
+	                android:layout_marginTop="20dp"
 	                android:layout_weight="1"
 	                android:background="#07000000"
 	                android:ems="10"
-			    	android:textColor="@color/recipeDiscriptionFontColor" />
+	                android:textColor="@color/recipeDiscriptionFontColor" />
+
 	        </LinearLayout>
 	    </ScrollView>
 
@@ -179,47 +183,62 @@
 	        android:animateOnClick="true"
 	        android:content="@+id/content"
 	        android:handle="@+id/handle"
-	        android:topOffset="320dp" >
+	        android:topOffset="340dp" >
 
 	        <Button
 	            android:id="@+id/handle"
 	            android:layout_width="match_parent"
 	            android:layout_height="37dp"
-	            android:background="@drawable/chev_up"/>
+	            android:background="@drawable/chevron"/>
 
 	        <LinearLayout
 	            android:id="@+id/content"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
+	            android:layout_width="fill_parent"
+	            android:layout_height="fill_parent"
 	            android:background="#55555555"
 	            android:orientation="vertical"
 	            android:paddingLeft="10dp"
 	            android:paddingRight="10dp" >
 
-	            <Button
-	                android:id="@+id/btnRecipeViewSaveRecipe"
-	                android:layout_width="match_parent"
-	                android:layout_height="35dp"
-	                android:layout_marginBottom="40dp"
-	                android:text="@string/saveRecipe" />
+	                <TableRow
+	                    android:layout_width="match_parent"
+	                    android:layout_height="wrap_content" >
 
-	            <Button
-	                android:id="@+id/btnRecipeViewFavoriteRecipe"
-	                android:layout_width="match_parent"
-	                android:layout_height="35dp"
-	                android:text="@string/favoriteRecipe" />
+		            <Button
+		                android:id="@+id/btnRecipeViewSaveRecipe"
+		                android:layout_width="match_parent"
+		                android:layout_height="match_parent"
+		                android:layout_weight="1"
+		                android:text="@string/saveRecipe" />
+	
+		            <Button
+		                android:id="@+id/btnRecipeViewFavoriteRecipe"
+		                android:layout_width="match_parent"
+		                android:layout_height="match_parent"
+		                android:layout_weight="1"
+		                android:text="@string/favoriteRecipe" />
+		            
+		            </TableRow>
 
-	            <Button
-	                android:id="@+id/btnRecipeViewViewRatings"
-	                android:layout_width="match_parent"
-	                android:layout_height="35dp"
-	                android:text="@string/viewRatings" />
-
-	            <Button
-	                android:id="@+id/btnRecipeViewEdit"
-	                android:layout_width="match_parent"
-	                android:layout_height="35dp"
-	                android:text="@string/editRecipe" />
+		            <TableRow
+		                android:layout_width="match_parent"
+		                android:layout_height="wrap_content" >
+		            
+		            <Button
+		                android:id="@+id/btnRecipeViewEdit"
+		                android:layout_width="match_parent"
+		                android:layout_height="match_parent"
+		                android:layout_weight="1"
+		                android:text="@string/editRecipe" />
+		            
+		            <Button
+		                android:id="@+id/btnRecipeViewViewRatings"
+		                android:layout_width="match_parent"
+		                android:layout_height="match_parent"
+		                android:layout_weight="1"
+		                android:text="@string/viewRatings" />
+	            
+	            	</TableRow>
 	        </LinearLayout>
 	    </SlidingDrawer>
 

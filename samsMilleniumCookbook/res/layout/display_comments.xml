@@ -16,6 +16,9 @@
         android:id="@+id/btnListRecipeCommentsAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="0"
         android:text="@string/addComment" />
 

@@ -285,6 +285,9 @@
 	<string name="Attention">Attention!</string>
 	<string name="backPressed">Back Pressed</string>
 	<string name="leave">Exit? You will lose any\nun-published data.</string>
+	<string name="noRecipesFound">No recipes were found.</string>
+	<string name="noSavedRecipes">You have no saved recipes.</string>
+	<string name="noFavoriteRecipes">You have no favorite recipes.</string>
 	
 	<!-- part of nutrition information  -->
 	<string name="caloriesPerServing">Calories per serving:</string>

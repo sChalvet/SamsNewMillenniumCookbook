@@ -54,6 +54,7 @@
    		<item name="android:editTextStyle">@style/editTextStyle</item>
    		<item name="android:textViewStyle">@style/textViewStyle</item>
    		<item name="android:buttonStyle">@style/buttonStyle</item>
+   		<item name="android:spinnerStyle">@style/spinnerStyle</item>
    		<item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
    		<item name="android:windowNoTitle">true</item>
 	</style>
@@ -64,6 +65,11 @@
 	</style>
 	
 	<style name="textViewStyle" parent="@android:style/Widget.TextView">
+    	<item name="android:textColor">@color/fontColor</item>
+	</style>
+	
+		<style name="spinnerStyle" parent="@android:style/Widget.Spinner">
+    	<item name="android:background">@drawable/select_button</item>
     	<item name="android:textColor">@color/fontColor</item>
 	</style>
 	

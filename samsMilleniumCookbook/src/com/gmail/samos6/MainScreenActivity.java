@@ -146,6 +146,7 @@ public class MainScreenActivity extends Activity{
 		btnLogout.setTypeface(typeFace);
 		btnMe.setTypeface(typeFace);
 		txtSearchWords.setTypeface(typeFace);
+		txtLogInName.setTypeface(typeFace);
 		
 		//set login name or guest if none exist
 		txtLogInName.setText(userName+" "+getString(R.string.isNowLogedIn));
@@ -289,7 +290,8 @@ public class MainScreenActivity extends Activity{
 	    Log.d("Main Screen", "on restart");
 
 		//getting user name
-		userName =prefs.getString("nickName", "guest");	    
+		userName =prefs.getString("nickName", "guest");	  
+		txtLogInName.setText(userName+" "+getString(R.string.isNowLogedIn));
 	}
 	
 	// Initiating Menu XML file (menu.xml)
@@ -323,6 +325,8 @@ public class MainScreenActivity extends Activity{
 			
 			alert = new AlertDialog.Builder(MainScreenActivity.this).create();
 			alert.setTitle(R.string.login);
+			alert.setIcon(R.drawable.icon_37_by_37);
+
 			
 			alert.setView(textEntryView);
 
@@ -417,6 +421,8 @@ public class MainScreenActivity extends Activity{
 		editor.putString("lastName", lastName);
 		editor.putString("token", token);
 		editor.commit();
+		
+		txtLogInName.setText(userName+" "+getString(R.string.isNowLogedIn));
 		
 		//close alert dialogue once logged in
 		alert.cancel();

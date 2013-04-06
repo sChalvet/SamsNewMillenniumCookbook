@@ -23,6 +23,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -60,6 +61,7 @@ public class SavedRecipesActivity  extends ListActivity{
 	
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
+	Boolean successful=false;
 	
 	//used to set font
 	Typeface typeFace;
@@ -236,6 +238,9 @@ public class SavedRecipesActivity  extends ListActivity{
 			//if asyncTask has Not been cancelled then continue
 			if(!bCancelled) try {
 				
+				//reseting value
+				successful=false;
+				
 				Log.d("All Saved Recipes json: ", json.toString());
 				// Checking for SUCCESS TAG
 				int success = json.getInt(TAG_SUCCESS);
@@ -244,6 +249,8 @@ public class SavedRecipesActivity  extends ListActivity{
 					// recipes found
 					// Getting Array of recipes
 					products = json.getJSONArray(TAG_PRODUCTS);
+					
+					successful=true;
 
 					// looping through All recipes
 					for (int i = 0; i < products.length(); i++) {
@@ -300,6 +307,11 @@ public class SavedRecipesActivity  extends ListActivity{
 			// dismiss the dialog after getting all Recipes
 			pDialog.dismiss();
 			
+			if(!successful){
+				Toast toast= Toast.makeText(getApplicationContext(), getString(R.string.noSavedRecipes), Toast.LENGTH_LONG);  
+						toast.setGravity(Gravity.TOP, 0, 125);
+						toast.show();
+			}
 			
 			// updating UI from Background Thread
 			runOnUiThread(new Runnable() {

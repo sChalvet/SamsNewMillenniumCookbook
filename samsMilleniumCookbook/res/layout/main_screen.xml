@@ -5,8 +5,6 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@drawable/background">
-	
-    <!--  Sample Dashboard screen with Two buttons -->
 
         <TextView
             android:id="@+id/textView1"
@@ -14,6 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
             android:paddingRight="10dp"
             android:text="@string/isNowLogedIn"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -28,7 +27,11 @@
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/imageView1"
             android:ems="10"
-            android:hint="@string/genRecipeSearch" />
+            android:hint="@string/genRecipeSearch"
+            android:inputType="textAutoCorrect|textAutoComplete"
+            android:lines="1"
+            android:maxLength="75"
+            android:singleLine="true" />
 
         <ImageView
             android:id="@+id/imageView1"
@@ -39,7 +42,7 @@
             android:layout_below="@+id/textView1"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/icon" />
+            android:src="@drawable/icon_selector" />
 
         <Button
             android:id="@+id/btnMainLogin"
@@ -47,6 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/login" />
 
         <Button
@@ -54,6 +59,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
             android:layout_toLeftOf="@+id/btnMainLogout"
             android:layout_toRightOf="@+id/btnMainLogin"
             android:text="Who am I?" />
@@ -64,23 +70,27 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/btnMainAddRecipe"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/logout" />
 
         <Button
             android:id="@+id/btnMainFavRecipe"
-            android:layout_width="150dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/btnMainSavedRecipe"
             android:layout_alignBottom="@+id/btnMainSavedRecipe"
             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
             android:text="@string/mainFavoriteRecipes" />
 
         <Button
             android:id="@+id/btnMainSavedRecipe"
-            android:layout_width="150dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/autoCompleteTextView1"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="24dp"
             android:text="@string/mainSavedRecipes" />
 
@@ -91,6 +101,8 @@
             android:layout_above="@+id/btnMainLogin"
             android:layout_alignParentLeft="true"
             android:layout_marginBottom="54dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/mainAddRecipe" />
 
         <Button
@@ -99,6 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:layout_margin="10dp"
             android:text="@string/mainSeePantry" />
 
         <Button
@@ -107,6 +120,37 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/btnMainAddRecipe"
             android:layout_alignParentLeft="true"
+            android:layout_margin="10dp"
             android:text="@string/mainSearchForRecipe" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/btnMainMe"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/viewLine" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/btnMainFavRecipe"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="18dp"
+            android:background="@color/viewLine" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="2dp"
+            android:background="@color/viewLine" />
 
 </RelativeLayout>

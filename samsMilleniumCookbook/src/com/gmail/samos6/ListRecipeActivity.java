@@ -23,6 +23,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,6 +53,7 @@ public class ListRecipeActivity  extends ListActivity{
 	
 	//used to see if user canceled the AsyncTask
 	Boolean bCancelled=false;
+	Boolean successful=false;
 
 	RecipeLazyAdapter adapter;
 	Button btnSave;
@@ -264,6 +266,7 @@ public class ListRecipeActivity  extends ListActivity{
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
+			pDialog.setIcon(R.drawable.icon_37_by_37);
 			pDialog.show();
 		}
 
@@ -285,6 +288,9 @@ public class ListRecipeActivity  extends ListActivity{
 			// getting JSON string from URL
 			JSONObject json = jParser.makeHttpRequest(urlSortFormat, "POST", params);
 			
+			//reseting variable
+			successful=false;
+			
 			//if AsyncTask has Not been cancelled then continue
 			if (!bCancelled) try {
 				
@@ -297,6 +303,8 @@ public class ListRecipeActivity  extends ListActivity{
 					// Getting Array of Products
 					products = json.getJSONArray(TAG_PRODUCTS);
 
+					successful=true;
+					
 					// looping through All Products
 					for (int i = 0; i < products.length(); i++) {
 						JSONObject c = products.getJSONObject(i);
@@ -348,6 +356,11 @@ public class ListRecipeActivity  extends ListActivity{
 			// dismiss the dialog after getting all products
 			pDialog.dismiss();
 			
+			if(!successful){
+				Toast toast= Toast.makeText(getApplicationContext(), getString(R.string.noRecipesFound), Toast.LENGTH_LONG);  
+						toast.setGravity(Gravity.TOP, 0, 125);
+						toast.show();
+			}
 			
 			// updating UI from Background Thread
 			runOnUiThread(new Runnable() {

@@ -143,6 +143,16 @@ public class EditUserInfoActivity extends Activity{
 		txtOldTestQuestion.setTypeface(typeFace);
 		txtOldTestAnswer.setTypeface(typeFace);
 		
+		((TextView) findViewById(R.id.pref1)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref2)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref3)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref4)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref6)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref7)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref8)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref9)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref10)).setTypeface(typeFace);
+		((TextView) findViewById(R.id.pref11)).setTypeface(typeFace);
 		
 		//getting user info from db
 		new LoadUserInfo().execute();

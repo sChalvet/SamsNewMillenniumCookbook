@@ -14,10 +14,12 @@ import org.json.JSONObject;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -338,6 +340,26 @@ public class EditRecipeActivity extends Activity {
         menuInflater.inflate(R.menu.menu, menu);
         return true;
     }
+    
+    
+	//in case user hits the back button by accident, they are asked to confirm
+	@Override  
+	public void onBackPressed() {
+		
+	    new AlertDialog.Builder(this)
+        .setTitle(R.string.backPressed)
+        .setMessage(R.string.leave)
+        .setIcon(R.drawable.icon_37_by_37)
+        .setNegativeButton(R.string.no, null)
+        .setPositiveButton(R.string.yes, new OnClickListener() {
+
+            public void onClick(DialogInterface arg0, int arg1) {
+            	EditRecipeActivity.super.onBackPressed();
+            }
+        }).create().show();
+	}
+	
+	
 	
 	/**
 	 * Enables user to cancel the AsychTask by hitting the back button
