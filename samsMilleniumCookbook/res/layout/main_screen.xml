@@ -55,14 +55,14 @@
             android:text="@string/login" />
 
         <Button
-            android:id="@+id/btnMainMe"
+            android:id="@+id/btnFeedback"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_margin="10dp"
             android:layout_toLeftOf="@+id/btnMainLogout"
             android:layout_toRightOf="@+id/btnMainLogin"
-            android:text="Who am I?" />
+            android:text="@string/feedback" />
 
         <Button
             android:id="@+id/btnMainLogout"
@@ -127,7 +127,7 @@
             android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_above="@+id/btnMainMe"
+            android:layout_above="@+id/btnFeedback"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"

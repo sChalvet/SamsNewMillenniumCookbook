@@ -171,7 +171,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_below="@id/pref8"
 	    android:hint="@string/testAnswer"
-	    android:inputType="text" >
+	    android:inputType="textVisiblePassword" >
 	    
 	</EditText>
 	    

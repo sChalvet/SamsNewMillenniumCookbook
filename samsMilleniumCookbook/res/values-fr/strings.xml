@@ -179,6 +179,7 @@
     <string name="only">seulement</string>
     <string name="canEditThis">peut modifier cette recette.</string>
     <string name="from">de</string>
+    <string name="servingsModifier">modificateur de ration:</string>
     
     
     
@@ -287,6 +288,14 @@
 	<string name="Attention">Attention!</string>
 	<string name="backPressed">Back Pressed</string>
 	<string name="leave">Exit? Vous perdriez toute\ninfo non-publiée.</string>
+	
+		<!-- part of nutrition information  -->
+	<string name="caloriesPerServing">Calories/ration:</string>
+	<string name="proteinPerServing">Protein/ration:</string>
+	<string name="fatPerServing">Lipid/ration:</string>
+	<string name="carbsPerServing">Sucre long/ration:</string>
+	<string name="nutritionFacts">Detail de nutrition</string>
+	<string name="feedback">Feedback</string>
 	
 		<!-- part of list recipes activity  -->
 	<string name="sortByAlpha">Alphabétiquement</string>

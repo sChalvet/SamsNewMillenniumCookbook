@@ -276,6 +276,7 @@
 	<string name="likes">likes</string>
 	<string name="howShare">How do you want to share?</string>
 	<string name="editAccount">Edit Account</string>
+	<string name="feedback">Feedback</string>
 	
 	<!-- values used throughout  -->
 	<string name="yes">Yes</string>
@@ -292,17 +293,14 @@
 	<!-- part of nutrition information  -->
 	<string name="caloriesPerServing">Calories per serving:</string>
 	<string name="proteinPerServing">Protein per serving:</string>
-	<string name="fatPerServing">fat per serving:</string>
-	<string name="carbsPerServing">carbs per serving:</string>
+	<string name="fatPerServing">Fat per serving:</string>
+	<string name="carbsPerServing">Carbs per serving:</string>
 	<string name="nutritionFacts">Nutrition Facts</string>
 
 	<!-- part of list recipes activity  -->
 	<string name="sortByAlpha">Alphabeticaly</string>
 	<string name="sortByReviewCount">by Review N˚</string>
 	<string name="sortByRating">by Rating</string>
-	
-	
-	<string name="viewLine">#474747</string>
 	
 	<string-array name="foodType"> 
     <item>Other</item>
