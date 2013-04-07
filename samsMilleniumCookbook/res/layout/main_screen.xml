@@ -153,4 +153,15 @@
             android:layout_marginTop="2dp"
             android:background="@color/viewLine" />
 
+        <TextView
+            android:id="@+id/txtVersionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="2dp"
+            android:text="@string/versionName"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="8sp" />
+
 </RelativeLayout>

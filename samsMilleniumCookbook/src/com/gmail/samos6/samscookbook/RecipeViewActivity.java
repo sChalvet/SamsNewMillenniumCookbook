@@ -22,6 +22,7 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -620,7 +621,7 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 	            return true;
 	            
 	        case R.id.share: 	            //					market://details?id=com.example.android.jetboy
-	            String message = firstName+" "+getString(R.string.likes)+" "+recipeName+" "+getString(R.string.from)+" "+getString(R.string.app_name);
+	            String message = firstName+" "+getString(R.string.likes)+" '"+recipeName+"' "+getString(R.string.from)+" "+getString(R.string.app_name)+" @ http://bit.ly/Y6SR2b";
         		Intent share = new Intent(Intent.ACTION_SEND);
         		share.setType("text/plain");
         		share.putExtra(Intent.EXTRA_TEXT, message);
