@@ -147,9 +147,9 @@ public class MainScreenActivity extends Activity{
 			public void onClick(View view) {
 				
 				if(!userName.equalsIgnoreCase("Guest")){
-				// Launching CreateRecipeActivity
-				Intent i = new Intent(getApplicationContext(), CreateRecipeActivity.class);
-				startActivity(i);
+					// Launching CreateRecipeActivity
+					Intent i = new Intent(getApplicationContext(), CreateRecipeActivity.class);
+					startActivity(i);
 				}else{
 					Toast.makeText(getApplicationContext(), getString(R.string.loginToCreate), Toast.LENGTH_LONG).show();
 					loginAlertDialog();
@@ -164,7 +164,10 @@ public class MainScreenActivity extends Activity{
 			public void onClick(View view) {
 				//String name =prefs.getString("nickName", null);
 				//String t =prefs.getString("token", null);
-				Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_LONG).show();
+				//Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_LONG).show();
+				
+				Intent i = new Intent(getApplicationContext(), FeedbackActivity.class);
+				startActivity(i);
 				
 				/*PackageManager pm = getPackageManager();
 				Intent alarmClockIntent = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);

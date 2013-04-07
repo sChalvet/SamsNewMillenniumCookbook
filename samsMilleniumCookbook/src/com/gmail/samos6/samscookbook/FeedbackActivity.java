@@ -8,6 +8,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.gmail.samos6.samscookbook.EditIngredientActivity.SaveIngredientDetails;
+
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -29,19 +31,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CreateNewCommentActivity extends Activity {
+public class FeedbackActivity extends Activity {
 
 	// Progress Dialog
 	private ProgressDialog pDialog;
 
 	JSONParser jsonParser = new JSONParser();
 	
-	TextView txtRecipeName;
-	EditText txtComment;
-	Spinner spnrRating;
-	Button btnPost;
-	
-	String recipeName;
+	TextView txtFeedback;
+	Button btnSend;
 
 	//used to set font
 	Typeface typeFace; 
@@ -59,22 +57,19 @@ public class CreateNewCommentActivity extends Activity {
 	Boolean bCancelled=false;
 
 	// url to create new product
-	String urlCreateCommnet ;
+	String urlSendFeedback ;
 	
 	
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
-	private static final String TAG_RECIPENAME = "recipeName";
 	private static final String TAG_MESSAGE = "message";
 	private static final String TAG_AUTHOR = "author";
 	private static final String TAG_COMMENT = "comment";
-	private static final String TAG_RATING = "rating";
-	private static final String TAG_TOKEN = "token";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.create_comment);
+		setContentView(R.layout.feedback_form);
 
 		//setting user name and password from preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -82,34 +77,42 @@ public class CreateNewCommentActivity extends Activity {
 		token =prefs.getString("token", "");
 		
 		//getting url from resources
-		urlCreateCommnet = getResources().getString(R.string.urlCreateComment);
+		urlSendFeedback = getResources().getString(R.string.urlSendFeedback);
 		// Edit Text
-		txtRecipeName = (TextView) findViewById(R.id.txtCreateCommentRecipeName);
-		txtComment = (EditText) findViewById(R.id.txtCreateCommentComment);
-		spnrRating = (Spinner) findViewById(R.id.CreateRecipeRatingSpinner);
-		
-		// getting recipeName from intent
-		Intent intent = getIntent();	
-		// getting data past from intent
-		recipeName = intent.getStringExtra(TAG_RECIPENAME);
-		txtRecipeName.setText(recipeName);
-		
+		txtFeedback = (TextView) findViewById(R.id.txtFeedback);
 		
 		// Create button
-		btnPost = (Button) findViewById(R.id.btnCreateCommentPost);
+		btnSend = (Button) findViewById(R.id.btnSendFeedback);
 
 		//setting the font type from assets		
 		typeFace = Typeface.createFromAsset(getAssets(), "fonts/KELMSCOT.ttf");
-		txtRecipeName.setTypeface(typeFace);
-		txtComment.setTypeface(typeFace);
+		txtFeedback.setTypeface(typeFace);
+		btnSend.setTypeface(typeFace);
+		
+		((TextView)findViewById(R.id.textView1)).setTypeface(typeFace);
+		((TextView)findViewById(R.id.textView2)).setTypeface(typeFace);
 		
 		// button click event
-		btnPost.setOnClickListener(new View.OnClickListener() {
+		btnSend.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View view) {
-				// creating new Comment in background thread
-				new CreateNewComment().execute();
+				
+				String comment = txtFeedback.getText().toString();	
+				
+				String msg = "";
+				boolean incomplete=false;
+				
+				
+				if(comment.matches("")){
+					msg = getString(R.string.pEnterFeedback);
+					incomplete=true;
+				}else{
+					new SendNewFeedback().execute();
+				}
+				
+				if(incomplete)
+					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -137,7 +140,7 @@ public class CreateNewCommentActivity extends Activity {
 	/**
 	 * Background Async Task to Create new Comment
 	 * */
-	class CreateNewComment extends AsyncTask<String, String, String> {
+	class SendNewFeedback extends AsyncTask<String, String, String> {
 
 		/**
 		 * Before starting background thread Show Progress Dialog
@@ -145,8 +148,8 @@ public class CreateNewCommentActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pDialog = new ProgressDialog(CreateNewCommentActivity.this);
-			pDialog.setMessage(getString(R.string.poastingComment));
+			pDialog = new ProgressDialog(FeedbackActivity.this);
+			pDialog.setMessage(getString(R.string.sendingFeedback));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.setOnCancelListener(cancelListener);
@@ -159,19 +162,15 @@ public class CreateNewCommentActivity extends Activity {
 		@Override
 		protected String doInBackground(String... args) {
 			
-			String comment = txtComment.getText().toString();
-			String rating = spnrRating.getSelectedItem().toString();
+			String comment = txtFeedback.getText().toString();
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair(TAG_RECIPENAME, recipeName));
 			params.add(new BasicNameValuePair(TAG_COMMENT, comment));
-			params.add(new BasicNameValuePair(TAG_RATING, rating));
 			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
-			params.add(new BasicNameValuePair(TAG_TOKEN, token));
 
 			// getting JSON Object
-			JSONObject json = jsonParser.makeHttpRequest(urlCreateCommnet, "POST", params);
+			JSONObject json = jsonParser.makeHttpRequest(urlSendFeedback, "POST", params);
 			
 			//if asyncTask has not been cancelled then continue
 			if(!bCancelled) try {
@@ -184,17 +183,17 @@ public class CreateNewCommentActivity extends Activity {
 				if (success == 1) {
 					
 					successful=true;
-					// successfully created Comment
+					// successfully posted feedback
 					// notify previous activity by sending code 100
-					Intent i = getIntent();
+					//Intent i = getIntent();
 					// send result code 100 to notify that the mission was accomplished
-					setResult(100, i);
+					//setResult(100, i);
 					
 					// closing this screen
 					finish();
 				} else {
 					message = json.getString(TAG_MESSAGE);
-					// failed to create Comment
+					// failed to send feedback
 					//log.d("Failed to create new comment", "failed");
 				}
 			} catch (JSONException e) {
@@ -213,7 +212,7 @@ public class CreateNewCommentActivity extends Activity {
 			pDialog.dismiss();
 			
 			if(successful)
-				Toast.makeText(getApplicationContext(), getString(R.string.commentPosted), Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.feedbackSent), Toast.LENGTH_LONG).show();
 			else
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}

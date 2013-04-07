@@ -11,7 +11,7 @@
 	<string name="urlGetIngredientDetails">http://50.22.11.28/~samscook/recipeApp/getIngredientDetails.php</string>
     <string name="urlUpdateIngredient">http://50.22.11.28/~samscook/recipeApp/updateIngredient.php</string>
     <string name="urlDeleteIngredient">http://50.22.11.28/~samscook/recipeApp/deleteIngredient.php</string>
-    <string name="urlCreateNewIngredient">http://50.22.11.28/~samscook/recipeApp/getAllIngredients.phpcreateIngredient.php</string>
+    <string name="urlCreateNewIngredient">http://50.22.11.28/~samscook/recipeApp/createIngredient.php</string>
     <string name="urlGetAllComments">http://50.22.11.28/~samscook/recipeApp/getAllComments.php</string>
     <string name="url_create_product">http://50.22.11.28/~samscook/recipeApp/create_product.php</string>
     <string name="urlCreateRecipe">http://50.22.11.28/~samscook/recipeApp/createRecipe.php</string>
@@ -34,6 +34,7 @@
     <string name="urlGetAllRecipesByAlpha">http://50.22.11.28/~samscook/recipeApp/getAllRecipesByAlpha.php</string>
     <string name="urlGetAllRecipesByReview">http://50.22.11.28/~samscook/recipeApp/getAllRecipesByReview.php</string>
     <string name="urlGetAllRecipesByRating">http://50.22.11.28/~samscook/recipeApp/getAllRecipesByRating.php</string>
+    <string name="urlSendFeedback">http://50.22.11.28/~samscook/recipeApp/sendFeedback.php</string>
     <string name="urlRoot">http://50.22.11.28/~samscook/recipeApp/</string>			
     
     
@@ -102,6 +103,7 @@
     <string name="loadingComment">Loading Comment...</string>
     <string name="poastingComment">Posting Comment...</string>
     <string name="creatingAcc">Creating Account...</string>
+    <string name="sendingFeedback">Sending Feedback...</string>
     
     
     <!-- part of Pantry and Ingredient Activity  -->
@@ -301,6 +303,14 @@
 	<string name="sortByAlpha">Alphabeticaly</string>
 	<string name="sortByReviewCount">by Review N˚</string>
 	<string name="sortByRating">by Rating</string>
+	
+	<!-- part of Feddback Activity -->
+	<string name="feedbackHint">Your feedback here.</string>
+	<string name="feedback2">Feedback:</string>
+	<string name="thanksfortime">Thank you for taking the time to post your comments.</string>
+	<string name="send">Send</string>
+	<string name="feedbackSent">Feedback Sent</string>
+	<string name="pEnterFeedback">Please enter some feedback</string>
 	
 	<string-array name="foodType"> 
     <item>Other</item>
