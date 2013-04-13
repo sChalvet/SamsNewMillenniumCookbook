@@ -9,12 +9,14 @@
 $response = array();
 $salt="0476089252";
 
-    // include db connect class
-    require_once __DIR__ . '/db_connect.php';
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
 
-    // connecting to db
-    $db = new DB_CONNECT();
+	// connecting to db
+	$db = new DB_CONNECT();
 	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
 
 // check for required fields
 if (isset($_POST["recipeName"])) {
@@ -94,17 +96,18 @@ if (isset($_POST["recipeName"])) {
 		if (!$result2) {
 			// successfully inserted into database
 			$response["success"] = 0;
-			$response["message"] = "Failed, "+mysqli_error($conn);
+			$response["message"] = "Failed, ".mysqli_error($conn);
 
 			// echoing JSON response
 			echo json_encode($response);
+			//die();
 		} 
 		
 		// check if row inserted or not
 		if ($result1) {
 			// successfully inserted into database
 			$response["success"] = 1;
-			$response["message"] = "Recipe successfully created."+$recipeId;
+			$response["message"] = "Recipe successfully created.";
 
 			// echoing JSON response
 			echo json_encode($response);
@@ -126,4 +129,16 @@ if (isset($_POST["recipeName"])) {
     // echoing JSON response
     echo json_encode($response);
 }
+
+/*Poor chicken broth into large pan and bring to a light boil.
+While broth is heating up dice the onion and mushrooms and put them in a pan with the olive oil, saute them.
+Dice the asparagus (remember to trim of about an inch from the bottom) and add them into the broth.
+Add about 5 table spoons of soy sauce and some garlic to taste. Salt and pepper.
+While asparagus cook, mix the onion and mushrooms around and cook until golden, then add them in with the rest.
+After about 45 min sprinkle the flour into the boiling soup and mix in. I used a crushing spoon to pulp the cooked asparagus but I leave this up to you.
+Add the milk at this point and let boil a few more minutes.
+Finally add the parmesan cheese and mix in. 
+Serve hot or chilled.
+*/
 ?>
+

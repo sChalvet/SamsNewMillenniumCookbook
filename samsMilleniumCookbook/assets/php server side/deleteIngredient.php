@@ -8,12 +8,14 @@
 $response = array();
 $salt="0476089252";
 
-    // include db connect class
-    require_once __DIR__ . '/db_connect.php';
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
 
-    // connecting to db
-    $db = new DB_CONNECT();
+	// connecting to db
+	$db = new DB_CONNECT();
 	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
 	
 // check for required fields
 if (isset($_POST['ingredientName'])) {
@@ -37,7 +39,7 @@ if (isset($_POST['ingredientName'])) {
 
 
     // mysql update row with matched pid
-    $result = mysqli_query($conn, "DELETE FROM ingredientList WHERE ingredientName = '$ingredientName'");
+    $result = mysqli_query($conn, "DELETE FROM ingredientlist WHERE ingredientName = '$ingredientName'");
     
     // check if row deleted or not
     if (mysqli_affected_rows($conn) > 0) {

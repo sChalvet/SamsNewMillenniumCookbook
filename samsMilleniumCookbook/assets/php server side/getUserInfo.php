@@ -1,18 +1,29 @@
 <?php
 
 /*
- * Following code will retreive user information (to be edited by user)
+ * Following code will get user information (to be edited by user)
  */
 // array for JSON response
 $response = array();
 $salt="0476089252";
+
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
+
+	// connecting to db
+	$db = new DB_CONNECT();
+	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
 
 // check for required fields
 if (isset($_POST["nickName"])) {
 	$nickName = strip_tags(substr($_POST['nickName'],0,20));
 	$token = $_POST["token"];
 
-	$result = mysqli_query($conn, "SELECT joinDate from user where userName= '$nickName'");
+	$nickName = mysqli_real_escape_string($conn, $nickName);
+	
+	$result = mysqli_query($conn, "SELECT joinDate from user where userName= '$nickName' LIMIT 1");
 	$row = mysqli_fetch_array($result);
 	
 	if($token!== mysqli_real_escape_string($conn, crypt(md5($salt), md5($row[0])))){
@@ -24,15 +35,6 @@ if (isset($_POST["nickName"])) {
         echo json_encode($response);
 		die();
 	}	
-
-	// include db connect class
-    require_once __DIR__ . '/db_connect.php';
-
-    // connecting to db
-    $db = new DB_CONNECT();
-	$conn=$db->connect();
-
-	$nickName = mysqli_real_escape_string($conn, $nickName);
 
 	//checking to see if this nickname has been used
     $result = mysqli_query($conn, "SELECT userId, userName, firstName, lastName, email, testQuestion FROM user WHERE userName = '$nickName' LIMIT 1");

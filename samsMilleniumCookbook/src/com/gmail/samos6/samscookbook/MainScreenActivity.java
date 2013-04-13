@@ -107,7 +107,7 @@ public class MainScreenActivity extends Activity{
 	}
 	
 	//getting user name
-	userName =prefs.getString("nickName", "guest");
+	userName =prefs.getString("nickName", "Guest");
 	token =prefs.getString("token", "");
 	
 	//getting url from resources
@@ -430,12 +430,15 @@ public class MainScreenActivity extends Activity{
 		userName="Guest";
 		SharedPreferences.Editor editor = prefs.edit();
 		
-		editor.putString("nickName", "guest");
+		editor.putString("nickName", "Guest");
 		editor.putString("email", "");
 		editor.putString("firstName", "");
 		editor.putString("lastName", "");
 		editor.putString("token", "");
 		editor.commit();
+		
+		//set login name or guest if none exist
+		txtLogInName.setText(userName+" "+getString(R.string.isNowLogedIn));
 		
 	};
 	

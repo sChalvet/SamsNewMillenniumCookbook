@@ -11,12 +11,14 @@ $salt="0476089252";
 
 date_default_timezone_set('America/New_York');
 
-    // include db connect class
-    require_once __DIR__ . '/db_connect.php';
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
 
-    // connecting to db
-    $db = new DB_CONNECT();
+	// connecting to db
+	$db = new DB_CONNECT();
 	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
 	
 // check for required fields
 if (isset($_POST['ingredientName'])) {

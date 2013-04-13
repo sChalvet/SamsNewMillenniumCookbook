@@ -1,20 +1,21 @@
 <?php
 
 /*
- * This is for requesting the details of a 
- * single recipe
+ * This returns the details of a 
+ * single recipe thoguh JSON
  */
 
 // array for JSON response
 $response = array();
 
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
 
-// include db connect class
-require_once __DIR__ . '/db_connect.php';
-
-// connecting to db
-$db = new DB_CONNECT();
-$conn=$db->connect();
+	// connecting to db
+	$db = new DB_CONNECT();
+	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
 
 // check for post data
 if (isset($_POST["recipeName"])) {
@@ -73,10 +74,20 @@ if (isset($_POST["recipeName"])) {
 			$product["rating"] = round($rating);
 			
 			//getting all the nutrition facts
-			$nutritionInfo = mysqli_query($conn, "SELECT r.ingredientId, r.amount, r.measurement, i.calories, i.fat, i.carbs, i.protein, i.type, i.ingredientName, r.description "
-													."FROM ingredientlist AS i JOIN recipeingredients AS r ON r.ingredientId = i.ingredientId "
-													."WHERE i.ingredientId IN (Select ingredientId FROM recipeingredients WHERE recipeName = '$recipeName')");
+			$nutritionInfo = mysqli_query($conn, "SELECT r.ingredientId, r.amount, r.measurement, i.calories, i.fat, i.carbs, i.protein, i.type, i.ingredientName, r.description " 
+													."FROM recipeingredients AS r JOIN ingredientlist AS i ON r.ingredientId = i.ingredientId "
+													."WHERE i.ingredientId IN (Select ingredientId FROM recipeingredients WHERE recipeName = '$recipeName') "
+													."AND r.recipeName = '$recipeName' "
+													."GROUP BY r.ingredientId");
 
+													
+/*
+SELECT r.ingredientId, r.amount, r.measurement, i.calories, i.fat, i.carbs, i.protein, i.type, i.ingredientName, r.description 
+FROM recipeingredients AS r JOIN ingredientlist AS i ON r.ingredientId = i.ingredientId
+WHERE i.ingredientId IN (Select ingredientId FROM recipeingredients WHERE recipeName = 'Nother Test') 
+AND r.recipeName = 'Nother Test'
+GROUP BY r.ingredientId
+*/
 			$n=0;
 			while ($rowFacts = mysqli_fetch_array($nutritionInfo)) {
 			

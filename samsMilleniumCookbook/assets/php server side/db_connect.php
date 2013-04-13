@@ -23,13 +23,24 @@ class DB_CONNECT {
     function connect() {
         // import database connection variables
         require_once __DIR__ . '/db_config.php';
-
+		
         // Connecting to mysql database
         $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
 
+		if(!$con){
+			// no products found
+			$response["success"] = 0;
+			$response["message"] = "Connect Error number:(" . mysqli_connect_errno() . ") ". mysqli_connect_error();
+
+			// echo no users JSON
+			echo json_encode($response);
+			die();
+		}
+
         // Selecing database
         //$db = mysqli_select_db(DB_DATABASE, $con);
-
+		
+		
         // returing connection cursor
         return $con;
     }
@@ -39,7 +50,7 @@ class DB_CONNECT {
      */
     function close() {
         // closing db connection
-        //mysqli_close();
+        //mysqli_close($con);
     }
 
 }

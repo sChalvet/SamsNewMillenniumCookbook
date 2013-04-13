@@ -6,18 +6,6 @@
     android:background="@drawable/list_ingredient_gradient_selector"
     android:orientation="vertical" >
 
-		 <RatingBar
-		     android:id="@+id/listFavRecipesRatingBar"
-		     style="@style/recipeRatingBar"
-		     android:layout_width="wrap_content"
-		     android:layout_height="wrap_content"
-		     android:layout_alignBottom="@+id/txtListFavRecipeRecipeName"
-		     android:layout_alignParentRight="true"
-		     android:layout_marginRight="10dp"
-		     android:layout_marginTop="3dp"
-		     android:isIndicator="true"
-		     android:numStars="5" />
-
 		 <TextView
 		     android:id="@+id/txtListFavRecipeSummery"
 		     android:layout_width="wrap_content"
@@ -104,18 +92,6 @@
 		    android:focusable="false"
 		    android:gravity="center_vertical" />
 
-		<ImageView
-		    android:id="@+id/listFavRecipeImage"
-		    android:layout_width="100dp"
-		    android:layout_height="80dp"
-		    android:layout_below="@+id/txtListFavRecipeRecipeName"
-		    android:layout_toRightOf="@+id/chkboxListFavRecipeCheckBox"
-		    android:background="#EEEEEE"
-		    android:contentDescription="@string/banner_alt"
-		    android:padding="1dp"
-		    android:scaleType="fitXY"
-		    android:src="@drawable/default_pic" />
-
 		<TextView
 		    android:id="@+id/tv1"
 		    android:layout_width="wrap_content"
@@ -133,5 +109,29 @@
 		    android:layout_alignLeft="@+id/txtListFavRecipeNumReviews"
 		    android:text="Van Keizer"
 		    android:textStyle="bold" />
+
+		<RatingBar
+		    android:id="@+id/listFavRecipesRatingBar"
+		    style="@style/recipeRatingBar"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_above="@+id/tv1"
+		    android:layout_alignParentRight="true"
+		    android:layout_marginRight="10dp"
+		    android:isIndicator="true"
+		    android:numStars="5" />
+
+		<ImageView
+		    android:id="@+id/listFavRecipeImage"
+		    android:layout_width="100dp"
+		    android:layout_height="80dp"
+		    android:layout_below="@+id/txtListFavRecipeRecipeName"
+		    android:layout_marginTop="10dp"
+		    android:layout_toRightOf="@+id/chkboxListFavRecipeCheckBox"
+		    android:background="#EEEEEE"
+		    android:contentDescription="@string/banner_alt"
+		    android:padding="1dp"
+		    android:scaleType="fitXY"
+		    android:src="@drawable/default_pic" />
 
 </RelativeLayout>

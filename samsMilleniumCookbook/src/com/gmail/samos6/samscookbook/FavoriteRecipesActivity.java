@@ -91,7 +91,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 		new LoadAllRecipes().execute();
 
 		// Get listview
-		final ListView lv = getListView();  //added final
+		final ListView lv = getListView();
 		
 		
 		btnDrop = (Button) 	findViewById(R.id.btnFavDropFromList);
@@ -312,7 +312,7 @@ public class FavoriteRecipesActivity  extends ListActivity{
 					/**
 					 * Updating parsed JSON data into ListView
 					 * */		
-					adapter = new ListFavoriteAdapter(FavoriteRecipesActivity.this, productsList);
+					adapter = new ListFavoriteAdapter(FavoriteRecipesActivity.this, productsList, typeFace);
 					
 					// updating listview
 					setListAdapter(adapter);

@@ -148,11 +148,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String query = "SELECT  * FROM " + TABLE_INGREDIENTSATHAND;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
+        int count = cursor.getCount();
         cursor.close();
     	
         db.close(); // Closing database connection
         
-    	return cursor.getCount();
+    	return count;
     	
     }
     

@@ -3,28 +3,30 @@
 /**
  * Following code will list recipes that 
  * match the contents of an array
+ * used to find favorite and saved recipes
  */
 
-if (isset($_POST["list0"])) {
-    $array[0] = "'".$_POST["list0"]."'";
-	$i=1;
-	while(isset($_POST["list".$i])){
-		$array[$i] = "'".$_POST["list".$i]."'";
-		$i++;
-	}
-	
-	//thearray is packed with recipenames this puts them all in a string with a , seperating them
-	$recipeId = implode(', ' , $array);
-	
-	// array for JSON response
-	$response = array();
-
+// array for JSON response
+$response = array();
+///////////////////////////Connection block//////////////////////////////////////// 
 	// include db connect class
 	require_once __DIR__ . '/db_connect.php';
 
 	// connecting to db
 	$db = new DB_CONNECT();
 	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
+
+if (isset($_REQUEST["list0"])) {
+    $array[0] = "'".$_REQUEST["list0"]."'";
+	$i=1;
+	while(isset($_REQUEST["list".$i])){
+		$array[$i] = "'".$_REQUEST["list".$i]."'";
+		$i++;
+	}
+	
+	//thearray is packed with recipenames this puts them all in a string with a , seperating them
+	$recipeId = implode(', ' , $array);
 	
 	// get all products from products table
 	$result = mysqli_query($conn, "SELECT recipeName, summery, userName, prepTime, cookTime, hasImage, recipeID FROM recipe WHERE recipeId IN ($recipeId)");
@@ -90,7 +92,7 @@ if (isset($_POST["list0"])) {
 	} else {
 		// no products found
 		$response["success"] = 0;
-		$response["message"] = "No products found";
+		$response["message"] = "No recipes found";
 
 		// echo no users JSON
 		echo json_encode($response);

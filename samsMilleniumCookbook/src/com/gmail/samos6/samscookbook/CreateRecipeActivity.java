@@ -28,6 +28,7 @@ import android.preference.PreferenceManager;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -200,7 +201,7 @@ public class CreateRecipeActivity extends Activity {
 
         
 			
-		//log.d("CreateRecipe_just in", "Inside");
+		//Log.d("CreateRecipe_just in", "Inside");
 	
 		//send user to pick ingredients first
 		Toast.makeText(getApplicationContext(), getString(R.string.chooseIngredients), Toast.LENGTH_LONG).show();
@@ -212,7 +213,7 @@ public class CreateRecipeActivity extends Activity {
 
 			@Override
 			public void onClick(View view) {
-				//log.d("CreateRecipe_btnPublish onclick", "inside");
+				//Log.d("CreateRecipe_btnPublish onclick", "inside");
 				
 				String recipeName= txtRecipeName.getText().toString();
 				String cookingDirections= txtCookingDirections.getText().toString();
@@ -222,7 +223,7 @@ public class CreateRecipeActivity extends Activity {
 				String msg = "";
 				boolean incomplete=false;
 				
-				//log.d("CreateRecipe_btnPublish recipename=", recipeName);
+				//Log.d("CreateRecipe_btnPublish recipename=", recipeName);
 				
 				if(recipeName.matches("")){
 					msg = getString(R.string.pEnterRecipeName);
@@ -255,7 +256,7 @@ public class CreateRecipeActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				
-				//log.d("CreateRecipe_btnTakePhoto onclick", "inside");
+				//Log.d("CreateRecipe_btnTakePhoto onclick", "inside");
 				Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 				startActivityForResult(intent, 0);	
 
@@ -268,7 +269,7 @@ public class CreateRecipeActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 
-						//log.d("CreateRecipe_btnAddIngredient onclick", "inside");
+						//Log.d("CreateRecipe_btnAddIngredient onclick", "inside");
 						
 						Intent intent = new Intent(getApplicationContext(), GetIngredientActivity.class);
 						Bundle b = new Bundle();
@@ -327,11 +328,11 @@ public class CreateRecipeActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		//log.d("inside ActivityResults", "...");	
+		//Log.d("inside ActivityResults", "...");	
 		
 		//result from taking a pic of recipe
 		if(requestCode == 0){
-			//log.d("inside ActivityResults", "pic result");	
+			//Log.d("inside ActivityResults", "pic result");	
 			recipeImage = (Bitmap) data.getExtras().get("data");
 			imgPicture.setImageBitmap(recipeImage);	
 		}
@@ -339,7 +340,7 @@ public class CreateRecipeActivity extends Activity {
 		// if result code 100, coming from GetIngredientActivity
 		if (resultCode == 100) {
 			
-			//log.d("inside ActivityResults", "result from GetIngredientActivity");	
+			//Log.d("inside ActivityResults", "result from GetIngredientActivity");	
 			
 			List<String> receivedList= new ArrayList<String>();
 			List<String> addList= new ArrayList<String>();
@@ -347,7 +348,7 @@ public class CreateRecipeActivity extends Activity {
 			Bundle extras= data.getExtras();
 			
 			receivedList = extras.getStringArrayList("IngredientList");
-			//log.d("inside ActivityResults got this list: ", receivedList.toString());
+			//Log.d("inside ActivityResults got this list: ", receivedList.toString());
 			
 			if(ingredientList.isEmpty()){
 				ingredientList=receivedList;
@@ -367,9 +368,9 @@ public class CreateRecipeActivity extends Activity {
 				ingredientList.addAll(addList);
 				ingredientList.removeAll(cutList);
 				
-				//log.d("inside ActivityResults list final: ", ingredientList.toString());
-				//log.d("inside ActivityResults list cut: ", cutList.toString());
-				//log.d("inside ActivityResults list add: ", addList.toString());
+				//Log.d("inside ActivityResults list final: ", ingredientList.toString());
+				//Log.d("inside ActivityResults list cut: ", cutList.toString());
+				//Log.d("inside ActivityResults list add: ", addList.toString());
 				
 				//adding the needed fields for the added ingredients
 				createIngredientListView(addList);
@@ -536,7 +537,7 @@ private List<String> cloneList(List<String> list) {
  */
 private void dropFromList(List<String> list) {
     
-	//log.d("inside dropList: ", list.toString());
+	//Log.d("inside dropList: ", list.toString());
 	
 	for(int i=0; i<list.size() ; i++){
 		
@@ -544,10 +545,10 @@ private void dropFromList(List<String> list) {
 		//list.set(i, list.get(i).toString()+":");
 		
 		for(int y=0; y<listIngredientName.size(); y++){
-			//log.d("inside loop: ", list.get(i).toString()+"=?="+listIngredientName.get(y).getText().toString());
+			//Log.d("inside loop: ", list.get(i).toString()+"=?="+listIngredientName.get(y).getText().toString());
 			if(list.get(i).toString().equalsIgnoreCase(listIngredientName.get(y).getText().toString())){
 				
-				//log.d("inside if: ", list.get(i).toString());
+				//Log.d("inside if: ", list.get(i).toString());
 				
 				listTable.get(y).setVisibility(View.GONE);
 				listIngredientName.remove(y);
@@ -560,7 +561,7 @@ private void dropFromList(List<String> list) {
 		}	
 	}	
 	
-	//log.d("inside dropList: ", list.toString());
+	//Log.d("inside dropList: ", list.toString());
 }
 
 
@@ -597,7 +598,6 @@ private void dropFromList(List<String> list) {
 			
 			//this loop gets the data from the ingredient list
 			for(int i=0; i<numIngredients; i++){
-				//if(listIngredientName.get(i))
 				String name = listIngredientName.get(i).getText().toString(); 
 				String amount = listSpnrAmount.get(i).getSelectedItem().toString(); 
 				String measurement = listSpnrMeasurement.get(i).getSelectedItem().toString(); 
@@ -605,9 +605,6 @@ private void dropFromList(List<String> list) {
 				Boolean vital = listVital.get(i).isChecked(); 
 				
 				int val = vital? 1 : 0;	
-				
-				//needed to remove the : from the end of the string
-				//name = name.substring(0, name.length()-1);
 				
 				params.add(new BasicNameValuePair("ingredientName"+Integer.toString(i), name));
 				params.add(new BasicNameValuePair("amount"+Integer.toString(i), amount));
@@ -630,7 +627,7 @@ private void dropFromList(List<String> list) {
 
 			}
 			
-			//log.d("CreateRecipe ingredientList=", ingredientList);
+			//Log.d("CreateRecipe ingredientList=", ingredientList);
 			
 			String recipeName= txtRecipeName.getText().toString();
 			String cookingDirections= txtCookingDirections.getText().toString();
@@ -652,7 +649,7 @@ private void dropFromList(List<String> list) {
 			params.add(new BasicNameValuePair(TAG_AUTHOR, userName));
 			params.add(new BasicNameValuePair(TAG_TOKEN, token));
 
-			//log.d("CreateRecipes params: ", params.toString());
+			//Log.d("CreateRecipes params: ", params.toString());
 			
 			//checks to see if user took a picture
 			if(recipeImage!=null){
@@ -676,7 +673,7 @@ private void dropFromList(List<String> list) {
 				if (!bCancelled) try {
 					
 					// check log cat for response
-					//log.d("Create Response", json2.toString());
+					//Log.d("Create Response", json2.toString());
 					
 					int success = json2.getInt(TAG_SUCCESS);
 	
@@ -686,14 +683,14 @@ private void dropFromList(List<String> list) {
 						
 						hasImage= json2.getInt(TAG_HASIMAGE);
 						
-						//log.d("CreateRecipe_Background picUpload", json2.getString(TAG_MESSAGE));
+						//Log.d("CreateRecipe_Background picUpload", json2.getString(TAG_MESSAGE));
 						
 						// closing this screen
 						//finish();
 					} else {
 						// failed to upload pic
 						 message = json2.getString(TAG_MESSAGE);
-						//log.d("CreateRecipe_Background", "oops! Failed to upload pic:  "+message);
+						//Log.d("CreateRecipe_Background", "oops! Failed to upload pic:  "+message);
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -714,7 +711,7 @@ private void dropFromList(List<String> list) {
 			if (!bCancelled) try {
 				
 				// check log cat for response
-				//log.d("Create Response", json.toString());
+				//Log.d("Create Response", json.toString());
 				
 				int success = json.getInt(TAG_SUCCESS);
 
@@ -722,11 +719,11 @@ private void dropFromList(List<String> list) {
 					
 					successfulRecipe=true;
 					// successfully created Recipe
-					//log.d("CreateRecipe_Background", "Success! Recipe Created");
+					//Log.d("CreateRecipe_Background", "Success! Recipe Created");
 				} else {
 					// failed to create Recipe
-					 message += json.getString(TAG_MESSAGE);
-					//log.d("CreateRecipe_Background", "oops! Failed to create recipe "+message);
+					 message = json.getString(TAG_MESSAGE);
+					//Log.d("CreateRecipe_Background", "oops! Failed to create recipe "+message);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

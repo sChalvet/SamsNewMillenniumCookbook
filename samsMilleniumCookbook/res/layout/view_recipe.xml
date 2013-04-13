@@ -60,6 +60,65 @@
 	                    android:layout_marginRight="10dp"
 	                    android:isIndicator="true"
 	                    android:numStars="5" />
+	                
+				    <TextView
+				        android:id="@+id/tv1"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentRight="true"
+				        android:layout_alignTop="@+id/scrollView1"
+				        android:layout_marginRight="94dp"
+				        android:layout_marginTop="25dp"
+				        android:text="@string/recipePostedBy" />
+			
+				    <TextView
+				        android:id="@+id/txtRecipeViewServings"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignLeft="@+id/txtRecipeViewNumReviews"
+				        android:layout_below="@+id/txtRecipeViewNumReviews"
+				        android:layout_marginTop="16dp"
+				        android:text="@string/recipeReviewCount"
+				        android:textStyle="bold" />
+			
+				    <TextView
+				        android:id="@+id/txtRecipeViewAuthor"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_above="@+id/txtRecipeViewNumReviews"
+				        android:layout_marginLeft="9dp"
+				        android:layout_toRightOf="@+id/txtRecipeViewNumReviews"
+				        android:text="@string/recipeAuthor"
+				        android:textStyle="bold" />
+			
+				    <TextView
+				        android:id="@+id/tv2"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignBaseline="@+id/txtRecipeViewNumReviews"
+				        android:layout_alignBottom="@+id/txtRecipeViewNumReviews"
+				        android:layout_alignLeft="@+id/txtRecipeViewAuthor"
+				        android:text="@string/recipeReviews" />
+			
+				    <TextView
+				        android:id="@+id/tv3"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignBaseline="@+id/txtRecipeViewServings"
+				        android:layout_alignBottom="@+id/txtRecipeViewServings"
+				        android:layout_alignRight="@+id/tv2"
+				        android:text="@string/recipeServings" />
+			
+				    <TextView
+				        android:id="@+id/txtRecipeViewNumReviews"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignRight="@+id/tv1"
+				        android:layout_below="@+id/tv1"
+				        android:layout_marginRight="8dp"
+				        android:layout_marginTop="15dp"
+				        android:text="@string/recipeReviewCount"
+				        android:textStyle="bold" />
 	            </RelativeLayout>
 
 	            <View
@@ -169,6 +228,8 @@
 	                android:background="#07000000"
 	                android:ems="10"
 	                android:textColor="@color/recipeDiscriptionFontColor" />
+	            
+	            
 
 	        </LinearLayout>
 	    </ScrollView>
@@ -241,64 +302,5 @@
 	            	</TableRow>
 	        </LinearLayout>
 	    </SlidingDrawer>
-
-	    <TextView
-	        android:id="@+id/tv1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentRight="true"
-	        android:layout_alignTop="@+id/scrollView1"
-	        android:layout_marginRight="94dp"
-	        android:layout_marginTop="25dp"
-	        android:text="@string/recipePostedBy" />
-
-	    <TextView
-	        android:id="@+id/txtRecipeViewServings"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignLeft="@+id/txtRecipeViewNumReviews"
-	        android:layout_below="@+id/txtRecipeViewNumReviews"
-	        android:layout_marginTop="16dp"
-	        android:text="@string/recipeReviewCount"
-	        android:textStyle="bold" />
-
-	    <TextView
-	        android:id="@+id/txtRecipeViewAuthor"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_above="@+id/txtRecipeViewNumReviews"
-	        android:layout_marginLeft="9dp"
-	        android:layout_toRightOf="@+id/txtRecipeViewNumReviews"
-	        android:text="@string/recipeAuthor"
-	        android:textStyle="bold" />
-
-	    <TextView
-	        android:id="@+id/tv2"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBaseline="@+id/txtRecipeViewNumReviews"
-	        android:layout_alignBottom="@+id/txtRecipeViewNumReviews"
-	        android:layout_alignLeft="@+id/txtRecipeViewAuthor"
-	        android:text="@string/recipeReviews" />
-
-	    <TextView
-	        android:id="@+id/tv3"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBaseline="@+id/txtRecipeViewServings"
-	        android:layout_alignBottom="@+id/txtRecipeViewServings"
-	        android:layout_alignRight="@+id/tv2"
-	        android:text="@string/recipeServings" />
-
-	    <TextView
-	        android:id="@+id/txtRecipeViewNumReviews"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignRight="@+id/tv1"
-	        android:layout_below="@+id/tv1"
-	        android:layout_marginRight="8dp"
-	        android:layout_marginTop="15dp"
-	        android:text="@string/recipeReviewCount"
-	        android:textStyle="bold" />
 
 	</RelativeLayout>

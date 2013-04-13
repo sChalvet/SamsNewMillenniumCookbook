@@ -6,15 +6,17 @@
 
 // array for JSON response
 $response = array();
-$webMasterEmail = "sams.cookbook@gmail.com";
+$webMasterEmail = "samscookbookteam@gmail.com";
 $salt = "0476089252";
 
-// include db connect class
-require_once __DIR__ . '/db_connect.php';
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
 
-// connecting to db
-$db = new DB_CONNECT();
-$conn=$db->connect();
+	// connecting to db
+	$db = new DB_CONNECT();
+	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
 
 // check for required fields
 if (isset($_POST["userId"])) {
@@ -178,20 +180,20 @@ function updateAcc($userId, $nickName, $email, $firstName, $lastName, $oldPasswo
 	function sendEmail($email, $firstName, $webMasterEmail){
 	
 	$to      = $email;
-	$subject = 'Sam\'s New Millennium Cookbook';
+	$subject = 'Sam\'s Cookbook';
 	$message = '
 				<html>
 				<head>
 				</head>
 				<body>
 					<center>
-					<h1>Greetings from Sam\'s New Millennium Cookbook!!</h1><br/>
+					<h1>Greetings from Sam\'s Cookbook!!</h1><br/>
 					<p>'.$firstName.', your account with us has been successfully updated!</p>
 					<p>We hope you enjoy the app and continue to do so.</p><br/><br/><br/>
 					</center>
 				</body>
 				<footer>
-					<p><font size=1>If you did not update your account on Sam\'s New Mellinnium Cookbook then send us an email at '.$webMasterEmail.'</font></p>
+					<p><font size=1>If you did not update your account on Sam\'s Cookbook then send us an email at '.$webMasterEmail.'</font></p>
 				</footer>
 				</html>
 				';
@@ -201,7 +203,7 @@ function updateAcc($userId, $nickName, $email, $firstName, $lastName, $oldPasswo
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
 	// Additional headers
-	$headers .= 'From: Sams Cookbook <'.$webMasterEmail .'>' . "\r\n";
+	$headers .= 'From: Sam\'s Cookbook <'.$webMasterEmail .'>' . "\r\n";
 
 	mail($to, $subject, $message, $headers);
 

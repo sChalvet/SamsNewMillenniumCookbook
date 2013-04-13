@@ -5,10 +5,20 @@
  */
 date_default_timezone_set('America/New_York');
 
-$webMasterEmail = "sams.cookbook@gmail.com";
+$webMasterEmail = "samscookbookteam@gmail.com";
 $salt = "0476089252";
 // array for JSON response
 $response = array();
+
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
+
+	// connecting to db
+	$db = new DB_CONNECT();
+	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
+
 
 // check for required fields
 if (isset($_POST["nickName"])) {
@@ -22,13 +32,6 @@ if (isset($_POST["nickName"])) {
 	$testQuestion = $_POST["testQuestion"];
 	$testAnswer = $_POST["testAnswer"];
 	$dateUpdated = date("Y-m-d H:i:s");
-
-	// include db connect class
-    require_once __DIR__ . '/db_connect.php';
-
-    // connecting to db
-    $db = new DB_CONNECT();
-	$conn=$db->connect();
 
 	$nickName = mysqli_real_escape_string($conn, $nickName);
 	$email = mysqli_real_escape_string($conn, $email);
@@ -92,20 +95,20 @@ if (isset($_POST["nickName"])) {
 function sendEmail($email, $firstName, $webMasterEmail){
 	
 	$to      = $email;
-	$subject = 'Sam\'s New Millennium Cookbook';
+	$subject = 'Sam\'s Cookbook';
 	$message = '
 				<html>
 				<head>
 				</head>
 				<body>
 					<center>
-					<h1>Greetings from Sam\'s New Millennium Cookbook!!</h1><br/>
+					<h1>Greetings from Sam\'s Cookbook!!</h1><br/>
 					<p>'.$firstName.', we are glad to see you joining us!</p>
 					<p>We hope you will enjoy the app and add many recipes.</p><br/><br/><br/>
 					</center>
 				</body>
 				<footer>
-					<p><font size=1>If you did create an account on Sam\'s New Mellinnium Cookbook then send "Not me" to '.$webMasterEmail.'</font></p>
+					<p><font size=1>If you did create an account on Sam\'s Cookbook then send "Not me" to '.$webMasterEmail.'</font></p>
 				</footer>
 				</html>
 				';
@@ -115,7 +118,7 @@ function sendEmail($email, $firstName, $webMasterEmail){
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
 	// Additional headers
-	$headers .= 'From: Sams Cookbook <'.$webMasterEmail .'>' . "\r\n";
+	$headers .= 'From: Sam\'s Cookbook <'.$webMasterEmail .'>' . "\r\n";
 
 	mail($to, $subject, $message, $headers);
 

@@ -2,13 +2,23 @@
 
 /*
  * Following code will reset user password
+ * and then user an email with new pass
  */
 date_default_timezone_set('America/New_York');
  
- $webMasterEmail = "sams.cookbook@gmail.com";
+ $webMasterEmail = "samscookbookteam@gmail.com";
  
 // array for JSON response
 $response = array();
+
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
+
+	// connecting to db
+	$db = new DB_CONNECT();
+	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
 
 // check for required fields
 if (isset($_POST["userName"])) {
@@ -17,13 +27,6 @@ if (isset($_POST["userName"])) {
 	$nickName = strip_tags(substr($_POST['userName'],0,20));		
 	$testAnswer = $_POST["testAnswer"];
 	$date = date("Y-m-d H:i:s");
-
-	// include db connect class
-    require_once __DIR__ . '/db_connect.php';
-
-    // connecting to db
-    $db = new DB_CONNECT();
-	$conn=$db->connect();
 
 	$nickName = mysqli_real_escape_string($conn, $nickName);
 	$testAnswer = mysqli_real_escape_string($conn, $testAnswer);
@@ -90,7 +93,7 @@ if (isset($_POST["userName"])) {
 function sendEmail($email, $firstName, $webMasterEmail, $newPass){
 	
 	$to      = $email;
-	$subject = 'Password reset for Sam\'s New Millennium Cookbook';
+	$subject = 'Password reset for Sam\'s Cookbook';
 	$message = '
 				<html>
 				<head>
@@ -98,7 +101,7 @@ function sendEmail($email, $firstName, $webMasterEmail, $newPass){
 				<body>
 					<center>
 					<h1>Your Password has been reset</h1><br/>
-					<p>'.$firstName.', your new password for Sam\'s New Millennium Cookbook has been reset to: '.$newPass.'</p>
+					<p>'.$firstName.', your new password for Sam\'s Cookbook has been reset to: <b>'.$newPass.'</b></p>
 					<p>Please change it to something you like better as soon as you can. Thanks.</p><br/><br/><br/>
 					</center>
 				</body>
@@ -113,7 +116,7 @@ function sendEmail($email, $firstName, $webMasterEmail, $newPass){
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
 	// Additional headers
-	$headers .= 'From: Sams Cookbook <'.$webMasterEmail.'>' . "\r\n";
+	$headers .= 'From: Sam\'s Cookbook <'.$webMasterEmail.'>' . "\r\n";
 
 	$ok= mail($to, $subject, $message, $headers);
 	

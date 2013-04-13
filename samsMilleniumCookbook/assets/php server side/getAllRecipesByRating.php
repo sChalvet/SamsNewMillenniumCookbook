@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Following code will list all the recipes
+ * Following code will list all the recipes ordered by rating
  */
 
  //http://localhost/recipeApp/getAllRecipes.php?recipeType=Fish&cookTime=Any&author=Van%20Keizer&keyWord=&foodName=Any
@@ -9,13 +9,14 @@
 // array for JSON response
 $response = array();
 
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
 
-// include db connect class
-require_once __DIR__ . '/db_connect.php';
-
-// connecting to db
-$db = new DB_CONNECT();
-$conn=$db->connect();
+	// connecting to db
+	$db = new DB_CONNECT();
+	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
 
 // check for post data
 if (isset($_POST["foodName"])) {
@@ -40,7 +41,8 @@ if (isset($_POST["foodName"])) {
 	$isauthor=false;
 	$iskeyWord=false;
 	
-	$query="SELECT r.recipeName, r.summery, r.userName, r.prepTime, r.cookTime, r.hasImage FROM recipe AS r";
+	$query="SELECT r.recipeName, r.summery, r.userName, r.prepTime, r.cookTime, r.hasImage, (SELECT count( * ) FROM recipecomments WHERE recipename = r.recipeName) AS reviewCount, "
+			." (SELECT sum(rating) FROM recipecomments where recipename = r.recipeName) As sumRating FROM recipe AS r";
 	
 	if($recipeType !== "Any"){
 		$recipeTypeQuery=" WHERE type = '$recipeType'";
@@ -48,6 +50,10 @@ if (isset($_POST["foodName"])) {
 		//echo "inside recipetype </br>";
 	}
 	
+	
+	/*
+		fastcook
+	*/
 	if($cookTime !== "Any"){
 		
 		switch ($cookTime) {
@@ -143,7 +149,7 @@ if (isset($_POST["foodName"])) {
 	
 	
 	// get all products from products table
-	$result = mysqli_query($conn, $query.$recipeTypeQuery.$cookTimeQuery.$authorQuery.$keyWordQuery.$foodNameQuery);
+	$result = mysqli_query($conn, $query.$recipeTypeQuery.$cookTimeQuery.$authorQuery.$keyWordQuery.$foodNameQuery." ORDER BY sumRating/reviewCount DESC, r.recipeName ASC");
 	
 	$temp=$query.$recipeTypeQuery.$cookTimeQuery.$authorQuery.$keyWordQuery.$foodNameQuery;
 	//echo "</br>$temp </br></br>$isrecipeType,  $iscookTime,  $isauthor, $iskeyWord, $isfoodName</br>";
@@ -161,6 +167,7 @@ if (isset($_POST["foodName"])) {
 	
 	}
 	
+	//SELECT r.recipeName ->0, r.summery ->1, r.userName ->2, r.prepTime ->3, r.cookTime ->4, r.hasImage ->5, reviewCount ->6, sumRating ->7 FROM recipe AS r
 	
 	// check for empty result
 	if (mysqli_num_rows($result)) {
@@ -170,15 +177,17 @@ if (isset($_POST["foodName"])) {
 		while ($row = mysqli_fetch_array($result)) {
 
 			$rating=0;
-			$numRatings=0;
-			
-			
+
 			$product = array();
 			$product["recipeName"] = $row[0];
 			$product["summery"] = $row[1];
 			$product["author"] = $row[2];
 			$product["prepTime"] = $row[3];
 			$product["cookTime"] = $row[4];
+			$product["numRatings"] = $row[6];
+			if($row[6]>0)
+				$rating = round($row[7]/$row[6]);
+			$product["rating"] = $rating;
 			
 			//if row[5] (hasImage) is true then its got a url
 			if(intval($row[5])){
@@ -189,22 +198,6 @@ if (isset($_POST["foodName"])) {
 				$product["imageUrl"] = "no pic";
 			}
 			
-			
-			$countResult = mysqli_query($conn, "SELECT count(*) FROM recipecomments where recipename = '$row[0]'");
-			if(mysqli_num_rows($countResult) > 0){
-				$CountRow = mysqli_fetch_array($countResult);
-				$numRatings=$CountRow[0];
-			}
-			
-			$product["numRatings"] = $numRatings;
-			
-			$ratingResult = mysqli_query($conn, "SELECT sum(rating) FROM recipecomments where recipename = '$row[0]'");
-			if(mysqli_num_rows($ratingResult) > 0){
-				$ratingRow = mysqli_fetch_array($ratingResult);
-				if($CountRow[0]>0)
-					$rating=$ratingRow[0]/$CountRow[0];
-			}	
-			$product["rating"] = round($rating);
 
 			// push single recipe into final response array
 			array_push($response["products"], $product);

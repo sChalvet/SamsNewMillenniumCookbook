@@ -1,12 +1,21 @@
 <?php
 
 /*
- * Following code will create a new User Account
+ * Following code will log the user in
  */
 
 // array for JSON response
 $response = array();
 $salt = "0476089252";
+
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
+
+	// connecting to db
+	$db = new DB_CONNECT();
+	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
 
 // check for required fields
 if (isset($_POST["nickName"])) {
@@ -14,14 +23,6 @@ if (isset($_POST["nickName"])) {
 	
 	$nickName = strip_tags(substr($_POST['nickName'],0,20));		
 	$password = strip_tags(substr($_POST['password'],0,30));
-
-
-    // include db connect class
-    require_once __DIR__ . '/db_connect.php';
-
-    // connecting to db
-    $db = new DB_CONNECT();
-	$conn=$db->connect();
 	
 	$nickName = mysqli_real_escape_string($conn, $nickName);
 	$password = mysqli_real_escape_string($conn, $password);

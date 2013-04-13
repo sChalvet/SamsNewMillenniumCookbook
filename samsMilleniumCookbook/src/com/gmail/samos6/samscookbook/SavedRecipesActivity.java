@@ -312,7 +312,7 @@ public class SavedRecipesActivity  extends ListActivity{
 					 * */
 					
 					
-					adapter = new ListFavoriteAdapter(SavedRecipesActivity.this, productsList);
+					adapter = new ListFavoriteAdapter(SavedRecipesActivity.this, productsList, typeFace);
 					
 					// updating listview
 					setListAdapter(adapter);

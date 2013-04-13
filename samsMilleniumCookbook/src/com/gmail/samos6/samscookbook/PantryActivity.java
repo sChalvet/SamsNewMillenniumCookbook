@@ -99,17 +99,26 @@ public class PantryActivity extends ListActivity {
 
 				//Log.d("Pantry_Search onclick", "inside");
 				
-				List<String> ingredientList = adapter.getChecked();
+				if(db.getIngredientCount()>0){
+					List<String> ingredientList = adapter.getChecked();
 				
-				//Log.d("Pantry_Search onclick list=", ingredientList.toString());
+					//Log.d("Pantry_Search onclick list=", ingredientList.toString());
+					
+					if(ingredientList.isEmpty()){
+						Toast.makeText(getApplicationContext(), getString(R.string.selectIngredients), Toast.LENGTH_SHORT).show();
+					}else{
+						
+						//launches dialog for user so the search type
+						choseSearchAlertDialog(ingredientList);
+						
+					}
+				}else{	//no ingredients to be selected
+					// Starting new intent
+					Intent i = new Intent(getApplicationContext(), ListIngredientActivity.class);
+					
 				
-				if(ingredientList.isEmpty()){
-					Toast.makeText(getApplicationContext(), getString(R.string.selectIngredients), Toast.LENGTH_SHORT).show();
-				}else{
-					
-					//launches dialog for user so the search type
-					choseSearchAlertDialog(ingredientList);
-					
+					// starting new activity and expecting some response back
+					startActivityForResult(i, 100);
 				}
 
 				

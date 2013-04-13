@@ -97,7 +97,7 @@ public class Images_ImageLoader {
         Bitmap b = decodeFile(f);
         if(b!=null)
             return b;
- 
+        
         //from web
         try {
             Bitmap bitmap=null;

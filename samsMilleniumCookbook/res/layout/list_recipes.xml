@@ -15,7 +15,7 @@
 		     android:layout_alignParentRight="true"
 		     android:layout_marginBottom="30dp"
 		     android:layout_marginRight="10dp"
-		     android:layout_marginTop="3dp"
+		     android:layout_marginTop="25dp"
 		     android:isIndicator="true"
 		     android:numStars="5"
 		     android:paddingBottom="0dp" />
@@ -48,7 +48,7 @@
 		     android:layout_height="wrap_content"
 		     android:layout_alignTop="@+id/recipeImage"
 		     android:layout_marginRight="10dp"
-		     android:layout_marginTop="16dp"
+		     android:layout_marginTop="28dp"
 		     android:layout_toLeftOf="@+id/tv1"
 		     android:text="@string/recipeReviewCount"
 		     android:textStyle="bold" />
@@ -80,18 +80,6 @@
 		     android:layout_below="@+id/txtListRecipeNumReviews"
 		     android:layout_marginRight="10dp"
 		     android:text="@string/recipePostedBy" />
-
-		 <ImageView
-		     android:id="@+id/recipeImage"
-		     android:layout_width="100dp"
-		     android:layout_height="80dp"
-		     android:layout_alignLeft="@+id/txtListRecipeSummery"
-		     android:layout_below="@+id/txtListRecipeRecipeName"
-		     android:background="#EEEEEE"
-		     android:contentDescription="@string/banner_alt"
-		     android:padding="1dp"
-		     android:scaleType="fitXY"
-		     android:src="@drawable/default_pic" />
 
 		 <TextView
 		     android:id="@+id/tv1"
@@ -128,5 +116,17 @@
 		    android:layout_above="@id/txtListRecipeRecipeName"
 		    android:layout_marginBottom="5dp"
 		    android:background="@color/viewLine" />
+
+		<ImageView
+		    android:id="@+id/recipeImage"
+		    android:layout_width="100dp"
+		    android:layout_height="80dp"
+		    android:layout_alignLeft="@+id/txtListRecipeSummery"
+		    android:layout_below="@+id/txtListRecipeRecipeName"
+		    android:background="#EEEEEE"
+		    android:contentDescription="@string/banner_alt"
+		    android:padding="1dp"
+		    android:scaleType="fitXY"
+		    android:src="@drawable/default_pic" />
 
 </RelativeLayout>

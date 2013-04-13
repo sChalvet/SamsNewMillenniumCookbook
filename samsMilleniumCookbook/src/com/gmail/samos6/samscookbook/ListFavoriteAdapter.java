@@ -7,6 +7,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ public class ListFavoriteAdapter extends BaseAdapter {
 	private static final String TAG_IMAGEURL = "imageUrl";
 	private static final String TAG_RECIPEID = "recipeId";
 	
+	//used to set font
+	Typeface typeFace;
 	
 	private LayoutInflater mInflater;
 	public ArrayList<HashMap<String, String>> data;
@@ -42,7 +45,7 @@ public ListFavoriteAdapter(Context context) {
 /**
  * ListFavoriteAdapter is used to remember checked boxes
  */
-public ListFavoriteAdapter(Activity activity, ArrayList<HashMap<String, String>> productsList) {
+public ListFavoriteAdapter(Activity activity, ArrayList<HashMap<String, String>> productsList, Typeface t) {
     super();
     
     imageLoader=new Images_ImageLoader(activity.getApplicationContext());
@@ -50,6 +53,8 @@ public ListFavoriteAdapter(Activity activity, ArrayList<HashMap<String, String>>
     mInflater = activity.getLayoutInflater();
     this.data = productsList;
 
+    typeFace = t;
+    
     //log.d("ListFavAdapter_data", data.toString());
 }
 
@@ -113,10 +118,20 @@ public View getView(final int position, View convertView, ViewGroup parent) {
         viewHolder.recipeImage =(ImageView)convertView.findViewById(R.id.listFavRecipeImage);
         convertView.setTag(viewHolder);
 
+        viewHolder.recipeName.setTypeface(typeFace);
+        viewHolder.author.setTypeface(typeFace);
+        viewHolder.summery.setTypeface(typeFace);
+        viewHolder.numRatings.setTypeface(typeFace);
+        viewHolder.totalTime.setTypeface(typeFace);
+        ((TextView)convertView.findViewById(R.id.tv1)).setTypeface(typeFace);
+        ((TextView)convertView.findViewById(R.id.tv2)).setTypeface(typeFace);
+        ((TextView)convertView.findViewById(R.id.tv3)).setTypeface(typeFace);
+        
     } else {
         viewHolder = (ViewHolder) convertView.getTag();
     }
 
+    
    
     String recipeName = data.get(position).get(TAG_RECIPENAME);
     String checkBox = data.get(position).get("reminder");

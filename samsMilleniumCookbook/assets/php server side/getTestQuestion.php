@@ -6,18 +6,20 @@
 // array for JSON response
 $response = array();
 
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
+
+	// connecting to db
+	$db = new DB_CONNECT();
+	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
+
 // check for required fields
 if (isset($_POST["userName"])) {
     
 	
 	$nickName = strip_tags(substr($_POST['userName'],0,20));		
-
-	// include db connect class
-    require_once __DIR__ . '/db_connect.php';
-
-    // connecting to db
-    $db = new DB_CONNECT();
-	$conn=$db->connect();
 
 	$nickName = mysqli_real_escape_string($conn, $nickName);
 

@@ -1,26 +1,29 @@
 <?php
 
 /*
- * This is for requesting the details of a *
+ * This is for requesting the details of a 
  * single ingredient
  */
 
 // array for JSON response
 $response = array();
 
+///////////////////////////Connection block//////////////////////////////////////// 
+	// include db connect class
+	require_once __DIR__ . '/db_connect.php';
 
-// include db connect class
-require_once __DIR__ . '/db_connect.php';
+	// connecting to db
+	$db = new DB_CONNECT();
+	$conn=$db->connect();
+/////////////////////////////////////////////////////////////////////////////////// 
 
-// connecting to db
-$db = new DB_CONNECT();
 
 // check for post data
 if (isset($_POST["ingredientName"])) {
     $ingredientName = $_POST['ingredientName'];
 
     // get a product from products table
-   $result = $db->connect()->query("SELECT calories, protein, fat, carbs, notes, addedBy, type FROM ingredientlist WHERE ingredientName = '$ingredientName'");
+   $result = mysqli_query($conn,"SELECT calories, protein, fat, carbs, notes, addedBy, type FROM ingredientlist WHERE ingredientName = '$ingredientName'");
 
     if (!empty($result)) {
         // check for empty result
