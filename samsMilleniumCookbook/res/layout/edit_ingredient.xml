@@ -79,6 +79,7 @@
 		    android:layout_weight=".25"
 		    android:inputType="number"
 		    android:maxLength="3"
+		    android:padding="3dp"
 		    android:text="100" />
 		
 		<TextView

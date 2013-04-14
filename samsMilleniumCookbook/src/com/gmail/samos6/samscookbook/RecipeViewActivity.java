@@ -367,7 +367,19 @@ public class RecipeViewActivity extends Activity implements OnSeekBarChangeListe
 		txtAuthor.setText(author);
 		txtNumReviews.setText(numRatings);
 		txtIngredientList.setText(getIngredientList(ingredientArray));
-		txtCookingDirections.setText(cookingDirections);
+		
+		//adding a number before each line in the directions
+		String lines[] = cookingDirections.split("\\r?\\n"); 
+		String dir="";
+		for(int i=0; i< lines.length-1; i++){
+			dir+=Integer.toString(i+1)+". "+lines[i]+"\n\n";
+		}
+		
+		dir+=Integer.toString(lines.length)+". "+lines[lines.length-1];
+		
+		txtCookingDirections.setText(dir);
+		
+		
 		txtCookTime.setText(cookTime);
 		txtPrepTime.setText(prepTime);
 		txtServings.setText(servings);
